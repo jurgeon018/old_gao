@@ -1,84 +1,141 @@
 new WOW().init();
 
-$(document).ready(function () {
-    // about__link
-    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/about_page.html') {
-    if (window.location.pathname == '/about/') {
+$(document).ready(function() {
+
+
+
+
+
+
+
+
+
+
+     // about__link
+     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/about_page.html') {
         $('#about__link').addClass('about__link').removeClass('hvr-underline-from-center');
-    }
-    //blog__link 
-    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/blog.html') {
-    if (window.location.pathname == '/blog/') {
+     }
+     //blog__link 
+     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/blog.html') {
         $('#blog__link').addClass('blog__link').removeClass('hvr-underline-from-center');
-    }
-    //contact__link  
-    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/contact_page.html') {
-    if (window.location.pathname == '/contacts/') {
+     }
+     //contact__link  
+     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/contact_page.html') {
         $('#contact__link').addClass('contact__link').removeClass('hvr-underline-from-center');
-    }
-    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.team_swipe == 1) {
-    if (window.location.pathname == '/' && localStorage.team_swipe == 1) {
-        localStorage.team_swipe = null;
-        document.getElementById('main__title-team').scrollIntoView();
-    }
-
-    $('#team__link').on("click", function () {
-        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
-        if (window.location.pathname == '/') {
-            document.getElementById('main__title-team').scrollIntoView();
-        } else {
-            localStorage.setItem('team_swipe', 1);
-            window.location.href = "index.html";
-        }
-    });
-
-    $('.team__footer').on("click", function () {
-        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
-        if (window.location.pathname == '/') {
-            document.getElementById('main__title-team').scrollIntoView();
-        } else {
-            localStorage.setItem('team_swipe', 1);
-            window.location.href = "index.html";
-        }
-    });
-
-    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.practise_swipe == 1) {
-    if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.practise_swipe == 1) {
-        localStorage.practise_swipe = null;
-        document.getElementById('main__title-practise').scrollIntoView();
-    }
-
-    $('#practise__link').on("click", function () {
-        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
-        if (window.location.pathname == '/') {
-            document.getElementById('team-btn').scrollIntoView();
-        } else {
-            localStorage.setItem('practise_swipe', 1);
-            window.location.href = "index.html";
-        }
-    });
-
-    $('.practise__footer').on("click", function () {
-        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
-        if (window.location.pathname == '/') {
-            document.getElementById('team-btn').scrollIntoView();
-        } else {
-            localStorage.setItem('practise_swipe', 1);
-            window.location.href = "index.html";
-        }
-    });
+     }
 
 
 
     //paralax
+
+
     var scene = document.getElementById('scene');
+
+
     if (scene != null) {
+
         var parallaxInstance = new Parallax(scene);
     }
+
+
+
+
+    if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.team_swipe == 1) {
+
+        localStorage.team_swipe = null;
+
+        document.getElementById('main__title-team').scrollIntoView();
+
+       
+    }
+
+
+    $('#team__link').on("click", function() {
+
+        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+
+            document.getElementById('main__title-team').scrollIntoView();
+
+        } else {
+            localStorage.setItem('team_swipe', 1);
+            window.location.href = "index.html";
+        }
+
+
+
+
+        // 
+
+        // localStorage.getItem('test')
+        // alert("перед")
+        // window.location.href = 'index.html'
+        // alert("післся")
+
+
+        // }
+    });
+    
+     $('.team__footer').on("click", function() {
+
+        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+
+            document.getElementById('main__title-team').scrollIntoView();
+
+        } else {
+            localStorage.setItem('team_swipe', 1);
+            window.location.href = "index.html";
+        }
+
+    });
+
+    // practise
+
+
+        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.practise_swipe == 1) {
+
+            localStorage.practise_swipe = null;
+
+            document.getElementById('main__title-practise').scrollIntoView();
+
+           
+        }
+
+
+        $('#practise__link').on("click", function() {
+
+            if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+
+                document.getElementById('team-btn').scrollIntoView();
+
+            } else {
+                localStorage.setItem('practise_swipe', 1);
+                window.location.href = "index.html";
+            }
+
+    });
+
+         $('.practise__footer').on("click", function() {
+
+            if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+
+                document.getElementById('team-btn').scrollIntoView();
+
+            } else {
+                localStorage.setItem('practise_swipe', 1);
+                window.location.href = "index.html";
+            }
+
+    });
+
+
+
+    
 
     $('.link-fanc').fancybox({
         touch: false
     });
+
+
 
 
     // MENU
@@ -87,7 +144,7 @@ $(document).ready(function () {
     var menu = $('.menu');
 
 
-    $('.menu-link').on('click', function () {
+    $('.menu-link').on('click', function() {
         link.toggleClass('menu-link_active');
         menu.toggleClass('menu_active');
         // console.log($(this).hasClass('menu-link_active'));
@@ -106,6 +163,8 @@ $(document).ready(function () {
     });
 
 
+
+
     // $('.menu-link_active').on('click', function() {
     //  link.removeClass('menu-link_active');
     //   $("html,body").css("overflow","visible");
@@ -113,7 +172,7 @@ $(document).ready(function () {
     // });
 
     var punch_link = $('.punch_link');
-    punch_link.on('click', function () {
+    punch_link.on('click', function() {
         link.toggleClass('menu-link_active');
         menu.removeClass('menu_active');
         $("html,body").css("overflow", "visible");
@@ -161,8 +220,8 @@ $(document).ready(function () {
 
 
 
-    jQuery(function ($) {
-        $(document).mouseup(function (e) { // отслеживаем событие клика по веб-документу
+    jQuery(function($) {
+        $(document).mouseup(function(e) { // отслеживаем событие клика по веб-документу
             var block = $("sub-m-1"); // определяем элемент, к которому будем применять условия (можем указывать ID, класс либо любой другой идентификатор элемента)
             if (!block.is(e.target) // проверка условия если клик был не по нашему блоку
                 &&
@@ -198,11 +257,11 @@ $(document).ready(function () {
     });
 
 
-    $('.my-1').on('click', function () {
+    $('.my-1').on('click', function() {
 
         mainSlick.slick('slickNext');
     });
-    $('.my-2').on('click', function () {
+    $('.my-2').on('click', function() {
 
         mainSlick.slick('slickPrev');
     });
@@ -212,13 +271,13 @@ $(document).ready(function () {
     // TAB
 
 
-    $(".city-name").on("click", function () {
+    $(".city-name").on("click", function(){
         ($(this)[0].dataset.tab);
-
+      
         ($(".city-name").removeClass("city-name_active"));
-        ($(this).addClass("city-name_active"));
+         ($(this).addClass("city-name_active"));
         ($(".map-info-block").removeClass("map-info-block_active"));
-        ($("#" + $(this)[0].dataset.tab).addClass("map-info-block_active"));
+            ($("#"+$(this)[0].dataset.tab).addClass("map-info-block_active"));
     });
 
 
@@ -251,12 +310,12 @@ $(document).ready(function () {
     //   document.getElementById('showScroll').innerHTML = pageYOffset + 'px';
     // });
 
-    //     function offset(el) {
-    //     var rect = el.getBoundingClientRect(),
-    //     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    //     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    //     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-    // }
+//     function offset(el) {
+//     var rect = el.getBoundingClientRect(),
+//     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+//     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+// }
 
 
     // var block_1 = $('#main-header')[0].offsetHeight;
@@ -267,7 +326,7 @@ $(document).ready(function () {
     // var block_6 = $('#practise')[0].offsetHeight;
     // var top_menu = $('#menu_id')[0].offsetHeight;
 
-
+    
     // $('#about__link').on("click", function () {
     // 
     // });
