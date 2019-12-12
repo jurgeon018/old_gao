@@ -72,9 +72,10 @@
 }
 .gold-text {
 	color: #D2A351;
+	display: flex;
 	 font-family: 'Montserrat', sans-serif;
 	                 font-weight: 700;
-	                 text-align: center;
+	                 align-items: center;
 	                 min-height: 124px;
 	 line-height: 1;
 	 font-size: 19px;

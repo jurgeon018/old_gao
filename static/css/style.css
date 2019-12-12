@@ -720,7 +720,7 @@ html {
 
   .slide-prof {
     position: relative;
-    min-height: 165px !important; }
+    min-height: 230px !important; }
 
   .gold-name {
     font-size: 10pt; }
@@ -816,9 +816,39 @@ html {
 
   .fancybox-content {
     padding: 10px !important; } }
+@media (max-width: 1001px) {
+  .white-text {
+    font-size: 9pt; }
+
+  .sub-text {
+    font-size: 8pt; } }
 @media (max-width: 800px) {
   .formA {
     min-width: 95%; } }
+@media (max-width: 665px) {
+  .white-text {
+    line-height: 1; }
+
+  .sub-text {
+    line-height: 1;
+    margin-top: 8px; }
+
+  .slide-qwerty-right {
+    display: none; }
+
+  .slide-qwerty-left {
+    display: none; }
+
+  .slide-left .slide-prof {
+    padding-top: 0 !important;
+    padding-left: 0 !important; }
+
+  .slide-right .slide-prof {
+    padding-top: 0 !important;
+    padding-right: 0 !important; }
+
+  .slide-prof {
+    min-height: 180px !important; } }
 @media (max-width: 650px) {
   .input-wrap input {
     height: 32px; }
