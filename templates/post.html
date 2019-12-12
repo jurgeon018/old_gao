@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block header_class%}
+practise-header
+{% endblock header_class%}
+{% block content %}
+
+<div class="green__title add__title">
+    {{post.title}}
+</div>
+
+<div class="test">
+    {{post.body|safe}}
+</div>
+
+{% endblock content %}

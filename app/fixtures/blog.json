@@ -1,0 +1,91 @@
+[
+  {
+    "model": "app.post", "pk": 1, "fields": {
+      "meta_title":"Газові питання",
+      "meta_descr":"Порядок проведення перевірок Оператором газорозподільних мереж комерційних лічильників газу які встановлені на виробництві.",
+      "alt":"картинка",
+      "title": "Порядок проведення перевірок Оператором газорозподільних мереж комерційних лічильників газу які встановлені на виробництві.",
+      "slug": "post-1",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "1.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 2, "fields": {
+      "meta_title":"Дозвіл Держпраці на виконання робіт підвищеної небезпеки",
+      "meta_descr":"Дозвіл Держпраці на виконання робіт підвищеної небезпеки",
+      "alt":"картинка",
+      "title": "Дозвіл Держпраці на виконання робіт підвищеної небезпеки",
+      "slug": "post-2",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "2.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 3, "fields": {
+      "meta_title":"Запити слідчого",
+      "meta_descr":"ЧИ НАДАВАТИ ВІДПОВІДІ НА ЗАПИТИ СЛІДЧОГО В ПОРЯДКУ СТАТТІ 93 КРИМІНАЛЬНОГО ПРОЦЕСУАЛЬНОГО КОДЕКСУ УКРАЇНИ",
+      "alt":"картинка",
+      "title": "ЧИ НАДАВАТИ ВІДПОВІДІ НА ЗАПИТИ СЛІДЧОГО В ПОРЯДКУ СТАТТІ 93 КРИМІНАЛЬНОГО ПРОЦЕСУАЛЬНОГО КОДЕКСУ УКРАЇНИ",
+      "slug": "post-3",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "3.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 4, "fields": {
+      "meta_title":"Основні аспекти звільнення з  роботи",
+      "meta_descr":"Основні аспекти звільнення з  роботи.",
+      "alt":"картинка",
+      "title": "Основні аспекти звільнення з  роботи.",
+      "slug": "post-4",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "4.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 5, "fields": {
+      "meta_title":"Підтвердження стажу роботи для призначення пенсії",
+      "meta_descr":"Підтвердження стажу роботи для призначення пенсії",
+      "alt":"картинка",
+      "title": "Підтвердження стажу роботи для призначення пенсії",
+      "slug": "post-5",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "5.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 6, "fields": {
+      "meta_title":"Перевізники",
+      "meta_descr":"Габаритно-ваговий контроль та справляння плати за проїзд автомобільними дорогами загального користування транспортних засобів та інших самохідних машин і механізмів, вагові та/або габаритні параметри яких перевищують нормативні.",
+      "alt":"картинка",
+      "title": "Габаритно-ваговий контроль та справляння плати за проїзд автомобільними дорогами загального користування транспортних засобів та інших самохідних машин і механізмів, вагові та/або габаритні параметри яких перевищують нормативні.",
+      "slug": "post-6",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "6.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 7, "fields": {
+      "meta_title":"Строк дії Договору оренди землі",
+      "meta_descr":"Укладання та набрання чинності Договору оренди земельної ділянки",
+      "alt":"картинка",
+      "title": "Укладання та набрання чинності Договору оренди земельної ділянки",
+      "slug": "post-7",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "7.png"
+    }
+  },
+  {
+    "model": "app.post", "pk": 8, "fields": {
+      "meta_title":"Як оформити позику грошей між фізичними особами",
+      "meta_descr":"Як оформити позику грошей між фізичними особами?",
+      "alt":"картинка",
+      "title": "Як оформити позику грошей між фізичними особами?",
+      "slug": "post-8",
+      "body": "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet ",
+      "image": "8.png"
+    }
+  }  
+]
+

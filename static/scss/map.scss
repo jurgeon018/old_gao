@@ -1,0 +1,192 @@
+.map {
+	
+	background-color: #F5F5F5;
+}
+.tab_1 {
+	display: none;
+	
+	 transition:visibility 0.5s linear 0.5s,opacity 0.5s linear;
+
+}
+.tab_2 {
+	display: block;
+	 
+	  transition-delay:0.5s
+}
+
+.city-name {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+	color: #727271;
+	margin-right: 50px;
+	line-height: 1.4;
+	cursor: pointer;
+	padding-bottom: 14px;
+	transition: all .2s;
+
+	
+}
+.tab-content {
+	min-height: 500px;
+}
+.city-name_active {
+	color: #D2A351 !important;
+	transition: all .2s;
+}
+.map-info-block {
+	visibility: hidden;
+	    transition: all .2s;
+	    position: absolute;
+	    height: 452px;
+	    display: block;
+	    left: -530px;
+	    opacity: 0;
+}
+.map-info-block_active {
+	 visibility: visible;
+	 opacity: 1;
+    left: 50px;
+
+
+	}
+#tab_1 {
+	
+}
+#tab_2 {
+	
+}
+#tab_3 {
+	
+}
+.city-swap {
+	display: flex;
+	border-bottom: 2px solid #D2A351;
+	max-width: 540px;
+}
+.mail-block {
+	display: flex;
+	margin-top: 20px;
+	align-items: center;
+
+	img {
+		margin-right: 20px;
+	}
+
+	a {
+		font-family: 'Roboto Slab', serif;
+		font-weight: 400;
+		color: #6C6C6C;
+		font-stretch: 18px;
+	}
+}
+.green-text {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+	color: #054C23;
+	font-size: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.soc-img {
+	display: flex;
+	margin-bottom: 30px;
+
+	img {
+		margin-left: 8px;
+	}
+}
+.soc-footer {
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	&:hover {
+		.footer-soc-fill {
+			fill: #D2A351;
+		}
+	}
+}
+.footer-soc-fill {
+	transition: fill .2s;
+	fill: #727271;
+}
+.marib {
+	color: #6C6C6C;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	max-width: 450px;
+}
+.adress-block {
+	
+
+}
+.work-time {
+	margin-top: 20px;
+}
+.logo-map {
+	margin-bottom: 30px;
+}
+.map-wrap {
+	margin-top: 90px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 150px;
+}
+.map-right {
+	width: 50%;
+
+	border: 20px solid white;
+	-webkit-box-shadow: 0px 0px 25px -2px rgba(204,202,204,1);
+	-moz-box-shadow: 0px 0px 25px -2px rgba(204,202,204,1);
+	box-shadow: 0px 0px 25px -2px rgba(204,202,204,1);
+}
+.map-text {
+	width: 50%;
+}
+@media (max-width: 1246px) {
+	.map-right {
+	    width: 45%;
+	    height: 450px;
+	}
+	.map-text {
+	    width: 53%;
+	}
+	.city-name {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: #727271;
+    margin-right: 20px;
+    line-height: 1.4;
+    font-size: 12px;
+	}
+}
+@media (max-width: 1152px) {
+	.map-right {
+	    width: 42%;
+	    height: 336px;
+	    margin-top: 153px;
+	}
+}
+
+@media (max-width: 916px) {
+	.map-wrap {
+		flex-direction: column;
+		align-items: center;
+	}
+	.map-text {
+		width: 90%;
+	}
+	.city-swap {
+		max-width: 630px;
+	}
+	.city-name {
+		font-size: 14px;
+	}
+	.map-right {
+	    width: 100%;
+	    height: 423px;
+	    margin-top: 40px;
+	}
+	.map-wrap {
+		margin-bottom: 50px;
+	}
+}

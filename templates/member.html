@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block header_class %}
+profile-header
+{% endblock header_class %}
+{% block content %}
+
+{% include 'includes/form.html' %}
+
+<div class="about-main__text about__subtitles">
+  <p>
+    Ми - команда досвідчених юристів. Ми завжди рухаємося вперед у ногу з часом. 
+    Наш  «колективний розум»  працює виключно на позитивний результат усі 24 години на добу. 
+    Ми працьовиті та завзяті, ті, хто завжди впевнений у своїх діях. 
+    Однак,  основною нашою рисою є те, що ми вміємо приймати правильні рішення, 
+    щоб досягти для Вас бажаного результату.
+  </p>
+
+</div> 
+
+<div class="about-prof-wrap">
+
+  <div class="about-prof">
+    <div class="img-prof-block">
+      <img class="img-prof" src="{{member.photo.url}}" alt="">
+    </div>
+    <div class="new-wrap-text">
+      <div class="green__name">
+        {{member.full_name}}
+      </div>
+      <div class="gold-text">
+        {{member.area}}
+      </div>
+      <div class="soc-img">
+        <img src="/static/img/map/soc-3.png" alt="">
+        <img src="/static/img/map/soc-2.png" alt="">
+        <img src="/static/img/map/soc-1.png" alt="">
+      </div>
+      <div class="geo-block">
+        <img src="/static/img/about-pg/about-icon-1.png" alt="">
+        <div class="geo-text">
+          {{member.address}}
+        </div>
+      </div>
+      <div class="geo-block">
+        <img src="/static/img/about-pg/about-icon-2.png" alt="">
+        <div class="geo-text">
+          <!-- {{member.phone}} -->
+          050 374 83 90
+        </div>
+      </div>
+      <div class="geo-block">
+        <img src="/static/img/about-pg/about-icon-2.png" alt="">
+        <div class="geo-text">
+          <!-- {{member.phone}} -->
+          050 432 19 97
+        </div>
+      </div>
+      
+      <div class="geo-block">
+        <img src="/static/img/about-pg/about-icon-3.png" alt="">
+        
+          <a class="geo-text" href="mailto:pupkini@gao.com.ua">
+            {{member.email}}
+          </a>
+        
+      </div>
+      <div class="punct-text">
+        {{member.description}}
+      </div>
+    </div>
+    
+    
+    <a data-fancybox data-src="#modal-form" href="javascript:;">
+      <div class="btn-communicate hvr-bounce-to-right">
+        <img class="comun-icon" src="/static/img/communicate-icon.png" alt="">
+        Консультація
+      </div>
+    </a>
+  </div>
+  
+  
+  
+  
+  
+  
+
+</div>
+
+{% endblock content %}

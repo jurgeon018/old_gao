@@ -1,0 +1,84 @@
+<div class="slider-header-wrap">
+    <div class="slide-left sliderS">
+        {% for post in posts%}
+        {% if forloop.counter|divisibleby:"2" %}
+        <div class="slide-prof">
+            <div class="slide-qwerty-left"></div>
+            <div class="gold-name">
+                <!-- Автор: {{post.author}} -->
+            </div>
+            <div class="white-text">
+                {{post.title|truncatechars:55}}
+            </div>
+            <div class="sub-text">
+                {{post.body|striptags|safe|truncatechars:100}}
+                <!-- {{post.title|truncatechars:55}} -->
+            </div>
+            <a href="{% url 'post' slug=post.slug%}">
+                <div class="btn-read hvr-fade">
+                    Читати
+                </div>
+            </a>
+        </div>
+        {% endif%}
+        {% endfor %}
+    </div>
+    <div class="slide-right sliderS">
+        {% for post in posts%}
+        {% if not forloop.counter|divisibleby:"2" %}
+        <div class="slide-prof">
+            <div class="slide-qwerty-right"></div>
+            <div class="gold-name">
+                <!-- Автор: {{post.author}} -->
+            </div>
+            <div class="white-text">
+                {{post.title|truncatechars:55}}
+            </div>
+            <div class="sub-text">
+                {{post.body|striptags|safe|truncatechars:100}}
+                <!-- {{post.title|truncatechars:55}} -->
+            </div>
+            <a href="{% url 'post' slug=post.slug%}">
+                <div class="btn-read hvr-fade">
+                    Читати
+                </div>
+            </a>
+        </div>
+        {% endif%}
+        {% endfor %}
+    </div>
+    <div class="arrow-wrap">
+        <div class="svg-arrow my-1">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="77px" height="30px" version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 77 30" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <g class="arrow-color" id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer" />
+                    <g class="arrow-color" id="_3156660608976">
+                        <line class="fil0 str0 arrow-color" x1="2" y1="15" x2="75" y2="15" />
+                        <line class="fil0 str0 arrow-color" x1="2" y1="15" x2="15" y2="2" />
+                        <line class="fil0 str0 arrow-color" x1="2" y1="15" x2="15" y2="28" />
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+
+        <div class="svg-arrow my-2">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="77px" height="30px" version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 77 30" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer" />
+                    <g id="_3120456888112">
+                        <line class="fil0 str0 arrow-color" x1="75" y1="15" x2="2" y2="15" />
+                        <line class="fil0 str0 arrow-color" x1="75" y1="15" x2="62" y2="2" />
+                        <line class="fil0 str0 arrow-color" x1="75" y1="15" x2="62" y2="28" />
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>

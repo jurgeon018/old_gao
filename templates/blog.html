@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block header_class%}
+practise-header
+{% endblock header_class%}
+{% block content %}
+<div class="main__title main__title-fix">
+  Блог
+</div>
+<div class="practise-block">
+
+  {% for post in posts%}
+  <a href="{{post.get_absolute_url}}">
+  <div class="pract-prof pract-fix">
+      <!-- <img class="pract-icon" src="/static/img/practise/pract-1.png" alt=""> -->
+      <div class="green-practise">
+        {{post.created}}
+      </div>
+      
+      <div class="gold-practise">
+        <!-- Автор: {{post.author.full_name}}. -->
+        «{{post.title|truncatechars:55}}» 
+      </div>
+      <div class="simple-text">
+        {{post.body|striptags|safe|truncatechars:55}}
+      </div>
+      <div class="pract-icon">
+        <img data-src="{{post.image.url}}" class="pract-icon-1" alt="">
+      
+      </div>
+        <a href="{{post.get_absolute_url}}">
+          <div class="btn-read hvr-fade">
+          Більше
+          </div>     
+      </a>
+    </div>    
+  </a>
+  {% endfor %}
+  
+</div>
+{% endblock content %}

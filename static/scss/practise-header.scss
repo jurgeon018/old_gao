@@ -1,0 +1,131 @@
+.practise-header {
+	margin-bottom: 80px;
+	
+
+	
+
+	.about__subtitles {
+		line-height: 1.3;
+	}
+}
+.add__title {
+	margin-top: 100px;
+}
+.btn-wrap-fix {
+	width: 210px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 60px;
+}
+.btn-new-page {
+	width: 200px;
+	font-family: 'Montserrat', sans-serif;
+	border: 2px solid #D2A351;
+	border-radius: 40px;
+	color: #D2A351 !important;
+	text-align: center;
+	padding: 13px;
+	padding-left: 35px;
+	cursor: pointer;
+
+	&:hover {
+		color: #fff !important;
+	}
+}
+.gold-pract {
+	color: #D2A351;
+	 font-family: 'Montserrat', sans-serif;
+	 font-weight: 700;
+	 margin-top: 40px;
+	 margin-bottom: 30px;
+}
+.green-pract__title {
+	color: #054C23;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	font-size: 17px;
+	text-transform: uppercase;
+
+}
+.small-green {
+	color: #054C23;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	margin-top: 50px;
+	line-height: 1.4;
+}
+.pract__title {
+	display: flex;
+	align-items: center;
+	margin-top: 7px;
+
+		margin-bottom: 5px;
+	img {
+		margin-right: 15px;
+	}
+}
+.bottom-wrap {
+	padding-left: 200px;
+}
+.sub-title-pract {
+	display: flex;
+	margin-top: 5px;
+
+	img {
+		height: 19px;
+		width: 17px;
+		padding-top: 3px;
+		margin-right: 15px;
+	}
+
+}
+.about__subtitles-first {
+	margin-top: 30px;
+}
+.pad {
+	padding-left: 20px;
+}
+.svg-pract-page {
+	margin-right: 40px;
+}
+@media (max-width: 1124px) {
+	.about-line-fix {
+		
+	    position: absolute;
+	    top: 34px;
+		
+	}
+}
+
+@media (max-width: 755px) {
+	.about-page-top-block {
+		padding-top: 135px !important;
+		flex-direction: column;
+
+
+	}
+	.bottom-wrap {
+	 padding-left: 0;
+	}
+	.header-pract {
+		margin-bottom: 30px;
+	}
+}
+@media (max-width: 518px) {
+	
+	.about-line-fix {
+	    position: absolute;
+	    top: 29px;
+	}
+}
+@media (max-width: 380px) {
+	.green-pract__title {
+		font-size: 14px;
+	}
+}
+@media (max-width: 385px) {
+	.green__title {
+		font-size: 20px;
+	}
+}

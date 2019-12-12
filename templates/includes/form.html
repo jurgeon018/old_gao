@@ -1,0 +1,21 @@
+<form method="POST" action="{% url 'form' %}" class="formA" id="modal-form" style="display:none;">
+    {% csrf_token %}
+    <div class="modal-block">
+    <div class="green-logo">
+        <img src="/static/img/green-logo.png" alt="">
+    </div>
+    <div class="input-wrap">
+        <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
+        <input name="name" type="text" placeholder="Прізвище та ім'я">
+    </div>
+    <div class="input-wrap">
+        <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
+        <input name="phone" id="phone" type="text" placeholder="+380 (__) _ _ _ - _ _ - _ _">
+    </div>
+    <div class="input-wrap">
+        <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
+        <input name="email" type="text" placeholder="Email">
+    </div>
+    <input value="Надіслати" type="submit" class="btn-read hvr-fade">
+    </div>
+</form>

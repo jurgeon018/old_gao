@@ -1,0 +1,85 @@
+<section id="client" class="client">
+    <div class="container">
+
+        <div id="main__title-client" class="main__title">
+            НАШІ КЛІЄНТИ
+        </div>
+
+        <div class="client-block">
+            {% for slider in sliders %}
+            <div class="sliderLogo">
+                {% if not forloop.counter|divisibleby:"2" == 0%}
+                    {% for client in slider.clients.all %}
+                    <div class="slide-prof">
+                        <div class="client-profile client-profile-left">
+                            <img data-src="{{client.image.url}}" alt="{{client.alt}}">
+                            <div class="client-text">
+                                <div class="green-name">
+                                    {{client.title}}
+                                    <div class="line-client"></div>
+                                </div>
+                                <div class="sub-work">
+                                    {{client.body}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if forloop.counter|divisibleby:"2" == 0%}
+                    {% for client in slider.clients.all %}
+                    <div class="slide-prof">
+                        <div class="client-profile client-profile-right">
+                            <img data-src="{{client.image.url}}" alt="{{client.alt}}">
+                            <div class="client-text">
+                                <div class="green-name">
+                                    {{client.title}}
+                                    <div class="line-client"></div>
+                                </div>
+                                <div class="sub-work">
+                                    {{client.body}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+        <div class="link__index">
+        <a href="#main-header">
+            <div class="elips">
+
+            </div>
+        </a>
+        <a href="#main__title-1">
+            <div class="elips">
+
+            </div>
+        </a>
+        <a href="#main__title-work">
+            <div class="elips">
+
+            </div>
+        </a>
+        <a href="#main__title-client">
+            <div class="elips elips_active">
+
+            </div>
+        </a>
+        <a href="#main__title-team">
+            <div class="elips">
+
+            </div>
+        </a>
+        <a href="#main__title-practise">
+            <div class="elips">
+
+            </div>
+        </a>
+        </div>
+        <div id="test-fix-blog"></div>
+    </div>
+</section>

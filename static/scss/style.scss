@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&display=swap&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic');
+@import 'fonts';
+@import 'main-header';
+@import 'about_us';
+@import 'work';
+@import 'client';
+@import 'team';
+@import 'practise';
+@import 'map';
+@import 'footer';
+// about-page
+@import 'about-header';
+// profile-page
+@import 'profile-header';
+// practise-header
+@import 'practise-header';
+body {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	// font-family: 'OpenSans-Regular', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	
+}
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+.container {
+	max-width: 85%;
+	margin: 0 auto;
+	border: 1px solid transparent;
+	
+
+
+}
+a {
+	text-decoration: none;
+	color: #fff;
+}
+img {
+	 	max-width: 100%;
+		height: auto;
+	 }
+
+.slide-prof.slick-slide {
+	transition: opacity 500ms ease 0s !important;
+}
+
+	

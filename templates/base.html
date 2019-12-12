@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{{page.description}}">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{{page.title}}</title>
+    {% block head_static%}
+        {% include 'includes/head_static.html' %}
+    {% endblock head_static%}
+</head>
+<body>
+     {% include 'includes/navbar.html' %}
+    <header 
+        id="{%block header_id%}{%endblock header_id%}"
+        class="{%block header_class%}{%endblock header_class%}"
+    >
+        <div class="container">
+            {% block content%}
+            {% endblock content%}
+        </div>
+    </header>
+    {% block extra_content %}
+    {% endblock extra_content %}
+    {% include 'includes/map.html' %}
+    {% include 'includes/footer.html' %}
+    {% block footer_static%}
+        {% include 'includes/footer_static.html' %}
+    {% endblock footer_static%}
+</body>
+</html>
+
+

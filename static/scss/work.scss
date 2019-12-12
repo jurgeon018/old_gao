@@ -1,0 +1,150 @@
+.work {
+	position: relative;
+	background-color: #F5F5F5;
+	overflow: hidden;
+
+
+	.main__title {
+		&:before {
+		display: block;
+		content: "";
+		height: 165px;
+		margin: -165px 0 0;
+		}
+	}
+}
+.line {
+	position: absolute;
+	bottom: 0;
+	right: -17px;
+	height: 1px;
+	width: 80px;
+	border-bottom: 1.4px solid #D2A351;
+}
+.green-name {
+	position: relative;
+	color: #054C23;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+	 line-height: 1;
+	 font-size: 20px;
+	 padding-bottom: 17px;
+	 margin-bottom: 10px;
+}
+.sub-work {
+	 font-family: 'Montserrat', sans-serif;
+	 font-weight: 700;
+	 margin-top: 10px;
+	 color: #727271;
+	 line-height: 1.5;
+	 font-size: 15px;
+}
+.work-text {
+	position: absolute;
+	top: 0;
+	right: 120px;
+	text-align: right;
+}
+.work-profile {
+	position: relative;
+	
+	display: flex;
+	justify-content: space-between;
+	width: calc(50% + 52px);
+	margin-top: 50px;
+	
+
+
+	img {
+		margin: 0 10px;
+		width: 85px;
+		height: 85px;
+	}
+}
+.work-block {
+	width: 100%;
+	margin: 0 auto;
+
+	margin-bottom: 50px;
+}
+.work-prof-right {
+	flex-direction: row-reverse;
+
+	
+	 img {
+		
+	}
+
+	.line {
+		position: absolute;
+		bottom: 0;
+		left: -14px;
+		height: 1px;
+	}
+	.work-text {
+	text-align: left;
+	left: 115px;
+	}
+}
+.work-wrap-right {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+@media (max-width: 1048px) {
+	.sub-work {
+	    font-family: 'Montserrat', sans-serif;
+	    font-weight: 700;
+	    margin-top: 10px;
+	    color: #727271;
+	    line-height: 1.2;
+	    font-size: 10px;
+	}
+	.green-name {
+		font-size: 14px;
+	}
+	.work-prof-right .work-text {
+	    text-align: left;
+	    left: 115px;
+	    width: 78%;
+	    padding-right: 5px;
+	}
+}
+@media (max-width: 613px) {
+	.work-profile {
+		width: calc(88% + 55px);
+	}
+}
+@media (max-width: 442px) {
+	
+	
+	.sub-work {
+	    max-width: 258px;
+	}
+	.work-text {
+	    position: absolute;
+	    top: 0;
+	    right: 103px;
+	    text-align: right;
+	}
+	.work-profile img {
+    margin: 0 10px;
+    width: 75px;
+    height: 75px;
+	}
+	.work-prof-right .work-text {
+	    text-align: left;
+	    left: 99px;
+	    width: 58%;
+	}
+	.sub-work {
+    max-width: 250px;
+	}
+
+	.work-profile {
+		margin-top: 65px;
+	}
+	.work-profile-fix {
+		margin-top: 125px;
+	}
+}

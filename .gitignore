@@ -1,7 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
+oy*.py[cod]
 *$py.class
+.idea/
 
 # C extensions
 *.so
@@ -14,8 +15,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -33,11 +32,9 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -52,8 +49,6 @@ coverage.xml
 .pytest_cache/
 
 # Translations
-*.mo
-*.pot
 
 # Django stuff:
 *.log
@@ -91,12 +86,8 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
+# celery beat schedule file
 celerybeat-schedule
-celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
@@ -127,3 +118,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.ini
