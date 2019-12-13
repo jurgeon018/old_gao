@@ -276,9 +276,16 @@ $(document).ready(function() {
       
         ($(".city-name").removeClass("city-name_active"));
          ($(this).addClass("city-name_active"));
+
         ($(".map-info-block").removeClass("map-info-block_active"));
             ($("#"+$(this)[0].dataset.tab).addClass("map-info-block_active"));
+
+             ($(".map-footer").removeClass("map-footer_active"));
+             ($("#m"+$(this)[0].dataset.tab).addClass("map-footer_active"));
+   
+            console.log(($("#m"+$(this)[0].dataset.tab).addClass("map-footer_active")));
     });
+
 
 
     // //обработчик кликов по неактивным табам

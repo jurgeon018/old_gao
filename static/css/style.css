@@ -1603,6 +1603,7 @@ html {
   transition: all .2s; }
 
 .tab-content {
+  position: relative;
   min-height: 500px; }
 
 .city-name_active {
@@ -1621,7 +1622,20 @@ html {
 .map-info-block_active {
   visibility: visible;
   opacity: 1;
-  left: 50px; }
+  left: 0px; }
+
+.map-footer {
+  visibility: hidden;
+  transition: all .2s;
+  position: absolute;
+  display: block;
+  right: -530px;
+  opacity: 0; }
+
+.map-footer_active {
+  visibility: visible;
+  opacity: 1;
+  right: 0px; }
 
 .city-swap {
   display: flex;
@@ -1681,10 +1695,12 @@ html {
   margin-top: 90px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 150px; }
+  margin-bottom: 150px;
+  overflow: hidden; }
 
 .map-right {
   width: 50%;
+  position: relative;
   border: 20px solid white;
   -webkit-box-shadow: 0px 0px 25px -2px #cccacc;
   -moz-box-shadow: 0px 0px 25px -2px #cccacc;

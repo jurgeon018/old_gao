@@ -8,19 +8,19 @@
         <div class="wrap-mail">
         <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
         </div>
-        <input name="name" type="text" placeholder="Прізвище та ім'я">
+        <input name="name" pattern="^[А-Яа-яЁё\s]+$" title="Не правильное имя или фамилия" type="text" minlength="2" placeholder="Прізвище та ім'я" required>
     </div>
     <div class="input-wrap">
         <div class="wrap-mail">
         <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
         </div>
-        <input name="phone" id="phone" type="text" placeholder="+380 (___) _ _ _ - _ _ - _ _">
+        <input name="phone" id="phone" type="text" placeholder="+38 (0__) _ _ _ - _ _ - _ _" required>
     </div>
     <div class="input-wrap">
         <div class="wrap-mail wrap-mail-3">
         <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
         </div>
-        <input name="email" type="text" placeholder="Email">
+        <input name="email" type="email" placeholder="Email" required>
     </div>
     <input value="Надіслати" type="submit" class="btn-read hvr-fade">
     </div>
