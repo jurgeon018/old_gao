@@ -1,0 +1,60 @@
+sudo ln -s /home/jurgeon/projects/gao/src/config/gao.service            /etc/systemd/system/
+sudo ln -s /home/jurgeon/projects/gao/src/config/gao                    /etc/nginx/sites-enabled/
+sudo ln -s /home/jurgeon/projects/gao/src/config/celery_gao_worker.conf /etc/supervisor/conf.d/
+sudo ln -s /home/jurgeon/projects/gao/src/config/celery_gao_beat.conf   /etc/supervisor/conf.d/
+sudo mkdir -p /var/log/celery
+sudo touch /var/log/celery/gao_worker.log
+sudo touch /var/log/celery/gao_beat.log
+
+
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+#sudo systemctl status nginx
+
+sudo systemctl enable gao
+sudo systemctl start gao
+sudo systemctl restart gao
+#sudo systemctl status gao
+
+sudo systemctl daemon-reload
+
+sudo supervisorctl reread
+sudo supervisorctl update
+
+#sudo supervisorctl stop gaoworker
+sudo supervisorctl start gaoworker
+#sudo supervisorctl restart gaoworker
+#sudo supervisorctl status gaoworker
+
+#sudo supervisorctl stop gaobeat
+sudo supervisorctl start gaobeat
+#sudo supervisorctl restart gaobeat
+#sudo supervisorctl status gaobeat
+
+
+sudo certbot --nginx -d gao.mendela.xyz
+
+sudo certbot renew --dry-run
+
+
+sudo tail -f /var/log/nginx/error.log
+sudo tail -f /var/log/celery/gao_worker.log
+sudo tail -f /var/log/celery/gao_beat.log
+sudo tail -f /var/log/celery/gao_worker.log
+sudo tail -f /var/log/celery/gao_beat.log
+
+
+# https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands
+# https://stackoverflow.com/questions/43537851/difference-between-systemctl-and-service-command
+sudo service uwsgi start 
+sudo service nginx start 
+sudo service uwsgi restart 
+sudo service nginx restart 
+sudo /etc/init.d/nginx start 
+sudo /etc/init.d/nginx restart
+#sudo reboot
+sudo ls UWSGI_SOCKETS_DIR
+sudo journalctl -u uwsgi
+sudo nginx -t
+sudo service nginx configtest

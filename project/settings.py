@@ -40,7 +40,7 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = 'gao.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
