@@ -259,6 +259,11 @@ html {
   flex-direction: column;
   text-align: right; }
 
+.link_mobale {
+  display: flex; }
+  .link_mobale .tel-link-2 {
+    margin-left: 5px; }
+
 .menu-info {
   display: flex;
   flex-direction: column; }
