@@ -6,3 +6,5 @@ def team(request):
     clients = Client.objects.all()
     sliders = Slider.objects.all()
     return locals()
+
+

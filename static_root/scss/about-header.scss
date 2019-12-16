@@ -9,6 +9,30 @@
 			color: #fff !important;
 		}
 	}
+	.svg-soc {
+		fill: #6C6C6C;
+		stroke: #6C6C6C;
+		width: 30px;
+		margin-right: 5px;
+
+		&:hover .svg-soc-1 {
+			fill: #D2A351;
+			stroke: #D2A351;
+		}
+	}
+	.svg-soc-2 {
+		stroke-width: 0.2;
+	}
+	.svg-soc-1 {
+		fill: #6C6C6C;
+		stroke: #6C6C6C;
+		transition: stroke .2s;
+
+		&:hover {
+			fill: #D2A351;
+			stroke: #D2A351;
+		}
+	}
 }
 .svg-about-page {
 	margin-right: 20px;
