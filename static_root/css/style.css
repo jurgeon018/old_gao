@@ -358,7 +358,8 @@ html {
 .info-icon-block {
   display: flex;
   margin-left: 60px;
-  margin-top: 3px; }
+  margin-top: 3px;
+  flex-direction: row-reverse; }
 
 .info-icon-block-container {
   position: absolute;
@@ -619,10 +620,8 @@ html {
   .menu {
     right: 26%; } }
 @media (max-width: 1208px) {
-  .header-logo {
-    margin-top: 23px; }
-    .header-logo img {
-      width: 20%; } }
+  .header-logo img {
+    width: 20%; } }
 @media (max-width: 1168px) {
   .slider-header-wrap {
     margin-top: 78%;
@@ -704,9 +703,6 @@ html {
     padding-left: 35px;
     cursor: pointer; } }
 @media (max-width: 780px) {
-  .header-logo {
-    margin-top: 30px; }
-
   .all__menu {
     height: 93px; }
 
@@ -1842,6 +1838,23 @@ html {
   transition: color .2s, background .2s; }
   .about-header .btn-read:hover {
     color: #fff !important; }
+.about-header .svg-soc {
+  fill: #6C6C6C;
+  stroke: #6C6C6C;
+  width: 30px;
+  margin-right: 5px; }
+  .about-header .svg-soc:hover .svg-soc-1 {
+    fill: #D2A351;
+    stroke: #D2A351; }
+.about-header .svg-soc-2 {
+  stroke-width: 0.2; }
+.about-header .svg-soc-1 {
+  fill: #6C6C6C;
+  stroke: #6C6C6C;
+  transition: stroke .2s; }
+  .about-header .svg-soc-1:hover {
+    fill: #D2A351;
+    stroke: #D2A351; }
 
 .svg-about-page {
   margin-right: 20px; }

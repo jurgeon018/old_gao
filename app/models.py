@@ -44,6 +44,7 @@ class Team(models.Model):
     email       = models.EmailField(verbose_name='email', blank=True, null=True)
     photo       = models.ImageField(verbose_name="Фото", blank=True, null=True)
     phone       = models.CharField(verbose_name="Номер телефону", max_length=12, blank=True, null=True)
+    phone2      = models.CharField(verbose_name="Номер телефону2", max_length=12, blank=True, null=True)
     slug        = models.SlugField(verbose_name="Посилання на сайті", max_length=250, blank=True, null=True)
 
     class Meta:
@@ -63,10 +64,12 @@ class Client(models.Model):
     body  = models.TextField(verbose_name="Опис", blank=True, null=True)
     image = models.ImageField(verbose_name="Зображення", blank=True, null=True)
     alt   = models.CharField(verbose_name="alt", max_length=220, blank=True, null=True)
+
     class Meta:
         verbose_name='клієнт'
         verbose_name_plural='Клієнти'
         app_label='app'
+
     def __str__(self):
         return self.title
 
@@ -74,9 +77,12 @@ class Client(models.Model):
 class Slider(models.Model):
     slider = models.CharField(verbose_name="Номер слайдера", max_length=120)
     clients = models.ManyToManyField(verbose_name="Клієнти", to="Client", related_name="sliders", blank=True, null=True)
+
     def __str__(self):
         return self.slider
+
     class Meta:
         verbose_name='Слайдер'
         verbose_name_plural='Слайдери'
         app_label='app'
+

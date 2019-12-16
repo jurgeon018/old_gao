@@ -525,6 +525,7 @@ html {
 	display: flex;
 	margin-left: 60px;
 	margin-top: 3px;
+	flex-direction: row-reverse;
 }
 .info-icon-block-container {
 	position: absolute;
@@ -842,7 +843,7 @@ html {
 }
 @media (max-width: 1208px) {
 	.header-logo {
-		margin-top: 23px;
+		
 		img {
 			width: 20%;
 		}
@@ -970,9 +971,7 @@ html {
 	}
 }
 @media (max-width: 780px) {
-	.header-logo {
-	    margin-top: 30px;
-	}
+	
 	.all__menu {
 		height: 93px;
 	}
