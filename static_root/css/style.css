@@ -114,6 +114,12 @@ html {
 .parallax-layer {
   position: absolute; }
 
+.formA {
+  border-radius: 10px !important;
+  -webkit-box-shadow: 0px 0px 32px 0px #8f8d8f !important;
+  -moz-box-shadow: 0px 0px 32px 0px #8f8d8f !important;
+  box-shadow: 0px 0px 32px 0px #8f8d8f !important; }
+
 .hvr-underline-from-center {
   display: inline-block;
   vertical-align: middle;
@@ -596,6 +602,12 @@ html {
   left: 7px !important;
   top: 22px !important; }
 
+@media (max-width: 4000px) {
+  .formA {
+    min-width: 30% !important; } }
+@media (max-width: 2220px) {
+  .formA {
+    min-width: 60% !important; } }
 @media (max-width: 1800px) {
   .main-header .container {
     padding-bottom: 46px; } }
@@ -702,8 +714,8 @@ html {
     top: 17px; } }
 @media (max-width: 802px) {
   .btn-communicate {
-    top: 90%;
-    right: 8px; }
+    top: 15%;
+    right: 4%; }
 
   .main-header {
     padding-bottom: 111px; }
@@ -713,7 +725,7 @@ html {
 
   .scene-wrap {
     width: 67%;
-    margin-top: 50px; }
+    margin-top: 140px; }
 
   .slide-left {
     width: 50% !important; }
@@ -778,9 +790,15 @@ html {
     font-weight: 700;
     color: #D2A351; }
   .input-wrap .form_icon {
-    width: 26px;
-    height: 26px;
-    margin-right: 20px; }
+    width: 100%;
+    height: auto; }
+  .input-wrap .wrap-mail {
+    margin-right: 10px;
+    width: 28px;
+    height: 28px; }
+  .input-wrap .wrap-mail-3 {
+    width: 32px;
+    height: 25px; }
   .input-wrap ::-webkit-input-placeholder {
     color: #D2A351; }
   .input-wrap ::-moz-placeholder {
@@ -867,9 +885,6 @@ html {
 
   .slide-left {
     width: 75% !important; } }
-@media (max-width: 399px) {
-  .formA {
-    min-height: 335px; } }
 @media (max-width: 354px) {
   .svg-head-logo svg {
     width: 154px; } }
@@ -938,6 +953,35 @@ html {
       border-bottom: 2px solid #c7c3c3;
       width: 76%;
       margin: 0 auto; } }
+@media (max-width: 400px) {
+  .fancybox-content {
+    max-width: 85% !important; }
+
+  .input-wrap input {
+    font-size: 8px; }
+
+  .input-wrap input {
+    height: 20px; }
+
+  .input-wrap input {
+    border-bottom: 1.2px solid #D2A351; }
+
+  .wrap-mail {
+    margin-right: 10px;
+    width: 20px !important;
+    height: 20px !important; }
+
+  .wrap-mail-3 {
+    width: 26px !important;
+    height: 19px !important; }
+
+  .modal-block .btn-read {
+    width: 120px;
+    font-size: 12px;
+    padding: 6px; }
+
+  .formA {
+    min-height: 256px; } }
 @media (max-width: 665px) {
   .main-header {
     padding-bottom: 0;
@@ -952,10 +996,7 @@ html {
     font-size: 10px; } }
 @media (max-width: 567px) {
   .scene-wrap {
-    width: 75%; }
-
-  .main-header .btn-communicate {
-    display: none; } }
+    width: 75%; } }
 @media (max-width: 522px) {
   .scene-wrap {
     position: absolute;
@@ -988,11 +1029,15 @@ html {
     width: 100%; } }
 @media (max-width: 365px) {
   .main-header {
-    min-height: 552px; }
+    min-height: 600px; }
 
   .scene-wrap {
     bottom: 88px;
-    width: 97%; } }
+    width: 97%; }
+
+  .btn-communicate {
+    top: 18%;
+    right: 4%; } }
 .about_us {
   position: relative; }
   .about_us .btn-read {
@@ -1558,6 +1603,7 @@ html {
   transition: all .2s; }
 
 .tab-content {
+  position: relative;
   min-height: 500px; }
 
 .city-name_active {
@@ -1576,7 +1622,20 @@ html {
 .map-info-block_active {
   visibility: visible;
   opacity: 1;
-  left: 50px; }
+  left: 0px; }
+
+.map-footer {
+  visibility: hidden;
+  transition: all .2s;
+  position: absolute;
+  display: block;
+  right: -530px;
+  opacity: 0; }
+
+.map-footer_active {
+  visibility: visible;
+  opacity: 1;
+  right: 0px; }
 
 .city-swap {
   display: flex;
@@ -1636,10 +1695,12 @@ html {
   margin-top: 90px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 150px; }
+  margin-bottom: 150px;
+  overflow: hidden; }
 
 .map-right {
   width: 50%;
+  position: relative;
   border: 20px solid white;
   -webkit-box-shadow: 0px 0px 25px -2px #cccacc;
   -moz-box-shadow: 0px 0px 25px -2px #cccacc;
@@ -2015,7 +2076,8 @@ html {
   width: 210px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 60px; }
+  margin-top: 60px;
+  margin-bottom: 40px; }
 
 .btn-new-page {
   width: 200px;
