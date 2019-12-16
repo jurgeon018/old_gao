@@ -33,7 +33,7 @@ sudo supervisorctl start gaobeat
 #sudo supervisorctl status gaobeat
 
 
-sudo certbot --nginx -d gao.mendela.xyz
+sudo certbot --nginx -d galpravgroup.com.ua
 
 sudo certbot renew --dry-run
 
