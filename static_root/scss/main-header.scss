@@ -141,7 +141,12 @@ html {
 .parallax-layer {
     position: absolute;
 }
-
+.formA {
+	border-radius: 10px !important;
+	-webkit-box-shadow: 0px 0px 32px 0px rgba(143,141,143,1) !important;
+	-moz-box-shadow: 0px 0px 32px 0px rgba(143,141,143,1) !important;
+	box-shadow: 0px 0px 32px 0px rgba(143,141,143,1) !important;
+}
 
 .hvr-underline-from-center {
   display: inline-block;
@@ -803,6 +808,20 @@ html {
 	left: 7px !important;
 	    top: 22px !important;
 }
+@media (max-width: 4000px) {
+	.formA {
+		min-width: 30% !important;
+	}
+}
+@media (max-width: 2220px) {
+	.formA {
+		min-width: 60% !important;
+	}
+}
+
+
+
+
 @media (max-width: 1800px) {
 	.main-header {
 		.container {
@@ -963,8 +982,8 @@ html {
 }
 @media (max-width: 802px) {
 	.btn-communicate {
-		top: 90%;
-		right: 8px;
+		    top: 15%;
+    		right: 4%;
 	}
 	.main-header {
 	    padding-bottom: 111px;
@@ -974,7 +993,7 @@ html {
 	}
 	.scene-wrap {
 		width: 67%;
-		margin-top: 50px;
+		margin-top: 140px;
 	}
 	
 	.slide-left {
@@ -1050,9 +1069,19 @@ html {
 	}
 	
 	.form_icon{
-		width: 26px;
-		    height: 26px;
-		   margin-right: 20px;
+		width: 100%;
+		    height: auto;
+		   
+	}
+
+	.wrap-mail {
+		margin-right: 10px;
+		width: 28px;
+		height: 28px;
+	}
+	.wrap-mail-3 {
+		width: 32px;
+		height: 25px;
 	}
 	::-webkit-input-placeholder {color:#D2A351;}
 	::-moz-placeholder          {color:#D2A351;}/* Firefox 19+ */
@@ -1177,12 +1206,7 @@ html {
 	    width: 75% !important;
 	}
 }
-@media (max-width: 399px) {
-	.formA {
-	    
-	    min-height: 335px;
-	}
-}
+
 @media (max-width: 354px) {
 	.svg-head-logo {
 		
@@ -1274,7 +1298,40 @@ html {
 		}
 	}
 }
-
+@media (max-width: 400px) {
+	.fancybox-content {
+		max-width: 85% !important;
+	}
+	.input-wrap input {
+		font-size: 8px;
+	}
+	.input-wrap input {
+	    height: 20px;
+	}
+	.input-wrap input {
+	    
+	    border-bottom: 1.2px solid #D2A351;
+	}
+	.wrap-mail {
+		margin-right: 10px;
+		width: 20px !important;
+		height: 20px !important;
+	}
+	.wrap-mail-3 {
+		width: 26px !important;
+		height: 19px !important;
+	}
+	.modal-block {
+		.btn-read {
+			width: 120px;
+			font-size: 12px;
+			padding: 6px;
+		}
+	}
+	.formA {
+	    min-height: 256px;
+	}
+}
 @media (max-width: 665px) {
 	.main-header {
 	    padding-bottom: 0;
@@ -1296,9 +1353,7 @@ html {
 	    width: 75%;
 	}
 	.main-header {
-		.btn-communicate {
-			display: none;
-		}
+		
 	}
 }
 @media (max-width: 522px) {
@@ -1365,12 +1420,16 @@ html {
 	}
 @media (max-width: 365px) {
 	.main-header {
-	    min-height: 552px;
+	    min-height: 600px;
 	}
 	.scene-wrap {
 	   bottom: 88px;
 
 	    width: 97%;
 	    
+	}
+	.btn-communicate {
+	    top: 18%;
+	    right: 4%;
 	}
 }
