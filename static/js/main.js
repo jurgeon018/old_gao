@@ -3,7 +3,10 @@ new WOW().init();
 $(document).ready(function() {
 
 
-
+$.extend($.lazyLoadXT, {
+  edgeY:  200,
+  srcAttr: 'data-src'
+});
 
 
 
