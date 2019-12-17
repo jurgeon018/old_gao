@@ -52,8 +52,11 @@ $.extend($.lazyLoadXT, {
 
         localStorage.team_swipe = null;
 
-        document.getElementById('main__title-team').scrollIntoView();
+       function linkF() {
+          document.getElementById('main__title-team').scrollIntoView();
+       }
 
+       setTimeout(linkF, 500);
        
     }
 
@@ -63,7 +66,11 @@ $.extend($.lazyLoadXT, {
         // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
         if (window.location.pathname == '/') {
 
-            document.getElementById('main__title-team').scrollIntoView();
+           function linkF() {
+              document.getElementById('main__title-team').scrollIntoView();
+           }
+
+           setTimeout(linkF, 500);
 
         } else {
             localStorage.setItem('team_swipe', 1);
@@ -90,7 +97,11 @@ $.extend($.lazyLoadXT, {
         // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
         if (window.location.pathname == '/') {
 
-            document.getElementById('main__title-team').scrollIntoView();
+              function linkF() {
+               document.getElementById('main__title-team').scrollIntoView();
+            }
+
+            setTimeout(linkF, 500);
 
         } else {
             localStorage.setItem('team_swipe', 1);
@@ -108,7 +119,11 @@ $.extend($.lazyLoadXT, {
 
             localStorage.practise_swipe = null;
 
-            document.getElementById('main__title-practise').scrollIntoView();
+            function linkP() {
+             document.getElementById('main__title-practise').scrollIntoView();
+            }
+
+            setTimeout(linkP, 500);
 
            
         }
@@ -119,8 +134,12 @@ $.extend($.lazyLoadXT, {
             // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
             if (window.location.pathname == '/') {
 
-                document.getElementById('team-btn').scrollIntoView();
+                 function linkP() {
+              document.getElementById('team-btn').scrollIntoView();
+            }
 
+            setTimeout(linkP, 500);
+            
             } else {
                 localStorage.setItem('practise_swipe', 1);
                 // window.location.href = "index.html";
@@ -134,7 +153,11 @@ $.extend($.lazyLoadXT, {
             // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
             if (window.location.pathname == '/') {
 
-                document.getElementById('team-btn').scrollIntoView();
+                 function linkP() {
+                  document.getElementById('team-btn').scrollIntoView();
+                }
+
+                setTimeout(linkP, 500);
 
             } else {
                 localStorage.setItem('practise_swipe', 1);
