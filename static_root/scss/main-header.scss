@@ -334,6 +334,12 @@ html {
 	
 	text-align: right;
 }
+.link_mobale {
+	display: flex;
+	.tel-link-2 {
+		margin-left: 5px;
+	}
+}
 .menu-info {
 	display: flex;
 	flex-direction: column;
