@@ -3,7 +3,10 @@ new WOW().init();
 $(document).ready(function() {
 
 
-
+$.extend($.lazyLoadXT, {
+  edgeY:  200,
+  srcAttr: 'data-src'
+});
 
 
 
@@ -12,15 +15,19 @@ $(document).ready(function() {
 
 
      // about__link
-     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/about_page.html') {
+    //  if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/about_page.html') {
+    if (window.location.pathname == '/about/') {
+         
         $('#about__link').addClass('about__link').removeClass('hvr-underline-from-center');
      }
      //blog__link 
-     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/blog.html') {
+    //  if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/blog.html') {
+     if (window.location.pathname == '/blog/') {
         $('#blog__link').addClass('blog__link').removeClass('hvr-underline-from-center');
      }
      //contact__link  
-     if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/contact_page.html') {
+    //  if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/contact_page.html') {
+     if (window.location.pathname == '/contacts/') {
         $('#contact__link').addClass('contact__link').removeClass('hvr-underline-from-center');
      }
 
@@ -40,7 +47,8 @@ $(document).ready(function() {
 
 
 
-    if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.team_swipe == 1) {
+    // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.team_swipe == 1) {
+    if (window.location.href == '/' && localStorage.team_swipe == 1) {
 
         localStorage.team_swipe = null;
 
@@ -52,13 +60,15 @@ $(document).ready(function() {
 
     $('#team__link').on("click", function() {
 
-        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+        if (window.location.pathname == '/') {
 
             document.getElementById('main__title-team').scrollIntoView();
 
         } else {
             localStorage.setItem('team_swipe', 1);
-            window.location.href = "index.html";
+            // window.location.href = "index.html";
+            window.location.pathname = "/";
         }
 
 
@@ -77,13 +87,15 @@ $(document).ready(function() {
     
      $('.team__footer').on("click", function() {
 
-        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+        if (window.location.pathname == '/') {
 
             document.getElementById('main__title-team').scrollIntoView();
 
         } else {
             localStorage.setItem('team_swipe', 1);
-            window.location.href = "index.html";
+            // window.location.href = "index.html";
+            window.location.pathname = "/";
         }
 
     });
@@ -91,7 +103,8 @@ $(document).ready(function() {
     // practise
 
 
-        if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.practise_swipe == 1) {
+        // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html' && localStorage.practise_swipe == 1) {
+        if (window.location.pathname == '/' && localStorage.practise_swipe == 1) {
 
             localStorage.practise_swipe = null;
 
@@ -103,26 +116,30 @@ $(document).ready(function() {
 
         $('#practise__link').on("click", function() {
 
-            if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+            // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+            if (window.location.pathname == '/') {
 
                 document.getElementById('team-btn').scrollIntoView();
 
             } else {
                 localStorage.setItem('practise_swipe', 1);
-                window.location.href = "index.html";
+                // window.location.href = "index.html";
+                window.location.pathname = "/";
             }
 
     });
 
          $('.practise__footer').on("click", function() {
 
-            if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+            // if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/index.html') {
+            if (window.location.pathname == '/') {
 
                 document.getElementById('team-btn').scrollIntoView();
 
             } else {
                 localStorage.setItem('practise_swipe', 1);
-                window.location.href = "index.html";
+                // window.location.href = "index.html";
+                window.location.pathname = "/";
             }
 
     });
