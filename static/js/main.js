@@ -8,12 +8,14 @@ $.extend($.lazyLoadXT, {
   srcAttr: 'data-src'
 });
 
+    
+    // fetch('http://getpost.itgid.info/index2.php')
+    // .then(data => {
+       
+    // });
 
-
-
-
-
-
+   
+ 
      // about__link
     //  if (window.location.href == 'file:///C:/Users/odmin/Desktop/GAO/about_page.html') {
     if (window.location.pathname == '/about/') {
@@ -171,9 +173,9 @@ $.extend($.lazyLoadXT, {
 
     
 
-    $('.link-fanc').fancybox({
-        touch: false
-    });
+    // $('.link-fanc').fancybox({
+    //     touch: false
+    // });
 
 
 
