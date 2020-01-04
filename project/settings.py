@@ -10,7 +10,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'django.contrib.redirects',
+    'django.contrib.flatpages',
     'django.contrib.sitemaps',
+
+
     'app.apps.AppConfig',
     'tinymce',
 ]
