@@ -10,7 +10,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'django.contrib.redirects',
+    'django.contrib.flatpages',
     'django.contrib.sitemaps',
+
+
     'app.apps.AppConfig',
     'tinymce',
 ]
@@ -73,3 +79,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+SITE_ID = 1
