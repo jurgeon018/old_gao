@@ -14,7 +14,7 @@ from django.contrib.sitemaps.views import sitemap
 
 sitemaps = {
   'posts': PostSitemap,
-  'posts': TeamSitemap,
+  'team': TeamSitemap,
   'static':StaticViewSitemap,
 }
 
