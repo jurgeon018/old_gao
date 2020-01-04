@@ -24,6 +24,7 @@ class Post(models.Model):
         verbose_name='пост'
         verbose_name_plural='Блог'
         app_label='app'
+        ordering = ('-id', )
 
     def __str__(self):
         return self.title
