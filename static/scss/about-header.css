@@ -105,6 +105,14 @@
   line-height: 1;
   font-size: 18px; }
 
+.geo-text a {
+  font-family: 'Montserrat', sans-serif;
+  color: #6C6C6C !important; }
+
+.geo-block a {
+  font-family: 'Montserrat', sans-serif;
+  color: #6C6C6C !important; }
+
 .bold-block {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;

@@ -1,5 +1,8 @@
 .practise-header {
   margin-bottom: 80px; }
+  .practise-header span {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #727271 !important; }
   .practise-header .about__subtitles {
     line-height: 1.3; }
 
