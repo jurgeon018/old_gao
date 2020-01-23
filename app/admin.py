@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from pages.models import * 
+from pages.admin import * 
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 
@@ -133,3 +135,4 @@ gao_admin.register(Post, PostAdmin)
 gao_admin.register(Slider, SliderAdmin)
 gao_admin.register(Site)
 gao_admin.register(Redirect)
+gao_admin.register(Page, PageAdmin)
