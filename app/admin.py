@@ -31,21 +31,13 @@ class PostAdmin(admin.ModelAdmin):
         'title', 
         'slug',
         'image',
-        'body',
         'author',
     )
-    list_editable = [
-        'title',
-        'slug',
-        'image',
-        'body',
-    ]
+
     prepopulated_fields = {
         'slug':('title',)
     }
-    list_display_links = [
-        'id', 
-    ]
+    list_display_links =list_display
 
 
 class TeamAdmin(admin.ModelAdmin):
