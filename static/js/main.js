@@ -3,6 +3,24 @@ new WOW().init();
 $(document).ready(function() {
 
 
+
+
+
+
+    $(".scroll_all").on('click', function () {
+        var elementClick = $(this).attr("href");
+        console.log(elementClick);
+        var destination = $(elementClick).offset().top;
+        $('html, body').animate({ scrollTop: destination }, 600);
+        return false;
+    });
+     
+
+
+
+
+
+
 $.extend($.lazyLoadXT, {
   edgeY:  200,
   srcAttr: 'data-src'
@@ -41,35 +59,38 @@ $.extend($.lazyLoadXT, {
 
 
   
-    if (window.location.href == '/' && localStorage.team_swipe == 1) {
+    if (window.location.pathname.split('/')[1] == '' && localStorage.team_swipe == 1) {
 
-        localStorage.team_swipe = null;
-
-       function linkF() {
-          document.getElementById('main__title-team').scrollIntoView();
-       }
-
-       setTimeout(linkF, 500);
+      function linkTime() {
+                 
+                 var destination = $('#main__title-team').offset().top;
+                 $('html, body').animate({ scrollTop: destination }, 600);
+                 return false;
+             }
+             setTimeout(linkTime, 500);
+             localStorage.team_swipe = 0;
        
     }
 
-
+console.log(window.location.pathname);
     $('#team__link').on("click", function() {
 
       
-        if (window.location.pathname == '/') {
+       if (window.location.pathname.split('/')[1] == "") {
+                 
+              function linkTime_2() {
+                  var destination = $('#main__title-team').offset().top;
+                  $('html, body').animate({ scrollTop: destination }, 600);
+                  return false;
+              }
+              setTimeout(linkTime_2, 500);
 
-           function linkF() {
-              document.getElementById('main__title-team').scrollIntoView();
-           }
+              } else {
+                  localStorage.team_swipe = 1;
+                  window.location.pathname = "/";
 
-           setTimeout(linkF, 500);
 
-        } else {
-            localStorage.setItem('team_swipe', 1);
-           
-            window.location.pathname = "/";
-        }
+              }
 
 
     });
@@ -77,19 +98,21 @@ $.extend($.lazyLoadXT, {
      $('.team__footer').on("click", function() {
 
        
-        if (window.location.pathname == '/') {
+       if (window.location.pathname.split('/')[1] == "") {
+                       
+                    function linkTime_2() {
+                        var destination = $('#main__title-team').offset().top;
+                        $('html, body').animate({ scrollTop: destination }, 600);
+                        return false;
+                    }
+                    setTimeout(linkTime_2, 500);
 
-              function linkF() {
-               document.getElementById('main__title-team').scrollIntoView();
-            }
+                    } else {
+                        localStorage.team_swipe = 1;
+                        window.location.pathname = "/";
 
-            setTimeout(linkF, 500);
 
-        } else {
-            localStorage.setItem('team_swipe', 1);
-        
-            window.location.pathname = "/";
-        }
+                    }
 
     });
 
@@ -99,13 +122,14 @@ $.extend($.lazyLoadXT, {
     
         if (window.location.pathname == '/' && localStorage.practise_swipe == 1) {
 
-            localStorage.practise_swipe = null;
-
-            function linkP() {
-             document.getElementById('main__title-practise').scrollIntoView();
-            }
-
-            setTimeout(linkP, 500);
+           function linkTime() {
+                          
+                          var destination = $('#main__title-practise').offset().top;
+                          $('html, body').animate({ scrollTop: destination }, 600);
+                          return false;
+                      }
+                      setTimeout(linkTime, 500);
+                      localStorage.team_swipe = 0;
 
            
         }
@@ -113,39 +137,42 @@ $.extend($.lazyLoadXT, {
 
         $('#practise__link').on("click", function() {
 
-           
-            if (window.location.pathname == '/') {
+          if (window.location.pathname.split('/')[1] == "") {
+                    
+                 function linkTime_2() {
+                     var destination = $('#main__title-practise').offset().top;
+                     $('html, body').animate({ scrollTop: destination }, 600);
+                     return false;
+                 }
+                 linkTime_2();
 
-                 function linkP() {
-              document.getElementById('team-btn').scrollIntoView();
-            }
+                 } else {
+                     localStorage.team_swipe = 1;
+                     window.location.pathname = "/";
 
-            setTimeout(linkP, 500);
-            
-            } else {
-                localStorage.setItem('practise_swipe', 1);
-               
-                window.location.pathname = "/";
-            }
+
+                 }
 
     });
 
          $('.practise__footer').on("click", function() {
 
            
-            if (window.location.pathname == '/') {
+           if (window.location.pathname.split('/')[1] == "") {
+                              
+                           function linkTime_2() {
+                               var destination = $('#main__title-practise').offset().top;
+                               $('html, body').animate({ scrollTop: destination }, 600);
+                               return false;
+                           }
+                           linkTime_2();
 
-                 function linkP() {
-                  document.getElementById('team-btn').scrollIntoView();
-                }
+                           } else {
+                               localStorage.team_swipe = 1;
+                               window.location.pathname = "/";
 
-                setTimeout(linkP, 500);
 
-            } else {
-                localStorage.setItem('practise_swipe', 1);
-               
-                window.location.pathname = "/";
-            }
+                           }
 
     });
 

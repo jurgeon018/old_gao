@@ -3,7 +3,8 @@
     <div class="header-logo">
         <a href="{% url 'index' %}">
             <span class="svg-head-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="254px" height="64px" version="1.1"
+                <svg class=
+                's123' xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="254px" height="64px" version="1.1"
                     style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
                     viewBox="0 0 354 94" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs>
@@ -252,10 +253,16 @@
             </div> 
 
             <a href="mailto:office@galpravgroup.com.ua">office@galpravgroup.com.ua</a>
-            <div class="info-icon-block">
-                {% comment %} {% include 'components/linkedin_svg.html' %} {% endcomment %}
-                {% include 'components/facebook_svg.html' %}
-                {% comment %} {% include 'components/insta_svg.html' %} {% endcomment %}
+            <div class="log_wrap">
+                <div class="log-prof">
+                    <img src="/static/img/login.png" alt="">
+                    login
+                </div>
+                <div class="info-icon-block">
+                    {% comment %} {% include 'components/linkedin_svg.html' %} {% endcomment %}
+                    {% include 'components/facebook_svg.html' %}
+                    {% comment %} {% include 'components/insta_svg.html' %} {% endcomment %}
+                </div>
             </div>
         </div>
         <a class="menu-link" href="#menu">
@@ -270,7 +277,7 @@
                     Про нас
                 </a></li>
             <li class="sub_link hvr-underline-from-center punch_link">
-                <a id="team__link" class="link_main">
+                <a href="#main__title-team" id="team__link" class="link_main scroll_all">
                     Команда
                 </a>
                 <img class="menu-arrow" data-src="/static/img/menu-arrow.png" alt="">
@@ -281,7 +288,7 @@
                 </ul>
             </li>
             <li id="practise__link" class="sub_link hvr-underline-from-center punch_link">
-                <a class="link_main" id="practise__link">
+                <a href="#main__title-practise" class="link_main scroll_all" id="practise__link">
                     Практики
                 </a>
 

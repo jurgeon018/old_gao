@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 
 from app.sitemaps import *
 from django.contrib.sitemaps.views import sitemap 
-
+from filebrowser.sites import site 
 
 
 sitemaps = {
@@ -20,6 +20,7 @@ sitemaps = {
 
 
 urlpatterns = [
+    path('admin/filebrowser/', site.urls),
     path('robots.txt/',        TemplateView.as_view(template_name="robots.txt"), name='robots'),
     path('sitemap.xml/',       sitemap, {'sitemaps':sitemaps}),
     path('tinymce/', include('tinymce.urls')),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('practice/7/',   TemplateView.as_view(template_name="practise-7.html"), name='practice-7'),
     path('practice/8/',   TemplateView.as_view(template_name="practise-8.html"), name='practice-8'),
 ]
+
 
 if settings.DEBUG == True:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

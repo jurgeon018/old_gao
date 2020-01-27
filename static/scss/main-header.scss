@@ -825,6 +825,34 @@ html {
 .layer_fix {
 	top: -139px !important;
 }
+.log-prof {
+	display: flex;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+	align-items: center;
+
+	    font-size: 14px;
+
+	img {
+		margin-right: 6px;
+		width: 15px;
+		height: auto;
+	}
+}
+.svg-login {
+	fill: #fff !important;
+	stroke: #fff !important;
+	svg {
+		fill: #fff !important;
+		stroke: #fff !important;
+	}
+}
+.log_wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 @media (max-width: 4000px) {
 	.formA {
 		min-width: 30% !important;
@@ -1144,6 +1172,18 @@ html {
 		padding: 10px !important;
 	}
 }
+@media (max-width: 1068px) {
+	.menu {
+    right: 33%;
+	}
+	.s123 {
+		width: 218px;
+	}
+	.menu .main-ul li {
+		margin-left: 26px;
+	}
+}
+
 @media (max-width: 1001px) {
 	.white-text {
 	font-size: 9pt;

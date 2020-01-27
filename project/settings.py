@@ -4,6 +4,7 @@ SECRET_KEY = '5mhjadw1o@#z455b%^v1v%s7mdi$_v7)ty4jgfeb1s(^t0et)l'
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
