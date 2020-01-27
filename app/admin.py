@@ -128,3 +128,5 @@ gao_admin.register(Slider, SliderAdmin)
 gao_admin.register(Site)
 gao_admin.register(Redirect)
 gao_admin.register(Page, PageAdmin)
+
+admin.site.register(Post, PostAdmin)

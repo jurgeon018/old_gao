@@ -815,6 +815,16 @@ html {
 	left: 7px !important;
 	    top: 22px !important;
 }
+.only_mlb {
+	display: none !important;
+}
+
+.only_desk {
+	display: inline;
+}
+.layer_fix {
+	top: -139px !important;
+}
 @media (max-width: 4000px) {
 	.formA {
 		min-width: 30% !important;
@@ -894,6 +904,14 @@ html {
 	.main-header {
 	   
 	       padding-bottom: 300px;
+	}
+}
+@media (max-width: 992px) {
+	.only_mlb {
+		display: inline !important;
+	}
+	.only_desk {
+		display: none !important;
 	}
 }
 @media (max-width: 723px) {
