@@ -3,22 +3,28 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import *
 from django.core.mail import send_mail,  BadHeaderError
 from django.contrib import messages
+from pages.models import * 
+
 
 
 def index(request):
-    return render(request, 'index.html')
+    page, _ = Page.objects.get_or_create(code='index')
+    return render(request, 'index.html', locals())
 
 
 def blog(request):
+    page, _ = Page.objects.get_or_create(code='blog')
     return render(request, 'blog.html', locals())
 
 
 def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    page = post 
     return render(request,'post.html', locals())
 
 
 def contacts(request):
+    page, _ = Page.objects.get_or_create(code='contacts')
     return render(request, 'contacts.html', locals())
 
 
@@ -28,10 +34,12 @@ def practice(request, pk):
 
 def member(request, slug):
     member = Team.objects.get(slug=slug)
+    page = member 
     return render(request, 'member.html', locals())
 
 
 def about(request):
+    page, _ = Page.objects.get_or_create(code='about')
     return render(request, 'about.html', locals())
 
 

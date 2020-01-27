@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from pages.models import * 
+from pages.admin import * 
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 
@@ -29,21 +31,13 @@ class PostAdmin(admin.ModelAdmin):
         'title', 
         'slug',
         'image',
-        'body',
         'author',
     )
-    list_editable = [
-        'title',
-        'slug',
-        'image',
-        'body',
-    ]
+
     prepopulated_fields = {
         'slug':('title',)
     }
-    list_display_links = [
-        'id', 
-    ]
+    list_display_links =list_display
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -133,3 +127,4 @@ gao_admin.register(Post, PostAdmin)
 gao_admin.register(Slider, SliderAdmin)
 gao_admin.register(Site)
 gao_admin.register(Redirect)
+gao_admin.register(Page, PageAdmin)

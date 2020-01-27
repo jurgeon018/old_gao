@@ -11,7 +11,7 @@ class Post(models.Model):
     meta_descr = models.TextField(blank=True, null=True)
     alt        = models.CharField(max_length=120, blank=True, null=True)
     title      = models.CharField(verbose_name='заголовок',max_length=250, blank=True, null=True)
-    slug       = models.SlugField(verbose_name='Посилання', max_length=250, unique=True, blank=True, null=True)
+    slug       = models.SlugField(verbose_name='Посилання', max_length=250, unique=True)
     # body       = models.TextField(verbose_name='текст', blank=True, null=True)
     body       = HTMLField(verbose_name='текст', blank=True, null=True)
     image      = models.ImageField(verbose_name='зображення', blank=True, null=True)

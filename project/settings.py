@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 
 
     'app.apps.AppConfig',
+    'pages',
     'tinymce',
 ]
 MIDDLEWARE = [
