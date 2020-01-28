@@ -1,5 +1,7 @@
 <div id="menu_id" class="all__menu">
-
+    <div class="load_spin">
+      <img src="/static/img/712.svg" alt="">
+    </div>
     <div class="header-logo">
         <a href="{% url 'index' %}">
             <span class="svg-head-logo">
@@ -248,13 +250,13 @@
             <a href="tel:+380504321997">+380504321997</a> -->
 
             <div class="link_mobale">
-                <a href="tel:+380504321997">+380504321997</a> 
-                <a class="tel-link-2" href="tel:+380977863919">+380977863919</a>
+                <a class="tel-link-1" onclick="gtag('event', 'send', { 'event_category': 'phone_1', 'event_action': 'click', });" href="tel:+380504321997">+380504321997</a> 
+                <a class="tel-link-2" onclick="gtag('event', 'send', { 'event_category': 'phone_2', 'event_action': 'click', });" href="tel:+380977863919">+380977863919</a>
             </div> 
 
-            <a href="mailto:office@galpravgroup.com.ua">office@galpravgroup.com.ua</a>
+            <a class="mail_class" onclick="gtag('event', 'send', { 'event_category': 'email', 'event_action': 'click', });" href="mailto:office@galpravgroup.com.ua">office@galpravgroup.com.ua</a>
             <div class="log_wrap">
-                <div class="log-prof">
+                <div class="log-prof" data-src="#modal-form_user">
                     <img src="/static/img/login.png" alt="">
                     login
                 </div>

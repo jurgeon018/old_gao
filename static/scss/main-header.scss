@@ -1,6 +1,25 @@
 html {
 	scroll-behavior: smooth;
 }
+.load_spin {
+	display: none;
+}
+.load_spin_active {
+	position: fixed;
+	z-index: 10000000;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(#4d5359, 0.7);
+	display: block !important;
+	
+	img {
+	  width: 50px;
+	  display: block;
+	  margin: 20% auto;
+	  height: auto;
+	}
+	
+}
 #showScroll {
 	margin-top: 80px;
 	min-width: 300px;
