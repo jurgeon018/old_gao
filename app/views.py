@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import *
 from django.core.mail import send_mail,  BadHeaderError
@@ -51,25 +51,12 @@ def test(request):
     message = ' it  means a world to us '
     email_from = settings.DEFAULT_FROM_EMAIL
     recipient_list = ['jurgeon018@gmail.com',]    
-
     send_mail( 
         subject, 
         message, 
         email_from, 
         recipient_list 
     )
-
-
-    # mail = settings.EMAIL_HOST_USER
-    # print(mail)
-    # send_mail(
-    #     subject        = 'Заявка на консультацію',
-    #     message        = 'Заявка на консультацію',
-    #     from_email     = mail, 
-    #     recipient_list = [mail, 'jurgeon018@gmail.com'], 
-    #     fail_silently  = False,
-    # )
-
     return HttpResponse('sdf')
 
 
@@ -79,22 +66,17 @@ def form(request):
     phone = request.POST.get('phone', '')
 
     return_path = request.META.get('HTTP_REFERER', '/')
-    mail = 'jurgeon018@gmail.com'
-    mail = 'office@galpravgroup.com.ua'
-    mail = 'admin@galpravgroup.com.ua'
-
-    Contact.objects.create(
-        name=name,
-        email=email, 
-        phone=phone,
-    )
-
-    send_mail(
-        subject        = 'Заявка на консультацію',
-        message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
-        from_email     = mail, 
-        recipient_list = [mail, 'jurgeon018@gmail.com'], 
-        fail_silently  = False
-    )
-
+    # send_mail(
+    #     subject        = 'Заявка на консультацію',
+    #     message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
+    #     from_email     = 'jurgeon018@gmail.com', 
+    #     recipient_list = ['jurgeon018@gmail.com', ], 
+    #     fail_silently  = False
+    # )
+    return JsonResponse({
+        "status":"OK",
+        
+    })
     return redirect(return_path)
+
+

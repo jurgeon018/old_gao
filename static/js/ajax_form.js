@@ -12,6 +12,7 @@ $(function() {
 //  **/
 function Onload() {
     valide_form('.modal-form_user', '.inp-vak-wrap', true);
+    valide_form('#modal-form', '.input-wrap', true);
 
 }
 function location_leng() {
@@ -120,6 +121,7 @@ function valide_form(id_form, error_inp_wrap, check_request) {
              
                 
                  $('.load_spin').addClass('load_spin_active');
+
                  var form_input = $(form).serializeArray();
                  var url_form = form.action;
                  var form_json = {};
@@ -146,6 +148,7 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                         console.log(data)
                       if(data.status=='OK' && typeof data['status'] !== "undefined"){
                           sayHi();
+                     gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
                       }
                       if(data.status=='BAD' && typeof data['status'] !== "undefined"){
                           $('.load_spin').removeClass('load_spin_active');
