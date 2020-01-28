@@ -948,9 +948,31 @@ html {
 	}
 }
 @media (max-width: 1350px) {
+	.arrow-wrap {
+		display: none;
+	}
 	.main-header {
 	   
-	       padding-bottom: 300px;
+	      padding-bottom: 65px;
+	}
+}
+@media (max-width: 1144px) {
+	.btn-communicate {
+	    top: 20%;
+	}
+}
+@media (max-width: 1118px) {
+
+	.main-header {
+	   
+	      padding-bottom: 40px;
+	}
+}
+@media (max-width: 862px) {
+
+	.main-header {
+	   padding-top: 100px;
+	     padding-bottom: 10px;
 	}
 }
 @media (max-width: 992px) {
@@ -986,7 +1008,7 @@ html {
 @media (max-width: 950px) {
 	.btn-communicate {
 	    position: absolute;
-	    top: 40%;
+	    top: 20%;
 	    right: 10px;
 	}
 }
