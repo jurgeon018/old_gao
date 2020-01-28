@@ -7,15 +7,98 @@ $(document).ready(function() {
 
 
 
-    $(".scroll_all").on('click', function () {
-        var elementClick = $(this).attr("href");
-        console.log(elementClick);
-        var destination = $(elementClick).offset().top;
-        $('html, body').animate({ scrollTop: destination }, 600);
-        return false;
+    $("#team__link").on('click', function () {
+        if (window.location.pathname.split('/')[1] !== "") {
+                              localStorage.team_swipe = 1;
+                           window.location.pathname = "/";
+                           console.log('hello');
+        } else {
+            var elementClick = $(this).attr("href");
+            console.log(elementClick);
+            var destination = $(elementClick).offset().top;
+            $('html, body').animate({ scrollTop: destination }, 600);
+            return false;
+        }
+        
     });
-     
 
+    $(".team__footer").on('click', function () {
+        if (window.location.pathname.split('/')[1] !== "") {
+                              localStorage.team_swipe = 1;
+                           window.location.pathname = "/";
+                           console.log('hello');
+        } else {
+            var elementClick = $(this).attr("href");
+            console.log(elementClick);
+            var destination = $(elementClick).offset().top;
+            $('html, body').animate({ scrollTop: destination }, 600);
+            return false;
+        }
+        
+    });
+
+
+
+     if (window.location.pathname.split('/')[1] == '' && localStorage.team_swipe == 1) {
+
+          function linkTime() {
+                     
+                     var destination = $('#main__title-team').offset().top;
+                     $('html, body').animate({ scrollTop: destination });
+                     return false;
+                 }
+                 setTimeout(linkTime, 500);
+                 localStorage.team_swipe = 0;
+           
+        }
+
+
+        $("#practise__link").on('click', function () {
+            if (window.location.pathname.split('/')[1] !== "") {
+                                  localStorage.team_swipe = 2;
+                               window.location.pathname = "/";
+                               console.log('hello');
+            } else {
+                var elementClick = $(this).attr("href");
+                console.log(elementClick);
+                var destination = $(elementClick).offset().top;
+                $('html, body').animate({ scrollTop: destination }, 600);
+                return false;
+            }
+            
+        });
+
+        $(".practise__footer").on('click', function () {
+            if (window.location.pathname.split('/')[1] !== "") {
+                                  localStorage.team_swipe = 2;
+                               window.location.pathname = "/";
+                               console.log('hello');
+            } else {
+                var elementClick = $(this).attr("href");
+                console.log(elementClick);
+                var destination = $(elementClick).offset().top;
+                $('html, body').animate({ scrollTop: destination }, 600);
+                return false;
+            }
+            
+        });
+
+
+
+         if (window.location.pathname.split('/')[1] == '' && localStorage.team_swipe == 2) {
+
+              function linkTime() {
+                         
+                         var destination = $('#main__title-practise').offset().top;
+                         $('html, body').animate({ scrollTop: destination });
+                         return false;
+                     }
+                     setTimeout(linkTime, 500);
+                     localStorage.team_swipe = 0;
+               
+            }
+     
+localStorage.team_swipe = 0;
 
 
 
@@ -58,127 +141,48 @@ $.extend($.lazyLoadXT, {
 
 
 
-  
-    if (window.location.pathname.split('/')[1] == '' && localStorage.team_swipe == 1) {
+$('#team__link').on("click", function() {
 
-      function linkTime() {
-                 
-                 var destination = $('#main__title-team').offset().top;
-                 $('html, body').animate({ scrollTop: destination }, 600);
-                 return false;
-             }
-             setTimeout(linkTime, 500);
-             localStorage.team_swipe = 0;
-       
-    }
-
-console.log(window.location.pathname);
-    $('#team__link').on("click", function() {
-
-      
-       if (window.location.pathname.split('/')[1] == "") {
-                 
-              function linkTime_2() {
-                  var destination = $('#main__title-team').offset().top;
-                  $('html, body').animate({ scrollTop: destination }, 600);
-                  return false;
-              }
-              setTimeout(linkTime_2, 500);
-
-              } else {
-                  localStorage.team_swipe = 1;
-                  window.location.pathname = "/";
-
-
-              }
-
-
-    });
-    
-     $('.team__footer').on("click", function() {
-
-       
-       if (window.location.pathname.split('/')[1] == "") {
-                       
-                    function linkTime_2() {
-                        var destination = $('#main__title-team').offset().top;
-                        $('html, body').animate({ scrollTop: destination }, 600);
-                        return false;
-                    }
-                    setTimeout(linkTime_2, 500);
-
-                    } else {
-                        localStorage.team_swipe = 1;
-                        window.location.pathname = "/";
-
-
-                    }
-
-    });
-
-   
-
-
-    
-        if (window.location.pathname == '/' && localStorage.practise_swipe == 1) {
-
-           function linkTime() {
-                          
-                          var destination = $('#main__title-practise').offset().top;
-                          $('html, body').animate({ scrollTop: destination }, 600);
-                          return false;
-                      }
-                      setTimeout(linkTime, 500);
-                      localStorage.team_swipe = 0;
-
-           
-        }
-
-
-        $('#practise__link').on("click", function() {
-
-          if (window.location.pathname.split('/')[1] == "") {
-                    
-                 function linkTime_2() {
-                     var destination = $('#main__title-practise').offset().top;
-                     $('html, body').animate({ scrollTop: destination }, 600);
-                     return false;
-                 }
-                 linkTime_2();
-
-                 } else {
-                     localStorage.team_swipe = 1;
-                     window.location.pathname = "/";
-
-
-                 }
-
-    });
-
-         $('.practise__footer').on("click", function() {
-
-           
-           if (window.location.pathname.split('/')[1] == "") {
-                              
-                           function linkTime_2() {
-                               var destination = $('#main__title-practise').offset().top;
-                               $('html, body').animate({ scrollTop: destination }, 600);
-                               return false;
-                           }
-                           linkTime_2();
-
-                           } else {
-                               localStorage.team_swipe = 1;
-                               window.location.pathname = "/";
-
-
-                           }
-
-    });
+});
 
 
 
-    
+
+        
+
+
+    // $('.btn-communicate').on("click", function() {
+    //     gtag('event', 'send', { 'event_category': 'contact_us', 'event_action': 'click', });
+    //     console.log("123");
+    // });
+
+    // $('.tel-link-1').on("click", function() {
+    //     gtag('event', 'send', { 'event_category': 'phone_1', 'event_action': 'click', });
+    //     console.log("123");
+    // });
+
+    // $('.tel-link-2').on("click", function() {
+    //     gtag('event', 'send', { 'event_category': 'phone_2', 'event_action': 'click', });
+    //     console.log("123");
+    // });
+    // $('.mail_class').on("click", function() {
+    //     gtag('event', 'send', { 'event_category': 'email', 'event_action': 'click', });
+    //     console.log("123");
+    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
    

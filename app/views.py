@@ -4,6 +4,7 @@ from .models import *
 from django.core.mail import send_mail,  BadHeaderError
 from django.contrib import messages
 from pages.models import * 
+from django.conf import settings 
 
 
 
@@ -43,23 +44,57 @@ def about(request):
     return render(request, 'about.html', locals())
 
 
+def test(request):
+    from django.core.mail import send_mail
+    from django.conf import settings
+    subject = 'Thank you for registering to our site'
+    message = ' it  means a world to us '
+    email_from = settings.DEFAULT_FROM_EMAIL
+    recipient_list = ['jurgeon018@gmail.com',]    
+
+    send_mail( 
+        subject, 
+        message, 
+        email_from, 
+        recipient_list 
+    )
+
+
+    # mail = settings.EMAIL_HOST_USER
+    # print(mail)
+    # send_mail(
+    #     subject        = 'Заявка на консультацію',
+    #     message        = 'Заявка на консультацію',
+    #     from_email     = mail, 
+    #     recipient_list = [mail, 'jurgeon018@gmail.com'], 
+    #     fail_silently  = False,
+    # )
+
+    return HttpResponse('sdf')
+
+
 def form(request):
     name  = request.POST.get('name', '')
     email = request.POST.get('email', '')
     phone = request.POST.get('phone', '')
 
     return_path = request.META.get('HTTP_REFERER', '/')
-    if name and email and phone:
-        send_mail(
-            subject        = 'Заявка на консультацію',
-            message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
-            from_email     = 'jurgeon018@gmail.com', 
-            recipient_list = ['jurgeon018@gmail.com', ], 
-            fail_silently  = False
-        )
+    mail = 'jurgeon018@gmail.com'
+    mail = 'office@galpravgroup.com.ua'
+    mail = 'admin@galpravgroup.com.ua'
 
-        messages.success(request, 'Повідомлення надіслано')
-        return redirect(return_path)
-    else:
-        messages.success(request, 'Заповніть всі поля')
-        return redirect(return_path)
+    Contact.objects.create(
+        name=name,
+        email=email, 
+        phone=phone,
+    )
+
+    send_mail(
+        subject        = 'Заявка на консультацію',
+        message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
+        from_email     = mail, 
+        recipient_list = [mail, 'jurgeon018@gmail.com'], 
+        fail_silently  = False
+    )
+
+    return redirect(return_path)
