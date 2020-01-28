@@ -5,23 +5,31 @@
         <img src="/static/img/green-logo.png" alt="">
     </div>
     <div class="input-wrap">
-        <div class="wrap-mail">
-        <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
-        </div>
-        <input name="name" pattern="^[А-Яа-яЁё\s]+$" title="Не правильное имя или фамилия" type="text" minlength="2" placeholder="Прізвище та ім'я" required>
+       <div class="inp_fix_wrap">
+           <div class="wrap-mail">
+           <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
+           </div>
+           <input name="name" title="Не правильное имя или фамилия" type="text" placeholder="Прізвище та ім'я">
+       </div>
     </div>
     <div class="input-wrap">
-        <div class="wrap-mail">
-        <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
+        <div class="inp_fix_wrap">
+            <div class="wrap-mail">
+            <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
+            </div>
+            <input name="phone" id="phone" type="text" placeholder="+38 (0__) _ _ _ - _ _ - _ _">
         </div>
-        <input name="phone" id="phone" type="text" placeholder="+38 (0__) _ _ _ - _ _ - _ _" required>
+       
     </div>
     <div class="input-wrap">
-        <div class="wrap-mail wrap-mail-3">
-        <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
+        <div class="inp_fix_wrap">
+            <div class="wrap-mail wrap-mail-3">
+            <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
+            </div>
+            <input name="email" type="email" placeholder="Email">
         </div>
-        <input name="email" type="email" placeholder="Email" required>
+       
     </div>
-    <input value="Надіслати" type="submit" onclick="gtag('event', 'send', { 'event_category': 'contact_us', 'event_action': 'click', });" class="btn-read hvr-fade">
+    <input value="Надіслати" type="submit" class="btn-read hvr-fade">
     </div>
 </form>

@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import *
 from django.core.mail import send_mail,  BadHeaderError
@@ -49,17 +49,15 @@ def form(request):
     phone = request.POST.get('phone', '')
 
     return_path = request.META.get('HTTP_REFERER', '/')
-    if name and email and phone:
-        send_mail(
-            subject        = 'Заявка на консультацію',
-            message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
-            from_email     = 'jurgeon018@gmail.com', 
-            recipient_list = ['jurgeon018@gmail.com', ], 
-            fail_silently  = False
-        )
-
-        messages.success(request, 'Повідомлення надіслано')
-        return redirect(return_path)
-    else:
-        messages.success(request, 'Заповніть всі поля')
-        return redirect(return_path)
+    # send_mail(
+    #     subject        = 'Заявка на консультацію',
+    #     message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
+    #     from_email     = 'jurgeon018@gmail.com', 
+    #     recipient_list = ['jurgeon018@gmail.com', ], 
+    #     fail_silently  = False
+    # )
+    return JsonResponse({
+        "status":"OK",
+        
+    })
+    return redirect(return_path)
