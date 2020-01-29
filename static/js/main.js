@@ -259,6 +259,7 @@ $('#team__link').on("click", function() {
         dots: false,
         swipe: false,
         fade: true,
+         autoplay: true,
         speed: 100
 
 

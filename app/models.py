@@ -88,3 +88,9 @@ class Slider(models.Model):
         app_label='app'
 
 
+class Contact(models.Model):
+    name  = models.TextField(verbose_name='Імя', blank=True, null=True)
+    email = models.TextField(verbose_name='Емайл', blank=True, null=True)
+    phone = models.TextField(verbose_name='Телефон', blank=True, null=True)
+
+

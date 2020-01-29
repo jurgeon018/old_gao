@@ -948,9 +948,31 @@ html {
 	}
 }
 @media (max-width: 1350px) {
+	.arrow-wrap {
+		display: none;
+	}
 	.main-header {
 	   
-	       padding-bottom: 300px;
+	      padding-bottom: 65px;
+	}
+}
+@media (max-width: 1144px) {
+	.btn-communicate {
+	    top: 20%;
+	}
+}
+@media (max-width: 1118px) {
+
+	.main-header {
+	   
+	      padding-bottom: 40px;
+	}
+}
+@media (max-width: 862px) {
+
+	.main-header {
+	   padding-top: 100px;
+	     padding-bottom: 10px;
 	}
 }
 @media (max-width: 992px) {
@@ -986,7 +1008,7 @@ html {
 @media (max-width: 950px) {
 	.btn-communicate {
 	    position: absolute;
-	    top: 40%;
+	    top: 20%;
 	    right: 10px;
 	}
 }
@@ -1120,10 +1142,52 @@ html {
 	text-align: center;
 	width: 57%;
 }
+
+
+
+.error {
+	padding: 7px;
+	color: red;
+}
+.true_form {
+	padding: 0;
+	    width: 500px;
+	    height: 250px;
+	    background: #fff !important;
+	    min-width: unset;
+	    text-align: center;
+	    min-height: unset;
+	    overflow: hidden !important;
+
+	    .fancybox-close-small {
+	        color: #fff !important;
+	    }
+	    .form_true_img {
+	        margin-top: 35px;
+	        margin: 0 auto;
+	            width: 100px;
+	            display: block;
+	    }
+	   
+	       
+	        
+
+}
+.footer__sub {
+    font-size: 16px;
+    margin-top: 30px;
+    font-weight: 300;
+    text-align: center;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
 .input-wrap{
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto;
+	flex-direction: column;
 	width: 90%;
 	margin-top: 20px;
 
@@ -1157,6 +1221,10 @@ html {
 	::-moz-placeholder          {color:#D2A351;}/* Firefox 19+ */
 	:-moz-placeholder           {color:#D2A351;}/* Firefox 18- */
 	:-ms-input-placeholder      {color:#D2A351;}
+}
+.inp_fix_wrap {
+	display: flex;
+	justify-content: space-between;
 }
 .modal-block {
 	.btn-read {

@@ -118,6 +118,8 @@ class SliderAdmin(admin.ModelAdmin):
         SliderInline
     ]
 
+class ContactAdmin(admin.ModelAdmin):
+    pass 
 
 
 
@@ -128,5 +130,6 @@ gao_admin.register(Slider, SliderAdmin)
 gao_admin.register(Site)
 gao_admin.register(Redirect)
 gao_admin.register(Page, PageAdmin)
+gao_admin.register(Contact, ContactAdmin)
 
 admin.site.register(Post, PostAdmin)

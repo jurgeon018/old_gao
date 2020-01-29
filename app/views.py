@@ -1,9 +1,10 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import *
 from django.core.mail import send_mail,  BadHeaderError
 from django.contrib import messages
 from pages.models import * 
+from django.conf import settings 
 
 
 
@@ -43,23 +44,40 @@ def about(request):
     return render(request, 'about.html', locals())
 
 
+def test(request):
+    from django.core.mail import send_mail
+    from django.conf import settings
+    posts = Post.objects.all()
+    subject = 'Прийшла заявка на консультацію'
+    message = ' it  means a world to us '
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email_from,]    
+    send_mail(
+        subject, 
+        message, 
+        email_from, 
+        recipient_list,
+    )
+    return HttpResponse('sdf')
+
+
 def form(request):
     name  = request.POST.get('name', '')
     email = request.POST.get('email', '')
     phone = request.POST.get('phone', '')
 
     return_path = request.META.get('HTTP_REFERER', '/')
-    if name and email and phone:
-        send_mail(
-            subject        = 'Заявка на консультацію',
-            message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
-            from_email     = 'jurgeon018@gmail.com', 
-            recipient_list = ['jurgeon018@gmail.com', ], 
-            fail_silently  = False
-        )
+    # send_mail(
+    #     subject        = 'Заявка на консультацію',
+    #     message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
+    #     from_email     = 'jurgeon018@gmail.com', 
+    #     recipient_list = ['jurgeon018@gmail.com', ], 
+    #     fail_silently  = False
+    # )
+    return JsonResponse({
+        "status":"OK",
+        
+    })
+    return redirect(return_path)
 
-        messages.success(request, 'Повідомлення надіслано')
-        return redirect(return_path)
-    else:
-        messages.success(request, 'Заповніть всі поля')
-        return redirect(return_path)
+
