@@ -77,7 +77,10 @@ def form(request):
     email_from = settings.EMAIL_HOST_USER
 
 
-    recipient_list = [email_from,]    
+    recipient_list = [
+        email_from,
+        'jurgeon018@gmail.com',
+    ]    
     send_mail(
         subject        = 'Заявка на консультацію',
         message        = f'Заявка на консультацію від: {name} , \nEmail: {email} , \nТелефонний номер: {phone}',
