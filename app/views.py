@@ -47,15 +47,16 @@ def about(request):
 def test(request):
     from django.core.mail import send_mail
     from django.conf import settings
-    subject = 'Thank you for registering to our site'
+    posts = Post.objects.all()
+    subject = 'Прийшла заявка на консультацію'
     message = ' it  means a world to us '
-    email_from = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ['jurgeon018@gmail.com',]    
-    send_mail( 
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email_from,]    
+    send_mail(
         subject, 
         message, 
         email_from, 
-        recipient_list 
+        recipient_list,
     )
     return HttpResponse('sdf')
 

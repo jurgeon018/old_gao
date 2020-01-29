@@ -76,22 +76,25 @@ MEDIA_URL = '/media/'
 
 
 
-# EMAIL_HOST = 'mail.galpravgroup.com.ua'
-# DEFAULT_FROM_EMAIL = 'admin@galpravgroup.com.ua'
-# EMAIL_HOST_USER = 'admin@galpravgroup.com.ua'
-# EMAIL_HOST_PASSWORD = 'galprav69018'
-# EMAIL_PORT = 110
 
-
-
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_HOST_USER     = 'jurgeon018@gmail.com'
-DEFAULT_FROM_EMAIL  = 'jurgeon018@gmail.com'
-EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jurgeon018@gmail.com'
+EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'mail.galpravgroup.com.ua'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'admin@galpravgroup.com.ua'
+# EMAIL_HOST_PASSWORD = 'galprav69018'
+
+
+
 SITE_ID = 1
