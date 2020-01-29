@@ -92,3 +92,15 @@ class Contact(models.Model):
     name  = models.TextField(verbose_name='Імя', blank=True, null=True)
     email = models.TextField(verbose_name='Емайл', blank=True, null=True)
     phone = models.TextField(verbose_name='Телефон', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}, {self.email}, {self.phone}"
+
+    class Meta:
+        verbose_name='Контакт'
+        verbose_name_plural='Контакти'
+        app_label='app'
+
+
+
+

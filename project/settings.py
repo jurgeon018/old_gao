@@ -74,27 +74,27 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jurgeon018@gmail.com'
-EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
-
-
-
+SITE_ID = 1
 
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'mail.galpravgroup.com.ua'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'admin@galpravgroup.com.ua'
-# EMAIL_HOST_PASSWORD = 'galprav69018'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'jurgeon018@gmail.com'
+# EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
 
 
 
-SITE_ID = 1
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.galpravgroup.com.ua'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'admin@galpravgroup.com.ua'
+EMAIL_HOST_PASSWORD = 'galprav69018'
+
+
+
