@@ -87,3 +87,4 @@ class Slider(models.Model):
         verbose_name_plural='Слайдери'
         app_label='app'
 
+
