@@ -93,4 +93,17 @@ class Contact(models.Model):
     email = models.TextField(verbose_name='Емайл', blank=True, null=True)
     phone = models.TextField(verbose_name='Телефон', blank=True, null=True)
 
+<<<<<<< HEAD
+=======
+    def __str__(self):
+        return f"{self.name}, {self.email}, {self.phone}"
+
+    class Meta:
+        verbose_name='Контакт'
+        verbose_name_plural='Контакти'
+        app_label='app'
+
+
+
+>>>>>>> 1383843ab5fdbef38b9dee7919dfc61f2c060656
 

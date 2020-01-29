@@ -1,0 +1,52 @@
+.client {
+  position: relative;
+  padding-bottom: 50px; }
+  .client .main__title:before {
+    display: block;
+    content: "";
+    height: 155px;
+    margin: -155px 0 0; }
+
+.client-profile {
+  width: 100%;
+  display: flex;
+  align-items: center; }
+  .client-profile img {
+    -webkit-box-shadow: 0px 0px 34px -12px #b0adb0;
+    -moz-box-shadow: 0px 0px 34px -12px #b0adb0;
+    box-shadow: 0px 0px 34px -12px #b0adb0;
+    max-width: 172px;
+    display: block;
+    height: auto;
+    margin: 22px; }
+
+.client-profile-right {
+  flex-direction: row-reverse;
+  text-align: right; }
+  .client-profile-right img {
+    width: 30%;
+    margin-left: 15px; }
+  .client-profile-right .line-client {
+    position: absolute;
+    bottom: 0;
+    right: -17px;
+    height: 1px;
+    width: 80px;
+    border-bottom: 1.4px solid #D2A351; }
+
+.client-profile-left img {
+  width: 30%;
+  margin-right: 15px; }
+.client-profile-left .line-client {
+  position: absolute;
+  bottom: 0;
+  left: -17px;
+  height: 1px;
+  width: 80px;
+  border-bottom: 2px solid #D2A351; }
+
+@media (max-width: 678px) {
+  .client-profile {
+    margin-top: 40px; } }
+
+/*# sourceMappingURL=client.css.map */

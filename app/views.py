@@ -5,7 +5,7 @@ from django.core.mail import send_mail,  BadHeaderError
 from django.contrib import messages
 from pages.models import * 
 from django.conf import settings 
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -49,7 +49,7 @@ def test(request):
     from django.conf import settings
     posts = Post.objects.all()
     subject = 'Прийшла заявка на консультацію'
-    message = ' it  means a world to us '
+    message = 'Прийшла заявка на консультацію'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email_from,]    
     send_mail(
@@ -61,23 +61,36 @@ def test(request):
     return HttpResponse('sdf')
 
 
+@csrf_exempt
 def form(request):
     name  = request.POST.get('name', '')
     email = request.POST.get('email', '')
     phone = request.POST.get('phone', '')
 
-    return_path = request.META.get('HTTP_REFERER', '/')
-    # send_mail(
-    #     subject        = 'Заявка на консультацію',
-    #     message        = f'Заявка на консультацію від: \n{name} , \nEmail: {email} , \nТелефонний номер: {phone}',
-    #     from_email     = 'jurgeon018@gmail.com', 
-    #     recipient_list = ['jurgeon018@gmail.com', ], 
-    #     fail_silently  = False
-    # )
+
+    Contact.objects.create(
+        name=name,
+        email=email,
+        phone=phone,
+    )
+    
+    email_from = settings.EMAIL_HOST_USER
+
+
+    recipient_list = [email_from,]    
+    send_mail(
+        subject        = 'Заявка на консультацію',
+        message        = f'Заявка на консультацію від: {name} , \nEmail: {email} , \nТелефонний номер: {phone}',
+        from_email     = email_from, 
+        recipient_list = recipient_list, 
+        fail_silently  = False
+    )
     return JsonResponse({
         "status":"OK",
-        
+
     })
-    return redirect(return_path)
 
 
+"""
+sdf@sdf.sdf22222222222222
+"""
