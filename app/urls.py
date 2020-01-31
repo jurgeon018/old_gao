@@ -33,7 +33,6 @@ urlpatterns = [
     path('post/<slug>/',     post,     name='post'),
     path('member/<slug>/',   member,   name='member'),
     path('form/',            form,     name='form'),
-    path('test/', test, name='test'),
 
     path('practice/<pk>/',   practice, name='practice'),
 

@@ -7,11 +7,11 @@ from django.utils import timezone
 
 
 class Post(models.Model):
-    meta_title = models.CharField(max_length=120, blank=True, null=True) 
+    meta_title = models.CharField(max_length=255, blank=True, null=True) 
     meta_descr = models.TextField(blank=True, null=True)
-    alt        = models.CharField(max_length=120, blank=True, null=True)
-    title      = models.CharField(verbose_name='заголовок',max_length=250, blank=True, null=True)
-    slug       = models.SlugField(verbose_name='Посилання', max_length=250, unique=True)
+    alt        = models.CharField(max_length=255, blank=True, null=True)
+    title      = models.CharField(verbose_name='заголовок',max_length=255, blank=True, null=True)
+    slug       = models.SlugField(verbose_name='Посилання', max_length=255, unique=True)
     # body       = models.TextField(verbose_name='текст', blank=True, null=True)
     body       = HTMLField(verbose_name='текст', blank=True, null=True)
     image      = models.ImageField(verbose_name='зображення', blank=True, null=True)
@@ -35,18 +35,18 @@ class Post(models.Model):
 
 
 class Team(models.Model):
-    meta_title  = models.CharField(max_length=120, blank=True, null=True) 
+    meta_title  = models.CharField(max_length=255, blank=True, null=True) 
     meta_descr  = models.TextField(blank=True, null=True)
-    alt         = models.CharField(max_length=120, blank=True, null=True)
-    full_name   = models.CharField(verbose_name='Ім\'я', max_length=250, blank=True, null=True)
-    area        = models.CharField(verbose_name='Галузь',max_length=250, blank=True, null=True)
+    alt         = models.CharField(max_length=255, blank=True, null=True)
+    full_name   = models.CharField(verbose_name='Ім\'я', max_length=255, blank=True, null=True)
+    area        = models.CharField(verbose_name='Галузь',max_length=255, blank=True, null=True)
     description = models.TextField(verbose_name="Опис", blank=True, null=True)
-    address     = models.CharField(verbose_name="Адреса", max_length=250, blank=True, null=True)
+    address     = models.CharField(verbose_name="Адреса", max_length=255, blank=True, null=True)
     email       = models.EmailField(verbose_name='email', blank=True, null=True)
     photo       = models.ImageField(verbose_name="Фото", blank=True, null=True)
-    phone       = models.CharField(verbose_name="Номер телефону", max_length=12, blank=True, null=True)
-    phone2      = models.CharField(verbose_name="Номер телефону2", max_length=12, blank=True, null=True)
-    slug        = models.SlugField(verbose_name="Посилання на сайті", max_length=250, blank=True, null=True)
+    phone       = models.CharField(verbose_name="Номер телефону", max_length=255, blank=True, null=True)
+    phone2      = models.CharField(verbose_name="Номер телефону2", max_length=255, blank=True, null=True)
+    slug        = models.SlugField(verbose_name="Посилання на сайті", max_length=255, blank=True, null=True)
 
     class Meta:
         verbose_name='учасник'
@@ -61,10 +61,10 @@ class Team(models.Model):
     
 
 class Client(models.Model):
-    title = models.CharField(verbose_name="Назва", max_length=250, blank=True, null=True)
+    title = models.CharField(verbose_name="Назва", max_length=255, blank=True, null=True)
     body  = models.TextField(verbose_name="Опис", blank=True, null=True)
     image = models.ImageField(verbose_name="Зображення", blank=True, null=True)
-    alt   = models.CharField(verbose_name="alt", max_length=220, blank=True, null=True)
+    alt   = models.CharField(verbose_name="alt", max_length=255, blank=True, null=True)
 
     class Meta:
         verbose_name='клієнт'
@@ -76,7 +76,7 @@ class Client(models.Model):
 
 
 class Slider(models.Model):
-    slider = models.CharField(verbose_name="Номер слайдера", max_length=120)
+    slider = models.CharField(verbose_name="Номер слайдера", max_length=255)
     clients = models.ManyToManyField(verbose_name="Клієнти", to="Client", related_name="sliders", blank=True, null=True)
 
     def __str__(self):
