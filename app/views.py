@@ -56,14 +56,9 @@ def form(request):
     )
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [
-<<<<<<< HEAD
         # email_from,
         # 'jurgeon018@gmail.com',
         'office@galpravgroup.com.ua',
-=======
-        email_from,
-        'jurgeon018@gmail.com',
->>>>>>> 795fa837e03f5eaeab2679110587b37e95060408
     ]
     send_mail(
         subject        = 'Заявка на консультацію',
