@@ -141,7 +141,7 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                       body: new URLSearchParams($.param(form_json))
                     })
                     .then(data => {
-          
+
                       return data.json();
                     })
                     .then(data => {
