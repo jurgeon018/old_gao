@@ -11,7 +11,7 @@ $(function() {
 //  *
 //  **/
 function Onload() {
-    valide_form('.modal-form_user', '.inp-vak-wrap', true);
+    valide_form('#modal-form_user', '.inp-vak-wrap', true);
     valide_form('#modal-form', '.input-wrap', true);
 
 }

@@ -3,6 +3,28 @@ new WOW().init();
 $(document).ready(function() {
 
 
+  // tabs==========
+  $(".main_tab__link").on("click", function(){
+      ($(this)[0].dataset.tab);
+      var className = ($(this)[0].dataset.tab);
+      console.log(className);
+      ($(".main_tab__link").removeClass("main_tab__link_active"));
+       ($(this).addClass("main_tab__link_active"));
+      ($(".tab-auto-content-prof").removeClass("tab-auto-content-prof_active"));
+          ($("#"+$(this)[0].dataset.tab).addClass("tab-auto-content-prof_active"));
+
+  });
+  $(".mini-tab__link").on("click", function(){
+      ($(this)[0].dataset.tab);
+      var className = ($(this)[0].dataset.tab);
+      console.log(className);
+      ($(".mini-tab__link").removeClass("mini-tab__link_active"));
+       ($(this).addClass("mini-tab__link_active"));
+      ($(".mini-tab-content-prof").removeClass("mini-tab-content-prof_active"));
+          ($("#"+$(this)[0].dataset.tab).addClass("mini-tab-content-prof_active"));
+
+  });
+
 
 
 

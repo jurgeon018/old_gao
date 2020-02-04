@@ -18,6 +18,41 @@ html {
 	  margin: 20% auto;
 	  height: auto;
 	}
+}
+.inp-vak-wrap {
+	display: flex;
+	flex-direction: column;
+
+	 input {
+	 	width: 100%;
+	 	outline: none;
+	 	border: none;
+	 	border-bottom: 2px solid #D2A351;
+	 	font-family: 'Montserrat', sans-serif;
+	 	font-weight: 700;
+	 	color: #D2A351;
+	 	background-color: transparent;
+	 }
+}
+.submit_vak {
+	background-color: transparent;
+	color: #D2A351 !important;
+	outline: none;
+	transition: all .2s;
+	&:hover {
+		color: #fff !important;
+	}
+}
+.fancybox-container {
+	
+}
+#modal-form_user {
+	
+}
+.fancybox-slide {
+	
+}
+.fancybox-stage {
 	
 }
 #showScroll {
