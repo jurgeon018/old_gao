@@ -123,6 +123,110 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 
+
+
+from django.contrib import admin 
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext, gettext_lazy as _
+
+
+User = get_user_model()
+
+class CustomUserAdmin(UserAdmin):
+    inlines = [
+        # ProfileInline,
+        # OrderInline,
+    ]
+
+    fieldsets = (
+        (_('Personal info'), {
+            'fields': (
+                'first_name', 
+                'last_name', 
+                'email',
+                # 'phone_number',
+            )
+        }),
+        (None, {
+            'fields': (
+                'username', 
+                'password'
+            )
+        }),
+        # (_('Permissions'), {
+        #     'fields': (
+        #         'is_active', 
+        #         'is_staff', 
+        #         'is_superuser', 
+        #         'groups', 
+        #         'user_permissions'
+        #     ),
+        # }),
+        # (_('Important dates'), {
+        #     'fields': (
+        #         'last_login', 
+        #         'date_joined',
+        #     ),
+        # }),
+    )
+    readonly_fields = [
+        # 'username',
+        # 'first_name',
+        # 'last_name',
+        # 'email',
+        # 'phone_number',
+        # 'last_login',
+        # 'date_joined',
+    ]
+    add_fieldsets = (
+        (None, {
+            'classes': (
+                'wide',
+            ),
+            'fields': (
+                'username', 
+                'password1', 
+                'password2'
+            ),
+        }),
+    )
+
+
+    list_per_page = 100
+    save_as_continue = False 
+    save_on_top = True 
+
+    list_display = (
+        'id', 
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+        # 'phone_number',
+    )
+    list_display_links = [
+        'id',
+        'email',
+        'username',
+        'first_name',
+        'last_name',
+        # 'phone_number',
+    ]
+    search_fields = [
+        'email',
+        'username',
+        'first_name',
+        'last_name',
+        # 'phone_number',
+    ]
+
+
+
+
+
+
+gao_admin.register(User, CustomUserAdmin)
 gao_admin.register(Client, ClientAdmin)
 gao_admin.register(Team, TeamAdmin)
 gao_admin.register(Post, PostAdmin)

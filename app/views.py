@@ -44,6 +44,12 @@ def about(request):
     return render(request, 'about.html', locals())
 
 
+def profile(request):
+    return render(request, 'profile.html', locals())
+
+
+
+
 @csrf_exempt
 def form(request):
     name  = request.POST.get('name', '')
