@@ -2,6 +2,266 @@
 
 
 {% block content%}
+<body class="card">
+	
+		<header class="kabinet">
+				<div class="kab__title-wrap">
+					<div class="kab__title">
+						Мій кабінет
+					</div>
+					<div class="set-wrap" data-src='#modal-form_settings'>
+						<img src="static/img/settings.svg" class="set-img" alt="">
+					</div>
+					
+				</div>
+				
+				<div class="all-tab-wrap">
+					<div class="auto-tab-link-block">
+						<div data-tab="tab_11" class="main_tab__link main_tab__link_active">
+							Особисті дані
+						</div>
+						<div data-tab="tab_22" class="main_tab__link">
+							Документи
+						</div>
+						<div class="main_tab__link">
+							Вихід
+						</div>
+					</div>
+					<div class="tab-auto-content-block">
+						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
+							<div class="tab_left_data">
+								<div class="main_user_data">
+									Особисті дані
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Ім’я
+									</div>
+									<div class="user-data-name">
+										Назар Бурега
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Електронна пошта
+									</div>
+									<div class="user-data-name">
+										Slavko@gmail.com
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Номер телефону
+									</div>
+									<div class="user-data-name">
+										+38 (96) 675 -15-**
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Стать 
+									</div>
+									<div class="user-data-name">
+										Чоловіча
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Дата народження
+									</div>
+									<div class="user-data-name">
+										13.09.1989
+									</div>
+								</div>
+							</div>
+							<div class="tab_right_data">
+								<div class="usualy_tab__link set-prof" data-src='#modal-form_settings'>
+									Редагувати особисті дані
+								</div><div class="usualy_tab__link set-prof" data-src='#modal-form_relog'>
+									Змінити пароль
+								</div>
+							</div>
+							
+						</div>
+						<div id="tab_22" class="tab-auto-content-prof">
+							<div class="main_user_data">
+								Документи
+							</div>
+							<div class="doc-block">
+								<div class="doc-profile">
+									<div class="doc-top">
+										<div class="doc-img-wrap">
+											<img src="/static/img/doc.svg" alt="">
+											<div class="doc-name">
+												Docum 1
+											</div>
+										</div>
+										<div class="doc__title">
+											Угода про подання правової 
+											допомоги. Протокол погодження 
+											ціни
+										</div>
+									</div>
+									<div class="doc-bot">
+										<div class="doc-btn">
+											<a href="#" download>
+												Завантажити
+											</a>
+										</div>
+										<div class="doc-btn">
+											<a href="#" download>
+												Переглянути
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="doc-profile">
+									<div class="doc-top">
+										<div class="doc-img-wrap">
+											<img src="/static/img/doc.svg" alt="">
+											<div class="doc-name">
+												Docum 2
+											</div>
+										</div>
+										<div class="doc__title">
+											Процесуальні документи
+										</div>
+									</div>
+									<div class="doc-bot">
+										<div class="doc-btn">
+											<a href="#" download>
+												Завантажити
+											</a>
+										</div>
+										<div class="doc-btn">
+											<a href="#" download>
+												Переглянути
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="doc-profile">
+									<div class="doc-top">
+										<div class="doc-img-wrap">
+											<img src="/static/img/doc.svg" alt="">
+											<div class="doc-name">
+												Docum 3
+											</div>
+										</div>
+										<div class="doc__title">
+											Документи виготовлені
+											адвокатам
+										</div>
+									</div>
+									<div class="doc-bot">
+										<div class="doc-btn">
+											<a href="#" download>
+												Завантажити
+											</a>
+										</div>
+										<div class="doc-btn">
+											<a href="#" download>
+												Переглянути
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="doc-profile">
+									<div class="doc-top">
+										<div class="doc-img-wrap">
+											<img src="/static/img/doc.svg" alt="">
+											<div class="doc-name">
+												Docum 4
+											</div>
+										</div>
+										<div class="doc__title">
+										Сканкопії інших 
+										документів
+										</div>
+									</div>
+									<div class="doc-bot">
+										<div class="doc-btn">
+											<a href="#" download>
+												Завантажити
+											</a>
+										</div>
+										<div class="doc-btn">
+											<a href="#" download>
+												Переглянути
+											</a>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+								
+					</div>
+						</div>
+					</div>
+				</div>
+
+				 {% include 'includes/form.html' %}
+				<div class="btn-wrap-fix">
+				  <a data-fancybox data-src="#modal-form" href="javascript:;">
+				    <div class="btn-new-page hvr-bounce-to-right">
+				      <img class="comun-icon" onclick="gtag('event', 'send', { 'event_category': 'contact_us', 'event_action': 'click', });" src="../../static/img/communicate-icon.png" alt="">
+				      Консультація
+				    </div>
+				  </a>
+				</div>
+
+
+				<form action="" class="cmxform" id="modal-form_settings" style="display:none;">
+					
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="name_car">Ваше і'мя</label class="label__style">
+						<input name="name_car" type="text" value="Бурега Назар Васильович" required>
+					</div>
+				
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="mail_car">Email</label>
+						<input name="mail_car" type="text" value="Slavko@gmail.com" required>
+					</div>
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="tel_car">Ваш телефон</label>
+						<input name="tel_car" type="text" value="+3809667515**" maxlength="13" required>
+					</div>
+					<div class="error_block_false">
+						
+					</div>
+					
+						<input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+					<!-- <div class="no_pass">
+						{% trans 'Забули пароль?'
+					</div> -->
+				</form>
+				<form action="" class="cmxform" id="modal-form_relog" style="display:none;">
+					
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="pas">Ваш пароль</label class="label__style">
+						<input name="pas" type="text" required>
+					</div>
+				
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="pas1">Новий пароль</label>
+						<input name="pas1" type="password" required>
+					</div>
+					<div class="inp-vak-wrap">
+						<label class="label__style" for="pas2">Підтвердіть новий пароль</label>
+						<input name="pas2" type="password" maxlength="13" required>
+					</div>
+					<div class="error_block_false">
+						
+					</div>
+					
+						<input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+					<!-- <div class="no_pass">
+						{% trans 'Забули пароль?'
+					</div> -->
+				</form>
+		</header>
+		<!-- /.kabinet -->
 
 
 {% endblock content%}

@@ -47,7 +47,15 @@ html {
 	
 }
 #modal-form_user {
-	
+	width: 400px;
+	padding: 35px !important;
+	.inp-vak-wrap {
+		min-height: 75px;
+	}
+
+	.btn-read {
+		margin-top: 15px;
+	}
 }
 .fancybox-slide {
 	
@@ -839,6 +847,91 @@ html {
 	cursor: pointer;
 	transition: background-color .2s;
 }
+@-webkit-keyframes hvr-wobble-skew {
+  16.65% {
+    -webkit-transform: skew(-12deg);
+    transform: skew(-12deg);
+  }
+
+  33.3% {
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+  }
+
+  49.95% {
+    -webkit-transform: skew(-6deg);
+    transform: skew(-6deg);
+  }
+
+  66.6% {
+    -webkit-transform: skew(4deg);
+    transform: skew(4deg);
+  }
+
+  83.25% {
+    -webkit-transform: skew(-2deg);
+    transform: skew(-2deg);
+  }
+
+  100% {
+    -webkit-transform: skew(0);
+    transform: skew(0);
+  }
+}
+
+@keyframes hvr-wobble-skew {
+  16.65% {
+    -webkit-transform: skew(-12deg);
+    transform: skew(-12deg);
+  }
+
+  33.3% {
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+  }
+
+  49.95% {
+    -webkit-transform: skew(-6deg);
+    transform: skew(-6deg);
+  }
+
+  66.6% {
+    -webkit-transform: skew(4deg);
+    transform: skew(4deg);
+  }
+
+  83.25% {
+    -webkit-transform: skew(-2deg);
+    transform: skew(-2deg);
+  }
+
+  100% {
+    -webkit-transform: skew(0);
+    transform: skew(0);
+  }
+}
+
+.hvr-wobble-skew {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-wobble-skew:hover, .hvr-wobble-skew:focus, .hvr-wobble-skew:active {
+  -webkit-animation-name: hvr-wobble-skew;
+  animation-name: hvr-wobble-skew;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
 .elips {
 	width: 10px;
 	height: 10px;
@@ -893,6 +986,22 @@ html {
 		width: 15px;
 		height: auto;
 	}
+}
+.log-prof_logout {
+	display: flex;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+	align-items: center;
+
+	    font-size: 14px;
+
+	img {
+		margin-right: 6px;
+		width: 15px;
+		height: auto;
+	}
+	
 }
 .svg-login {
 	fill: #fff !important;
@@ -1183,6 +1292,7 @@ html {
 .error {
 	padding: 7px;
 	color: red;
+	font-size: 13px;
 }
 .true_form {
 	padding: 0;
@@ -1369,6 +1479,15 @@ html {
 		font-size: 25px;
 	}
 }
+@media (max-width: 547px) {
+	#modal-form_user {
+		width: 85%;
+		    padding: 20px !important;
+	}
+	#modal-form_user .inp-vak-wrap {
+	    min-height: 5px;
+	}
+}
 @media (max-width: 529px) {
 	.formA {
 		min-height: 370px;
@@ -1396,7 +1515,7 @@ html {
 	.svg-head-logo {
 		
 		svg {
-			width: 154px;
+			    width: 195px;
 		}
 	}
 }
@@ -1452,7 +1571,17 @@ html {
 		display: none;
 	}
 	.menu-info {
-		display: none;
+		display: block;
+
+		.link_mobale {
+			display: none;
+		}
+		.mail_class {
+			display: none;
+		}
+	}
+	.menu-link-wrap {
+		top: 35px;
 	}
 	.menu-link {
 		display: block;
@@ -1589,9 +1718,17 @@ html {
 	.main-header .container {
 	    
 	}
+	.s123 {
+	    width: 180px;
+	}
+	.menu-link-wrap {
+	 right: 40px;
+	    top: 70px;
+	}
+
 
 }
-@media (max-width: 380px) {
+@media (max-width: 377px) {
 	
 }
 @media (max-width: 376px) {

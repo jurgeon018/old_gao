@@ -13,6 +13,8 @@ $(function() {
 function Onload() {
     valide_form('#modal-form_user', '.inp-vak-wrap', true);
     valide_form('#modal-form', '.input-wrap', true);
+    valide_form('#modal-form_settings', '.inp-vak-wrap', false);
+    valide_form('#modal-form_relog', '.inp-vak-wrap', false);
 
 }
 function location_leng() {
@@ -58,6 +60,25 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 number: {
                     required: true,
                 },
+                name_car: {
+                    required: true,
+                },
+                mail_car: {
+                    required: true,
+                    email: true,
+                },
+                tel_car: {
+                    required: true,
+                },
+                pas: {
+                    required: true,
+                },
+                pas1: {
+                    required: true,
+                },
+                pas2: {
+                    required: true,
+                },
                 username: {
                     required: true,
                 },
@@ -82,6 +103,25 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 },
              },
              messages: {
+                name_car: {
+                   required: error_text.required,
+                },
+                mail_car: {
+                    required: error_text.required,
+                                       email: error_text.email
+                },
+                tel_car: {
+                   required: error_text.required,
+                },
+                pas: {
+                   required: error_text.required,
+                },
+                pas1: {
+                   required: error_text.required,
+                },
+                pas2: {
+                    required: error_text.required,
+                },
                 firstname: {
                     required: error_text.required,
                 },
@@ -118,10 +158,18 @@ function valide_form(id_form, error_inp_wrap, check_request) {
              submitHandler: function(form) {
                 console.log("222");
                 event.preventDefault();
-             
-                
+           
                  $('.load_spin').addClass('load_spin_active');
-
+                $.fancybox.close({
+                    src: '#modal-form_user',
+                });
+                $.fancybox.close({
+                    src: '#modal-form_settings',
+                });
+                $.fancybox.close({
+                    src: '#modal-form_relog',
+                });
+                   
                  var form_input = $(form).serializeArray();
                  var url_form = form.action;
                  var form_json = {};
