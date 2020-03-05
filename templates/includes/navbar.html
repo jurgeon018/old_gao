@@ -262,18 +262,18 @@
                     Вхід
                 </div>
                 {% else %}
+                <a href="{% url 'profile' %}">
                 <div class="log-prof" data-src="">
-                    <a href="{% url 'profile' %}">
                         <img src="/static/img/login.png" alt="">
                         Профіль
-                    </a>
-                </div>
+                    </div>
+                </a>
+                <a href="{% url 'custom_logout' %}">
                 <div class="hvr-wobble-skew log-prof_logout">
-                    <a href="{% url 'custom_logout' %}">
                         <img src="/static/img/logout.svg" alt="">
                         Вихід
-                    </a>
-                </div>
+                    </div>
+                </a>
                 {% endif %}
 
                 <div class="info-icon-block">

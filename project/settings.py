@@ -19,9 +19,11 @@ INSTALLED_APPS = [
 
 
     'app.apps.AppConfig',
+    'custom_auth',
     'pages',
     'tinymce',
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,8 +78,7 @@ MEDIA_URL = '/media/'
 
 SITE_ID = 1
 
-
-
+AUTH_USER_MODEL = 'custom_auth.User'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_USE_TLS = True
@@ -86,10 +87,6 @@ SITE_ID = 1
 # EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
 
 LOGIN_URL = '/'
-
-
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.galpravgroup.com.ua'
 EMAIL_PORT = 25

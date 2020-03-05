@@ -23,9 +23,11 @@
 						<div data-tab="tab_22" class="main_tab__link">
 							Документи
 						</div>
-						<div class="main_tab__link">
-							Вихід
-						</div>
+						<a href="{% url 'custom_logout' %}">
+							<div class="main_tab__link">
+								Вихід
+							</div>
+						</a>
 					</div>
 					<div class="tab-auto-content-block">
 						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
@@ -38,6 +40,14 @@
 									</div>
 									<div class="user-data-name">
 										{{request.user.first_name}}
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Логін
+									</div>
+									<div class="user-data-name">
+										{{request.user.username}}
 									</div>
 								</div>
 								<div class="user-data-prof">
@@ -64,117 +74,45 @@
 									Змінити пароль
 								</div>
 							</div>
-							
 						</div>
 						<div id="tab_22" class="tab-auto-content-prof">
 							<div class="main_user_data">
 								Документи
+								<!-- Угода про подання правової допомоги. Протокол погодження ціни 
+								Процесуальні документи 
+								Документи виготовлені адвокатам 
+								Сканкопії інших документів  -->
 							</div>
 							<div class="doc-block">
+								{% for document in request.user.documents.all%}
 								<div class="doc-profile">
 									<div class="doc-top">
 										<div class="doc-img-wrap">
 											<img src="/static/img/doc.svg" alt="">
 											<div class="doc-name">
-												Docum 1
+												{{document.file}}
 											</div>
 										</div>
 										<div class="doc__title">
-											Угода про подання правової 
-											допомоги. Протокол погодження 
-											ціни
+											{{document.title}}
 										</div>
 									</div>
 									<div class="doc-bot">
 										<div class="doc-btn">
-											<a href="#" download>
+											<a href="{{document.file.url}}" download>
 												Завантажити
 											</a>
 										</div>
+										{% if document.is_pdf %}
 										<div class="doc-btn">
-											<a href="#" download>
+											<a href="{% url 'read_document' document.id %}">
 												Переглянути
 											</a>
 										</div>
+										{% endif %}
 									</div>
 								</div>
-								<div class="doc-profile">
-									<div class="doc-top">
-										<div class="doc-img-wrap">
-											<img src="/static/img/doc.svg" alt="">
-											<div class="doc-name">
-												Docum 2
-											</div>
-										</div>
-										<div class="doc__title">
-											Процесуальні документи
-										</div>
-									</div>
-									<div class="doc-bot">
-										<div class="doc-btn">
-											<a href="#" download>
-												Завантажити
-											</a>
-										</div>
-										<div class="doc-btn">
-											<a href="#" download>
-												Переглянути
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="doc-profile">
-									<div class="doc-top">
-										<div class="doc-img-wrap">
-											<img src="/static/img/doc.svg" alt="">
-											<div class="doc-name">
-												Docum 3
-											</div>
-										</div>
-										<div class="doc__title">
-											Документи виготовлені
-											адвокатам
-										</div>
-									</div>
-									<div class="doc-bot">
-										<div class="doc-btn">
-											<a href="#" download>
-												Завантажити
-											</a>
-										</div>
-										<div class="doc-btn">
-											<a href="#" download>
-												Переглянути
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="doc-profile">
-									<div class="doc-top">
-										<div class="doc-img-wrap">
-											<img src="/static/img/doc.svg" alt="">
-											<div class="doc-name">
-												Docum 4
-											</div>
-										</div>
-										<div class="doc__title">
-										Сканкопії інших 
-										документів
-										</div>
-									</div>
-									<div class="doc-bot">
-										<div class="doc-btn">
-											<a href="#" download>
-												Завантажити
-											</a>
-										</div>
-										<div class="doc-btn">
-											<a href="#" download>
-												Переглянути
-											</a>
-										</div>
-									</div>
-								</div>
+								{% endfor %}
 								
 							</div>
 						</div>
@@ -199,8 +137,8 @@
 				<form action="{% url 'update_profile' %}" class="cmxform" id="modal-form_settings" style="display:none;">
 	
 					<div class="inp-vak-wrap">
-						<label class="label__style" for="name">Ваше і'мя1</label class="label__style">
-						<input name="name" type="text" value="{{request.user.first_name}}" required>
+						<label class="label__style" for="name">Ваше і'мя</label class="label__style">
+						<input name="first_name" type="text" value="{{request.user.first_name}}" required>
 					</div>
 
 					<div class="inp-vak-wrap">

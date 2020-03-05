@@ -33,7 +33,6 @@ class Post(models.Model):
         return reverse("post", kwargs={"slug": self.slug})
 
 
-
 class Team(models.Model):
     meta_title  = models.CharField(max_length=255, blank=True, null=True) 
     meta_descr  = models.TextField(blank=True, null=True)
@@ -102,5 +101,24 @@ class Contact(models.Model):
         app_label='app'
 
 
+from django.contrib.auth import get_user_model 
+
+
+
+User = get_user_model()
+
+class Document(models.Model):
+    user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to=User, blank=True, null=True)
+    file = models.FileField(verbose_name='Файл')
+    
+    def __str__(self):
+        return f'{self.user}: {self.file}'
+    
+    def document_is_pdf(self):
+        return self.file.path.split('.')[-1] == '.pdf'
+    
+    class Meta:
+        verbose_name = 'Документ'
+        verbose_name_plural = 'Документ'
 
 

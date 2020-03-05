@@ -1,1 +1,1 @@
-default_app_config = 'box.custom_auth.apps.CustomAuthConfig'
+default_app_config = 'custom_auth.apps.CustomAuthConfig'

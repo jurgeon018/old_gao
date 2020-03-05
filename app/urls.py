@@ -38,6 +38,7 @@ urlpatterns = [
     path('custom_logout', custom_logout, name='custom_logout'),
     path('update_profile/', update_profile, name='update_profile'),
     path('update_password/', update_password, name='update_password'),
+    path('read_document/<id>/', read_document, name='read_document'),
     
     
     

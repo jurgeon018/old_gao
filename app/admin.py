@@ -133,10 +133,21 @@ from django.utils.translation import gettext, gettext_lazy as _
 
 User = get_user_model()
 
+
+class DocumentInline(admin.TabularInline):
+    model = Document 
+    extra = 0 
+    classes = ['collapse',]
+
+class DocumentAdmin(admin.ModelAdmin):
+    pass 
+
+
 class CustomUserAdmin(UserAdmin):
     inlines = [
         # ProfileInline,
         # OrderInline,
+        DocumentInline
     ]
 
     fieldsets = (
@@ -222,10 +233,6 @@ class CustomUserAdmin(UserAdmin):
     ]
 
 
-
-
-
-
 gao_admin.register(User, CustomUserAdmin)
 gao_admin.register(Client, ClientAdmin)
 gao_admin.register(Team, TeamAdmin)
@@ -235,5 +242,7 @@ gao_admin.register(Site)
 gao_admin.register(Redirect)
 gao_admin.register(Page, PageAdmin)
 gao_admin.register(Contact, ContactAdmin)
+gao_admin.register(Document, DocumentAdmin)
 
 admin.site.register(Post, PostAdmin)
+

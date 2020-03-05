@@ -108,15 +108,29 @@ def custom_logout(request):
     return response
 
 
+def read_document(request, id):
+    document = Document.objects.get(id=id)
+    from django.conf import settings 
+    from django.http import FileResponse
+    # path = os.path.join(settings.STATICFILES_DIRS[0], 'pdf', 'oferta.pdf')
+    path = document.file.path
+    if document.is_pdf():
+        print(path)
+        response = FileResponse(open(path, 'rb'), content_type='application/pdf')
+    else:
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        response['Content-Disposition'] = 'attachment; filename=download.docx'
+    return response
+
 @csrf_exempt 
 def update_profile(request):
     query = request.POST or request.GET
-    name  = query.get('name')
+    first_name  = query.get('first_name')
     email = query.get('email') 
     phone_number = query.get('phone_number') 
 
     user              = request.user
-    user.name         = name 
+    user.first_name         = first_name 
     user.email        = email 
     user.phone_number = phone_number
     user.save()
