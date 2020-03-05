@@ -85,7 +85,7 @@ SITE_ID = 1
 # EMAIL_HOST_USER = 'jurgeon018@gmail.com'
 # EMAIL_HOST_PASSWORD = 'yfpfhrj69001'
 
-
+LOGIN_URL = '/'
 
 
 

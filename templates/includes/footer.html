@@ -7,11 +7,11 @@
        Наші менеджери звяжуться з вами
    </div>
    </form>
-    <form сlass="formA" id="modal-form_user" style="display:none;">
+    <form сlass="formA" id="modal-form_user" style="display:none;" action="{% url 'custom_login' %}">
 
         <div class="inp-vak-wrap">
-            <label class="label__style" for="firstname">Логин</label class="label__style">
-            <input id="firstname" name="username" placeholder="Логин" type="text">
+            <label class="label__style" for="firstname">Логін</label class="label__style">
+            <input id="firstname" name="username" placeholder="Логін" type="text">
         </div>
         <div class="inp-vak-wrap">
             <label class="label__style" for="email">Пароль</label>

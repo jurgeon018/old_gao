@@ -35,10 +35,9 @@
 								</div>
 								<div class="user-data-prof">
 									<div class="user-data-type">
-										Ім’я
 									</div>
 									<div class="user-data-name">
-										Назар Бурега
+										{{request.user.first_name}}
 									</div>
 								</div>
 								<div class="user-data-prof">
@@ -46,7 +45,7 @@
 										Електронна пошта
 									</div>
 									<div class="user-data-name">
-										Slavko@gmail.com
+										{{request.user.email}}
 									</div>
 								</div>
 								<div class="user-data-prof">
@@ -54,23 +53,7 @@
 										Номер телефону
 									</div>
 									<div class="user-data-name">
-										+38 (96) 675 -15-**
-									</div>
-								</div>
-								<div class="user-data-prof">
-									<div class="user-data-type">
-										Стать 
-									</div>
-									<div class="user-data-name">
-										Чоловіча
-									</div>
-								</div>
-								<div class="user-data-prof">
-									<div class="user-data-type">
-										Дата народження
-									</div>
-									<div class="user-data-name">
-										13.09.1989
+										{{request.user.phone_number}}
 									</div>
 								</div>
 							</div>
@@ -212,20 +195,21 @@
 				</div>
 
 
-				<form action="" class="cmxform" id="modal-form_settings" style="display:none;">
-					
+
+				<form action="{% url 'update_profile' %}" class="cmxform" id="modal-form_settings" style="display:none;">
+	
 					<div class="inp-vak-wrap">
-						<label class="label__style" for="name_car">Ваше і'мя</label class="label__style">
-						<input name="name_car" type="text" value="Бурега Назар Васильович" required>
+						<label class="label__style" for="name">Ваше і'мя1</label class="label__style">
+						<input name="name" type="text" value="{{request.user.first_name}}" required>
 					</div>
-				
+
 					<div class="inp-vak-wrap">
-						<label class="label__style" for="mail_car">Email</label>
-						<input name="mail_car" type="text" value="Slavko@gmail.com" required>
+						<label class="label__style" for="email">Email</label>
+						<input name="email" type="text" value="{{request.user.email}}" required>
 					</div>
 					<div class="inp-vak-wrap">
-						<label class="label__style" for="tel_car">Ваш телефон</label>
-						<input name="tel_car" type="text" value="+3809667515**" maxlength="13" required>
+						<label class="label__style" for="phone">Ваш телефон</label>
+						<input name="phone_number" type="text" value="{{request.user.phone}}" maxlength="13" required>
 					</div>
 					<div class="error_block_false">
 						
@@ -236,20 +220,20 @@
 						{% trans 'Забули пароль?'
 					</div> -->
 				</form>
-				<form action="" class="cmxform" id="modal-form_relog" style="display:none;">
+				<form action="{% url 'update_password' %}" class="cmxform" id="modal-form_relog" style="display:none;">
 					
 					<div class="inp-vak-wrap">
 						<label class="label__style" for="pas">Ваш пароль</label class="label__style">
-						<input name="pas" type="text" required>
+						<input name="old_password" type="text" required>
 					</div>
 				
 					<div class="inp-vak-wrap">
 						<label class="label__style" for="pas1">Новий пароль</label>
-						<input name="pas1" type="password" required>
+						<input name="password1" type="password" required>
 					</div>
 					<div class="inp-vak-wrap">
 						<label class="label__style" for="pas2">Підтвердіть новий пароль</label>
-						<input name="pas2" type="password" maxlength="13" required>
+						<input name="password2" type="password" maxlength="13" required>
 					</div>
 					<div class="error_block_false">
 						

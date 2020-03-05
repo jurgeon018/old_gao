@@ -256,14 +256,26 @@
 
             <a class="mail_class" onclick="gtag('event', 'send', { 'event_category': 'email', 'event_action': 'click', });" href="mailto:office@galpravgroup.com.ua">office@galpravgroup.com.ua</a>
             <div class="log_wrap">
+                {% if request.user.is_anonymous %}
                 <div class="hvr-wobble-skew log-prof" data-src="#modal-form_user">
                     <img src="/static/img/login.png" alt="">
-                    login
+                    Вхід
                 </div>
-               <!--  <div class="hvr-wobble-skew log-prof_logout">
-                    <img src="/static/img/logout.svg" alt="">
-                    Вихід
-                </div> -->
+                {% else %}
+                <div class="log-prof" data-src="">
+                    <a href="{% url 'profile' %}">
+                        <img src="/static/img/login.png" alt="">
+                        Профіль
+                    </a>
+                </div>
+                <div class="hvr-wobble-skew log-prof_logout">
+                    <a href="{% url 'custom_logout' %}">
+                        <img src="/static/img/logout.svg" alt="">
+                        Вихід
+                    </a>
+                </div>
+                {% endif %}
+
                 <div class="info-icon-block">
                     {% comment %} {% include 'components/linkedin_svg.html' %} {% endcomment %}
                     {% include 'components/facebook_svg.html' %}

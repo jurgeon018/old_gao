@@ -34,6 +34,13 @@ urlpatterns = [
     path('post/<slug>/',     post,     name='post'),
     path('member/<slug>/',   member,   name='member'),
     path('form/',            form,     name='form'),
+    path('custom_login', custom_login, name='custom_login'),
+    path('custom_logout', custom_logout, name='custom_logout'),
+    path('update_profile/', update_profile, name='update_profile'),
+    path('update_password/', update_password, name='update_password'),
+    
+    
+    
 
     path('practice/<pk>/',   practice, name='practice'),
 
