@@ -177,13 +177,13 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                     console.log(obj);
                     console.log(index);
                     form_json[obj.name] = obj.value;
-          
+                    
                     console.log(form_json);
                   });
-          
+                    
                     console.log(form_json);
                   if(url_form != ''){
-          
+                    
                     fetch(url_form, {
                       method: 'POST',
                       body: new URLSearchParams($.param(form_json))
