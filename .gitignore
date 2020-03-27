@@ -3,6 +3,7 @@ __pycache__/
 oy*.py[cod]
 *$py.class
 .idea/
+static_root/
 
 # C extensions
 *.so
