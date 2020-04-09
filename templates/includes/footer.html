@@ -7,6 +7,13 @@
        Наші менеджери звяжуться з вами
    </div>
    </form>
+   <form method="POST" action="" class="cmxform true_form" id="modal_form_false" style="display:none;">
+    <img class="form_true_img" src="/static/img/error.png" alt="">
+    <div class="footer__sub">
+      Такого користувача не існує <br>
+      Пароль та логін надсилаються клієнтам на почту
+    </div>
+    </form>
     <form сlass="formA" id="modal-form_user" style="display:none;" action="{% url 'custom_login' %}">
 
         <div class="inp-vak-wrap">
@@ -18,7 +25,7 @@
             <input id="password" name="password" type="password" placeholder="*****">
         </div>
         <div class="error_block_false">
-            
+          Пароль та логін надсилаються клієнтам на почту
         </div>
        
             <input class="submit_vak btn-read hvr-fade" type="submit" value="увійти">

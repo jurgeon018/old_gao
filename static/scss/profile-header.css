@@ -8,7 +8,9 @@
 .profile-header .new-wrap-text {
   width: 70%; }
 .profile-header .gold-text {
-  max-width: 42%; }
+  max-width: 77%;
+  align-items: unset;
+  min-height: unset; }
 .profile-header .punct-text {
   max-width: 98%; }
 .profile-header .btn-read {
@@ -58,9 +60,6 @@
     font-weight: 700;
     line-height: 1;
     font-size: 13px; }
-
-  .about-prof .green__name {
-    min-height: 42px; }
 
   .green__name {
     position: relative;

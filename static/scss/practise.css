@@ -1,10 +1,5 @@
 .practise {
   position: relative; }
-  .practise .main__title:before {
-    display: block;
-    content: "";
-    height: 170px;
-    margin: -170px 0 0; }
 
 .svg-pract {
   fill: #D2A351;

@@ -196,14 +196,14 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                         console.log(data)
                       if(data.status=='OK' && typeof data['status'] !== "undefined"){
                           sayHi();
-                     gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
+                        gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
                       }
                       if(data.status=='BAD' && typeof data['status'] !== "undefined"){
                           $('.load_spin').removeClass('load_spin_active');
                           $(".error_block_false").text("Невірний логін або пароль");
-                        //   $.fancybox.open({
-                        //     src: '#modal-form_false',
-                        //   });
+                          $.fancybox.open({
+                            src: '#modal_form_false',
+                          });
           
                       }
           
@@ -253,15 +253,15 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 // } else {
                 //     console.log("form_not_actions");
                 // }
-                function explode(){
-                  if (id_form == '#modal-form_user') {
-                    // window.location.pathname = '/'
-                  } else {
-                    sayHi();
-                  }
+                // function explode(){
+                //   if (id_form == '#modal-form_user') {
+                //     // window.location.pathname = '/'
+                //   } else {
+                //     sayHi();
+                //   }
                    
-                  }
-                  explode()
+                //   }
+                //   explode()
                 function sayHi() {
                     $('.load_spin').removeClass('load_spin_active');
                     $.fancybox.close();
