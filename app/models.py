@@ -46,6 +46,8 @@ class Team(models.Model):
     phone       = models.CharField(verbose_name="Номер телефону", max_length=255, blank=True, null=True)
     phone2      = models.CharField(verbose_name="Номер телефону2", max_length=255, blank=True, null=True)
     slug        = models.SlugField(verbose_name="Посилання на сайті", max_length=255, blank=True, null=True)
+    # created     = models.DateTimeField(blank=True, null=True,)
+    updated     = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     class Meta:
         verbose_name='учасник'

@@ -110,5 +110,21 @@
           "phone2":"+380961483990",
           "slug":"ferens"
         }
+      },
+      {
+        "model": "app.Team", "pk": 8, "fields": {
+          "meta_title":"Крет Олег",
+          "meta_descr":"Крет Олег",
+          "alt":"Крет Олег",
+          "full_name":"Крет Олег",
+          "area":"Кримінальне право, кримінальний кодекс",
+          "description":"Адвокат. З 2003 року розпочав юридичну практику. Адвокатською діяльністю займаюсь з лютого 2006 року. ",
+          "address":"",
+          "email":"k.o@galpravgroup.com.ua",
+          "photo":"ferens.png",
+          "phone":"",
+          "phone2":"",
+          "slug":"kret"
+        }
       }
 ]

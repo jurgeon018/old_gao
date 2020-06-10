@@ -2,19 +2,37 @@ from django.contrib.sitemaps import Sitemap
 from app.models import *
 from django.urls import reverse  
 
-
-
+        
 class TeamSitemap(Sitemap):
+    changefreq = 'weekly' 
+    protocol = 'https'
+    priority = 1
+
     def items(self):
         return Team.objects.all()
 
+    def lastmod(self, obj):
+        return obj.updated
+
+
 
 class PostSitemap(Sitemap):
+    changefreq = 'weekly' 
+    protocol = 'https'
+    priority = 1
+
     def items(self):
         return Post.objects.all()
 
+    def lastmod(self, obj):
+        return obj.updated
+
 
 class StaticViewSitemap(Sitemap):
+    changefreq = 'weekly' 
+    protocol = 'https'
+    priority = 1
+
     def items(self):
         return [
             "index",
