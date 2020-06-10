@@ -70,20 +70,20 @@ profile-header
       {% if member.phone %}
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-2.png" alt="">
-        <div class="geo-text">
+        <a href="tel:{{member.phone}}" class="geo-text">
           {{member.phone}}
           <!-- 050 374 83 90 -->
           <!-- 097 786 39 19 -->
-        </div>
+        </a>
       </div>
       {% endif %}
       {% if member.phone2 %}
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-2.png" alt="">
-        <div class="geo-text">
+        <a href="tel:{{member.phone}}" class="geo-text">
           {{member.phone2}}
           <!-- 050 432 19 97 -->
-        </div>
+        </a>
       </div>
       {% endif %}
       
