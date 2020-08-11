@@ -104,11 +104,11 @@ html {
 }
 .main-header {
 	position: relative;
-	min-height: 100px;
+	min-height: 100vh;
 	background: linear-gradient(39deg, #030A00, #112804);
 	 background-size: 100%;
 	 z-index: 2;
-	 padding-bottom: 124px;
+	 padding-bottom: 20px;
 	 overflow: hidden;
 	 
 	.container {
@@ -192,10 +192,12 @@ html {
      
 }
 .scene-wrap {
-	margin: 0 auto;
-	margin-top: 32px;
-	    width: 38%;
-	    align-items: center;
+		position: relative;
+		margin: 0 auto;
+	    width: 100%;
+		align-items: center;
+		height: calc(100vh - 355px);
+
 }
 .parallax-layer-4 {
 	    top: 67% !important;
@@ -735,18 +737,23 @@ html {
 }
 .slider_btn {
     border: none;
-    color: #D2A351;
 	cursor: pointer;
 	display: block;
+	color: #fff;
+	margin-top: 15px;
+	transition: all .2s;
+
+	&:hover {
+		color: #D2A351;
+	}
 }
 .slider-header-wrap {
-	position: absolute;
+	position: relative;
 	
 	    display: flex;
-	    width: 85%;
+	    width: 100%;
 	    justify-content: space-between;
 	    margin: 0 auto;
-	    bottom: 10px;
 	
 		.slide-prof {
 			position: relative;
@@ -761,6 +768,9 @@ html {
 		left: 0;
 	}
 	
+}
+.slide-prof {
+	transition: all .2s;
 }
 .slide-qwerty-left {
 	z-index: -1;
@@ -792,10 +802,10 @@ html {
 .arrow-wrap	{
 	position: absolute;
 	display: flex;
-	width: 150px;
+	width: 200px;
 	justify-content: space-between;
-	bottom: 10%;
-	    right: 23%;
+	bottom: -80px;
+    right: 0;
 
 }
 .slide-prof {
@@ -804,7 +814,7 @@ html {
 .slide-left {
 	padding-left: 20px;
 	width: 100% !important;
-
+	height: 155px;
 	
 	.slide-prof {
 		transition: all .2s;
@@ -819,12 +829,11 @@ html {
 	
 
 	.slick-current {
-		transition: all .2s;
-		align-items: flex-start !important;
+		// align-items: flex-start;
 
-		.sub-text {
-			text-align: left;
-		}
+		// .sub-text {
+		// 	text-align: left;
+		// }
 	}
 }
 	

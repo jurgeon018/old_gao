@@ -278,7 +278,7 @@ $('#team__link').on("click", function() {
     var mainSlick = $('.sliderS').slick({
        
         swipe: false,
-        autoplay: false,
+        autoplay: true,
         speed: 1000,
         infinite: true,
         slidesToShow: 2,
@@ -286,34 +286,42 @@ $('#team__link').on("click", function() {
         nextArrow: document.querySelector('#my-arrow-next'),
         prevArrow: document.querySelector('#my-arrow-prev'),
         cssEase: 'ease-in-out',
-        touchThreshold: 100,
-        draggable: true,
-        autoplay: true,
-        autoplaySpeed: 7000,
-        arrows: false,
-        dots: true,
-        fade: true,
+       
 
     });
 
+    $('.slide-prof').css('opacity', '0');
+    setTimeout(() => {
+        $('.slide-prof').css('opacity', '1');
+
+        $('.slide-prof').css('align-items', 'flex-end');
+        $('.slide-prof').find('.sub-text').css('text-align', 'right');
+        $('.slick-current').css('align-items', 'flex-start');
+        $('.slick-current').find('.sub-text').css('text-align', 'left');
+    }, 500);
+    setTimeout(() => {
+        $('.slide-prof').css('opacity', '1');
+
+    }, 1000);
+
   
-    // $('.sliderS').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    $('.sliderS').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         
-    //     let active_slide = Number($('.slide-left').find('.slick-current').attr('data-counter'));
-    //     console.log('active_slide: ', active_slide);
-    //     let all_length = $('.slide-left').find('.slide-prof').length;
+            $('.slide-prof').css('opacity', '0');
+        setTimeout(() => {
+            $('.slide-prof').css('opacity', '1');
 
-    //     let slider_id = Number(currentSlide) + 1;
-    //     let sliders = $('.slide-left').find('.slide-prof');
+            $('.slide-prof').css('align-items', 'flex-end');
+            $('.slide-prof').find('.sub-text').css('text-align', 'right');
+            $('.slick-current').css('align-items', 'flex-start');
+            $('.slick-current').find('.sub-text').css('text-align', 'left');
+        }, 500);
+        setTimeout(() => {
+            $('.slide-prof').css('opacity', '1');
 
-
-    //     $.each(sliders, function(index, value) {
-    //         if ($(value).attr('data-counter') == active_slide) {
-    //             console.log('$(value): ', $(value));
-    //         }
-    //     });
+        }, 1000);
         
-    // });
+    });
 
 
     $('.my-1').on('click', function() {
