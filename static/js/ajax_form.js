@@ -373,7 +373,7 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 },
                 mail_car: {
                     required: error_text.required,
-                                       email: error_text.email
+                    email: error_text.email
                 },
                 tel_car: {
                    required: error_text.required,

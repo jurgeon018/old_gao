@@ -716,20 +716,28 @@ html {
 	font-size: 12pt;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
-	line-height: 1.4;
+	line-height: 1.5;
 }
 .white-text {
 	color: #fff;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
-	line-height: 1.4;
+	line-height: 1.5;
 	font-size: 12pt;
 }
 .sub-text {
 	color: #fff;
 	font-family: 'Montserrat', sans-serif;
-	line-height: 1.4;
-	font-size: 12pt;
+	line-height: 1.5;
+	font-size: 16px;
+	    width: 200px;
+
+}
+.slider_btn {
+    border: none;
+    color: #D2A351;
+	cursor: pointer;
+	display: block;
 }
 .slider-header-wrap {
 	position: absolute;
@@ -795,47 +803,51 @@ html {
 }
 .slide-left {
 	padding-left: 20px;
-	width: 25% !important;
+	width: 100% !important;
 
-	.btn-read {
-		position: absolute;
-		bottom: 0;
-		left: -83px;
-		margin-left: 90px;
-	}
+	
 	.slide-prof {
-		padding-top: 34px;
-		padding-left: 22px;
-		min-height: 260px;
-	}
-	
-}
+		transition: all .2s;
+		display: flex !important;
+		flex-direction: column;
+		align-items: flex-end;
 
-.slide-right {
-	padding-right: 20px;
-	text-align: right;
-	width: 25% !important;
+		.sub-text {
+			text-align: right;
+		}
+	}
+	
 
-	.btn-read {
-		position: absolute;
-		bottom: 0;
-		right: 10px;
-		margin-left: 90px;
+	.slick-current {
+		transition: all .2s;
+		align-items: flex-start !important;
+
+		.sub-text {
+			text-align: left;
+		}
 	}
-	.slide-prof {
-		padding-top: 34px;
-		padding-right: 22px;
-		min-height: 260px;
-	}
-	
-	
 }
+	
+
 .hvr-fade {
 	transition: background-color .2s;
 	&:hover {
 		background-color: #D2A351;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .btn-read {
 	margin-top: 50px;

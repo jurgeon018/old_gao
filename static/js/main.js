@@ -276,25 +276,53 @@ $('#team__link').on("click", function() {
 
    
     var mainSlick = $('.sliderS').slick({
+       
+        swipe: false,
+        autoplay: false,
+        speed: 1000,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
         nextArrow: document.querySelector('#my-arrow-next'),
         prevArrow: document.querySelector('#my-arrow-prev'),
-        dots: false,
-        swipe: false,
+        cssEase: 'ease-in-out',
+        touchThreshold: 100,
+        draggable: true,
+        autoplay: true,
+        autoplaySpeed: 7000,
+        arrows: false,
+        dots: true,
         fade: true,
-         autoplay: true,
-        speed: 100
-
 
     });
+
+  
+    // $('.sliderS').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+        
+    //     let active_slide = Number($('.slide-left').find('.slick-current').attr('data-counter'));
+    //     console.log('active_slide: ', active_slide);
+    //     let all_length = $('.slide-left').find('.slide-prof').length;
+
+    //     let slider_id = Number(currentSlide) + 1;
+    //     let sliders = $('.slide-left').find('.slide-prof');
+
+
+    //     $.each(sliders, function(index, value) {
+    //         if ($(value).attr('data-counter') == active_slide) {
+    //             console.log('$(value): ', $(value));
+    //         }
+    //     });
+        
+    // });
 
 
     $('.my-1').on('click', function() {
+        mainSlick.slick('slickPrev');
 
-        mainSlick.slick('slickNext');
     });
     $('.my-2').on('click', function() {
+        mainSlick.slick('slickNext');
 
-        mainSlick.slick('slickPrev');
     });
 
 
