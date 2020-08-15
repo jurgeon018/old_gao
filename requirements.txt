@@ -4,3 +4,4 @@ django-filebrowser-no-grappelli
 pillow 
 django-rest-framework
 django-import-export 
+django-modeltranslation
