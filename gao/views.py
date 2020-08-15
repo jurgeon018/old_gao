@@ -46,6 +46,15 @@ def profile(request):
     return render(request, 'profile.html', locals())
 
 def cabinet(request, role):
+    user = request.user
+    if role == 'advocat':
+        consultations = Consultation.objects.filter(advocat=user)
+        clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
+        finished_consultations = consultations.filter(status=Consultation.FINISHED)
+    elif role == 'client':
+        consultations = Consultation.objects.filter(client=user)
+        advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
+        finished_consultations = consultations.filter(status=Consultation.FINISHED)
     return render(request, f'cabinet_{role}.html', locals())
 
 @csrf_exempt

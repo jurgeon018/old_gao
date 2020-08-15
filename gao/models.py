@@ -15,7 +15,58 @@ class TimestampMixin(models.Model):
         abstract = True 
 
 
-class ProjectUser(AbstractUser):
+class DaysMixin(models.Model):
+    monday       = models.BooleanField(verbose_name="Понеділок робочий день?", default=True)
+    tuesday      = models.BooleanField(verbose_name="Вівторок робочий день?", default=True)
+    wednesday    = models.BooleanField(verbose_name="Середа робочий день?", default=True)
+    thursday     = models.BooleanField(verbose_name="Четвер робочий день?", default=True)
+    friday       = models.BooleanField(verbose_name="Пятниця робочий день?", default=True)
+    saturday     = models.BooleanField(verbose_name="Субота робочий день?", default=False)
+    sunday       = models.BooleanField(verbose_name="Неділя робочий день?", default=False)
+
+    monday_from    = models.TimeField(verbose_name="Початок робочого дня в понеділок", blank=True, null=True)
+    monday_to      = models.TimeField(verbose_name="Закінчення робочого дня в понеділок", blank=True, null=True)
+
+    tuesday_from   = models.TimeField(verbose_name="Початок робочого дня в вівторок", blank=True, null=True)
+    tuesday_to     = models.TimeField(verbose_name="Закінчення робочого дня в вівторок", blank=True, null=True)
+
+    wednesday_from = models.TimeField(verbose_name="Початок робочого дня в середу", blank=True, null=True)
+    wednesday_to   = models.TimeField(verbose_name="Закінчення робочого дня в середу", blank=True, null=True)
+
+    thursday_from  = models.TimeField(verbose_name="Початок робочого дня в четвер", blank=True, null=True)
+    thursday_to    = models.TimeField(verbose_name="Закінчення робочого дня в четвер", blank=True, null=True)
+
+    friday_from    = models.TimeField(verbose_name="Початок робочого дня в пятницю", blank=True, null=True)
+    friday_to      = models.TimeField(verbose_name="Закінчення робочого дня в пятницю", blank=True, null=True)
+
+    saturday_from  = models.TimeField(verbose_name="Початок робочого дня в субботу", blank=True, null=True)
+    saturday_to    = models.TimeField(verbose_name="Закінчення робочого дня в субботу", blank=True, null=True)
+
+    sunday_from    = models.TimeField(verbose_name="Початок робочого дня в неділю", blank=True, null=True)
+    sunday_to      = models.TimeField(verbose_name="Закінчення робочого дня в неділю", blank=True, null=True)
+
+    class Meta:
+        abstract = True 
+
+
+class WorkingDay(models.Model):
+    advocat   = models.ForeignKey(
+        verbose_name="Адвокат", to="gao.User",
+        on_delete=models.SET_NULL, blank=True, null=True
+    )
+    date      = models.DateField(verbose_name="День")
+    time_from = models.DateField(verbose_name="Час від")
+    time_to   = models.DateField(verbose_name="Час до")
+
+    def  __str__(self):
+        return f'{self.date}: {self.time_from} - {self.time_to}'
+
+    class Meta:
+        verbose_name = "Робочий день"
+        verbose_name_plural = "Робочі дні"
+
+
+class User(AbstractUser, DaysMixin):
   CLIENT_ROLE  = 'client'
   ADVOCAT_ROLE = 'advocat'
   USER_ROLES = [
@@ -25,8 +76,8 @@ class ProjectUser(AbstractUser):
   phone_number = models.CharField(verbose_name="Номер телефону", max_length=255, blank=True, null=True)
   role         = models.CharField(verbose_name="Роль", choices=USER_ROLES, default=CLIENT_ROLE, max_length=255)
   rate         = models.FloatField(verbose_name="Ціна за годину консультації", default=0)
-  faculty      = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True)
-  
+  faculties    = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True)
+
   def get_free_hours(self, date_from, date_to):
     free_hours = ...
     return free_hours 
@@ -35,13 +86,20 @@ class ProjectUser(AbstractUser):
     free_dates = ...
     return free_dates
 
+  def date_is_free(self):
+    is_free = ... 
+    return is_free
+
+  def get_working_days(self):
+    return WorkingDay.objects.filter(advocat=self)
+
   def get_consultations(self):
     if self.role == ADVOCAT_ROLE:
       consultations = Consultation.objects.filter(advocat=self)
     elif self.role == CLIENT_ROLE:
       consultations =  Consultation.objects.filter(client=self)
     return consultations
-
+  
   def __str__(self):
     return f"{self.first_name} {self.last_name} ({self.username}, {self.phone_number}, {self.email})"
   
@@ -54,12 +112,12 @@ class Consultation(TimestampMixin):
     STATUS1 = 'STATUS1'
     STATUS2 = 'STATUS2'
     STATUS3 = 'STATUS3'
-    STATUS4 = 'STATUS4'
+    FINISHED = 'FINISHED'
     STATUSES = (
         (STATUS1, "STATUS1"),
         (STATUS2, "STATUS2"),
         (STATUS3, "STATUS3"),
-        (STATUS4, "STATUS4"),
+        (FINISHED, "FINISHED"),
     )
     SKYPE  = 'SKYPE'
     VIBER  = 'VIBER'
@@ -81,16 +139,14 @@ class Consultation(TimestampMixin):
     comment   = models.TextField(verbose_name="Коментар", blank=True, null=True)
     mark      = models.SmallIntegerField(verbose_name="Оцінка", blank=True, null=True)
     advocat   = models.ForeignKey(
-        verbose_name="Адвокат", to="gao.ProjectUser", 
+        verbose_name="Адвокат", to="gao.User", 
         related_name="advocat_consultations",
-        on_delete=models.CASCADE,
-        # on_delete=models.SET_NULL, blank=True, null=True,
+        on_delete=models.CASCADE, blank=False, null=False,
     )
     client    = models.ForeignKey(
-        verbose_name="Клієнт", to="gao.ProjectUser", 
+        verbose_name="Клієнт", to="gao.User", 
         related_name="client_consultations",
-        on_delete=models.CASCADE,
-        # on_delete=models.SET_NULL, blank=True, null=True,
+        on_delete=models.SET_NULL, blank=True, null=True,
     )
 
     @property 
@@ -99,20 +155,23 @@ class Consultation(TimestampMixin):
         return times 
 
     @property
+    def documents(self):
+      documents = ConsultationDocument.objects.filter(consultation=self)
+      return documents
+
+    @property
     def time(self):
         # time = time_to - time_from
         time = 0
         for c_time in self.times:
             time 
         return time 
-
+    
     @property
     def price(self):
-        price = 0
-        if self.advocat:
-            price = self.advocat.rate * self.time
+        price = self.advocat.rate * self.time
         return price
-
+    
     class Meta:
         verbose_name = 'Консультація'
         verbose_name_plural = 'Консультації'
@@ -136,7 +195,12 @@ class ConsultationTime(models.Model):
 
 class ConsultationDocument(TimestampMixin):
     file = models.FileField(verbose_name="Файл")
-    consultation = models.ForeignKey(verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(
+        verbose_name="Автор", to="gao.User", on_delete=models.SET_NULL, null=True, blank=False,
+    )
+    consultation = models.ForeignKey(
+        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False,
+    )
 
     def __str__(self):
         return f'{self.consultation}'
@@ -147,7 +211,9 @@ class ConsultationDocument(TimestampMixin):
 
 
 class ConsultationPayment(TimestampMixin):
-    consultation = models.OneToOneField(verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=True)
+    consultation = models.OneToOneField(
+        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False,
+    )
     amount = models.FloatField(verbose_name="Сумма")
 
     def __str__(self):
@@ -233,7 +299,7 @@ class Contact(models.Model):
 
 
 class Document(models.Model):
-    user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to="gao.ProjectUser", blank=True, null=True)
+    user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to="gao.User", blank=True, null=True)
     file = models.FileField(verbose_name='Файл')
     
     def __str__(self):
@@ -245,35 +311,4 @@ class Document(models.Model):
     class Meta:
         verbose_name = 'Документ'
         verbose_name_plural = 'Документ'
-
-
-
-
-
-
-# class Post(models.Model):
-#     meta_title = models.CharField(max_length=255, blank=True, null=True) 
-#     meta_descr = models.TextField(blank=True, null=True)
-#     alt        = models.CharField(max_length=255, blank=True, null=True)
-#     title      = models.CharField(verbose_name='заголовок',max_length=255, blank=True, null=True)
-#     slug       = models.SlugField(verbose_name='Посилання', max_length=255, unique=True)
-#     # body       = models.TextField(verbose_name='текст', blank=True, null=True)
-#     body       = HTMLField(verbose_name='текст', blank=True, null=True)
-#     image      = models.ImageField(verbose_name='зображення', blank=True, null=True)
-#     updated    = models.DateTimeField(auto_now_add=False, auto_now=True, blank=True, null=True)
-#     created    = models.DateTimeField(default=timezone.now)
-#     # created    = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)
-#     author     = models.ForeignKey(to='Team', related_name="posts", blank=True, null=True, on_delete=models.CASCADE)
-
-#     class Meta:
-#         verbose_name='пост'
-#         verbose_name_plural='Блог'
-
-#     def __str__(self):
-#         return self.title
-
-#     def get_absolute_url(self):
-#         return reverse("post", kwargs={"slug": self.slug})
-
-
 

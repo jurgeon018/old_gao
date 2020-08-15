@@ -236,7 +236,7 @@ admin.site.register(Slider, SliderAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Document, DocumentAdmin)
 
-@admin.register(ProjectUser)
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     inlines = [
         # ProfileInline,

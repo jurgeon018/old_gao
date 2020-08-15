@@ -88,7 +88,7 @@ MEDIA_URL = '/media/'
 
 SITE_ID = 1
 
-AUTH_USER_MODEL = 'gao.ProjectUser'
+AUTH_USER_MODEL = 'gao.User'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_USE_TLS = True
