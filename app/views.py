@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     page, _ = Page.objects.get_or_create(code='index')
+    page_is_index = True 
     return render(request, 'index.html', locals())
 
 

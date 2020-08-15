@@ -19,7 +19,7 @@
 	font-weight: 700;
 	color: #727271;
 	margin-right: 50px;
-	line-height: 1.4;
+	line-height: 1.5;
 	cursor: pointer;
 	padding-bottom: 14px;
 	transition: all .2s;
@@ -84,7 +84,7 @@
 .mail-block {
 	display: flex;
 	margin-top: 20px;
-	align-items: center;
+	align-items: end;
 
 	img {
 		margin-right: 20px;
@@ -92,7 +92,7 @@
 
 	a {
 		font-family: 'Roboto Slab', serif;
-		font-weight: 700;
+		font-weight: 300;
 		color: #6C6C6C;
 		font-stretch: 18px;
 	}
@@ -130,9 +130,13 @@
 .marib {
 	color: #6C6C6C;
 	font-family: 'Montserrat', sans-serif;
-	font-weight: 700;
+	font-weight: 300;
 	max-width: 450px;
 
+}
+.mobile__block {
+	display: flex;
+	flex-direction: column;
 }
 .adress-block {
 	
@@ -176,7 +180,7 @@
     font-weight: 700;
     color: #727271;
     margin-right: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-size: 12px;
 	}
 }

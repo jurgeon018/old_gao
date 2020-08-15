@@ -1,7 +1,8 @@
 .profile-header {
 	.btn-communicate {
 		top: 104%;
-		right: 42%;
+		left: 50%;
+		transform: translateX(-50%);
 		color: #D2A351;
 		transition: color .2s;
 		&:hover {
@@ -93,10 +94,49 @@
 	}
 }
 @media (max-width: 700px) {
+	.map-wrap {
+		margin-top: 30px;
+	}
+	.profile-header {
+		padding-bottom: 120px;
+
+	}
 	.profile-header .about-prof {
 	 width: 100%;
 	 flex-direction: column;
+	 align-items: center;
+	 margin: 0 !important;
+
+
+	 .green__name {
+		 width: 60%;
+		 margin: 0 auto;
+		 margin-bottom: 15px;
+		 margin-top: 20px;
+	 }
+	 .gold-text {
+		width: 60%;
+		margin: 0 auto;
+	 }
+	 	.geo-block {
+			max-width: unset;
+			width: 60%;
+			margin: 0 auto;
+			margin-top: 15px;	
+		}
+		.punct-text {
+			max-width: 100%;
+			margin-top: 30px;
+		}
 	}
+	.img-prof-block {
+		margin-right: 0;
+	}
+
+	.abzac .about__subtitles {
+		padding-left: 0 !important;
+	}
+	
 	.img-prof-block {
 		width: 60%;
 	}
@@ -108,5 +148,23 @@
 @media (max-width: 410px) {
 	.profile-header .about-main__text {
 	    padding-top: 93px;
+	}
+}
+@media (max-width: 360px) {
+	.img-prof-block {
+		width: 100%;
+	}
+	.profile-header {
+		.green__name {
+			width: 100%;
+		}	
+		.gold-text {
+			width: 100%;
+			margin: 0 auto;
+			max-width: unset;
+		}
+		.geo-block {
+			width: 100%;
+		}
 	}
 }

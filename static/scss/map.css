@@ -14,7 +14,7 @@
   font-weight: 700;
   color: #727271;
   margin-right: 50px;
-  line-height: 1.4;
+  line-height: 1.5;
   cursor: pointer;
   padding-bottom: 14px;
   transition: all .2s; }
@@ -139,7 +139,7 @@
     font-weight: 700;
     color: #727271;
     margin-right: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-size: 12px; } }
 @media (max-width: 1152px) {
   .map-right {

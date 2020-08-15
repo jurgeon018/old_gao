@@ -1,6 +1,6 @@
 .kabinet {
     padding-top: 150px;
-    background-color: #FEFEFE;
+    background-color: #fff;
 }
 .kab__title-wrap {
     display: flex;
@@ -8,7 +8,7 @@
 
 }
 #modal-form_settings {
-    background-color: #efefef;
+    background-color: #fff;
     width: 500px;
     border-radius: 20px;
     .inp-vak-wrap {
@@ -19,7 +19,7 @@
     }
     .inp-vak-wrap input {
         border: none;
-        background-color: #efefef;
+        background-color: #fff;
         border-bottom: 1px solid #D2A351;
     }
     .submit_vak {
@@ -56,7 +56,6 @@
 }
 #tab_22 {
     overflow-y: auto;
-    height: 630px;
 }
 .doc-profile:nth-child(2n+2) {
    border-left: 2px solid #EBECEC;
@@ -133,7 +132,7 @@
 
 }
 #modal-form_relog {
-   background-color: #efefef;
+   background-color: #fff;
       width: 500px;
       border-radius: 20px;
       .inp-vak-wrap {
@@ -144,7 +143,7 @@
       }
       .inp-vak-wrap input {
           border: none;
-          background-color: #efefef;
+          background-color: #fff;
           border-bottom: 1px solid #D2A351;
       }
       .submit_vak {
@@ -198,13 +197,11 @@
     margin-top: 30px;
     display: flex;
     overflow: hidden;
-    height: 630px;
 }
 .auto-tab-link-block {
     display: flex;
     flex-direction: column;
     padding-right: 20px;
-    min-height: 320px;
     width: 17%;
     border-right: 1.5px solid #D2A351;
 }
@@ -254,23 +251,27 @@
    
 }
 .tab-auto-content-prof {
-    
-    position: absolute;
+    transition: all .6s;
+    position: relative;
     opacity: 0;
     z-index: 0;
     visibility: hidden;
-    right: -100%;
-    transition: all .2s;
     width: 100%;
-    height: 410px;
+    max-height: 1px;
 }
 .tab-auto-content-prof_active {
+    transition: all .2s;
     padding-left: 30px;
     visibility: visible;
     opacity: 1;
     z-index: 1;
-    right: 0;
-    transition: all .2s;
+    max-height: 10000px;
+}
+input {outline: none;}
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+    -webkit-text-fill-color: #6C6C6C !important; /* цвет текста */
+    color: #6C6C6C !important; /* цвет текста */
 }
 .main_user_data {
     font-weight: 700;
@@ -568,14 +569,8 @@ position: absolute;
     .main_tab__link, .usualy_tab__link {
         max-width: 270px;
     }
-    .auto-tab-link-block {
-        min-height: 160px;
-    }
-    .all-tab-wrap {
-        height: 750px;
-    }
+   
     .tab-auto-content-prof {
-        height: 520px;
         right: unset !important;
         left: 0px !important;
     }
@@ -595,12 +590,7 @@ position: absolute;
     .mini-tab-content-prof_active {
         top: 0 !important;
     }
-    .tab-auto-content-block {
-        width: 560px;
-        padding-left: 0;
-        min-height: 10px;
-        margin: 0 auto;
-    }
+  
     .doc-bot {
         flex-direction: column;
         margin-top: 0;

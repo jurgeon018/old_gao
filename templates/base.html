@@ -16,11 +16,13 @@
 </head>
 <body>
      {% include 'includes/navbar.html' %}
+    {% block without_header%}
+    {% endblock without_header %}
     <header 
         id="{%block header_id%}{%endblock header_id%}"
         class="{%block header_class%}{%endblock header_class%}"
     >
-        <div class="container">
+        <div class="{% if not page_is_index %}container{%endif%}">
             {% block content%}
             {% endblock content%}
         </div>

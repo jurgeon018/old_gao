@@ -104,7 +104,7 @@
 	                 font-weight: 700;
 	                 align-items: center;
 	                 min-height: 124px;
-	 line-height: 1;
+	 line-height: 1.5;
 	 font-size: 19px;
 	     padding-bottom: 10px;
 	 border-bottom: 2.4px solid #676766;
@@ -124,6 +124,7 @@
 	 color: #6C6C6C;
 	 line-height: 1;
 	 font-size: 18px;
+	 margin-bottom: 5px;
 }
 .geo-text a {
 	 font-family: 'Montserrat', sans-serif;
@@ -146,7 +147,7 @@
 
 .geo-block {
 	display: flex;
-	align-items: center;
+	align-items: end;
 	margin-bottom: 20px;
 	img {
 		margin-right: 12px;

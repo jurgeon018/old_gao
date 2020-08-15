@@ -519,19 +519,19 @@ html {
   font-size: 12pt;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  line-height: 1.4; }
+  line-height: 1.5; }
 
 .white-text {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.5;
   font-size: 12pt; }
 
 .sub-text {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  line-height: 1.4;
+  line-height: 1.5;
   font-size: 12pt; }
 
 .slider-header-wrap {
@@ -1305,7 +1305,7 @@ html {
   max-width: 549px;
   padding-bottom: 20px;
   font-family: 'Montserrat', sans-serif;
-  line-height: 1.4;
+  line-height: 1.5;
   font-size: 14px; }
 
 .about-profile {
@@ -1824,7 +1824,7 @@ html {
   font-weight: 700;
   color: #727271;
   margin-right: 50px;
-  line-height: 1.4;
+  line-height: 1.5;
   cursor: pointer;
   padding-bottom: 14px;
   transition: all .2s; }
@@ -1949,7 +1949,7 @@ html {
     font-weight: 700;
     color: #727271;
     margin-right: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-size: 12px; } }
 @media (max-width: 1152px) {
   .map-right {
@@ -2366,7 +2366,7 @@ html {
   font-weight: 700;
   font-size: 15px;
   margin-top: 50px;
-  line-height: 1.4; }
+  line-height: 1.5; }
 
 .pract__title {
   display: flex;
@@ -3093,7 +3093,7 @@ body {
   box-sizing: border-box; }
 
 .container {
-  max-width: 85%;
+  max-width: 90%;
   margin: 0 auto;
   border: 1px solid transparent; }
 

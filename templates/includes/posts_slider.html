@@ -12,7 +12,7 @@
                 {{post.title|truncatechars:55}}
             </div> -->
             <div class="sub-text">
-                {{post.body|striptags|safe|truncatechars:100}}
+                {{post.body|striptags|safe|truncatechars:55}}
                 <!-- {{post.title|truncatechars:55}} -->
             </div>
             <a class="slider_btn" href="{% url 'post' slug=post.slug%}">

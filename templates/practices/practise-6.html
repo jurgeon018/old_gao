@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}
-{% include 'includes/form.html' %}
-
-<div class="about-page-top-block">
-          <div class="svg-pract-page">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+{% block without_header%}
+<section class="background_section">
+  <div class="container">
+    <div class="about-page-top-block">
+      <div class="svg-pract-page">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
 viewBox="0 0 177 177"
 xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
@@ -160,22 +160,29 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <path class="fil7" d="M105 111l0 11c0,2 2,3 3,3 0,0 0,0 0,0l12 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -11c0,-1 -1,-3 -2,-3 0,0 0,0 0,0l-12 0c-1,0 -3,2 -3,3 0,0 0,0 0,0zm6 3l0 0 6 0 0 6 -6 0 0 -6z"/>
 </g>
 </g>
-</svg>
-          </div>
-          <div class="about__title-wrap">
-            <div class="green__title">
-              КУПІВЛЯ-ПРОДАЖ ПІДПРИЄМСТВ
-            </div>
-            <div class="about-line about-line-fix">
-            
-            </div>
-            <div class="about__subtitles">
-            Угоди купівлі-продажу існуючого бізнесу користуються достатньою популярністю в Україні. 
-            Юридичний супровід таких угод - це складне правове завдання, рішення кожного її етапу потребує достатнього знання 
-            законодавства, в тому числі, Антимонопольного, а також наявності великого практичного досвіду. 
-            </div>
+        </svg>
+      </div>
+      <div class="about__title-wrap">
+        <div class="green__title">
+          Купівля-продаж підприємств
         </div>
+        <div class="about-line about-line-fix">
+        
+        </div>
+        <div class="about__subtitles">
+        Угоди купівлі-продажу існуючого бізнесу користуються достатньою популярністю в Україні. 
+        Юридичний супровід таких угод - це складне правове завдання, рішення кожного її етапу потребує достатнього знання 
+        законодавства, в тому числі, Антимонопольного, а також наявності великого практичного досвіду. 
+        </div>
+    </div>
 </div>
+  </div>
+</section>
+{% endblock without_header %}
+{% block content %}
+{% include 'includes/form.html' %}
+
+
 
 <div class="bottom-wrap">
   <div class="about__subtitles about__subtitles-first">Наші адвокати мають успішний досвід юридичного супроводу угод купівлі-продажу підприємств (бізнесу), що дозволить 
@@ -199,46 +206,46 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
   </div>
   <div class="inform-pract-block">
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Юридичний супровід продажу (купівлі) підприємств;
+        <b>+ </b> Юридичний супровід продажу (купівлі) підприємств;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Юридичний супровід процедур приєднання, перетворення, злиття підприємств;
+        <b>+ </b> Юридичний супровід процедур приєднання, перетворення, злиття підприємств;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Підготовка та юридичний супровід укладення договорів відчуження корпоративних прав;
+        <b>+ </b> Підготовка та юридичний супровід укладення договорів відчуження корпоративних прав;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Представництво інтересів учасника перед товариством, іншими учасниками товариства, органами державної влади, перед третіми особами, 
+        <b>+ </b> Представництво інтересів учасника перед товариством, іншими учасниками товариства, органами державної влади, перед третіми особами, 
         в процесі реалізації корпоративних прав;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Правовий аналіз установчих документів суб'єктів господарювання, рішень статутних органів товариства;
+        <b>+ </b> Правовий аналіз установчих документів суб'єктів господарювання, рішень статутних органів товариства;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Правовий аналіз видів діяльності суб'єкта господарювання на наявність необхідних дозвільних документів;
+        <b>+ </b> Правовий аналіз видів діяльності суб'єкта господарювання на наявність необхідних дозвільних документів;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Судовий захист у корпоративних спорах
+        <b>+ </b> Судовий захист у корпоративних спорах
       </div>
     </div>
     

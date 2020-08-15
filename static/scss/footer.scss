@@ -28,7 +28,7 @@
 	list-style: none;
 	color: #EBECEC;
 	display: flex;
-
+	padding: 0;
 
 	li {
 		margin-right: 15px;
@@ -36,6 +36,7 @@
 		padding-bottom: 5px;
 	}
 }
+
 .foter-multi {
 	width: 65%;
 	display: flex;
@@ -71,7 +72,7 @@
 		font-size: 14px;
 	}
 	.footer-right {
-		width: 70%;
+		width: 100px;
 	}
 	.footer-block {
 		padding: 11px 0;
@@ -82,9 +83,7 @@
 		align-items: left;
 		flex-direction: column-reverse;
 	}
-	.footer-right {
-    width: 15%;
-	}
+	
 }
 @media (max-width: 464px) {
 	.footer-block {

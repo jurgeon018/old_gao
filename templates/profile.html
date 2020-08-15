@@ -1,35 +1,47 @@
 {% extends 'base.html' %}
+{% block head_static%}
+{% include 'includes/head_static.html' %}
+<link  href="/static/css/new_profile.css" rel="stylesheet">
 
+{% endblock head_static%}
 
 {% block content%}
 <body class="card">
-	
 		<header class="kabinet">
 				<div class="kab__title-wrap">
 					<div class="kab__title">
 						Мій кабінет
 					</div>
-					<div class="set-wrap" data-src='#modal-form_settings'>
-						<img src="/static/img/settings.svg" class="set-img" alt="">
+					<div class="set-wrap">
+						<img src="/static/img/profile/settings.svg" class="set-img" alt="">
 					</div>
-					
 				</div>
-				
+				<div class="user_name">
+					Бурега Назар Васильович
+				</div>
+				<div class="user_type">
+					клієнт
+				</div>
 				<div class="all-tab-wrap">
 					<div class="auto-tab-link-block">
-						<div data-tab="tab_11" class="main_tab__link main_tab__link_active">
+						<div data-tab="tab_33" class="button_transparent main_tab__link">
+							Мох консультації
+						</div>
+						<div data-tab="tab_11" class="button_transparent main_tab__link main_tab__link_active">
 							Особисті дані
 						</div>
-						<div data-tab="tab_22" class="main_tab__link">
+						<div data-tab="tab_22" class="button_transparent main_tab__link">
 							Документи
 						</div>
-						<a href="{% url 'custom_logout' %}">
-							<div class="main_tab__link">
+						
+						<a class="button_transparent main_tab__link" href="{% url 'custom_logout' %}">
 								Вихід
-							</div>
 						</a>
 					</div>
 					<div class="tab-auto-content-block">
+						<div id="tab_33" class="tab-auto-content-prof">
+							213
+						</div>
 						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
 							<div class="tab_left_data">
 								<div class="main_user_data">
@@ -66,14 +78,34 @@
 										{{request.user.phone_number}}
 									</div>
 								</div>
-							</div>
-							<div class="tab_right_data">
-								<div class="usualy_tab__link set-prof" data-src='#modal-form_settings'>
-									Редагувати особисті дані
-								</div><div class="usualy_tab__link set-prof" data-src='#modal-form_relog'>
-									Змінити пароль
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Стать 
+									</div>
+									<div class="user-data-name">
+										13.09.1989
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										Дата народження
+									</div>
+									<div class="user-data-name">
+										Чоловіча
+									</div>
+								</div>
+								<div class="user-data-prof">
+									<div class="user-data-type">
+										22.**.19**
+									</div>
+									<div class="user-data-name">
+										Slavko
+									</div>
 								</div>
 							</div>
+							<!-- <div class="tab_right_data">
+								
+							</div> -->
 						</div>
 						<div id="tab_22" class="tab-auto-content-prof">
 							<div class="main_user_data">
@@ -82,6 +114,22 @@
 								Процесуальні документи 
 								Документи виготовлені адвокатам 
 								Сканкопії інших документів  -->
+							</div>
+							<div class="main_doc_link__block">
+								<div data-tab='1' class="button_transparent main_doc_link main_doc_link_active">
+									Від авдокатів
+								</div>
+								<div data-tab='2' class="button_transparent main_doc_link">
+									Мої документи
+								</div>
+							</div>
+							<div class="main_doc_content__block">
+								<div id="profile_1" class="main_doc_content main_doc_content_active">
+									1
+								</div>
+								<div id="profile_2" class="main_doc_content">
+									2
+								</div>
 							</div>
 							<div class="doc-block">
 								{% for document in request.user.documents.all%}
@@ -184,6 +232,23 @@
 				</form>
 		</header>
 		<!-- /.kabinet -->
-
+		<form method="POST" action="" class="cmxform" id="modal-change_settings" style="display:none;">
+			<div class="change_title">
+				Редагувати:
+			</div>
+			<div class="change__block">
+				<div class="usualy_tab__link set-prof button_transparent" data-src='#modal-form_settings'>
+					особисті дані
+			   </div>
+			   <div class="usualy_tab__link set-prof button_transparent" data-src='#modal-form_relog'>
+				    пароль
+			   </div>
+			</div>
+		</form>
 
 {% endblock content%}
+{% block footer_static%}
+		{% include 'includes/footer_static.html' %}
+		<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
+		
+{% endblock footer_static%}

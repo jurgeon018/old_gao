@@ -274,7 +274,7 @@ $(function() {
 //  *
 //  **/
 function Onload() {
-    valide_form('#modal-form_user', '.inp-vak-wrap', true);
+    valide_form('#modal-form_user', '.inp-vak-wrap', false);
     valide_form('#modal-form', '.input-wrap', true);
     valide_form('#modal-form_settings', '.inp-vak-wrap', false);
     valide_form('#modal-form_relog', '.inp-vak-wrap', false);
@@ -344,7 +344,6 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 },
                 username: {
                     required: true,
-                    lettersonly: true
                 },
                 password: {
                     required: true,
