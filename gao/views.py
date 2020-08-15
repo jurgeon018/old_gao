@@ -7,7 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from box.core.sw_content.models import * 
+from sw_blog.models import Post 
 from .models import *
+
 
 def index(request):
     page, _ = Page.objects.get_or_create(code='index')

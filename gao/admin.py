@@ -46,29 +46,9 @@ class FacultyAdmin(ImportExportModelAdmin):
     resource_class = FacultyResource
 
 
-class PostInline(admin.StackedInline):
-    model = Post 
-    extra = 0
-
-
 class SliderInline(admin.StackedInline):
     model = Slider.clients.through
     extra = 0
-
-
-class PostAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'title', 
-        'slug',
-        'image',
-        'author',
-    )
-
-    prepopulated_fields = {
-        'slug':('title',)
-    }
-    list_display_links =list_display
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -97,9 +77,6 @@ class TeamAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug':('full_name',)
     }
-    inlines = [
-        PostInline
-    ]
 
 
 class ClientAdmin(admin.ModelAdmin):
@@ -253,15 +230,13 @@ class CustomUserAdmin(UserAdmin):
     ]
 
 
-admin.site.register(User, CustomUserAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Team, TeamAdmin)
-admin.site.register(Post, PostAdmin)
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Document, DocumentAdmin)
 
-
+@admin.register(ProjectUser)
 class CustomUserAdmin(UserAdmin):
     inlines = [
         # ProfileInline,

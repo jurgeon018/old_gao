@@ -8,6 +8,8 @@ from django.contrib.sitemaps.views import sitemap
 from .views import *
 from .sitemaps import *
 
+from sw_blog.sitemaps import PostSitemap
+
 from filebrowser.sites import site 
 
 
@@ -58,8 +60,7 @@ urlpatterns = [
 ]
 
 
-if settings.DEBUG == True:
+if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-    

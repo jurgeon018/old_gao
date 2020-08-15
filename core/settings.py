@@ -19,9 +19,11 @@ INSTALLED_APPS = [
 
     'box.core',
     'box.core.sw_content',
+    'box.core.sw_global_config',
     'gao',
 
     'sw_liqpay',
+    'sw_blog',
     
     'tinymce',
     'rest_framework',

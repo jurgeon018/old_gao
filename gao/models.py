@@ -50,13 +50,6 @@ class ProjectUser(AbstractUser):
     verbose_name_plural = ('Користувачі')
 
 
-
-
-
-
-
-
-
 class Consultation(TimestampMixin):
     STATUS1 = 'STATUS1'
     STATUS2 = 'STATUS2'
@@ -127,6 +120,7 @@ class Consultation(TimestampMixin):
     def __str__(self):
         return f'{self.date}'
 
+
 class ConsultationTime(models.Model):
     consultation = models.ForeignKey(verbose_name="Консультація", to="gao.Consultation", on_delete=models.CASCADE)
     time_from = models.TimeField(verbose_name="Час від")
@@ -172,31 +166,6 @@ class Faculty(TimestampMixin):
 
     class Meta:
         verbose_name = "Право"
-
-
-class Post(models.Model):
-    meta_title = models.CharField(max_length=255, blank=True, null=True) 
-    meta_descr = models.TextField(blank=True, null=True)
-    alt        = models.CharField(max_length=255, blank=True, null=True)
-    title      = models.CharField(verbose_name='заголовок',max_length=255, blank=True, null=True)
-    slug       = models.SlugField(verbose_name='Посилання', max_length=255, unique=True)
-    # body       = models.TextField(verbose_name='текст', blank=True, null=True)
-    body       = HTMLField(verbose_name='текст', blank=True, null=True)
-    image      = models.ImageField(verbose_name='зображення', blank=True, null=True)
-    updated    = models.DateTimeField(auto_now_add=False, auto_now=True, blank=True, null=True)
-    created    = models.DateTimeField(default=timezone.now)
-    # created    = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)
-    author     = models.ForeignKey(to='Team', related_name="posts", blank=True, null=True, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name='пост'
-        verbose_name_plural='Блог'
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse("post", kwargs={"slug": self.slug})
 
 
 class Team(models.Model):
@@ -263,7 +232,6 @@ class Contact(models.Model):
         verbose_name_plural='Контакти'
 
 
-
 class Document(models.Model):
     user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to="gao.ProjectUser", blank=True, null=True)
     file = models.FileField(verbose_name='Файл')
@@ -277,5 +245,35 @@ class Document(models.Model):
     class Meta:
         verbose_name = 'Документ'
         verbose_name_plural = 'Документ'
+
+
+
+
+
+
+# class Post(models.Model):
+#     meta_title = models.CharField(max_length=255, blank=True, null=True) 
+#     meta_descr = models.TextField(blank=True, null=True)
+#     alt        = models.CharField(max_length=255, blank=True, null=True)
+#     title      = models.CharField(verbose_name='заголовок',max_length=255, blank=True, null=True)
+#     slug       = models.SlugField(verbose_name='Посилання', max_length=255, unique=True)
+#     # body       = models.TextField(verbose_name='текст', blank=True, null=True)
+#     body       = HTMLField(verbose_name='текст', blank=True, null=True)
+#     image      = models.ImageField(verbose_name='зображення', blank=True, null=True)
+#     updated    = models.DateTimeField(auto_now_add=False, auto_now=True, blank=True, null=True)
+#     created    = models.DateTimeField(default=timezone.now)
+#     # created    = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)
+#     author     = models.ForeignKey(to='Team', related_name="posts", blank=True, null=True, on_delete=models.CASCADE)
+
+#     class Meta:
+#         verbose_name='пост'
+#         verbose_name_plural='Блог'
+
+#     def __str__(self):
+#         return self.title
+
+#     def get_absolute_url(self):
+#         return reverse("post", kwargs={"slug": self.slug})
+
 
 

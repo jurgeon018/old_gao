@@ -6,7 +6,7 @@ from django.forms import NumberInput, Textarea, TextInput
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin, TranslationStackedInline
 from box.core.utils import BaseAdmin , seo 
-from adminsortable.admin import SortableAdmin
+# from adminsortable.admin import SortableAdmin
 from box.core.utils import BaseAdmin
 from .models import *
 from box.core.utils import (
@@ -93,7 +93,7 @@ from .resources import PostResource
 class PostAdmin(
     BaseAdmin,
     TabbedTranslationAdmin,
-    SortableAdmin,
+    # SortableAdmin,
     ImportExportModelAdmin,
     # MarkdownxModelAdmin,
     # SummernoteModelAdmin,
@@ -116,7 +116,7 @@ class PostAdmin(
             'author',
             'category',
             'similars',
-            'markers',
+            # 'markers',
         ]
     inlines = [
         CommentInline,
@@ -129,7 +129,7 @@ class PostAdmin(
                 'category',
                 'author',
                 'similars',
-                'markers',
+                # 'markers',
                 'image',
                 'content',
             ),

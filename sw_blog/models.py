@@ -22,9 +22,9 @@ User = get_user_model()
 
 
 class Post(AbstractPage):
-  markers    = models.ManyToManyField(
-    to="sw_global_config.GlobalMarker", verbose_name=_("Маркери"), blank=True
-  )
+  # markers    = models.ManyToManyField(
+  #   to="sw_global_config.GlobalMarker", verbose_name=_("Маркери"), blank=True
+  # )
   # content = RichTextUploadingField(
   # content = RichTextField(
     # config_name='awesome_ckeditor',

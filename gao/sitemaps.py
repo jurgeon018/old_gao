@@ -9,9 +9,9 @@ class TeamSitemap(Sitemap):
         return Team.objects.all()
 
 
-class PostSitemap(Sitemap):
-    def items(self):
-        return Post.objects.all()
+# class PostSitemap(Sitemap):
+#     def items(self):
+#         return Post.objects.all()
 
 
 class StaticViewSitemap(Sitemap):
