@@ -5,7 +5,8 @@ from pages.admin import *
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 
-
+from .resources import * 
+from import_export.admin import ImportExportModelAdmin
 
 class GaoAdmin(admin.AdminSite):
     index_title = 'GAO Admin site'
@@ -14,6 +15,29 @@ class GaoAdmin(admin.AdminSite):
 
 
 gao_admin = GaoAdmin(name="gao_admin")
+
+
+
+@admin.register(Consultation, site=gao_admin)
+class ConsultationAdmin(ImportExportModelAdmin):
+    resource_class = ConsultationResource
+
+
+@admin.register(ConsultationDocument, site=gao_admin)
+class ConsultationDocumentAdmin(ImportExportModelAdmin):
+    resource_class = ConsultationDocumentResource
+
+
+@admin.register(ConsultationPayment, site=gao_admin)
+class ConsultationPaymentAdmin(ImportExportModelAdmin):
+    resource_class = ConsultationPaymentResource
+
+
+@admin.register(Faculty, site=gao_admin)
+class FacultyAdmin(ImportExportModelAdmin):
+    resource_class = FacultyResource
+
+
 
 
 class PostInline(admin.StackedInline):

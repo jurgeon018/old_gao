@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib import admin as custom_admin
 from pages.models import *
-from modeltranslation.admin import *
+# from modeltranslation.admin import *
 
 custom_admin = admin.site
 

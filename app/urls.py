@@ -20,6 +20,7 @@ sitemaps = {
 
 
 urlpatterns = [
+    path('api/', include('app.api.urls')),
     path('admin/filebrowser/', site.urls),
     path('robots.txt/',        TemplateView.as_view(template_name="robots.txt"), name='robots'),
     path('sitemap.xml/',       sitemap, {'sitemaps':sitemaps}),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('',                 index,    name='index' ),
     path('contacts/',        contacts, name='contacts'),
     path('profile/',         profile,  name='profile'),
+    path('cabinet/<role>/',         cabinet,  name='cabinet'),
     path('blog/',            blog,     name='blog'),
     path('about/',           about,    name='about'),
     path('post/<slug>/',     post,     name='post'),

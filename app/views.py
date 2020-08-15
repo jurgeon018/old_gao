@@ -44,11 +44,14 @@ def about(request):
     return render(request, 'about.html', locals())
 
 from django.contrib.auth.decorators import login_required
+
+
 @login_required
 def profile(request):
     return render(request, 'profile.html', locals())
 
-
+def cabinet(request, role):
+    return render(request, f'cabinet_{role}.html', locals())
 
 
 @csrf_exempt

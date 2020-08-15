@@ -5,6 +5,112 @@ from tinymce.models import HTMLField
 from django.utils import timezone 
 
 
+class TimestampMixin(models.Model):
+    created = models.DateTimeField(verbose_name="Створено", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(verbose_name="Оновлено", auto_now_add=False, auto_now=True)
+
+    class Meta:
+        abstract = True 
+
+
+class Consultation(TimestampMixin):
+    STATUS1 = 'STATUS1'
+    STATUS2 = 'STATUS2'
+    STATUS3 = 'STATUS3'
+    STATUS4 = 'STATUS4'
+    STATUSES = (
+        (STATUS1, "STATUS1"),
+        (STATUS2, "STATUS2"),
+        (STATUS3, "STATUS3"),
+        (STATUS4, "STATUS4"),
+    )
+    SKYPE  = 'SKYPE'
+    VIBER  = 'VIBER'
+    GMEET  = 'GMEET'
+    ZOOM   = 'ZOOM'
+    MOBILE = 'MOBILE'
+    FORMATS = [
+        (SKYPE,  "SKYPE"),
+        (VIBER,  "VIBER"),
+        (GMEET,  "GMEET"),
+        (ZOOM,   "ZOOM"),
+        (MOBILE, "MOBILE"),
+    ]
+    format    = models.CharField(verbose_name="Формат", null=True, blank=True, choices=FORMATS, default=SKYPE, max_length=255)
+    status    = models.CharField(verbose_name="Статус", null=True, blank=True, choices=STATUSES, default=STATUS1, max_length=255)
+    # status    = models.ForeignKey(verbose_name="Статус", to="app.Status", on_delete=models.SET_NULL, null=True, blank=True)
+    # format    = models.ForeignKey(verbose_name="Формат", to="app.Format", on_delete=models.SET_NULL, null=True, blank=True)
+    date      = models.DateField(verbose_name="Дата")
+    time_from = models.TimeField(verbose_name="Час від")
+    time_to   = models.TimeField(verbose_name="Час до")
+    comment   = models.TextField(verbose_name="Коментар", blank=True, null=True)
+    mark      = models.SmallIntegerField(verbose_name="Оцінка", blank=True, null=True)
+    advocat   = models.ForeignKey(
+        verbose_name="Адвокат", to="custom_auth.User", 
+        related_name="advocat_consultations",
+        on_delete=models.CASCADE,
+        # on_delete=models.SET_NULL, blank=True, null=True,
+    )
+    client    = models.ForeignKey(
+        verbose_name="Клієнт", to="custom_auth.User", 
+        related_name="client_consultations",
+        on_delete=models.CASCADE,
+        # on_delete=models.SET_NULL, blank=True, null=True,
+    )
+
+    @property
+    def time(self):
+        time = time_to - time_from
+        return time 
+
+    @property
+    def price(self):
+        price = 0
+        if self.advocat:
+            price = self.advocat.rate * self.time
+        return price
+
+    class Meta:
+        verbose_name = 'Консультація'
+        verbose_name_plural = 'Консультації'
+
+    def __str__(self):
+        return f'{self.date}'
+
+
+class ConsultationDocument(TimestampMixin):
+    file = models.FileField(verbose_name="Файл")
+    consultation = models.ForeignKey(verbose_name="Консультація", to="app.Consultation", on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.consultation}'
+
+    class Meta:
+        verbose_name = "Документ до консультації"    
+        verbose_name_plural = "Документи до консультацій"    
+
+
+class ConsultationPayment(TimestampMixin):
+    consultation = models.OneToOneField(verbose_name="Консультація", to="app.Consultation", on_delete=models.SET_NULL, null=True, blank=True)
+    amount = models.FloatField(verbose_name="Сумма")
+
+    def __str__(self):
+        return f'{self.consultation}'
+
+    class Meta:
+        verbose_name = "Оплата до консультації"    
+        verbose_name_plural = "Оплати до консультацій"    
+
+
+class Faculty(TimestampMixin):
+    name = models.CharField(verbose_name="Назва", max_length=255)
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        verbose_name = "Право"
+
 
 class Post(models.Model):
     meta_title = models.CharField(max_length=255, blank=True, null=True) 
