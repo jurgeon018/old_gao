@@ -6,23 +6,23 @@ from .models import *
 class ConsultationResource(ModelResource):
     class Meta:
         model = Consultation
-        exclude = []
+        exclude = ['created','updated',]
 
 
 class FacultyResource(ModelResource):
     class Meta:
         model = Faculty
-        exclude = []
+        exclude = ['created','updated',]
 
 
 class ConsultationDocumentResource(ModelResource):
     class Meta:
         model = ConsultationDocument
-        exclude = []
+        exclude = ['created','updated',]
 
 
 class ConsultationPaymentResource(ModelResource):
     class Meta:
         model = ConsultationPayment
-        exclude = []
+        exclude = ['created','updated',]
 

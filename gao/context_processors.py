@@ -1,4 +1,6 @@
 from .models import * 
+from sw_blog.models import Post 
+
 
 def team(request):
     team    = Team.objects.all()

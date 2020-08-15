@@ -45,8 +45,14 @@ def about(request):
 def profile(request):
     return render(request, 'profile.html', locals())
 
+@login_required
 def cabinet(request, role):
     user = request.user
+    faculties = Faculty.objects.all()
+    advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
+    print(advocats)
+    clients  = User.objects.filter(role=User.CLIENT_ROLE)
+    consultations = Consultation.objects.all()
     if role == 'advocat':
         consultations = Consultation.objects.filter(advocat=user)
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
@@ -174,10 +180,10 @@ def update_password(request):
 
 @csrf_exempt 
 def custom_login(request):
-
+    query = request.POST or request.GET
     response    = redirect(request.META['HTTP_REFERER'])
-    username    = request.POST['username']
-    password    = request.POST['password']
+    username    = query['username']
+    password    = query['password']
     remember_me = request.GET.get('remember_me')
 
     if remember_me == "true":

@@ -76,7 +76,7 @@ class User(AbstractUser, DaysMixin):
   phone_number = models.CharField(verbose_name="Номер телефону", max_length=255, blank=True, null=True)
   role         = models.CharField(verbose_name="Роль", choices=USER_ROLES, default=CLIENT_ROLE, max_length=255)
   rate         = models.FloatField(verbose_name="Ціна за годину консультації", default=0)
-  faculties    = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True)
+  faculties    = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True, related_name="advocats")
 
   def get_free_hours(self, date_from, date_to):
     free_hours = ...
