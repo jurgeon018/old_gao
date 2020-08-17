@@ -10,14 +10,18 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for i in range(10):
             user, created = User.objects.get_or_create(
-                username=f"advocat_{i}"
+                username=f"advocat{i}"
             )
             user.role = User.ADVOCAT_ROLE
-            user.set_password(f'advocat_{i}')
+            user.is_stuff = True
+            user.is_superuser = True
+            user.set_password(f'advocat{i}')
+            user.rate = random.randrange(100, 1000)
             user.save()
-            print(user)
             if not created:
                 for faculty in Faculty.objects.all():
+                    print(faculty)
+                    print(random.random())
                     if random.random():
                         user.faculties.add(faculty)
         print('ok')

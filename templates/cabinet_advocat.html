@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 {% block content%}
 <br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-fdsasdf
 {% for advocat in advocats %}
-    {{advocats.username}}fdsasdf
-    for
+    <hr>
+    {{advocat.username}}<br>
+    <br>
+    Галузі права:<br>
+    {% for faculty in advocat.faculties.all %}
+    - {{faculty.name}}<br>
+    {% endfor %}
+    <hr>
 {% endfor %}
-
+<hr>
+<hr>
+{% for faculty in faculties %}
+    <hr>
+    {{faculty.name}}<br>
+    <br>
+    Адвокати:
+    {% for advocat in faculty.advocats.all %}
+    - {{advocat.username}}<br>
+    {% endfor %}
+    <hr>
+{% endfor %}
 {% endblock content%}
