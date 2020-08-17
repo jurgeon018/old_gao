@@ -12,10 +12,11 @@ $('.set-wrap').on('click', function() {
 
 
 $(".main_doc_link").on("click", function(){
-    $(".main_doc_link").removeClass("main_doc_link_active");
+    let wrap = $(this).parents('.tab-auto-content-prof');
+    $(wrap).find(".main_doc_link").removeClass("main_doc_link_active");
      $(this).addClass("main_doc_link_active");
 
-    $(".main_doc_content").removeClass("main_doc_content_active");
+    $(wrap).find(".main_doc_content").removeClass("main_doc_content_active");
     $("#profile_"+$(this)[0].dataset.tab).addClass("main_doc_content_active");
 
 });

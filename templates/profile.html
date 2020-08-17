@@ -16,10 +16,10 @@
 						<img src="/static/img/profile/settings.svg" class="set-img" alt="">
 					</div>
 				</div>
-				<div class="user_name">
+				<div class="user_name midle_title midle_title_3 color_gold">
 					Бурега Назар Васильович
 				</div>
-				<div class="user_type">
+				<div class="user_type standart_title standart_title_4 color_black">
 					клієнт
 				</div>
 				<div class="all-tab-wrap">
@@ -35,12 +35,40 @@
 						</div>
 						
 						<a class="button_transparent main_tab__link" href="{% url 'custom_logout' %}">
-								Вихід
+							Вихід
 						</a>
 					</div>
 					<div class="tab-auto-content-block">
 						<div id="tab_33" class="tab-auto-content-prof">
-							213
+							<div class="main_user_data">
+								Мої консультації
+								<!-- Угода про подання правової допомоги. Протокол погодження ціни 
+								Процесуальні документи 
+								Документи виготовлені адвокатам 
+								Сканкопії інших документів  -->
+							</div>
+							<div class="main_doc_link__block">
+								<div data-tab='3' class="button_transparent main_doc_link main_doc_link_active">
+									Бронювання
+								</div>
+								<div data-tab='4' class="button_transparent main_doc_link">
+									Мої консультації
+								</div>
+							</div>
+							<div class="main_doc_content__block">
+								<div id="profile_3" class="main_doc_content main_doc_content_active">
+									<div class="step_title standart_title standart_title_4 color_black">
+										<span class="step_text color_gold">
+											Крок 1.
+										</span> 
+										 Для початку роботи Вам необхідно вибрати галузь 
+										юреспруденції та адвоката, котрий надаватиме Вам консультацію.
+									</div>
+								</div>
+								<div id="profile_4" class="main_doc_content">
+									2
+								</div>
+							</div>
 						</div>
 						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
 							<div class="tab_left_data">
@@ -125,44 +153,70 @@
 							</div>
 							<div class="main_doc_content__block">
 								<div id="profile_1" class="main_doc_content main_doc_content_active">
-									1
-								</div>
-								<div id="profile_2" class="main_doc_content">
-									2
-								</div>
-							</div>
-							<div class="doc-block">
-								{% for document in request.user.documents.all%}
-								<div class="doc-profile">
-									<div class="doc-top">
-										<div class="doc-img-wrap">
-											<img src="/static/img/doc.svg" alt="">
-											<div class="doc-name">
-												{{document.file}}
+									<div class="doc-block">
+										{% for document in request.user.documents.all%}
+										<div class="doc-profile">
+											<div class="doc-top">
+												<div class="doc-img-wrap">
+													<img src="/static/img/doc.svg" alt="">
+													<div class="doc-name">
+														Docum 1
+													</div>
+												</div>
+												<div class="doc__title">
+													{{document.file}}
+												</div>
+											</div>
+											<div class="doc-bot">
+												<div class="doc-btn">
+													<a href="{{document.file.url}}" download>
+														Завантажити
+													</a>
+												</div>
+												{% if document.is_pdf %}
+												<div class="doc-btn">
+													<a href="{% url 'read_document' document.id %}">
+														Переглянути
+													</a>
+												</div>
+												{% endif %}
 											</div>
 										</div>
-										<div class="doc__title">
-											{{document.title}}
-										</div>
-									</div>
-									<div class="doc-bot">
-										<div class="doc-btn">
-											<a href="{{document.file.url}}" download>
-												Завантажити
-											</a>
-										</div>
-										{% if document.is_pdf %}
-										<div class="doc-btn">
-											<a href="{% url 'read_document' document.id %}">
-												Переглянути
-											</a>
-										</div>
-										{% endif %}
+										{% endfor %}
 									</div>
 								</div>
-								{% endfor %}
-								
+								<div id="profile_2" class="main_doc_content">
+									<div class="docs__wrap">
+										<div class="docs_title midle_title midle_title_3 color_gold">
+											Консультація 1
+										</div>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява1.pdf
+										</a>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява2.pdf
+										</a>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява2.pdf
+										</a>
+									</div>
+									<div class="docs__wrap">
+										<div class="docs_title midle_title midle_title_3 color_gold">
+											Консультація 2
+										</div>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява1.pdf
+										</a>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява2.pdf
+										</a>
+										<a href="#" class="doc_content standart_title standart_title_4 color_black">
+											Заява2.pdf
+										</a>
+									</div>
+								</div>
 							</div>
+							
 						</div>
 								
 					</div>
