@@ -262,8 +262,6 @@ jQuery.validator.addMethod("creditcardtypes", function(value, element, param) {
 
 
 $(function() {
-
-
     Onload();
   })
 // /**
@@ -278,7 +276,7 @@ function Onload() {
     valide_form('#modal-form', '.input-wrap', true);
     valide_form('#modal-form_settings', '.inp-vak-wrap', false);
     valide_form('#modal-form_relog', '.inp-vak-wrap', false);
-
+    valide_form('.user_order_of_advocate', '.inp-vak-wrap', true);
 }
 function location_leng() {
     return location.pathname.split('/')[1];
@@ -309,7 +307,6 @@ function valide_form(id_form, error_inp_wrap, check_request) {
         }
         $(id_form).validate({
             errorPlacement: function (event, validator) {
-                console.log("111");
                 $(validator).parents(error_inp_wrap).append($(event));
             },
             rules: {
@@ -420,8 +417,8 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 },
              },
              submitHandler: function(form) {
-                console.log("222");
                 event.preventDefault();
+                let form = params.form;
            
                  $('.load_spin').addClass('load_spin_active');
                 $.fancybox.close({
@@ -438,95 +435,123 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                  var url_form = form.action;
                  var form_json = {};
                  $(form_input).each(function(index, obj) {
-                    console.log(obj);
-                    console.log(index);
                     form_json[obj.name] = obj.value;
-                    
-                    console.log(form_json);
-                  });
-                    
-                    console.log(form_json);
-                  if(url_form != ''){
-                    
-                    fetch(url_form, {
-                      method: 'POST',
-                      body: new URLSearchParams($.param(form_json))
-                    })
-                    .then(data => {
+                 });
 
-                      return data.json();
-                    })
-                    .then(data => {
-                        console.log(data)
-                      if(data.status=='OK' && typeof data['status'] !== "undefined"){
-                          sayHi();
-                        gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
-                      }
-                      if(data.status=='BAD' && typeof data['status'] !== "undefined"){
-                          $('.load_spin').removeClass('load_spin_active');
-                          $(".error_block_false").text("Невірний логін або пароль");
-                          $.fancybox.open({
-                            src: '#modal_form_false',
-                          });
-                          
-          
-                      }
-          
-                      if(typeof data['url'] !== "undefined" && data.url!=''){
-                        //   sayHi();
-                          console.log(location.href)
-                          console.log(data.url)
-                          location.href=data.url;
-                      }
+
+
+                    console.log('test!!!');
+                    console.log('id_form', $(id_form));
+
+                    if ($(id_form).hasClass('new_form')) {
+                        // форма з файлами!!! ========================>
+                        let file_logo__life2 = form.querySelectorAll('#last_hidden_file')[0];
+                        let Formdata = new FormData()
+                        if (file_logo__life != undefined) {
+                          if (file_logo__life.files[0] !== undefined) { 
+                            Formdata.append('logo', file_logo__life.files[0])
+                          }
+                        }
+
+
+
+
+                        if(url_form != '') {
                     
-          
-          
-                    })
-          
-                  }else {
-                    console.log("forn_not_actions");
-                  }
-          
-                //     $(form_input).each(function(index, obj) {
-                //         [obj.name] = obj.value;
-                //     });
-                // if(url_form != '') {
-                //     fetch(url_form, {
-                //         method: 'POST',
-                //         body: new URLSearchParams($.param())
-                //     })
-                //     .then(data => {
-                //         return data.json();
-                //     })
-                //     .then(data => {
-                //         console.log('2223');
-                //         if(data.status=='OK' && typeof data['status'] !== "undefined") {
-                //             sayHi();
+                            fetch(url_form, {
+                              method: 'POST',
+                              body: new URLSearchParams($.param(form_json))
+                            })
+                            .then(data => {
+        
+                              return data.json();
+                            })
+                            .then(data => {
+                                console.log(data)
+                              if(data.status=='OK' && typeof data['status'] !== "undefined"){
+                                  sayHi();
+                                gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
+                              }
+                              if(data.status=='BAD' && typeof data['status'] !== "undefined"){
+                                  $('.load_spin').removeClass('load_spin_active');
+                                  $(".error_block_false").text("Невірний логін або пароль");
+                                  $.fancybox.open({
+                                    src: '#modal_form_false',
+                                  });
+                                  
+                  
+                              }
+                  
+                              if(typeof data['url'] !== "undefined" && data.url!=''){
+                                //   sayHi();
+                                  console.log(location.href)
+                                  console.log(data.url)
+                                  location.href=data.url;
+                              }
                             
-                //         }
-                //         if(typeof data['url'] !== 'undefined' && data.url!='') {
-                //             sayHi();
+                  
+                  
+                            })
+                  
+                          }else {
+                            console.log("forn_not_actions");
+                          }
+                    } else {
+                        if(url_form != ''){
+                    
+                            fetch(url_form, {
+                              method: 'POST',
+                              body: new URLSearchParams($.param(form_json))
+                            })
+                            .then(data => {
+        
+                              return data.json();
+                            })
+                            .then(data => {
+                                console.log(data)
+                              if(data.status=='OK' && typeof data['status'] !== "undefined"){
+                                  sayHi();
+                                gtag('event', 'send', { 'event_category': 'form', 'event_action': 'send', });
+                              }
+                              if(data.status=='BAD' && typeof data['status'] !== "undefined"){
+                                  $('.load_spin').removeClass('load_spin_active');
+                                  $(".error_block_false").text("Невірний логін або пароль");
+                                  $.fancybox.open({
+                                    src: '#modal_form_false',
+                                  });
+                                  
+                  
+                              }
+                  
+                              if(typeof data['url'] !== "undefined" && data.url!=''){
+                                //   sayHi();
+                                  console.log(location.href)
+                                  console.log(data.url)
+                                  location.href=data.url;
+                              }
                             
-                //             location.href=data.url;
-                //         }
-                //         if(typeof data['reviews'] !== "undefined") {
-                //             sayHi_rewis();
-                            
-                //         }
-                       
-                //     })
-                // } else {
-                //     console.log("form_not_actions");
-                // }
-                // function explode(){
-                //   if (id_form == '#modal-form_user') {
-                //     // window.location.pathname = '/'
-                //   } else {
-                //     sayHi();
-                //   }
-                   
-                //   }
-                //   explode()
+                  
+                  
+                            })
+                  
+                          }else {
+                            console.log("forn_not_actions");
+                          }
+                    }
+                 
+          
+
+
+
+
+
+
+
+
+
+
+
+
                 function sayHi() {
                     $('.load_spin').removeClass('load_spin_active');
                     $.fancybox.close();
