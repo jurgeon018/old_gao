@@ -350,9 +350,6 @@ if ($('.advocate_calender_container').length == 1) {
     });
 
 }
- 
-
-
 
 
 
@@ -360,16 +357,27 @@ if ($('.advocate_calender_container').length == 1) {
 
 $('.docs_title_btn').on('click', function() {
     let wrap = $(this).parents('.docs__wrap');
-
     $(wrap).toggleClass('docs__wrap_active');
-
-
 });
 
 
 
 
+function create_clockwork_client(content) {
+    let step_date_prof = document.createElement('div');
 
+    if (content.reserve == false) {
+        step_date_prof.classList.add('step_date_prof', 'button_transparent');
+    } else {
+        step_date_prof.classList.add('step_date_prof', 'button_transparent', 'step_date_prof_passive');
+    }
+    step_date_prof.setAttribute(`data-clock`, transform_clock(content.hours));
+    step_date_prof.textContent = transform_clock(content.hours);
+
+    $(step_date_prof).on('click', add_clockwork);
+
+    return step_date_prof;
+}
 
 
     
@@ -426,6 +434,52 @@ var myDatepicker = $('#datapicker_user').datepicker({
             current_data = `П'ятниця. ${formattedDate}`;
         }
         $('.advocate_user_date').text(current_data);
+
+
+
+        let test_json = [
+            
+            {
+                hours: 540,
+                reserve: false,
+            },
+            {
+                hours: 570,
+                reserve: true,
+            },
+            {
+                hours: 600,
+                reserve: false,
+            },
+            {
+                hours: 630,
+                reserve: false,
+            },
+            {
+                hours: 660,
+                reserve: false,
+            },
+            {
+                hours: 690,
+                reserve: false,
+            },
+            {
+                hours: 720,
+                reserve: false,
+            },
+            {
+                hours: 750,
+                reserve: false,
+            },
+        ]
+
+        $('.step_date__wrap').children().remove();
+
+        console.log('test_json: ', test_json);
+        $.each(test_json, function(index, value) {
+            console.log('value: ', value);
+            $('.step_date__wrap')[0].appendChild(create_clockwork_client(value));
+        });
         
     }
     
@@ -512,17 +566,24 @@ function add_clockwork() {
     if ($(this).hasClass('step_date_prof_passive')) {
 
     } else {
+        let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
         $(this).toggleClass('step_date_prof_active');
         let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
-        $('.step_access').text(`${current_clock}.00`);
+        $('.step_access').text(transform_clock(current_clock * attr));
     }
 }
 
 $('.step_access_btn').on('click', function() {
-    let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
-    $('.current_clock_num').text(`${current_clock}`);
+    let current_clock = transform_minute(Number($('.step_access').text()));
+    console.log('current_clock: ', current_clock);
     let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
-    let sum = current_cost * current_clock;
+    let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
+
+    let current_sum = current_cost / duration;
+    let sum = current_sum * current_clock;
+
+
+    $('.current_clock_num').text(transform_clock(current_clock));
     $('.all_price_consultation').attr('data-price', sum);
     counter_num('.all_price_consultation', 1000, sum);
 })
@@ -638,15 +699,30 @@ let create_practise = (content) => {
         return step_active_content;
 }
 
-let current_clock = transform_clock(260);
-console.log('current_clock: ', current_clock);
+
 function transform_clock(date) {
     let current_clock = date;
 
     let hours = Math.trunc(current_clock / 60);
-    let minunte = Math.round((current_clock / 60 - hours) * 60);
+    let minute = Math.round((current_clock / 60 - hours) * 60);
+    let last;
+    if (minute <= 9) {
+        last = `0${minute}`;
+    } else {
+        last = minute;
+    }
+    current_clock = `${hours}.${last}`;
 
-    current_clock = `${hours}.${minunte}`;
+    return current_clock;
+}
+
+function transform_minute(date) {
+    let current_clock = date;
+
+    let hours = Math.trunc(current_clock) * 60;
+    let minute = (current_clock - Math.trunc(current_clock)) * 100;
+    
+    current_clock = Math.round(hours + minute);
 
     return current_clock;
 }
