@@ -418,7 +418,6 @@ function valide_form(id_form, error_inp_wrap, check_request) {
              },
              submitHandler: function(form) {
                 event.preventDefault();
-                let form = params.form;
            
                  $('.load_spin').addClass('load_spin_active');
                 $.fancybox.close({
