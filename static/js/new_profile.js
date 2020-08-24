@@ -434,11 +434,10 @@ var myDatepicker = $('#datapicker_user').datepicker({
             current_data = `П'ятниця. ${formattedDate}`;
         }
         $('.advocate_user_date').text(current_data);
-
+        $('.step_access').text('');
 
 
         let test_json = [
-            
             {
                 hours: 540,
                 reserve: false,
@@ -498,11 +497,119 @@ $('.data_step_select_btn').on('click', function() {
 
     $(this).toggleClass('visible');
 })
+// додавання файлів адвокатом
+$('.advocate_doc_add_btn').on('change', function() {
+    let file_create = $('#advocate_doc_add_btn')[0];
+    let files = file_create.files;
+    
+    $.each(files, function(index, value ){
+        $('.doc-block')[0].appendChild(create_advocate_files(value));
+    });
+});
+
+
+let create_advocate_files = (content) => {
+    let doc_profile = document.createElement('div');
+        doc_profile.classList.add('doc-profile');
+
+        let doc_top = document.createElement('div');
+        doc_top.classList.add('doc-top');
+
+        let doc_bot = document.createElement('div');
+        doc_bot.classList.add('doc-bot');
+
+    let doc_img_wrap = document.createElement('div');
+    doc_img_wrap.classList.add('doc-img-wrap');
+
+    let doc_img = document.createElement('img');
+    doc_img.classList.add('doc-img');
+    doc_img.setAttribute(`src`, '/static/img/doc.svg');
+
+
+    let numbers = $('.doc-block').find('.doc-profile').length + 1;
+    let doc_name = document.createElement('div');
+    doc_name.classList.add('doc-name');
+    doc_name.textContent = `Docum ${numbers}`;
+
+    let doc__title = document.createElement('div');
+    doc__title.classList.add('doc__title');
+    doc__title.textContent = content.name;
+
+
+    // let svg_span = document.createElement('span');
+    // svg_span.classList.add('advocate_download_close');
+
+    // svg_span.innerHTML = `
+    //     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+    //         <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+    //         </path>
+    //     </svg>
+    // `;
+    // $(svg_span).on('click', delete_file);
+
+
+    doc_profile.appendChild(doc_top);
+    doc_profile.appendChild(doc_bot);
+    doc_top.appendChild(doc_img_wrap);
+    doc_img_wrap.appendChild(doc_img);
+    doc_img_wrap.appendChild(doc_name);
+    doc_top.appendChild(doc__title);
+
+    
+        return doc_profile;
+}
 
 
 
 
 
+
+
+// додавання файлів клієнтом
+$('.input_user_file').on('change', function() {
+    let file_create = $('#input_user_file')[0];
+    let files = file_create.files;
+    if (files.length == 1) {
+        $('.new_files_info').text(`${files.length} новий файл`);
+    } else {
+        $('.new_files_info').text(`${files.length} нових файлів`);
+    }
+    $('.new_files_users').children().remove();
+
+    $.each(files, function(index, value ){
+        $('.new_files_users')[0].appendChild(create_client_files(value));
+    });
+});
+
+
+let create_client_files = (content) => {
+    console.log('content: ', content);
+    let advocate_download_prof = document.createElement('div');
+        advocate_download_prof.classList.add('advocate_download_prof', 'new_advocate_download_prof');
+
+    let advocate_download_name = document.createElement('div');
+    advocate_download_name.classList.add('advocate_download_name', 'main_title', 'main_title_4', 'color_gold');
+    advocate_download_name.textContent = content.name;
+    
+
+    // let svg_span = document.createElement('span');
+    // svg_span.classList.add('advocate_download_close');
+
+    // svg_span.innerHTML = `
+    //     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+    //         <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+    //         </path>
+    //     </svg>
+    // `;
+    // $(svg_span).on('click', delete_file);
+
+
+    advocate_download_prof.appendChild(advocate_download_name);
+    // advocate_download_prof.appendChild(svg_span);
+
+    
+        return advocate_download_prof;
+}
 
 $('.set-wrap').on('click', function() {
     $.fancybox.open({

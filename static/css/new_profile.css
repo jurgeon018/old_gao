@@ -524,7 +524,7 @@
 .custom-scrollbar {
   position: relative;
   overflow: hidden;
-  height: 150px; }
+  height: 169px; }
 
 .custom-scrollbar__inner {
   height: 100%;
@@ -579,6 +579,7 @@
   border-radius: 20px;
   border: 1px solid #D2A351;
   padding: 25px 40px;
+  height: fit-content;
   margin-right: 50px; }
   .advocate_calender_info .consultation_section {
     width: 100%; }
@@ -886,6 +887,9 @@
 
 .advocate_download_close {
   cursor: pointer; }
+  .advocate_download_close svg {
+    width: 100%;
+    height: 100%; }
 
 .advocate_practise__block {
   display: flex;
@@ -924,6 +928,35 @@
   border-top: 1px solid #72727129;
   border-bottom: 1px solid #72727129; }
 
+.new_files_users__block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; }
+
+.new_files_info {
+  margin-right: 20px;
+  width: 180px; }
+
+.new_files_users {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: calc(100% - 200px); }
+
+@media (max-width: 1417px) {
+  .advocate_calender_info {
+    width: 300px;
+    padding: 25px 20px;
+    margin-right: 20px; }
+
+  .grid_content {
+    font-size: 10px; }
+
+  .advocate_calender__block {
+    width: calc(100% - 320px); }
+
+  .advocate_slick_date_prof {
+    font-size: 11px; } }
 @media (max-width: 1280px) {
   .advocate_select_profile__block {
     flex-direction: column; }
@@ -949,6 +982,21 @@
 
   .consultation_star__block p {
     margin-bottom: 10px; } }
+@media (max-width: 1170px) {
+  .advocate_calender_container {
+    flex-direction: column; }
+
+  .advocate_calender_info {
+    width: 100%;
+    padding: 25px 20px;
+    margin-right: 0;
+    margin-bottom: 20px; }
+
+  .advocate_calender__block {
+    width: 100%; }
+
+  .advocate_calender_navigate {
+    top: 0px; } }
 @media (max-width: 1090px) {
   .tab-auto-content-block {
     width: 100%;
@@ -973,7 +1021,17 @@
 
   .consultation__block {
     display: block; } }
+@media (max-width: 578px) {
+  .reserve_hidden_content {
+    padding: 15px 20px; }
+
+  .advocate_user_clock__block {
+    flex-direction: column; } }
 @media (max-width: 492px) {
+  .new_files_users__block {
+    flex-direction: column;
+    align-items: baseline; }
+
   .change__block {
     display: flex;
     flex-direction: column; }
@@ -1020,5 +1078,30 @@
 
   .step_date__block {
     width: 160px; } }
+@media (max-width: 464px) {
+  .reserve_hidden_content .reserve_clock__block {
+    flex-direction: column; }
+
+  .reserve_comment__block {
+    flex-direction: column; }
+
+  .reserve_contents {
+    width: 100%;
+    margin-top: 10px; }
+
+  .advocate_user_clock__block {
+    flex-direction: column;
+    align-items: end;
+    margin-top: 20px; }
+
+  .reserve_hidden_content .reserve_date__block {
+    flex-direction: column;
+    align-items: end; } }
+@media (max-width: 401px) {
+  .grid_content {
+    font-size: 8px; }
+
+  .advocate_slick_date_prof {
+    font-size: 8px; } }
 
 /*# sourceMappingURL=new_profile.css.map */
