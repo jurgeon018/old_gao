@@ -59,7 +59,6 @@
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="main_doc_content main_doc_content_active">
 									<form action="/test/" class="new_form user_order_of_advocate">
-										<input type="text" name="username">
 										<div class="step_title standart_title standart_title_4 color_black">
 											<span class="step_text color_gold">
 												Крок 1.
@@ -68,7 +67,7 @@
 											 юреспруденції та адвоката, котрий надаватиме Вам консультацію.
 										</div>
 										<div class="step_select__block">
-											<div class="step_select">
+											<div data-error='виберіть галузь' class="pract_step_select step_select">
 												<div class="step_select_title standart_title standart_title_4 color_black">
 													виберіть галузь
 												</div>
@@ -105,7 +104,7 @@
 												<div class="step_active_content standart_title standart_title_4 color_gold">
 													Судова практика
 												</div>
-												<div class="step_hidden_content">
+												<div class="practise_step_hidden_content step_hidden_content">
 													<div data-title='Практика земельних правовідносин' class="step_select_text standart_title standart_title_2 color_black">
 														Практика земельних правовідносин
 													</div>
@@ -123,7 +122,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="step_select">
+											<div data-error='виберіть адвоката' class="advoc_step_select step_select">
 												<div class="step_select_title standart_title standart_title_4 color_black">
 													виберіть адвоката
 												</div>
@@ -157,9 +156,9 @@
 													</div>
 												</div>
 												<div class="step_active_content standart_title standart_title_4 color_gold">
-													Судова практика
+													Адвокат1
 												</div>
-												<div class="step_hidden_content">
+												<div class="client_select_step_hidden_content step_hidden_content">
 													<div data-title='Практика земельних правовідносин' class="step_select_text standart_title standart_title_2 color_black">
 														Практика земельних правовідносин
 													</div>
@@ -246,7 +245,7 @@
 														<img src="/static/img/profile/5.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
+														<span class="clock_manager" data-clock='9.00, 10.00, 11.00'>з 09.00 по 11.00.</span>
 														<span>консультація -  <span class="current_clock_num">0</span> год.</span>
 													</div>
 													<div class="advocate_user_settings">
@@ -283,13 +282,16 @@
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
 														<span>Вартість консультації:</span>
-														<span class="all_price_consultation color_gold" data-advocate_duration_cost='30' data-advocate-cost='500' data-price='0'>0 грн</span>
+														<span class="span_sum__block">
+															<span class="odometer all_price_consultation color_gold" data-advocate_duration_cost='30' data-advocate-cost='500' data-price='0'>0</span>
+															<span class="color_gold"> грн</span>
+														</span>
 													</div>
 													
 												</div>
 											</div>
 											<div class="advocate_select_date">
-												<div class="date_btn__block step_select">
+												<div data-error='виберіть дату' class="date_btn__block step_select">
 													<div class="step_select_title standart_title standart_title_4 color_black">
 														виберіть дату
 													</div>
@@ -328,7 +330,7 @@
 												</div>
 											</div>
 											<div class="advocate_select_time">
-												<div class="date_btn__block step_select">
+												<div data-error='виберіть час' class="date_btn__block step_select">
 													<div class="step_select_title standart_title standart_title_4 color_black">
 														виберіть час
 													</div>
@@ -508,8 +510,12 @@
 											</label>
 											<input class="input_user_file" multiple id="input_user_file" type="file">
 										</div>
-										<div class="submit_wrapper">
+										
+										<div class="submit_wrapper submit_wrapper_error">
 											<input value="Підтвердити" class="submit_user_order button_transparent" type="submit" class="">
+										</div>
+										<div class="sumbit_content_error standart_title standart_title_4 color_green">
+
 										</div>
 									</form>
 								</div>
@@ -984,6 +990,7 @@
 {% block footer_static%}
 		{% include 'includes/footer_static.html' %}
 		<script defer src="/static/js/datepicker.js" type="text/javascript"></script>
+		<script defer src="/static/js/odometer.min.js" type="text/javascript"></script>
 		<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
 		
 {% endblock footer_static%}

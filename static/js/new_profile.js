@@ -352,6 +352,135 @@ if ($('.advocate_calender_container').length == 1) {
 }
 
 
+let test_practise = [
+    {
+        name: 'договірна',
+        id: 1
+    },
+    {
+        name: 'приговірна',
+        id: 2
+    },
+    {
+        name: 'чарівна',
+        id: 3
+    },
+    {
+        name: 'логішна',
+        id: 4
+    },
+    {
+        name: 'антична',
+        id: 5
+    },
+]
+
+let test_advocate = [
+    {
+        name: 'advocate1',
+        id: [2, 3, 4, 5]
+    },
+    {
+        name: 'advocate2',
+        id: [1, 3]
+    },
+    {
+        name: 'advocate3',
+        id: [1, 2, 3, 5]
+    },
+    {
+        name: 'advocate4',
+        id: [5]
+    },
+]
+create_all_doc_for_client('.practise_step_hidden_content', test_practise);
+create_all_doc_for_client('.client_select_step_hidden_content', test_advocate);
+   
+function create_all_doc_for_client(wrap, json) {
+    console.log('json: ', json);
+    $(wrap).children().remove();
+    $.each(json, function(index, value) {
+        $(wrap)[0].appendChild(create_doc(value));
+    });
+}
+
+function create_doc(content) {
+    let doc_item = document.createElement('div');
+    doc_item.setAttribute(`data-title`, content.name);
+    doc_item.setAttribute(`data-id`, content.id);
+    doc_item.classList.add('step_select_text', 'standart_title', 'standart_title_2', 'color_black');
+    doc_item.textContent = content.name;
+
+    $(doc_item).on('click', click_select_item);
+    return doc_item;
+}
+
+
+function click_select_item() {
+    let wrap = $(this).parents('.step_select');
+    let data = $(this).attr('data-title');
+
+    $(wrap).find('.step_select_text').removeClass('step_select_text_active');
+    $(this).addClass('step_select_text_active');
+    $(wrap).find('.step_active_content').text(data);
+    $(wrap).addClass('step_select_active');
+    $(wrap).find('.step_hidden_content').removeClass('step_hidden_content_active');
+
+
+    let checker = $(this).parents()[0];
+    console.log('checker: ', checker);
+    // практики
+    if ($(checker).hasClass('practise_step_hidden_content')) {
+        let test1 = [
+            {
+                name: 'advocate3',
+                id: [1, 2, 3, 5]
+            },
+            {
+                name: 'advocate4',
+                id: [5]
+            },
+        ]
+        create_all_doc_for_client('.client_select_step_hidden_content', test1);
+    }
+    // адвокати
+    else if ($(checker).hasClass('client_select_step_hidden_content')) {
+        let test2 = [
+            {
+                name: 'чарівна',
+                id: 3
+            },
+            {
+                name: 'логішна',
+                id: 4
+            },
+            {
+                name: 'антична',
+                id: 5
+            },
+        ]
+        create_all_doc_for_client('.practise_step_hidden_content', test2);
+
+        $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
+        $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+
+        var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        datepicker.destroy();
+        var weekenddDays = [0, 6];
+        var reserve = ["20-August-2020", "21-August-2020"];
+        var busy = ["25-August-2020", "27-August-2020"];
+        var months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
+        create_client_calender(weekenddDays, reserve, busy, months_items);
+    }
+
+
+};
+
+
+
+
+
+
 
 
 
@@ -381,119 +510,121 @@ function create_clockwork_client(content) {
 
 
     
-var disabledDays = [0, 6];
-var reserved_days = ["20-August-2020", "21-August-2020"];
-var busy_days = ["25-August-2020", "27-August-2020"];
-var months = ['january','feburary','March','April','May','June','July','August','September','November','December'];
 
-var myDatepicker = $('#datapicker_user').datepicker({
-    moveToOtherMonthsOnSelect: false,
-    multipleDates: false,
-    minDate: new Date(),
-    onRenderCell: function(date, cellType) {
-        var currentDate = date.getDate();
-        var myDate = ((date.getDate()<10)?'0':'')+date.getDate()+'-'+months[date.getMonth()]+'-'+date.getFullYear();
-   
-         if (reserved_days.indexOf(myDate)>-1) {
-           return {
-            classes: 'disable_day',
-            disabled: true
-           }
-         } else if (busy_days.indexOf(myDate)>-1) {
-            return {
-                classes: 'busy_day',
-                disabled: false,
-                html: currentDate + '<span class="dp-note"></span>'
-            }
-          } else if (cellType == 'day') {
-                var day = date.getDay(),
-                isDisabled = disabledDays.indexOf(day) != -1;
-
-            return {
-                disabled: isDisabled
-            }
-        } else {
-           return {
-            disabled: false
-          }
-        }
-      },
-    onSelect: function(formattedDate, date, inst) {
-        let str_text = inst.selectedDates[0] + ' ';
-        let current_day = str_text.slice(0, 3);
-        let current_data;
-        if (current_day == 'Mon') {
-            current_data = `Понеділок. ${formattedDate}`;
-        } else if (current_day == 'Tue') {
-            current_data = `Вівторок. ${formattedDate}`;
-        } else if (current_day == 'Wed') {
-            current_data = `Середа. ${formattedDate}`;
-        } else if (current_day == 'Thu') {
-            current_data = `Четвер. ${formattedDate}`;
-        } else if (current_day == 'Fri') {
-            current_data = `П'ятниця. ${formattedDate}`;
-        }
-        $('.advocate_user_date').text(current_data);
-        $('.step_access').text('');
-
-
-        let test_json = [
-            {
-                hours: 540,
-                reserve: false,
-            },
-            {
-                hours: 570,
-                reserve: true,
-            },
-            {
-                hours: 600,
-                reserve: false,
-            },
-            {
-                hours: 630,
-                reserve: false,
-            },
-            {
-                hours: 660,
-                reserve: false,
-            },
-            {
-                hours: 690,
-                reserve: false,
-            },
-            {
-                hours: 720,
-                reserve: false,
-            },
-            {
-                hours: 750,
-                reserve: false,
-            },
-        ]
-
-        $('.step_date__wrap').children().remove();
-
-        console.log('test_json: ', test_json);
-        $.each(test_json, function(index, value) {
-            console.log('value: ', value);
-            $('.step_date__wrap')[0].appendChild(create_clockwork_client(value));
-        });
-        
-    }
+function create_client_calender(disabledDays, reserved_days, busy_days, months) {
+    var myDatepicker = $('#datapicker_user').datepicker({
+        moveToOtherMonthsOnSelect: false,
+        multipleDates: false,
+        minDate: new Date(),
+        onRenderCell: function(date, cellType) {
+            var currentDate = date.getDate();
+            var myDate = ((date.getDate()<10)?'0':'')+date.getDate()+'-'+months[date.getMonth()]+'-'+date.getFullYear();
+       
+             if (reserved_days.indexOf(myDate)>-1) {
+               return {
+                classes: 'disable_day',
+                disabled: true
+               }
+             } else if (busy_days.indexOf(myDate)>-1) {
+                return {
+                    classes: 'busy_day',
+                    disabled: false,
+                    html: currentDate + '<span class="dp-note"></span>'
+                }
+              } else if (cellType == 'day') {
+                    var day = date.getDay(),
+                    isDisabled = disabledDays.indexOf(day) != -1;
     
- });
- myDatepicker.show();
+                return {
+                    disabled: isDisabled
+                }
+            } else {
+               return {
+                disabled: false
+              }
+            }
+          },
+        onSelect: function(formattedDate, date, inst) {
+            let str_text = inst.selectedDates[0] + ' ';
+            let current_day = str_text.slice(0, 3);
+            let current_data;
+            if (current_day == 'Mon') {
+                current_data = `Понеділок. ${formattedDate}`;
+            } else if (current_day == 'Tue') {
+                current_data = `Вівторок. ${formattedDate}`;
+            } else if (current_day == 'Wed') {
+                current_data = `Середа. ${formattedDate}`;
+            } else if (current_day == 'Thu') {
+                current_data = `Четвер. ${formattedDate}`;
+            } else if (current_day == 'Fri') {
+                current_data = `П'ятниця. ${formattedDate}`;
+            }
+            $('.advocate_user_date').text(current_data);
+            $('.step_access').text('');
+            $('.current_clock_num').text(0);
+            $('.all_price_consultation').text(0);
+            $('.advocate_select_date').find('.step_select').addClass('step_select_active');
+            $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+    
+            let test_json = [
+                {
+                    hours: 540,
+                    reserve: false,
+                },
+                {
+                    hours: 570,
+                    reserve: true,
+                },
+                {
+                    hours: 600,
+                    reserve: false,
+                },
+                {
+                    hours: 630,
+                    reserve: false,
+                },
+                {
+                    hours: 660,
+                    reserve: false,
+                },
+                {
+                    hours: 690,
+                    reserve: false,
+                },
+                {
+                    hours: 720,
+                    reserve: false,
+                },
+                {
+                    hours: 750,
+                    reserve: false,
+                },
+            ]
+    
+            $('.step_date__wrap').children().remove();
+    
+            console.log('test_json: ', test_json);
+            $.each(test_json, function(index, value) {
+                console.log('value: ', value);
+                $('.step_date__wrap')[0].appendChild(create_clockwork_client(value));
+            });
+            
+        }
+        
+     });
+}
+ 
+ var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+ datepicker.destroy();
  
 
 $('.data_step_select_btn').on('click', function() {
     if ($(this).hasClass('visible')) {
-        myDatepicker.hide();
+        $('#datapicker_user').hide();
     } else {
-        myDatepicker.show();
+        $('#datapicker_user').show();
     }
-
-
+    
 
     $(this).toggleClass('visible');
 })
@@ -622,16 +753,6 @@ $('.step_change_btn').on('click', function() {
     let wrap = $(this).parents('.step_select');
     $(wrap).find('.step_hidden_content').toggleClass('step_hidden_content_active');
 });
-$('.step_select_text').on('click', function() {
-    let wrap = $(this).parents('.step_select');
-    let data = $(this).attr('data-title');
-
-    $(wrap).find('.step_select_text').removeClass('step_select_text_active');
-    $(this).addClass('step_select_text_active');
-    $(wrap).find('.step_active_content').text(data);
-    $(wrap).addClass('step_select_active');
-    $(wrap).find('.step_hidden_content').removeClass('step_hidden_content_active');
-});
 
 $(".main_doc_link").on("click", function(){
     let wrap = $(this).parents('.tab-auto-content-prof');
@@ -661,10 +782,30 @@ function delete_file() {
 
 
 $('.submit_wrapper').on('click', function() {
-    console.log(1);
+    check_user_valid();
 })
 
-
+function check_user_valid() {
+    let all_check_items = $('.step_select');
+    let all_count = $('.step_select').length;
+    let counter = 0;
+    $.each(all_check_items, function(index, value) {
+        if ($(value).hasClass('step_select_active')) {
+            counter++;
+        } else {
+            let error_text = $(value).attr('data-error');
+            $('.sumbit_content_error').text(error_text);
+            return false;
+        }
+        if (counter == all_count) {
+            console.log("все ок");
+            $('.sumbit_content_error').text('');
+            $('.submit_wrapper').removeClass('submit_wrapper_error');
+        } else {
+            $('.submit_wrapper').addClass('submit_wrapper_error');
+        }
+    });
+}
 
 
 $('.step_date_prof').on('click', add_clockwork);
@@ -689,10 +830,15 @@ $('.step_access_btn').on('click', function() {
     let current_sum = current_cost / duration;
     let sum = current_sum * current_clock;
 
-
+    $('.advocate_select_time').find('.step_select').addClass('step_select_active');
     $('.current_clock_num').text(transform_clock(current_clock));
     $('.all_price_consultation').attr('data-price', sum);
-    counter_num('.all_price_consultation', 1000, sum);
+    
+
+
+      $('.all_price_consultation').text(sum);
+    // counter_num('.all_price_consultation', 1000, sum);
+    check_user_valid();
 })
 
 // className - імя класа
@@ -766,7 +912,14 @@ if ($('.step_date__block').length == 1) {
 
 
 
+$('.advocate_user_clock').on('click', function() {
+    let wrap = $(this).parents('.advocate_user_clock__block');
+    $(wrap).find('.advocate_step_hidden_content').toggleClass('step_hidden_content_active');
+});
 
+$('.reserve_btn').on('click', function() {
+    $('.reserve_hidden_content').toggleClass('reserve_hidden_content_active');
+});
 
 
 $('.step_select_radio').on('click', function() {
@@ -777,10 +930,9 @@ $('.step_select_radio').on('click', function() {
     if ($(this).hasClass('step_select_text_active')) {
         let current_practise = $(wrap).find('.step_active_content__block').find('.step_active_content');
         $.each(current_practise, function(index, value) {
-            console.log('text: ', text);
+                console.log('text: ', text);
                 console.log('$(value).text: ', $(value).text());
             if ($(value).text() == text) {
-                
                 $(value).remove();
             }
         });

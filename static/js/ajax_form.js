@@ -429,7 +429,9 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                 $.fancybox.close({
                     src: '#modal-form_relog',
                 });
-                   
+
+
+                let Formdata = new FormData();
                  var form_input = $(form).serializeArray();
                  var url_form = form.action;
                  var form_json = {};
@@ -438,19 +440,33 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                  });
 
 
-
-                    console.log('test!!!');
-                    console.log('id_form', $(id_form));
-
                     if ($(id_form).hasClass('new_form')) {
                         // форма з файлами!!! ========================>
-                        let file_logo__life2 = form.querySelectorAll('#last_hidden_file')[0];
-                        let Formdata = new FormData()
-                        if (file_logo__life != undefined) {
-                          if (file_logo__life.files[0] !== undefined) { 
-                            Formdata.append('logo', file_logo__life.files[0])
+                        let user_files = form.querySelectorAll('#input_user_file')[0];
+
+                        console.log('user_files: ', user_files);
+                        if (user_files != undefined) {
+                          if (user_files.files[0] !== undefined) { 
+                              $.each(user_files.files, function(index, value) {
+                                Formdata.append('file', value);
+                              });
                           }
                         }
+                        let user_practise = $('.pract_step_select').find('.step_active_content').text();
+                        let user_advocate = $('.advoc_step_select').find('.step_active_content').text();
+                        let user_date = $('.advocate_user_date').text();
+                        let user_clock = $('.clock_manager').attr('data-clock');
+                        let user_price = $('.all_price_consultation').attr('data-price');
+
+                        let object = {
+                            practise: user_practise,
+                            advocate: user_advocate,
+                            date: user_date,
+                            clock: user_clock,
+                            price: user_price
+                        }
+                           
+                        Formdata.append('data', JSON.stringify(object));
 
 
 
@@ -459,7 +475,7 @@ function valide_form(id_form, error_inp_wrap, check_request) {
                     
                             fetch(url_form, {
                               method: 'POST',
-                              body: new URLSearchParams($.param(form_json))
+                              body: Formdata
                             })
                             .then(data => {
         
