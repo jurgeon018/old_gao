@@ -361,9 +361,10 @@ $('#team__link').on("click", function() {
 
 
 
+    // $("#phone").mask("+38 (099) 99 - 99 - 999");
+    $('#phone').mask("+38(099) 99 99 999");
 
-
-    $("#phone").mask("+38 (099) 99 - 99 - 999");
+    $(".reserve_input_date").mask("99_99_2099");
 
 
 
