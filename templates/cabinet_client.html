@@ -59,7 +59,6 @@
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="main_doc_content main_doc_content_active">
 									<form action="/test/" class="new_form user_order_of_advocate">
-										<input type="text" name="username">
 										<div class="step_title standart_title standart_title_4 color_black">
 											<span class="step_text color_gold">
 												Крок 1.
@@ -68,7 +67,7 @@
 											 юреспруденції та адвоката, котрий надаватиме Вам консультацію.
 										</div>
 										<div class="step_select__block">
-											<div class="step_select">
+											<div data-error='виберіть галузь' class="pract_step_select step_select">
 												<div class="step_select_title standart_title standart_title_4 color_black">
 													виберіть галузь
 												</div>
@@ -105,7 +104,7 @@
 												<div class="step_active_content standart_title standart_title_4 color_gold">
 													Судова практика
 												</div>
-												<div class="step_hidden_content">
+												<div class="practise_step_hidden_content step_hidden_content">
 													<div data-title='Практика земельних правовідносин' class="step_select_text standart_title standart_title_2 color_black">
 														Практика земельних правовідносин
 													</div>
@@ -123,7 +122,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="step_select">
+											<div data-error='виберіть адвоката' class="advoc_step_select step_select">
 												<div class="step_select_title standart_title standart_title_4 color_black">
 													виберіть адвоката
 												</div>
@@ -157,9 +156,9 @@
 													</div>
 												</div>
 												<div class="step_active_content standart_title standart_title_4 color_gold">
-													Судова практика
+													Адвокат1
 												</div>
-												<div class="step_hidden_content">
+												<div class="client_select_step_hidden_content step_hidden_content">
 													<div data-title='Практика земельних правовідносин' class="step_select_text standart_title standart_title_2 color_black">
 														Практика земельних правовідносин
 													</div>
@@ -246,7 +245,7 @@
 														<img src="/static/img/profile/5.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
+														<span class="clock_manager" data-clock='9.00, 10.00, 11.00'>з 09.00 по 11.00.</span>
 														<span>консультація -  <span class="current_clock_num">0</span> год.</span>
 													</div>
 													<div class="advocate_user_settings">
@@ -283,13 +282,16 @@
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
 														<span>Вартість консультації:</span>
-														<span class="all_price_consultation color_gold" data-advocate-cost='500' data-price='0'>0 грн</span>
+														<span class="span_sum__block">
+															<span class="odometer all_price_consultation color_gold" data-advocate_duration_cost='30' data-advocate-cost='500' data-price='0'>0</span>
+															<span class="color_gold"> грн</span>
+														</span>
 													</div>
 													
 												</div>
 											</div>
 											<div class="advocate_select_date">
-												<div class="date_btn__block step_select">
+												<div data-error='виберіть дату' class="date_btn__block step_select">
 													<div class="step_select_title standart_title standart_title_4 color_black">
 														виберіть дату
 													</div>
@@ -328,7 +330,7 @@
 												</div>
 											</div>
 											<div class="advocate_select_time">
-												<div class="date_btn__block step_select">
+												<div data-error='виберіть час' class="date_btn__block step_select">
 													<div class="step_select_title standart_title standart_title_4 color_black">
 														виберіть час
 													</div>
@@ -364,25 +366,9 @@
 													<div class="step_hidden_content">
 														<div class="step_date__block">
 															<div class="step_date_scroll__wrap custom-scrollbar">
-																<div class="step_date__wrap custom-scrollbar__inner">
-																	<div data-clock='9.00' class="button_transparent step_date_prof">
-																		9.00
-																	</div>
-																	<div data-clock='9.00' class="button_transparent step_date_prof">
-																		9.00
-																	</div>
-																	<div data-clock='9.00' class="button_transparent step_date_prof">
-																		9.00
-																	</div>
-																	<div data-clock='9.00' class="button_transparent step_date_prof step_date_prof_passive">
-																		9.00
-																	</div>
-																	<div data-clock='9.00' class="button_transparent step_date_prof">
-																		9.00
-																	</div>
-																	<div data-clock='9.00' class="button_transparent step_date_prof">
-																		9.00
-																	</div>
+																<!-- data-transition='30' тут має виводитись яка тривалість консультації -->
+																<div data-transition='30' class="step_date__wrap custom-scrollbar__inner">
+																	
 																</div>
 	
 																<div class="custom-scrollbar__bar">
@@ -397,7 +383,7 @@
 																</div>
 																<div class="step_access__wrap">
 																	<div class="step_access standart_title standart_title_3 color_black">
-																		0.00
+																		
 																	</div>
 																	<div class="step_access_btn">
 																		<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
@@ -457,43 +443,65 @@
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява1.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява2.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява3.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява1.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява2.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява3.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
 											</div>
 											<div class="advocate_download_prof">
 												<div class="advocate_download_name main_title main_title_4 color_gold">
 													Заява3.pdf
 												</div>
-												<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												<span class='advocate_download_close'>
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+												</span>
+											</div>
+										</div>
+										<div class="new_files_users__block">
+											<div class="new_files_info standart_title standart_title_4 color_black">
+												
+											</div>
+											<div class="new_files_users">
+
 											</div>
 										</div>
 										<div class="input_file__block">
@@ -502,8 +510,12 @@
 											</label>
 											<input class="input_user_file" multiple id="input_user_file" type="file">
 										</div>
-										<div class="submit_wrapper">
+										
+										<div class="submit_wrapper submit_wrapper_error">
 											<input value="Підтвердити" class="submit_user_order button_transparent" type="submit" class="">
+										</div>
+										<div class="sumbit_content_error standart_title standart_title_4 color_green">
+
 										</div>
 									</form>
 								</div>
@@ -978,6 +990,7 @@
 {% block footer_static%}
 		{% include 'includes/footer_static.html' %}
 		<script defer src="/static/js/datepicker.js" type="text/javascript"></script>
+		<script defer src="/static/js/odometer.min.js" type="text/javascript"></script>
 		<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
 		
 {% endblock footer_static%}

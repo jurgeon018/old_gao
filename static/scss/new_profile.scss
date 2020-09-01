@@ -210,6 +210,96 @@
     transition: all .2s;
 }
 
+
+.odometer.odometer-auto-theme, .odometer.odometer-theme-default {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    position: relative;
+  }
+  .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-default .odometer-digit {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    position: relative;
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-digit-spacer, .odometer.odometer-theme-default .odometer-digit .odometer-digit-spacer {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    visibility: hidden;
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-digit-inner, .odometer.odometer-theme-default .odometer-digit .odometer-digit-inner {
+    // text-align: left;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-ribbon, .odometer.odometer-theme-default .odometer-digit .odometer-ribbon {
+    display: block;
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-ribbon-inner, .odometer.odometer-theme-default .odometer-digit .odometer-ribbon-inner {
+    display: block;
+    -webkit-backface-visibility: hidden;
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-value, .odometer.odometer-theme-default .odometer-digit .odometer-value {
+    display: block;
+    -webkit-transform: translateZ(0);
+  }
+  .odometer.odometer-auto-theme .odometer-digit .odometer-value.odometer-last-value, .odometer.odometer-theme-default .odometer-digit .odometer-value.odometer-last-value {
+    position: absolute;
+  }
+  .odometer.odometer-auto-theme.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-up .odometer-ribbon-inner {
+    -webkit-transition: -webkit-transform 2s;
+    -moz-transition: -moz-transform 2s;
+    -ms-transition: -ms-transform 2s;
+    -o-transition: -o-transform 2s;
+    transition: transform 2s;
+  }
+  .odometer.odometer-auto-theme.odometer-animating-up.odometer-animating .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-up.odometer-animating .odometer-ribbon-inner {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+  .odometer.odometer-auto-theme.odometer-animating-down .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-down .odometer-ribbon-inner {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+  .odometer.odometer-auto-theme.odometer-animating-down.odometer-animating .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+    -webkit-transition: -webkit-transform 2s;
+    -moz-transition: -moz-transform 2s;
+    -ms-transition: -ms-transform 2s;
+    -o-transition: -o-transform 2s;
+    transition: transform 2s;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+  
+  .odometer.odometer-auto-theme .odometer-value, .odometer.odometer-theme-default .odometer-value {
+    text-align: center;
+  }
+
+  
+
+  
 .step_active_content {
     transition: all .2s;
     position: relative;
@@ -486,15 +576,25 @@
     top: 0;
     left: 0;
 }
+.submit_user_order {
+    background: transparent;
+}
 .submit_wrapper {
     justify-content: center;
     display: flex;
     cursor: pointer;
+    
+    &_error {
+        .submit_user_order {
+            pointer-events: none;
+        }
+    }
 }
-.submit_user_order {
-    // pointer-events: none;
-    background: transparent;
+.sumbit_content_error {
+    text-align: center;
+    margin-top: 15px;
 }
+
 
 .consultation {
     &_title {
@@ -740,7 +840,7 @@
   .custom-scrollbar {
     position: relative;
     overflow: hidden;
-    height: 150px;
+    height: 169px;
   }
   .custom-scrollbar__inner {
     height: 100%;
@@ -802,6 +902,7 @@
         border-radius: 20px;
         border: 1px solid #D2A351;
         padding: 25px 40px;
+        height: fit-content;
         margin-right: 50px;
         .consultation_section {
             width: 100%;
@@ -911,6 +1012,20 @@
         color: #727271;
         border: none;
         padding: 5px;
+    }
+    transition: all .2s;
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0px;
+    top: -100px;
+
+    &_active {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        max-height: 1000px;
+        top: 0;
     }
 }
 .save_reserve_date_btn {
@@ -1162,6 +1277,12 @@
 
 .advocate_download_close {
     cursor: pointer;
+
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 
@@ -1219,6 +1340,35 @@
 }
 
 
+.new_files_users__block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    
+}
+
+.new_files_info {
+    margin-right: 20px;
+    width: 180px;
+}
+.new_files_users {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 200px);
+}
+.advocate_user_clock__block {
+    position: relative;
+}
+.advocate_step_hidden_content {
+    position: absolute !important;
+    top: 50px;
+    left: 50%;
+    background: #fff;
+    transform: translateX(-50%);
+    width: 160px;
+    border-radius: 20px;
+}
 
 
 
@@ -1233,11 +1383,22 @@
 
 
 
-
-
-
-
-
+@media (max-width: 1417px) {
+    .advocate_calender_info {
+        width: 300px;
+        padding: 25px 20px;
+        margin-right: 20px;
+    }
+    .grid_content {
+        font-size: 10px;
+    }
+    .advocate_calender__block {
+        width: calc(100% - 320px);
+    }
+    .advocate_slick_date_prof {
+        font-size: 11px;
+    }
+}
 @media (max-width: 1280px) {
     .advocate_select_profile__block {
         flex-direction: column;
@@ -1263,6 +1424,24 @@
     }
     .consultation_star__block p {
         margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 1170px) {
+    .advocate_calender_container {
+        flex-direction: column;
+    }
+    .advocate_calender_info {
+        width: 100%;
+        padding: 25px 20px;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .advocate_calender__block {
+        width: 100%;
+    }
+    .advocate_calender_navigate {
+        top: 0px;
     }
 }
 
@@ -1297,7 +1476,20 @@
         display: block;
     }
 }
+@media (max-width: 578px) {
+    .reserve_hidden_content {
+        padding: 15px 20px;
+    }    
+    .advocate_user_clock__block {
+        flex-direction: column;
+    }
+}
 @media (max-width: 492px) {
+    .new_files_users__block {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    
 
     .change__block {
         display: flex;
@@ -1346,6 +1538,37 @@
     }
     .step_date__block {
         width: 160px;
+    }
+}
+@media (max-width: 464px) {
+    .reserve_hidden_content .reserve_clock__block {
+        flex-direction: column;
+        
+    }
+    .reserve_comment__block {
+        flex-direction: column;
+    }
+    .reserve_contents {
+        width: 100%;
+        margin-top: 10px;
+
+    }
+    .advocate_user_clock__block {
+        flex-direction: column;
+        align-items: end;
+        margin-top: 20px;
+    }
+    .reserve_hidden_content .reserve_date__block {
+        flex-direction: column;
+        align-items: end;
+    }
+}
+@media (max-width: 401px) {
+    .grid_content {
+        font-size: 8px;
+    }
+    .advocate_slick_date_prof {
+        font-size: 8px;
     }
 }
 @media (max-width: 388px) {
