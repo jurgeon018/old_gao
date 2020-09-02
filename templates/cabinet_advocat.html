@@ -20,15 +20,15 @@
 					</div>
 				</div>
 				<div class="user_name midle_title midle_title_3 color_gold">
-					Бурега Назар Васильович
+					{{ user.full_name}}
 				</div>
 				<div class="user_type standart_title standart_title_4 color_black">
-					клієнт
+					Адвокат
 				</div>
 				<div class="all-tab-wrap">
 					<div class="auto-tab-link-block">
 						<div data-tab="tab_33" class="button_transparent main_tab__link">
-							Мох консультації
+							Мої консультації
 						</div>
 						<div data-tab="tab_11" class="button_transparent main_tab__link main_tab__link_active">
 							Особисті дані
@@ -573,7 +573,9 @@
 										<div class="user-data-type">
 										</div>
 										<div class="user-data-name">
-											{{request.user.first_name}}
+										{% if user.first_name %}
+											{{ user.first_name }}
+										{% endif %}
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -581,7 +583,9 @@
 											Ім'я
 										</div>
 										<div class="user-data-name">
-											{{request.user.username}}
+										{% if user.username %}
+											{{ user.username }}
+										{% endif %}
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -589,7 +593,9 @@
 											Електронна пошта
 										</div>
 										<div class="user-data-name">
-											{{request.user.email}}
+										{% if user.email %}
+											{{ user.email }}
+										{% endif %}
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -597,7 +603,9 @@
 											Номер телефону
 										</div>
 										<div class="user-data-name">
-											{{request.user.phone_number}}
+										{% if user.phone_number %}
+											{{ user.phone_number }}
+										{% endif %}
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -605,7 +613,9 @@
 											Стать 
 										</div>
 										<div class="user-data-name">
-											13.09.1989
+										{% if user.sex %}
+											{{ user.sex }}
+										{% endif %}
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -613,15 +623,9 @@
 											Дата народження
 										</div>
 										<div class="user-data-name">
-											Чоловіча
-										</div>
-									</div>
-									<div class="user-data-prof">
-										<div class="user-data-type">
-											22.**.19**
-										</div>
-										<div class="user-data-name">
-											Slavko
+										{% if user.birth_date %}
+											{{ user.birth_date }}
+										{% endif %}
 										</div>
 									</div>
 								</div>
@@ -630,32 +634,15 @@
 										Практики
 									</div>
 									<div class="advocate_practise_content__block">
+									{% for faculty in user.faculties.all %}
 										<div class="advocate_download_prof">
 											<div class="advocate_download_name main_title main_title_4 color_gold">
-												Земельне право
+												{{ faculty.name }}
 											</div>
 											<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
 										</div>
-										<div class="advocate_download_prof">
-											<div class="advocate_download_name main_title main_title_4 color_gold">
-												Земельне право
-											</div>
-											<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
-										</div>
-										<div class="advocate_download_prof">
-											<div class="advocate_download_name main_title main_title_4 color_gold">
-												Земельне право
-											</div>
-											<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
-										</div>
-										<div class="advocate_download_prof">
-											<div class="advocate_download_name main_title main_title_4 color_gold">
-												Земельне право
-											</div>
-											<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
-										</div>
+									{% endfor %}
 									</div>
-									
 								</div>
 								<div class="user-data-prof">
 									<div class="user-data-type">
@@ -741,7 +728,7 @@
 							<div class="main_doc_content__block">
 								<div id="profile_1" class="main_doc_content main_doc_content_active">
 									<div class="doc-block">
-										{% for document in request.user.documents.all%}
+										{% for document in user.documents.all%}
 										<div class="doc-profile">
 											<div class="doc-top">
 												<div class="doc-img-wrap">

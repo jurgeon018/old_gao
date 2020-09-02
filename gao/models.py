@@ -55,8 +55,8 @@ class WorkingDay(models.Model):
         on_delete=models.SET_NULL, blank=True, null=True
     )
     date      = models.DateField(verbose_name="День")
-    time_from = models.DateField(verbose_name="Час від")
-    time_to   = models.DateField(verbose_name="Час до")
+    time_from = models.TimeField(verbose_name="Працює з")
+    time_to   = models.TimeField(verbose_name="Працює до")
 
     def  __str__(self):
         return f'{self.date}: {self.time_from} - {self.time_to}'
@@ -73,6 +73,9 @@ class User(AbstractUser, DaysMixin):
     (CLIENT_ROLE, "client"),
     (ADVOCAT_ROLE, "advocat"),
   ]
+  full_name    = models.CharField(verbose_name="Повне ім'я", max_length=150, blank=False, null=False)
+  birth_date   = models.DateField(verbose_name="Дата народження", blank=True, null=True)
+  sex          = models.CharField(verbose_name="Стать", max_length=50, blank=True, null=True)
   phone_number = models.CharField(verbose_name="Номер телефону", max_length=255, blank=True, null=True)
   role         = models.CharField(verbose_name="Роль", choices=USER_ROLES, default=CLIENT_ROLE, max_length=255)
   rate         = models.FloatField(verbose_name="Ціна за годину консультації", default=0)
@@ -87,7 +90,7 @@ class User(AbstractUser, DaysMixin):
     return free_dates
 
   def date_is_free(self):
-    is_free = ... 
+    is_free = ...
     return is_free
 
   def get_working_days(self):

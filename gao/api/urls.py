@@ -6,6 +6,8 @@ from .views import *
 urlpatterns = [
     path("users/", UserListView.as_view()),
     path("users/<pk>/", UserDetailView.as_view()),
+    path("users/<faculty>/", AdvocateListView.as_view()),
+    path("users_date/", advocat_busy_days),
 
     path("consultations/", ConsultationListView.as_view()),
     path("consultations/<pk>/", ConsultationDetailView.as_view()),

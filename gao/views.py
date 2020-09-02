@@ -51,7 +51,6 @@ def cabinet(request, role):
     user = request.user
     faculties = Faculty.objects.all()
     advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
-    print(advocats)
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
     if role == 'advocat':

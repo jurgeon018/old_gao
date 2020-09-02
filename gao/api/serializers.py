@@ -4,13 +4,18 @@ from ..models import *
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
-        exclude = []
+        exclude = ['password', 'groups', 'user_permissions', ]
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
-        exclude = []
+        exclude = ['password', 'groups', 'user_permissions', ]
+        
+class AdvocateListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ['password', 'groups', 'user_permissions',]
 
 
 class ConsultationListSerializer(serializers.ModelSerializer):

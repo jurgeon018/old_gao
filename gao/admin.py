@@ -329,5 +329,7 @@ class CustomUserAdmin(UserAdmin):
 class CustomGroup(GroupAdmin):
     exclude = []
 
-
-
+@admin.register(WorkingDay)
+class WorkingDayAdmin(admin.ModelAdmin):
+		exclude = []
+    
