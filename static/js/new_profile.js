@@ -393,8 +393,12 @@ let test_advocate = [
         id: [5]
     },
 ]
-create_all_doc_for_client('.practise_step_hidden_content', test_practise);
-create_all_doc_for_client('.client_select_step_hidden_content', test_advocate);
+
+if ($('.practise_step_hidden_content').length >= 1) {
+    create_all_doc_for_client('.practise_step_hidden_content', test_practise);
+    create_all_doc_for_client('.client_select_step_hidden_content', test_advocate);
+}
+
    
 function create_all_doc_for_client(wrap, json) {
     console.log('json: ', json);
@@ -755,6 +759,7 @@ $('.step_change_btn').on('click', function() {
 });
 
 $(".main_doc_link").on("click", function(){
+    console.log(123);
     let wrap = $(this).parents('.tab-auto-content-prof');
     $(wrap).find(".main_doc_link").removeClass("main_doc_link_active");
      $(this).addClass("main_doc_link_active");
