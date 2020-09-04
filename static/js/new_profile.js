@@ -3,7 +3,7 @@
 
 
 
-
+console.log('olexiy');
 
 
 
@@ -486,7 +486,6 @@ $('.docs_title_btn').on('click', function() {
     let wrap = $(this).parents('.docs__wrap');
     $(wrap).toggleClass('docs__wrap_active');
 });
-
 
 if ($('.advocate_user_input__block').length >= 1) {
     var datepicker = $('#datapicker_user').datepicker().data('datepicker');
