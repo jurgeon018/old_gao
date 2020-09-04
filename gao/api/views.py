@@ -107,7 +107,7 @@ class AdvocateListView(generics.ListCreateAPIView):
             queryset = queryset.filter(faculties__id__in=[faculty])
         return queryset
 
-
+# BO API
 def advocat_busy_days(request):
     advocat_id = request.GET.get('advocat_id')
     month = request.GET.get('month')
@@ -138,6 +138,30 @@ def advocat_busy_days(request):
             continue
         else:
             days_available.append(day.strftime('%d-%B-%Y'))
-
     return JsonResponse({"OK": days_available})
 
+def delete_advocate_faculty(request):
+    data = request.data
+    advocat_id  = data.get("advocat_id")
+    faculty_id  = data.get("faculty_id")
+    advocat = User.objects.get(id=advocat_id)
+    faculty = Faculty.objects.get(id=faculty_id)
+    advocat.faculties.Remove(faculty)
+    return JsonResponse({"OK": "OK"})
+
+def add_advocate_faculty(request):
+    data = request.data
+    advocat_id  = data.get("advocat_id")
+    faculty_id  = data.get("faculty_id")
+    advocat = User.objects.get(id=advocat_id)
+    faculty = Faculty.objects.get(id=faculty_id)
+    advocat.faculties.add(faculty)
+    return JsonResponse({"OK": "OK"})
+
+def add_advocate_document(request):
+    data = request.data
+    file = request.Files['file']
+    advocat_id  = data.get("advocat_id")
+    advocat = User.objects.get(id=advocat_id)
+    documents = Document.objects.create(user=advocat, file=file)
+    return JsonResponse({"OK": "OK"})

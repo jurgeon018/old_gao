@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.utils import timezone 
+import datetime
 from django.contrib.auth.models import User, AbstractBaseUser,AbstractUser
 
 from tinymce.models import HTMLField
@@ -102,7 +103,10 @@ class User(AbstractUser, DaysMixin):
     elif self.role == CLIENT_ROLE:
       consultations =  Consultation.objects.filter(client=self)
     return consultations
-  
+
+  def get_client_consultations(self):
+    return Consultation.objects.filter(client=self)
+
   def __str__(self):
     return f"{self.first_name} {self.last_name} ({self.username}, {self.phone_number}, {self.email})"
   
@@ -139,6 +143,7 @@ class Consultation(TimestampMixin):
     # status    = models.ForeignKey(verbose_name="Статус", to="gao.Status", on_delete=models.SET_NULL, null=True, blank=True)
     # format    = models.ForeignKey(verbose_name="Формат", to="gao.Format", on_delete=models.SET_NULL, null=True, blank=True)
     date      = models.DateField(verbose_name="Дата")
+    faculties = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True, related_name="consulations")
     comment   = models.TextField(verbose_name="Коментар", blank=True, null=True)
     mark      = models.SmallIntegerField(verbose_name="Оцінка", blank=True, null=True)
     advocat   = models.ForeignKey(
@@ -164,16 +169,43 @@ class Consultation(TimestampMixin):
 
     @property
     def time(self):
-        # time = time_to - time_from
         time = 0
-        for c_time in self.times:
-            time 
-        return time 
+        if self.times.first().time_to and self.times.first().time_from :
+            minutes = int(self.times.first().time_to.strftime('%M')) + int(self.times.first().time_from.strftime('%M'))
+            hours = (int(self.times.first().time_to.strftime('%H')) - int(self.times.first().time_from.strftime("%H")))
+            if minutes > 0:
+                hours -= 1
+            if minutes > 60:
+                hours += 1
+                minutes -= 60
+            time = 60 - minutes + (hours * 60)
+        return time
+    
+    @property
+    def full_time(self):
+        time = 0
+        if self.times.first().time_to and self.times.first().time_from :
+            minutes = 60 - (int(self.times.first().time_to.strftime('%M')) + int(self.times.first().time_from.strftime('%M')))
+            hours = (int(self.times.first().time_to.strftime('%H')) - int(self.times.first().time_from.strftime("%H")))
+            if minutes > 0:
+                hours -= 1
+            if minutes > 60:
+                hours += 1
+                minutes -= 60
+            time = f"{hours} год. {minutes} хв."
+        return time
     
     @property
     def price(self):
-        price = self.advocat.rate * self.time
-        return price
+        time = self.time
+        hours = time // 60
+        minutes = (time % 60) / 60
+        price = (self.advocat.rate * hours) + (self.advocat.rate * minutes)
+        return int(price)
+    
+    def get_files_by_user(self):
+        consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
+        return
     
     class Meta:
         verbose_name = 'Консультація'
@@ -187,9 +219,6 @@ class ConsultationTime(models.Model):
     consultation = models.ForeignKey(verbose_name="Консультація", to="gao.Consultation", on_delete=models.CASCADE)
     time_from = models.TimeField(verbose_name="Час від")
     time_to   = models.TimeField(verbose_name="Час до")
-
-    def __str__(self):
-        return f'{self.time}'
 
     class Meta:
         verbose_name = "Година консультації"
