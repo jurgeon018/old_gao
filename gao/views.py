@@ -55,7 +55,7 @@ def cabinet(request, role):
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
     if role == 'advocat':
-        consultations = consultations.filter(advocat=user)
+        consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
         finished_consultations = consultations.filter(status=Consultation.FINISHED)
     elif role == 'client':
