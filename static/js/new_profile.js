@@ -482,19 +482,21 @@ function click_select_item() {
 
 
 
-
-
-
-
-
-
 $('.docs_title_btn').on('click', function() {
     let wrap = $(this).parents('.docs__wrap');
     $(wrap).toggleClass('docs__wrap_active');
 });
 
 
-
+if ($('.advocate_user_input__block').length >= 1) {
+    var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        datepicker.destroy();
+        var weekenddDays = [0, 6];
+        var reserve = ["20-August-2020", "21-August-2020"];
+        var busy = ["25-August-2020", "27-August-2020"];
+        var months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
+        create_client_calender(weekenddDays, reserve, busy, months_items);
+}
 
 function create_clockwork_client(content) {
     let step_date_prof = document.createElement('div');
@@ -618,8 +620,6 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
      });
 }
  
- var datepicker = $('#datapicker_user').datepicker().data('datepicker');
- datepicker.destroy();
  
 
 $('.data_step_select_btn').on('click', function() {
