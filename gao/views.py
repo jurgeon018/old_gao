@@ -48,17 +48,18 @@ def profile(request):
 
 @login_required
 def cabinet(request, role):
+    users = User.objects.filter(role=User.CLIENT_ROLE)
     user = request.user
     faculties = Faculty.objects.all()
     advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
     if role == 'advocat':
-        consultations = Consultation.objects.filter(advocat=user)
+        consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
         finished_consultations = consultations.filter(status=Consultation.FINISHED)
     elif role == 'client':
-        consultations = Consultation.objects.filter(client=user)
+        consultations = consultations.filter(client=user)
         advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
         finished_consultations = consultations.filter(status=Consultation.FINISHED)
     return render(request, f'cabinet_{role}.html', locals())
@@ -142,7 +143,7 @@ def update_profile(request):
     phone_number = query.get('phone_number') 
 
     user              = request.user
-    user.first_name         = first_name 
+    user.first_name   = first_name 
     user.email        = email 
     user.phone_number = phone_number
     user.save()

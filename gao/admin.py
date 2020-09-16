@@ -26,9 +26,25 @@ from .resources import *
 from .models import *
 
 
+
+class ConsultationDocumentInline(admin.StackedInline):
+    extra = 0
+    model = ConsultationDocument
+    classes = ['collapse']
+
+class ConsultationTimeInline(admin.StackedInline):
+    extra = 0
+    model = ConsultationTime
+    classes = ['collapse']
+
 @admin.register(Consultation)
 class ConsultationAdmin(ImportExportModelAdmin):
     resource_class = ConsultationResource
+    inlines = [
+        ConsultationDocumentInline,
+        ConsultationTimeInline
+    ]
+    
 
 
 @admin.register(ConsultationDocument)
@@ -152,8 +168,12 @@ class CustomUserAdmin(UserAdmin):
             'fields': (
                 'first_name', 
                 'last_name', 
+                'full_name',
+                'role',
                 'email',
-                # 'phone_number',
+                'phone_number',
+                'birth_date',
+                'sex',
             )
         }),
         (None, {
@@ -248,8 +268,13 @@ class CustomUserAdmin(UserAdmin):
             'fields': (
                 'first_name', 
                 'last_name', 
+                'full_name',
+                'role',
+                'faculties',
                 'email',
                 'phone_number',
+                'birth_date',
+                'sex',
             )
         }),
         (None, {
@@ -301,6 +326,7 @@ class CustomUserAdmin(UserAdmin):
     save_as_continue = False 
     save_on_top = True 
 
+    filter_horizontal = ["faculties"]
     list_display = (
         'id', 
         'username',
