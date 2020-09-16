@@ -73,6 +73,57 @@ class User(AbstractUser, DaysMixin):
     verbose_name_plural = ('Користувачі')
 
 
+class WeekDay(models.Model):
+    NAME_CHOICES = [
+        ["Понеділок","Понеділок"],
+        ["Вівторок","Вівторок"],
+        ["Середа","Середа"],
+        ["Четвер","Четвер"],
+        ["Пятниця","Пятниця"],
+        ["Субота","Субота"],
+        ["Неділя","Неділя"],
+    ]
+    mon = 1
+    tue = 2
+    wed = 3
+    thu = 4
+    fri = 5
+    sat = 6
+    sun = 7
+    SLUG_CHOICES = [
+        [mon, "mon"],
+        [tue, "tue"],
+        [wed, "wed"],
+        [thu, "thu"],
+        [fri, "fri"],
+        [sat, "sat"],
+        [sun, "sun"],
+    ]
+    name       = models.CharField(verbose_name="Назва", max_length=255, unique=True, choices=NAME_CHOICES)
+    code       = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=SLUG_CHOICES)
+
+    def __str__(self):
+        return f'{self.name}, {self.code}'
+
+    class Meta:
+        unique_together     = ['name','code']
+        verbose_name        = "День тижня"
+        verbose_name_plural = "Дні тижня"
+
+
+class UserWeekDay(models.Model):
+    week_day   = models.ForeignKey(verbose_name="День тижня", to="gao.WeekDay", on_delete=models.CASCADE)
+    user       = models.ForeignKey(verbose_name="Користувачі", to="gao.User", on_delete=models.CASCADE)
+    is_working = models.BooleanField(verbose_name="Робочий?", default=True)
+
+    def __str__(self):
+        return f'{self.id}'
+
+    class Meta:
+        verbose_name = "День тижня адвоката"
+        verbose_name_plural = "Дні тижня адвоката"
+
+
 class WorkingDay(models.Model):
     advocat   = models.ForeignKey(
         verbose_name="Адвокат", to="gao.User",
@@ -127,10 +178,10 @@ class Consultation(TimestampMixin):
         (MOBILE, "MOBILE"),
     ]
     format    = models.CharField(
-      verbose_name="Формат", null=True, blank=True, choices=FORMATS, default=SKYPE, max_length=255,
+      verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
     )
     status    = models.CharField(
-      verbose_name="Статус", null=True, blank=True, choices=STATUSES, default=STATUS1, max_length=255,
+      verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=STATUS1, max_length=255,
     )
     # status    = models.ForeignKey(
     # verbose_name="Статус", to="gao.Status", on_delete=models.SET_NULL, null=True, blank=True,
@@ -145,10 +196,10 @@ class Consultation(TimestampMixin):
       verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
       on_delete=models.SET_NULL, related_name="consulations",
     )
-    time_from = models.DateTimeField(
+    time_from = models.TimeField(
       verbose_name="Час початку",
     )
-    time_to = models.DateTimeField(
+    time_to = models.TimeField(
       verbose_name="Час завершення",
     )
     comment   = models.TextField(
@@ -163,10 +214,11 @@ class Consultation(TimestampMixin):
         on_delete=models.CASCADE, blank=False, null=False,
     )
     client    = models.ForeignKey(
-        verbose_name="Клієнт", to="gao.User", 
+        verbose_name="Клієнт", to="gao.User",
         related_name="client_consultations",
         on_delete=models.SET_NULL, blank=True, null=True,
     )
+
     @property 
     def times(self):
         times = ConsultationTime.objects.filter(consultation=self)

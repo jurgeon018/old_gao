@@ -1,5 +1,6 @@
 from django.urls import path, include 
 from .views import * 
+from .generics import * 
 
 
 
@@ -9,10 +10,8 @@ urlpatterns = [
     path("users/<faculty>/", AdvocateListView.as_view()),
     # BO MY
     path("users_date/", advocat_busy_days),
-    path("user_create_consultation/", user_create_consultation),
 
-    path("delete_advocate_faculty/", delete_advocate_faculty),
-    path("add_advocate_faculty/", add_advocate_faculty),
+    path("set_advocate_faculties/", set_advocate_faculties),
     path("add_advocate_document/", add_advocate_document),
 
     path("consultations/", ConsultationListView.as_view()),

@@ -11,7 +11,7 @@ class Command(BaseCommand):
         for i in range(100):
             advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
             clients  = User.objects.filter(role=User.CLIENT_ROLE)
-
+            
             formats  = Consultation.FORMATS
             statuses = Consultation.STATUSES
 

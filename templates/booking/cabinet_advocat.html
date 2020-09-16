@@ -67,7 +67,7 @@
 
 
 
-							{% comment %} // календар {% endcomment %}
+							<!-- календар -->
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="advocate_calender_container main_doc_content main_doc_content_active">
 									<div class="advocate_calender_info">
@@ -126,13 +126,13 @@
                                                 <div class="advocate_user_img">
                                                     <img src="/static/img/profile/5.svg" alt="">
                                                 </div>
-												<div class="advocate_calender_select">
-													<select style="width: 100%;" class="communicate_select" name="status">
-														<option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Skype">Skype</option>
-														<option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" selected='selected' value="GoogleMeet">GoogleMeet</option>
-														<option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Paint">Paint</option>
-													</select>
-											   </div>
+                                            <div class="advocate_calender_select">
+                                              <select style="width: 100%;" class="communicate_select" name="status">
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Skype">Skype</option>
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" selected='selected' value="GoogleMeet">GoogleMeet</option>
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Paint">Paint</option>
+                                              </select>
+                                            </div>
                                             </div>
                                             <div class="advocate_user_item__block">
                                                 <div class="advocate_user_img">
@@ -189,87 +189,19 @@
 											</div>
 											{% endfor %}
 										</div>
-                                        <div class="advocate_calender_time__block">
-                                            <div data-clock='9' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        09.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='10' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        10.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='11' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        11.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='12' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        12.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='13' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        13.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='14' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        14.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='15' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        15.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='16' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        16.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='17' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        17.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='18' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        18.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-clock='19' class="adv_cal_time">
-                                                <div class="grid_inner">
-                                                    <div class="grid_content">
-                                                        19.00
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="advocate_calender_item__block">
-                                           <!-- // тут генерується календар -->
+                      <div class="advocate_calender_time__block">
+                          {% for hour in hours_list %}
+                          <div data-clock='{{hour}}' class="adv_cal_time">
+                              <div class="grid_inner">
+                                  <div class="grid_content">
+                                      {{hour}}
+                                  </div>
+                              </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                      <div class="advocate_calender_item__block">
+                          <!-- // тут генерується календар -->
 										</div>
 										
 										<div class="reserve_btn button_transparent">
@@ -369,10 +301,10 @@
 
 
 
-								{% comment %} // мої консультації {% endcomment %}
+								<!-- мої консультації -->
 								<div id="profile_4" class="main_doc_content">
 									<div class="consultation__block">
-									{% comment %} // вивід із адмінки {% endcomment %}
+									<!-- вивід із адмінки -->
 									{% for consultation in consultations %}
 										<div class="consultation_prof">
 											<div class="consultation_section consultation_left">
@@ -473,7 +405,7 @@
 
 
 
-						{% comment %} // особисті дані {% endcomment %}
+						<!-- особисті дані -->
 						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
 							<div class="user_advocate__wrapper">
 								<div class="main_user_data">
@@ -627,7 +559,7 @@
 								</div>
 							</div>
 							<div class="main_doc_content__block">
-								{% comment %} // мої документи {% endcomment %}
+								<!-- мої документи -->
 								<div id="profile_1" class="main_doc_content main_doc_content_active">
 									<div class="doc-block">
 										{% for document in user.documents.all %}
@@ -667,7 +599,7 @@
 										<input type="file" multiple id="advocate_doc_add_btn" class="advocate_doc_add_btn">
 									</div>
 								</div>
-								{% comment %} // від клієнтів {% endcomment %}
+								<!-- від клієнтів -->
 								<div id="profile_2" class="main_doc_content">
 								{% for item in users %}
 								{% get_client_consultations item user as user_consultations %}
@@ -791,13 +723,11 @@
 			   </div>
 			</div>
 		</form>
-
 {% endblock content%}
 {% block footer_static%}
-		{% include 'includes/footer_static.html' %}
-		<script defer src="/static/js/datepicker.js" type="text/javascript"></script>
-		<script defer src="/static/js/slick.min.js" type="text/javascript"></script>
-		<script defer src="/static/js/select2.full.min.js" type="text/javascript"></script>
-		<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
-		
+{% include 'includes/footer_static.html' %}
+<script defer src="/static/js/datepicker.js" type="text/javascript"></script>
+<script defer src="/static/js/slick.min.js" type="text/javascript"></script>
+<script defer src="/static/js/select2.full.min.js" type="text/javascript"></script>
+<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
 {% endblock footer_static%}

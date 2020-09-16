@@ -1,5 +1,9 @@
-http://127.0.0.1:8000/cabinet/advocat/
-http://127.0.0.1:8000/cabinet/client/
+
+
+
+
+http://127.0.0.1:8000/cabinet/
+http://127.0.0.1:8000/cabinet/
 
 
 GET "/api/consultations/"
