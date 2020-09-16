@@ -32,17 +32,17 @@ class ConsultationDocumentInline(admin.StackedInline):
     model = ConsultationDocument
     classes = ['collapse']
 
-class ConsultationTimeInline(admin.StackedInline):
-    extra = 0
-    model = ConsultationTime
-    classes = ['collapse']
+# class ConsultationTimeInline(admin.StackedInline):
+#     extra = 0
+#     model = ConsultationTime
+#     classes = ['collapse']
 
 @admin.register(Consultation)
 class ConsultationAdmin(ImportExportModelAdmin):
     resource_class = ConsultationResource
     inlines = [
         ConsultationDocumentInline,
-        ConsultationTimeInline
+        # ConsultationTimeInline
     ]
     
 

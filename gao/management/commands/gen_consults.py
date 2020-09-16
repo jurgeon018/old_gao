@@ -18,21 +18,28 @@ class Command(BaseCommand):
             advocat  = random.choice(advocats)
             client   = random.choice(clients)
             format   = random.choice(formats)[0]
-            status   = random.choice(statuses)[0] 
+            status   = random.choice(statuses)[0]
+
             delta    = timedelta(
                 days    = random.randint(1, 60),
-                minutes = random.randint(1, 120),
-                seconds = random.randint(1, 60)
-                )
-            date_str = (datetime.now() + delta).strftime("%d/%m/%Y %H:%M:%S")
-            date     = datetime.strptime(date_str, "%d/%m/%Y %H:%M:%S")
-            
-            consult, created = Consultation.objects.get_or_create(
-                advocat = advocat,
-                client  = client,
-                date    = date,
-                format  = format,
-                status  = status,
+                hours   = random.randint(1, 2),
+                seconds = random.randint(1, 60),
             )
+            print("delta:", delta)
+            # time_to   = 
+            # time_from = 
+            date_str  = datetime.now() + delta
+            date_str  = date_str.strftime("%d/%m/%Y %H:%M:%S")
+            date      = datetime.strptime(date_str, "%d/%m/%Y %H:%M:%S")
+            
+            # consult, created = Consultation.objects.get_or_create(
+            #     advocat   = advocat,
+            #     client    = client,
+            #     date      = date,
+            #     # time_to   = time_to,
+            #     # time_from = time_from,
+            #     format    = format,
+            #     status    = status,
+            # )
         print('ok')
 

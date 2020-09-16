@@ -182,37 +182,12 @@
 												</svg>
 											</div>
 										</div>
-										<div class="advocate_slick_date__block">
-											<div data-day_id='1' class="advocate_slick_date_prof standart_title standart_title_4 color_black advocate_slick_date_prof_active">
-												Пн. 13.08.2020
+										<div class="advocate_slick_date__block">	
+											{% for date in dates %}
+											<div data-day_id='1' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
+												{{date}}
 											</div>
-											<div data-day_id='2' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Вт. 13.08.2020
-											</div>
-											<div data-day_id='3' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Ср. 13.08.2020
-											</div>
-											<div data-day_id='4' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Чт. 13.08.2020
-											</div>
-											<div data-day_id='5' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пт. 13.08.2020
-											</div>
-											<div data-day_id='6' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пн. 13.08.2020
-											</div>
-											<div data-day_id='7' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Вт. 13.08.2020
-											</div>
-											<div data-day_id='8' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Ср. 13.08.2020
-											</div>
-											<div data-day_id='9' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Чт. 13.08.2020
-											</div>
-											<div data-day_id='10' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пт. 13.08.2020
-											</div>
+											{% endfor %}
 										</div>
                                         <div class="advocate_calender_time__block">
                                             <div data-clock='9' class="adv_cal_time">
