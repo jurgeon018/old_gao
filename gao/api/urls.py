@@ -9,6 +9,7 @@ urlpatterns = [
     path("users/<faculty>/", AdvocateListView.as_view()),
     # BO MY
     path("users_date/", advocat_busy_days),
+    path("user_create_consultation/", user_create_consultation),
 
     path("delete_advocate_faculty/", delete_advocate_faculty),
     path("add_advocate_faculty/", add_advocate_faculty),

@@ -165,3 +165,12 @@ def add_advocate_document(request):
     advocat = User.objects.get(id=advocat_id)
     documents = Document.objects.create(user=advocat, file=file)
     return JsonResponse({"OK": "OK"})
+
+def user_create_consultation(request):
+    data = request.data
+    user = data.get('user')
+    faculty = data.get('faculty')
+    advocat = data.get('advocat')
+    date    = data.get('date')
+    
+    return

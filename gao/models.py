@@ -98,9 +98,9 @@ class User(AbstractUser, DaysMixin):
     return WorkingDay.objects.filter(advocat=self)
 
   def get_consultations(self):
-    if self.role == ADVOCAT_ROLE:
+    if self.role == User.ADVOCAT_ROLE:
       consultations = Consultation.objects.filter(advocat=self)
-    elif self.role == CLIENT_ROLE:
+    elif self.role == User.CLIENT_ROLE:
       consultations =  Consultation.objects.filter(client=self)
     return consultations
 
@@ -143,7 +143,7 @@ class Consultation(TimestampMixin):
     # status    = models.ForeignKey(verbose_name="Статус", to="gao.Status", on_delete=models.SET_NULL, null=True, blank=True)
     # format    = models.ForeignKey(verbose_name="Формат", to="gao.Format", on_delete=models.SET_NULL, null=True, blank=True)
     date      = models.DateField(verbose_name="Дата")
-    faculties = models.ManyToManyField(verbose_name="Галузі права", to="gao.Faculty", blank=True, related_name="consulations")
+    faculty   = models.ForeignKey(verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, on_delete=models.SET_NULL, related_name="consulations")
     comment   = models.TextField(verbose_name="Коментар", blank=True, null=True)
     mark      = models.SmallIntegerField(verbose_name="Оцінка", blank=True, null=True)
     advocat   = models.ForeignKey(

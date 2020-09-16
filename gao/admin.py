@@ -40,7 +40,6 @@ class ConsultationTimeInline(admin.StackedInline):
 @admin.register(Consultation)
 class ConsultationAdmin(ImportExportModelAdmin):
     resource_class = ConsultationResource
-    filter_horizontal = ['faculties']
     inlines = [
         ConsultationDocumentInline,
         ConsultationTimeInline
