@@ -5,6 +5,7 @@ python3 manage.py migrate
 
 python3 manage.py loaddata blog client team
 python3 manage.py sw_import -d import/
+python3 manage.py gen_weekdays
 python3 manage.py gen_advo
 python3 manage.py gen_clients
 python3 manage.py gen_consults
