@@ -521,13 +521,14 @@
 								</div>
 								<div id="profile_4" class="main_doc_content">
 									<div class="consultation__block">
+									{% for consultation in consultations %}
 										<div class="consultation_prof">
 											<div class="consultation_section consultation_left">
 												<div class="advocate_photo">
 													<img src="/static/img/about-us/about-img.png" alt="">
 												</div>
 												<div class="advocate_name main_title main_title_4 color_gold">
-													Боровець Микола
+													{{ consultation.advocat }}
 												</div>
 												<div class="advocate_subname standart_title standart_title_4 color_black">
 													Адвокат
@@ -540,17 +541,14 @@
 														</div>
 													</div>
 													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
+														{{ consultation.faculty }}
 													</div>
 												</div>
 												<div class="advocate_name main_title main_title_4 color_gold">
 													Статус консультації:
 												</div>
 												<div class="advocate_subname standart_title standart_title_4 color_black">
-													В очікуванні
+													{{ consultation.status }}
 												</div>
 											</div>
 											<div class="consultation_section consultation_center">
@@ -562,7 +560,7 @@
 														<img src="/static/img/profile/2.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														Середа. 15.08.2020.
+														{{ consultation.date|date:"D d.m.Y." }}
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -570,8 +568,8 @@
 														<img src="/static/img/profile/5.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
-														<span>консультація -  2 год.</span>
+														<span>з {{ consultation.times.first.time_from }} по {{ consultation.times.first.time_to }}.</span>
+														<span>консультація - {{ consultation.full_time }} </span>
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -579,7 +577,7 @@
 														<img src="/static/img/profile/7.svg" alt="">
 													</div>
 													<div class="advocate_user_title main_title main_title_4 color_gold">
-														Skype
+														{{ consultation.format }}
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -588,7 +586,7 @@
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
 														<span>Вартість консультації:</span>
-														<span class="color_gold">1000 грн</span>
+														<span class="color_gold">{{ consultation.price }} грн</span>
 													</div>
 												</div>
 												<div class="consultation_title__block">
@@ -627,132 +625,15 @@
 													Додаткові файли:
 												</div>
 												<div class="consultation_file__block">
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява1.pdf
+												{% for document in consultation.documents %}
+													<a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
+														document.file
 													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява3.pdf
-													</a>
+												{% endfor %}
 												</div>
 											</div>
 										</div>
-										<div class="consultation_prof">
-											<div class="consultation_section consultation_left">
-												<div class="advocate_photo">
-													<img src="/static/img/about-us/about-img.png" alt="">
-												</div>
-												<div class="advocate_name main_title main_title_4 color_gold">
-													Боровець Микола
-												</div>
-												<div class="advocate_subname standart_title standart_title_4 color_black">
-													Адвокат
-												</div>
-												<div class="advocate_type__block">
-													<div class="advocate_type_title__block">
-														<img src="/static/img/profile/2.svg" alt="">
-														<div class="advocate_type_title main_title main_title_4 color_gold">
-															Галузь
-														</div>
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-												</div>
-												<div class="advocate_name main_title main_title_4 color_gold">
-													Статус консультації:
-												</div>
-												<div class="advocate_subname standart_title standart_title_4 color_black">
-													В очікуванні
-												</div>
-											</div>
-											<div class="consultation_section consultation_center">
-													<div class="consultation_title main_title main_title_4 color_green">
-														Інформація по консультації:
-													</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/2.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														Середа. 15.08.2020.
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/5.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
-														<span>консультація -  2 год.</span>
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/7.svg" alt="">
-													</div>
-													<div class="advocate_user_title main_title main_title_4 color_gold">
-														Skype
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/8.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>Вартість консультації:</span>
-														<span class="color_gold">1000 грн</span>
-													</div>
-												</div>
-												<div class="consultation_title__block">
-													<div class="consultation_star main_title main_title_4 color_green">
-														Ваша оцінка за консультацію
-													</div>
-													<div class="consultation_star__block">
-														<div id="wrapper">
-															<form action="" method="post">
-															  <p class="clasificacion">
-																 <input id="radio1" type="radio" name="estrellas" value="5"><!--
-																--><label for="radio1">&#9733;</label><!--
-																--><input id="radio2" type="radio" name="estrellas" value="4"><!--
-																--><label for="radio2">&#9733;</label><!--
-																--><input id="radio3" type="radio" name="estrellas" value="3"><!--
-																--><label for="radio3">&#9733;</label><!--
-																--><input id="radio4" type="radio" name="estrellas" value="2"><!--
-																--><label for="radio4">&#9733;</label><!--
-																--><input id="radio5" type="radio" name="estrellas" value="1"><!--
-																--><label for="radio5">&#9733;</label>
-															  </p>
-															</form>
-														  </div>
-														  <div>
-														  
-														  </div>
-													</div>
-												</div>
-											</div>
-											<div class="consultation_section consultation_right">
-												<div class="consultation_title main_title main_title_4 color_green">
-													Додаткові файли:
-												</div>
-												<div class="consultation_file__block">
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява1.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява3.pdf
-													</a>
-												</div>
-											</div>
-										</div>
+									{% endfor %}
 									</div>
 								</div>
 							</div>
@@ -761,13 +642,6 @@
 							<div class="tab_left_data">
 								<div class="main_user_data">
 									Особисті дані
-								</div>
-								<div class="user-data-prof">
-									<div class="user-data-type">
-									</div>
-									<div class="user-data-name">
-										{{request.user.first_name}}
-									</div>
 								</div>
 								<div class="user-data-prof">
 									<div class="user-data-type">
@@ -798,7 +672,7 @@
 										Стать 
 									</div>
 									<div class="user-data-name">
-										13.09.1989
+										{{ request.user.sex }}
 									</div>
 								</div>
 								<div class="user-data-prof">
@@ -806,15 +680,7 @@
 										Дата народження
 									</div>
 									<div class="user-data-name">
-										Чоловіча
-									</div>
-								</div>
-								<div class="user-data-prof">
-									<div class="user-data-type">
-										22.**.19**
-									</div>
-									<div class="user-data-name">
-										Slavko
+										{{ request.user.birth_date }}
 									</div>
 								</div>
 							</div>
@@ -873,35 +739,21 @@
 									</div>
 								</div>
 								<div id="profile_2" class="main_doc_content">
+								{% for consultation in user.get_consultations %}
+								{% if user.get_consultations %}
 									<div class="docs__wrap">
 										<div class="docs_title midle_title midle_title_3 color_gold">
-											Консультація 1
+											Консультація {{ forloop.counter }}
 										</div>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява1.pdf
+										{% for document in consultation.documents %}
+										<a href="{{ document.file.url }}" class="doc_content standart_title standart_title_4 color_black">
+											{{ document.file.url }}
 										</a>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява2.pdf
-										</a>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява2.pdf
-										</a>
-									</div>
-									<div class="docs__wrap">
-										<div class="docs_title midle_title midle_title_3 color_gold">
-											Консультація 2
-										</div>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява1.pdf
-										</a>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява2.pdf
-										</a>
-										<a href="#" class="doc_content standart_title standart_title_4 color_black">
-											Заява2.pdf
-										</a>
+										{% endfor %}
 									</div>
 								</div>
+								{% endif %}
+								{% endfor %}
 							</div>
 							
 						</div>

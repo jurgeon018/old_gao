@@ -31,8 +31,7 @@ urlpatterns = [
 
     path('',                 index,    name='index' ),
     path('contacts/',        contacts, name='contacts'),
-    path('profile/',         profile,  name='profile'),
-    path('cabinet/<role>/',  cabinet,  name='cabinet'),
+    path('cabinet/',  cabinet,  name='cabinet'),
     path('blog/',            blog,     name='blog'),
     path('about/',           about,    name='about'),
     path('post/<slug>/',     post,     name='post'),

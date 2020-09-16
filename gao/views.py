@@ -42,26 +42,36 @@ def about(request):
     return render(request, 'about.html', locals())
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html', locals())
+from datetime import datetime, date, time, timedelta 
+
 
 @login_required
-def cabinet(request, role):
+def cabinet(request):
+    users = User.objects.filter(role=User.CLIENT_ROLE)
     user = request.user
+    role = user.role
     faculties = Faculty.objects.all()
     advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
-    if role == 'advocat':
-        consultations = Consultation.objects.filter(advocat=user)
+    today = datetime.today()
+    dates = []
+    # for days in reversed(range(0, 10)):
+    #     date = today - timedelta(days=days)
+    #     dates.append(date)
+    for days in range(0, 10):
+        date = today + timedelta(days=days)
+        dates.append(date)
+    # dates = set(dates)
+    if role == User.ADVOCAT_ROLE:
+        consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
-        finished_consultations = consultations.filter(status=Consultation.FINISHED)
-    elif role == 'client':
-        consultations = Consultation.objects.filter(client=user)
+    elif role == User.CLIENT_ROLE:
+        consultations = consultations.filter(client=user)
         advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
-        finished_consultations = consultations.filter(status=Consultation.FINISHED)
+    finished_consultations = consultations.filter(status=Consultation.FINISHED)
     return render(request, f'cabinet_{role}.html', locals())
+
 
 @csrf_exempt
 def form(request):
@@ -142,7 +152,7 @@ def update_profile(request):
     phone_number = query.get('phone_number') 
 
     user              = request.user
-    user.first_name         = first_name 
+    user.first_name   = first_name 
     user.email        = email 
     user.phone_number = phone_number
     user.save()
@@ -249,8 +259,7 @@ def custom_login(request):
             'status':'OK',
             'message':message,
             'is_authenticated':request.user.is_authenticated,
-            # 'url':reverse('index'),
-            'url':reverse('profile'),
+            'url':reverse('cabinet'),
         })
     messages.success(request, message)
     return response

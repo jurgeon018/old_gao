@@ -93,7 +93,6 @@ class FacultyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Faculty.objects.all()
 
 
-
 class AdvocateListView(generics.ListCreateAPIView):
     serializer_class = AdvocateListSerializer
     queryset = User.objects.all()
@@ -107,7 +106,7 @@ class AdvocateListView(generics.ListCreateAPIView):
             queryset = queryset.filter(faculties__id__in=[faculty])
         return queryset
 
-
+# BO API
 def advocat_busy_days(request):
     advocat_id = request.GET.get('advocat_id')
     month = request.GET.get('month')
@@ -121,7 +120,6 @@ def advocat_busy_days(request):
         if special_days.filter(date=day):
             days_available.append(day.strftime('%d-%B-%Y'))
             continue
-
         if day.weekday() == 0 and not advocat.monday : 
             continue
         if day.weekday() == 1 and not advocat.tuesday : 
@@ -138,6 +136,39 @@ def advocat_busy_days(request):
             continue
         else:
             days_available.append(day.strftime('%d-%B-%Y'))
-
     return JsonResponse({"OK": days_available})
 
+def delete_advocate_faculty(request):
+    data = request.data
+    advocat_id  = data.get("advocat_id")
+    faculty_id  = data.get("faculty_id")
+    advocat = User.objects.get(id=advocat_id)
+    faculty = Faculty.objects.get(id=faculty_id)
+    advocat.faculties.Remove(faculty)
+    return JsonResponse({"OK": "OK"})
+
+def add_advocate_faculty(request):
+    data = request.data
+    advocat_id  = data.get("advocat_id")
+    faculty_id  = data.get("faculty_id")
+    advocat = User.objects.get(id=advocat_id)
+    faculty = Faculty.objects.get(id=faculty_id)
+    advocat.faculties.add(faculty)
+    return JsonResponse({"OK": "OK"})
+
+def add_advocate_document(request):
+    data = request.data
+    file = request.Files['file']
+    advocat_id  = data.get("advocat_id")
+    advocat = User.objects.get(id=advocat_id)
+    documents = Document.objects.create(user=advocat, file=file)
+    return JsonResponse({"OK": "OK"})
+
+def user_create_consultation(request):
+    data = request.data
+    user = data.get('user')
+    faculty = data.get('faculty')
+    advocat = data.get('advocat')
+    date    = data.get('date')
+    
+    return

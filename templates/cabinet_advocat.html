@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load gao %}
 {% block head_static%}
 {% include 'includes/head_static.html' %}
 <link  href="/static/css/datepicker.css" rel="stylesheet">
@@ -6,9 +7,9 @@
 <link  href="/static/css/select2.min.css" rel="stylesheet">
 <link  href="/static/css/new_profile.css" rel="stylesheet">
 
-{% endblock head_static%}
+{% endblock head_static %}
 
-{% block content%}
+{% block content %}
 <body class="card">
 		<header class="kabinet">
 				<div class="kab__title-wrap">
@@ -20,7 +21,7 @@
 					</div>
 				</div>
 				<div class="user_name midle_title midle_title_3 color_gold">
-					{{ user.full_name}}
+					{{ user.full_name }}
 				</div>
 				<div class="user_type standart_title standart_title_4 color_black">
 					Адвокат
@@ -58,6 +59,15 @@
 									Мої консультації
 								</div>
 							</div>
+
+
+
+
+
+
+
+
+							{% comment %} // календар {% endcomment %}
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="advocate_calender_container main_doc_content main_doc_content_active">
 									<div class="advocate_calender_info">
@@ -172,37 +182,12 @@
 												</svg>
 											</div>
 										</div>
-										<div class="advocate_slick_date__block">
-											<div data-day_id='1' class="advocate_slick_date_prof standart_title standart_title_4 color_black advocate_slick_date_prof_active">
-												Пн. 13.08.2020
+										<div class="advocate_slick_date__block">	
+											{% for date in dates %}
+											<div data-day_id='1' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
+												{{date}}
 											</div>
-											<div data-day_id='2' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Вт. 13.08.2020
-											</div>
-											<div data-day_id='3' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Ср. 13.08.2020
-											</div>
-											<div data-day_id='4' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Чт. 13.08.2020
-											</div>
-											<div data-day_id='5' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пт. 13.08.2020
-											</div>
-											<div data-day_id='6' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пн. 13.08.2020
-											</div>
-											<div data-day_id='7' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Вт. 13.08.2020
-											</div>
-											<div data-day_id='8' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Ср. 13.08.2020
-											</div>
-											<div data-day_id='9' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Чт. 13.08.2020
-											</div>
-											<div data-day_id='10' class="advocate_slick_date_prof standart_title standart_title_4 color_black">
-												Пт. 13.08.2020
-											</div>
+											{% endfor %}
 										</div>
                                         <div class="advocate_calender_time__block">
                                             <div data-clock='9' class="adv_cal_time">
@@ -377,18 +362,30 @@
 										</form>
 									</div>
 								</div>
+
+
+
+
+
+
+
+								{% comment %} // мої консультації {% endcomment %}
 								<div id="profile_4" class="main_doc_content">
 									<div class="consultation__block">
+									{% comment %} // вивід із адмінки {% endcomment %}
+									{% for consultation in consultations %}
 										<div class="consultation_prof">
 											<div class="consultation_section consultation_left">
 												<div class="advocate_photo">
 													<img src="/static/img/about-us/about-img.png" alt="">
 												</div>
 												<div class="advocate_name main_title main_title_4 color_gold">
-													Боровець Микола
+												{% if consultation.client %}
+													{{ consultation.client }}
+												{% endif %}
 												</div>
 												<div class="advocate_subname standart_title standart_title_4 color_black">
-													Адвокат
+													Клієнт
 												</div>
 												<div class="advocate_type__block">
 													<div class="advocate_type_title__block">
@@ -397,18 +394,19 @@
 															Галузь
 														</div>
 													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
+														<div class="advocate_type_work standart_title standart_title_4 color_black">
+														{% if consultation.faculty %}
+															{{ consultation.faculty }}
+														{% endif %}
+														</div>
 												</div>
 												<div class="advocate_name main_title main_title_4 color_gold">
 													Статус консультації:
 												</div>
 												<div class="advocate_subname standart_title standart_title_4 color_black">
-													В очікуванні
+														{% if consultation.status %}
+															{{ consultation.status }}
+														{% endif %}
 												</div>
 											</div>
 											<div class="consultation_section consultation_center">
@@ -420,7 +418,7 @@
 														<img src="/static/img/profile/2.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														Середа. 15.08.2020.
+														{{ consultation.date|date:"D d.m.Y." }}
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -428,8 +426,8 @@
 														<img src="/static/img/profile/5.svg" alt="">
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
-														<span>консультація -  2 год.</span>
+														<span>з {{ consultation.times.first.time_from }} по {{ consultation.times.first.time_to }}.</span>
+														<span>консультація -  {{ consultation.full_time }} </span>
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -437,7 +435,7 @@
 														<img src="/static/img/profile/7.svg" alt="">
 													</div>
 													<div class="advocate_user_title main_title main_title_4 color_gold">
-														Skype
+														{{ consultation.format }}
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
@@ -446,7 +444,7 @@
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
 														<span>Вартість консультації:</span>
-														<span class="color_gold">1000 грн</span>
+														<span class="color_gold">{{ consultation.price }} грн</span>
 													</div>
 												</div>
 												
@@ -456,110 +454,26 @@
 													Додаткові файли:
 												</div>
 												<div class="consultation_file__block">
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява1.pdf
+												{% for document in consultation.documents %}
+													<a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
+														{{ document.file }}
 													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява3.pdf
-													</a>
+												{% endfor %}
 												</div>
 											</div>
 										</div>
-										<div class="consultation_prof">
-											<div class="consultation_section consultation_left">
-												<div class="advocate_photo">
-													<img src="/static/img/about-us/about-img.png" alt="">
-												</div>
-												<div class="advocate_name main_title main_title_4 color_gold">
-													Боровець Микола
-												</div>
-												<div class="advocate_subname standart_title standart_title_4 color_black">
-													Адвокат
-												</div>
-												<div class="advocate_type__block">
-													<div class="advocate_type_title__block">
-														<img src="/static/img/profile/2.svg" alt="">
-														<div class="advocate_type_title main_title main_title_4 color_gold">
-															Галузь
-														</div>
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
-												</div>
-												<div class="advocate_name main_title main_title_4 color_gold">
-													Статус консультації:
-												</div>
-												<div class="advocate_subname standart_title standart_title_4 color_black">
-													В очікуванні
-												</div>
-											</div>
-											<div class="consultation_section consultation_center">
-													<div class="consultation_title main_title main_title_4 color_green">
-														Інформація по консультації:
-													</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/2.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														Середа. 15.08.2020.
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/5.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>з 09.00 по 11.00.</span>
-														<span>консультація -  2 год.</span>
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/7.svg" alt="">
-													</div>
-													<div class="advocate_user_title main_title main_title_4 color_gold">
-														Skype
-													</div>
-												</div>
-												<div class="advocate_user_item__block">
-													<div class="advocate_user_img">
-														<img src="/static/img/profile/8.svg" alt="">
-													</div>
-													<div class="advocate_user_title standart_title standart_title_4 color_black">
-														<span>Вартість консультації:</span>
-														<span class="color_gold">1000 грн</span>
-													</div>
-												</div>
-											</div>
-											<div class="consultation_section consultation_right">
-												<div class="consultation_title main_title main_title_4 color_green">
-													Додаткові файли:
-												</div>
-												<div class="consultation_file__block">
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява1.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="consultation_file standart_title standart_title_4 color_black">
-														Заява3.pdf
-													</a>
-												</div>
-											</div>
-										</div>
+									{% endfor %}
 									</div>
 								</div>
 							</div>
 						</div>
+						
+
+
+
+
+
+						{% comment %} // особисті дані {% endcomment %}
 						<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
 							<div class="user_advocate__wrapper">
 								<div class="main_user_data">
@@ -568,15 +482,6 @@
 								<div class="tab_left_data">
 									<div class="photo_advocate__block">
 										<img src="/static/img/about-us/about-img.png" alt="" class="photo_advocate">
-									</div>
-									<div class="user-data-prof">
-										<div class="user-data-type">
-										</div>
-										<div class="user-data-name">
-										{% if user.first_name %}
-											{{ user.first_name }}
-										{% endif %}
-										</div>
 									</div>
 									<div class="user-data-prof">
 										<div class="user-data-type">
@@ -636,7 +541,7 @@
 									<div class="advocate_practise_content__block">
 									{% for faculty in user.faculties.all %}
 										<div class="advocate_download_prof">
-											<div class="advocate_download_name main_title main_title_4 color_gold">
+											<div data-id="{{ faculty.id }}" class="advocate_download_name main_title main_title_4 color_gold">
 												{{ faculty.name }}
 											</div>
 											<svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
@@ -679,21 +584,13 @@
 
 											</div>
 											<div class="step_hidden_content">
-												<div data-title="Практика земельних правовідносин" class="step_select_radio standart_title standart_title_2 color_black">
-													Практика земельних правовідносин
+											{% for faculty in faculties %}
+											{% if faculty.name and faculty not in user.faculties.all %}
+												<div data-title="{{ faculty.name }}" data-id="{{ faculty.id }}" class="step_select_radio standart_title standart_title_2 color_black">
+													{{ faculty.name }}
 												</div>
-												<div data-title="Договірна та презентаційна практика" class="step_select_radio standart_title standart_title_2 color_black">
-													Договірна та презентаційна практика
-												</div>
-												<div data-title="Консалтинг з юридичних питань" class="step_select_radio standart_title standart_title_2 color_black">
-													Консалтинг з юридичних питань
-												</div>
-												<div data-title="Договірна та презентаційна практика" class="step_select_radio standart_title standart_title_2 color_black">
-													Договірна та презентаційна практика
-												</div>
-												<div data-title="Практика земельних правовідносин" class="step_select_radio standart_title standart_title_2 color_black">
-													Практика земельних правовідносин
-												</div>
+											{% endif %}
+											{% endfor %}
 											</div>
 										</div>
 									</div>
@@ -709,6 +606,10 @@
 								</div>
 							</div>
 						</div>
+
+
+
+
 						<div id="tab_22" class="tab-auto-content-prof">
 							<div class="main_user_data">
 								Документи
@@ -726,9 +627,10 @@
 								</div>
 							</div>
 							<div class="main_doc_content__block">
+								{% comment %} // мої документи {% endcomment %}
 								<div id="profile_1" class="main_doc_content main_doc_content_active">
 									<div class="doc-block">
-										{% for document in user.documents.all%}
+										{% for document in user.documents.all %}
 										<div class="doc-profile">
 											<div class="doc-top">
 												<div class="doc-img-wrap">
@@ -765,7 +667,11 @@
 										<input type="file" multiple id="advocate_doc_add_btn" class="advocate_doc_add_btn">
 									</div>
 								</div>
+								{% comment %} // від клієнтів {% endcomment %}
 								<div id="profile_2" class="main_doc_content">
+								{% for item in users %}
+								{% get_client_consultations item user as user_consultations %}
+								{% if user_consultations %}
 									<div class="docs__wrap">
 										<div class="docs_title_btn docs_title midle_title midle_title_3 color_gold">
 											<svg class="close_client" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-times fa-w-10 fa-3x"><path fill="currentColor" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path></svg>
@@ -777,87 +683,30 @@
 													<path fill='#D2A351' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
 												</g>
 											</svg>
+											
 											<span class="docs_client_name">
-												Оробчук Ярослав
+												{{ item.first_name }} {{ item.username }}
 											</span> 
 										</div>
+										{% for consultation in user_consultations %}
 										<div class="doc_content__wrapper">
 											<div class="docs__wrap">
 												<div class="docs_title midle_title midle_title_3 color_gold">
-													Консультація 1
+													Консультація {{ forloop.counter }}
 												</div>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява1.pdf
+												{% for document in consultation.documents %}
+													<a href="{{ document.file.url }}" class="doc_content standart_title standart_title_4 color_black">
+														{{ document.file }}
 													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-											</div>
-											<div class="docs__wrap">
-												<div class="docs_title midle_title midle_title_3 color_gold">
-													Консультація 2
-												</div>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява1.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
+												{% empty %}
+												<span class="doc_content standart_title standart_title_4 color_black">Немає документів</span>
+												{% endfor %}
 											</div>
 										</div>
+									{% endfor %}
 									</div>
-									<div class="docs__wrap">
-										<div class="docs_title_btn docs_title midle_title midle_title_3 color_gold">
-											<svg class="close_client" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-times fa-w-10 fa-3x"><path fill="currentColor" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path></svg>
-											<svg class="open_client" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-											viewBox="0 0 2117 2117"
-											xmlns:xlink="http://www.w3.org/1999/xlink">
-												<g id="Layer_x0020_1">
-													<metadata id="CorelCorpID_0Corel-Layer"/>
-													<path fill='#D2A351' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
-												</g>
-											</svg>
-											<span class="docs_client_name">
-												Оробчук Ярослав
-											</span> 
-										</div>
-										<div class="doc_content__wrapper">
-											<div class="docs__wrap">
-												<div class="docs_title midle_title midle_title_3 color_gold">
-													Консультація 1
-												</div>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява1.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-											</div>
-											<div class="docs__wrap">
-												<div class="docs_title midle_title midle_title_3 color_gold">
-													Консультація 2
-												</div>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява1.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-													<a href="#" class="doc_content standart_title standart_title_4 color_black">
-														Заява2.pdf
-													</a>
-											</div>
-										</div>
-									</div>
+								{% endif %}
+								{% endfor %}
 								</div>
 							</div>
 							
@@ -867,7 +716,7 @@
 					</div>
 				</div>
 
-				 {% include 'includes/form.html' %}
+				{% include 'includes/form.html' %}
 				<div class="btn-wrap-fix">
 				  <a data-fancybox data-src="#modal-form" href="javascript:;">
 				    <div class="btn-new-page hvr-bounce-to-right">

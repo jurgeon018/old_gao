@@ -1,13 +1,15 @@
-pip3 install -r requirements.txt 
+pip3 install -r requirements.txt
 
-python3 manage.py makemigrations 
-python3 manage.py migrate 
+python3 manage.py makemigrations
+python3 manage.py migrate
+
 python3 manage.py loaddata blog client team
-python3 manage.py sw_import -d import/ 
+python3 manage.py sw_import -d import/
 python3 manage.py gen_advo
 python3 manage.py gen_clients
 python3 manage.py gen_consults
-python3 manage.py createsuperuser
-python3 manage.py runserver 
 
+
+
+python3 manage.py runserver 127.0.0.1:8000 
 
