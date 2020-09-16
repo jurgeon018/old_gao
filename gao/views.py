@@ -54,15 +54,23 @@ def cabinet(request):
     advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
+
+    now = datetime.now()
+    hours_list = []
+    for hours in range(9, 20):
+        # delta = timedelta(hours=hours, minutes=0, seconds=0)
+        # total_seconds = delta.total_seconds()
+        # minutes = int(total_seconds // 60)
+        # seconds = int(total_seconds % 60)
+        hours_list.append(f'{hours}.00')
+        if hours != 19:
+            hours_list.append(f'{hours}.30')
     today = datetime.today()
     dates = []
-    # for days in reversed(range(0, 10)):
-    #     date = today - timedelta(days=days)
-    #     dates.append(date)
     for days in range(0, 10):
         date = today + timedelta(days=days)
         dates.append(date)
-    # dates = set(dates)
+
     if role == User.ADVOCAT_ROLE:
         consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
@@ -70,7 +78,7 @@ def cabinet(request):
         consultations = consultations.filter(client=user)
         advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
     finished_consultations = consultations.filter(status=Consultation.FINISHED)
-    return render(request, f'cabinet_{role}.html', locals())
+    return render(request, f'booking/cabinet_{role}.html', locals())
 
 
 @csrf_exempt
