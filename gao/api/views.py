@@ -93,7 +93,6 @@ class FacultyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Faculty.objects.all()
 
 
-
 class AdvocateListView(generics.ListCreateAPIView):
     serializer_class = AdvocateListSerializer
     queryset = User.objects.all()
@@ -121,7 +120,6 @@ def advocat_busy_days(request):
         if special_days.filter(date=day):
             days_available.append(day.strftime('%d-%B-%Y'))
             continue
-
         if day.weekday() == 0 and not advocat.monday : 
             continue
         if day.weekday() == 1 and not advocat.tuesday : 
@@ -138,6 +136,5 @@ def advocat_busy_days(request):
             continue
         else:
             days_available.append(day.strftime('%d-%B-%Y'))
-
     return JsonResponse({"OK": days_available})
 
