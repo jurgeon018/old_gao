@@ -5,6 +5,7 @@ from .generics import *
 
 
 urlpatterns = [
+    path("blocked_days/", blocked_days),
     path("set_advocate_faculties/", set_advocate_faculties),
     path("add_advocate_document/", add_advocate_document),
 

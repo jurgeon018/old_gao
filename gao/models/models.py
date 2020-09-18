@@ -229,7 +229,7 @@ class WorkingDay(models.Model):
         verbose_name="Адвокат", to="gao.User",
         on_delete=models.SET_NULL, blank=True, null=True,
     )
-    date      = models.DateField(verbose_name="День")
+    date  = models.DateField(verbose_name="День")
     start = models.TimeField(verbose_name="Початок робочого дня")
     end   = models.TimeField(verbose_name="Завершення робочого дня")
 
@@ -298,6 +298,7 @@ class Consultation(TimestampMixin):
       verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
       on_delete=models.SET_NULL, related_name="consulations",
     )
+    # TODO: clean метод який не позволить створити консультацію з start > end
     start = models.TimeField(
       verbose_name="Час початку",
     )
