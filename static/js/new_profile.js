@@ -406,7 +406,6 @@ if ($('.advocate_calender_container').length == 1) {
 
 }
 
-
 let test_practise = [
     {
         name: 'договірна',
