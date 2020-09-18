@@ -36,44 +36,44 @@ class ConsultationListView(generics.ListCreateAPIView):
     queryset = Consultation.objects.all()
 
     def create(self, request, *args, **kwargs):
-        print("request.user", request.user)
-        response  = {"messages":[]}
-        data      = request.data 
-        date      = data['date']
-        start = data['start']
-        end   = data['end']
-        advocat   = data['advocat']
-        client    = data['client']
-        consultations = Consultation.objects.filter(
-            date      = date, 
-            start = start, 
-            end   = end,
-        )
-        advocat_consultations = consultations.filter(advocat=advocat)
-        client_consultations  = consultations.filter(client=client)
-        # TODO: запхати таку перевірку у Consultation.save()
-        if client_consultations.exists() and advocat_consultations.exists():
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншим клієнтом', 
-                'status':'bad',
-            })
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншою консультацією', 
-                'status':'bad',
-            })
-            return Response(response)
-        elif advocat_consultations.exists():
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншим клієнтом', 
-                'status':'bad',
-            })
-            return Response(response)
-        elif client_consultations.exists():
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншою консультацією', 
-                'status':'bad',
-            })
-            return Response(response)
+        # TODO: перевірки через User.timerange_is_free
+        # print("request.user", request.user)
+        # response  = {"messages":[]}
+        # data      = request.data 
+        # date      = data['date']
+        # start     = data['start']
+        # end       = data['end']
+        # advocat   = data['advocat']
+        # client    = data['client']
+        # consultations = Consultation.objects.filter(
+        #     date  = date, 
+        #     start = start, 
+        #     end   = end,
+        # )
+        # advocat_consultations = consultations.filter(advocat=advocat)
+        # client_consultations  = consultations.filter(client=client)
+        # if client_consultations.exists() and advocat_consultations.exists():
+        #     response['messages'].append({
+        #         'text':'Ця година вже зайнята іншим клієнтом', 
+        #         'status':'bad',
+        #     })
+        #     response['messages'].append({
+        #         'text':'Ця година вже зайнята іншою консультацією', 
+        #         'status':'bad',
+        #     })
+        #     return Response(response)
+        # elif advocat_consultations.exists():
+        #     response['messages'].append({
+        #         'text':'Ця година вже зайнята іншим клієнтом', 
+        #         'status':'bad',
+        #     })
+        #     return Response(response)
+        # elif client_consultations.exists():
+        #     response['messages'].append({
+        #         'text':'Ця година вже зайнята іншою консультацією', 
+        #         'status':'bad',
+        #     })
+        #     return Response(response)
         response = super().create(request, *args, **kwargs)
 
         for file in request.FILES:
@@ -108,39 +108,38 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         end       = data.get('end')
         advocat   = data.get('advocat')
         client    = data.get('client')
-        if date and start and end and advocat and client:
-            consultations = Consultation.objects.filter(
-                date      = date, 
-                start = start, 
-                end   = end,
-            )
-            advocat_consultations = Consultation.objects.filter(advocat=advocat)
-            client_consultations  = Consultation.objects.filter(client=client)
-            # TODO: запхати таку перевірку у Consultation.save()
-            if client_consultations.exists() and advocat_consultations.exists():
-                response['messages'].append({
-                    'text':'Ця година вже зайнята іншим клієнтом', 
-                    'status':'bad',
-                })
-                response['messages'].append({
-                    'text':'Ця година вже зайнята іншою консультацією', 
-                    'status':'bad',
-                })
-                return Response(response)
-            elif advocat_consultations.exists():
-                response['messages'].append({
-                    'text':'Ця година вже зайнята іншим клієнтом', 
-                    'status':'bad',
-                })
-                return Response(response)
-            elif client_consultations.exists():
-                response['messages'].append({
-                    'text':'Ця година вже зайнята іншою консультацією', 
-                    'status':'bad',
-                })
-                return Response(response)
-        elif "mark" in request.data:
-            # response = 
+        # if date and start and end and advocat and client:
+        #     consultations = Consultation.objects.filter(
+        #         date      = date, 
+        #         start = start, 
+        #         end   = end,
+        #     )
+        #     advocat_consultations = consultations.filter(advocat=advocat)
+        #     client_consultations  = consultations.filter(client=client)
+        #     # TODO: запхати таку перевірку у Consultation.save()
+        #     if client_consultations.exists() and advocat_consultations.exists():
+        #         response['messages'].append({
+        #             'text':'Ця година вже зайнята іншим клієнтом', 
+        #             'status':'bad',
+        #         })
+        #         response['messages'].append({
+        #             'text':'Ця година вже зайнята іншою консультацією', 
+        #             'status':'bad',
+        #         })
+        #         return Response(response)
+        #     elif advocat_consultations.exists():
+        #         response['messages'].append({
+        #             'text':'Ця година вже зайнята іншим клієнтом', 
+        #             'status':'bad',
+        #         })
+        #         return Response(response)
+        #     elif client_consultations.exists():
+        #         response['messages'].append({
+        #             'text':'Ця година вже зайнята іншою консультацією', 
+        #             'status':'bad',
+        #         })
+        #         return Response(response)
+        if "mark" in request.data:
             super().update(request, *args, **kwargs)
             response['messages'].append({
                 'text':'Консультацію було успішно оцінено',

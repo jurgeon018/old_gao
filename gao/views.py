@@ -38,8 +38,7 @@ def cabinet(request):
     today = datetime.today()
     dates = []
     for days in range(0, 10):
-        date = today + timedelta(days=days)
-        dates.append(date)
+        dates.append(today + timedelta(days=days))
     if role == User.ADVOCAT_ROLE:
         consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))

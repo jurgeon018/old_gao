@@ -11,7 +11,7 @@ import calendar
 import json 
 
 
-@api_view(['GET',])
+@api_view(['GET'])
 def get_days_info(request):
     query     = request.query_params#; print("query: ", query)
     month     = int(query['month'])
@@ -20,8 +20,23 @@ def get_days_info(request):
     client    = query['client']
     advocat   = User.objects.get(id=advocat)
     client    = User.objects.get(id=client)
+    # TODO: перевірки по клієнту 
     return Response({
-        "days":advocat.get_days_info(year, month)
+        "days":advocat.get_days_info(year, month),
+    })
+
+
+@api_view(['GET'])
+def get_hours_info(request):
+    query     = request.query_params#; print("query: ", query)
+    date      = query['date']
+    advocat   = query['advocat']
+    client    = query['client']
+    advocat   = User.objects.get(id=advocat)
+    client    = User.objects.get(id=client)
+    # TODO: перевірки по клієнту 
+    return Response({
+        "hours":advocat.get_hours_info(date),
     })
 
 
@@ -37,16 +52,7 @@ def set_advocate_faculties(request):
     advocat.faculties.set(faculties)
     # if request.method == 'POST':
     #     advocat.faculties.add(faculty)
-    # if request.method == 'DELETE':
+    # elif request.method == 'DELETE':
     #     advocat.faculties.remove(faculty)
     return JsonResponse({'OK':'OK'})
 
-
-@api_view(['POST'])
-def add_advocate_document(request):
-    data = request.data
-    file = request.Files['file']
-    advocat_id  = data.get("advocat_id")
-    advocat = User.objects.get(id=advocat_id)
-    documents = Document.objects.create(user=advocat, file=file)
-    return JsonResponse({"OK": "OK"})

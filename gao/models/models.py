@@ -55,29 +55,54 @@ class User(AbstractUser):
 
   def get_day_status(self, day):
     '''
-    blocked     - зайнятий, з консультаціями 
     rest        - зайнятий, без консультацій
-    partly_busy - вільний, з консультаціями 
+    blocked     - зайнятий, з консультаціями 
     free        - вільний, без консультацій
-    unknows     - помилка в логіці перевірок
+    partly_busy - вільний, з консультаціями 
+    unknown     - помилка в логіці перевірок
     '''
     week_days = UserWeekDay.objects.filter(user=self)
     week_day_codes = week_days.values_list('week_day__code', flat=True)
     if str(day.isoweekday()) not in week_day_codes:
       status = 'rest'
+    elif False:
+      # TODO: !
+      status = 'blocked'
+    elif False:
+      # TODO: !
+      status = 'free'
+    elif False:
+      # TODO: !
+      status = 'partly_busy'
     else:
       status = 'unknown'
     return status
 
-    
-
-  def get_blocked_hours(self, date_from, date_to):
-    free_hours = []
-    hours = [...,...,...]
-    for hour in hours:
-      if not self.time_is_free(date, start, end):
-        free_hours.append(hour)
-    return free_hours 
+  def get_hours_info(self, date):
+    hours = []
+    date = datetime.strptime(date, "%d.%m.%Y")
+    for hour in range(0, 24):
+      hours.append({
+        "hour":datetime.strptime(f"{hour}:00", "%H:%M").time(),
+        "status":self.get_hour_status(date),
+      })
+      if hour != 24:
+        hours.append({
+          "hour":datetime.strptime(f"{hour}:30", "%H:%M").time(),
+          "status":self.get_hour_status(date),
+        })
+    return hours
+  
+  def get_hour_status(self, hour):
+    if False:
+      # TODO: !
+      status = "free"
+    elif False:
+      # TODO: !
+      status = "busy"
+    else:
+      status = 'unknown'
+    return status 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -297,7 +322,7 @@ class Consultation(TimestampMixin):
 
     @property
     def time(self):
-        time = 0
+        time = 1
         # if self.times.first().end and self.times.first().start :
         #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
         #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
@@ -325,11 +350,13 @@ class Consultation(TimestampMixin):
     
     @property
     def price(self):
+        price = 1
         time = self.time
+        # time = self.end - self.start 
         hours = time // 60
         minutes = (time % 60) / 60
         price = (self.advocat.rate * hours) + (self.advocat.rate * minutes)
-        return int(price)
+        return price 
     
     def get_files_by_user(self):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)

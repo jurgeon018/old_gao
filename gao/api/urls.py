@@ -6,8 +6,8 @@ from .generics import *
 
 urlpatterns = [
     path("get_days_info/", get_days_info),
+    path("get_hours_info/", get_hours_info),
     path("set_advocate_faculties/", set_advocate_faculties),
-    path("add_advocate_document/", add_advocate_document),
 
     path("users/", UserListView.as_view()),
     path("users/<pk>/", UserDetailView.as_view()),
