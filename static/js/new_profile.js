@@ -448,8 +448,20 @@ let test_advocate = [
     },
 ]
 
-function generate_practise() {
-    fetch('/api/faculties/', {
+function remove_active_block(wrap) {
+    let parents = $(wrap);
+    $(parents).removeClass('step_select_active');
+    $(parents).find('.step_active_content').text();      
+}
+function generate_practise(id) {
+    console.log('id: ', id);
+    let url;
+    if (id == undefined) {
+        url = '/api/faculties/'
+    } else {
+        url = `/api/faculties/?advocat_id=${id}`
+    }
+    fetch(url, {
         method: "GET",
       })
       .then((data) => {
@@ -457,17 +469,36 @@ function generate_practise() {
       })
       .then((body) => {
           create_all_doc_for_client('.practise_step_hidden_content', body);
-      });      
+      });    
+      
+        remove_active_block('.pract_step_select');
 }
-function generate_advocate() {
-    fetch('/api/users/', {
+function generate_advocate(id) {
+    let url;
+    if (id == undefined) {
+        url = '/api/users/?role=advocat';
+    } else {
+        url = `/api/users/?faculty_ids=[${id}]`;
+    }
+    
+    fetch(url, {
         method: "GET",
       })
       .then((data) => {
         return data.json();
       })
       .then((body) => {
-          create_all_doc_for_client('.client_select_step_hidden_content', body);
+          
+          let new_body = [];
+          $.each(body, function(index, value) {
+            new_body.push({
+                id: value.id,
+                name: value.username
+            })
+          });
+          create_all_doc_for_client('.client_select_step_hidden_content', new_body);
+          
+          remove_active_block('.advoc_step_select');
       });      
 }
 if ($('.practise_step_hidden_content').length >= 1) {
@@ -477,7 +508,6 @@ if ($('.practise_step_hidden_content').length >= 1) {
 
    
 function create_all_doc_for_client(wrap, json) {
-    console.log('json: ', json);
     $(wrap).children().remove();
     $.each(json, function(index, value) {
         $(wrap)[0].appendChild(create_doc(value));
@@ -499,7 +529,7 @@ function create_doc(content) {
 function click_select_item() {
     let wrap = $(this).parents('.step_select');
     let data = $(this).attr('data-title');
-
+    let data_id = $(this).attr('data-id');
     $(wrap).find('.step_select_text').removeClass('step_select_text_active');
     $(this).addClass('step_select_text_active');
     $(wrap).find('.step_active_content').text(data);
@@ -511,35 +541,15 @@ function click_select_item() {
     console.log('checker: ', checker);
     // практики
     if ($(checker).hasClass('practise_step_hidden_content')) {
-        let test1 = [
-            {
-                name: 'advocate3',
-                id: [1, 2, 3, 5]
-            },
-            {
-                name: 'advocate4',
-                id: [5]
-            },
-        ]
-        create_all_doc_for_client('.client_select_step_hidden_content', test1);
+        generate_advocate(data_id);
+        // create_all_doc_for_client('.client_select_step_hidden_content', test1);
     }
     // адвокати
     else if ($(checker).hasClass('client_select_step_hidden_content')) {
-        let test2 = [
-            {
-                name: 'чарівна',
-                id: 3
-            },
-            {
-                name: 'логішна',
-                id: 4
-            },
-            {
-                name: 'антична',
-                id: 5
-            },
-        ]
-        create_all_doc_for_client('.practise_step_hidden_content', test2);
+        
+       
+        generate_practise(data_id);
+        // create_all_doc_for_client('.practise_step_hidden_content', test2);
 
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
