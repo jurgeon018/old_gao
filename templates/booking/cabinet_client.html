@@ -20,7 +20,7 @@
 				<div class="user_name midle_title midle_title_3 color_gold">
 					Бурега Назар Васильович
 				</div>
-				<div class="user_type standart_title standart_title_4 color_black">
+				<div data-client='{{request.user.id}}' class="client_info_id user_type standart_title standart_title_4 color_black">
 					клієнт
 				</div>
 				<div class="all-tab-wrap">
@@ -142,8 +142,9 @@
 													</div>
 												</div>
 												<div class="step_active_content standart_title standart_title_4 color_gold">
-													Адвокат1
+													
 												</div>
+												<div class="hidden_message"></div>
 												<div class="client_select_step_hidden_content step_hidden_content">
 													<!-- тут генеруються адвокати -->
 												</div>
@@ -165,8 +166,8 @@
 												<div class="advocate_photo">
 													<img src="/static/img/about-us/about-img.png" alt="">
 												</div>
-												<div class="advocate_name main_title main_title_4 color_gold">
-													Боровець Микола
+												<div class="user_advocate_name advocate_name main_title main_title_4 color_gold">
+													Оберіть адвоката
 												</div>
 												<div class="advocate_subname standart_title standart_title_4 color_black">
 													Адвокат
@@ -178,12 +179,10 @@
 															Галузь
 														</div>
 													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
+													<div class="user_advocate_type_work advocate_type_work standart_title standart_title_4 color_black">
+														Оберіть галузь
 													</div>
-													<div class="advocate_type_work standart_title standart_title_4 color_black">
-														Судова галузь
-													</div>
+													
 												</div>
 												<div class="advocate_user_item__block">
 													<div class="advocate_user_img">

@@ -451,7 +451,7 @@ let test_advocate = [
 function remove_active_block(wrap) {
     let parents = $(wrap);
     $(parents).removeClass('step_select_active');
-    $(parents).find('.step_active_content').text();      
+    $(parents).find('.step_active_content').text('');      
 }
 function generate_practise(id) {
     console.log('id: ', id);
@@ -476,30 +476,38 @@ function generate_practise(id) {
 function generate_advocate(id) {
     let url;
     if (id == undefined) {
-        url = '/api/users/?role=advocat';
+        // url = '/api/users/?role=advocat';
+
+        $('.hidden_message').text('Оберіть галузь');
     } else {
+        $('.hidden_message').text('');
         url = `/api/users/?faculty_ids=[${id}]`;
+
+        fetch(url, {
+            method: "GET",
+          })
+          .then((data) => {
+            return data.json();
+          })
+          .then((body) => {
+              console.log('body: ', body);
+              console.log('body.length: ', body.length);
+              if (body.length == 0) {
+                $('.hidden_message').text('По данній галузі адвокатів не знайдено');
+              }
+              let new_body = [];
+              $.each(body, function(index, value) {
+                new_body.push({
+                    id: value.id,
+                    name: value.username
+                })
+              });
+              create_all_doc_for_client('.client_select_step_hidden_content', new_body);
+              
+              remove_active_block('.advoc_step_select');
+          });     
     }
     
-    fetch(url, {
-        method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-          
-          let new_body = [];
-          $.each(body, function(index, value) {
-            new_body.push({
-                id: value.id,
-                name: value.username
-            })
-          });
-          create_all_doc_for_client('.client_select_step_hidden_content', new_body);
-          
-          remove_active_block('.advoc_step_select');
-      });      
 }
 if ($('.practise_step_hidden_content').length >= 1) {
     generate_practise();
@@ -542,13 +550,32 @@ function click_select_item() {
     // практики
     if ($(checker).hasClass('practise_step_hidden_content')) {
         generate_advocate(data_id);
+        $('.user_advocate_type_work').text(data);
+        $('.user_advocate_name').text('Оберіть адвоката');
+
         // create_all_doc_for_client('.client_select_step_hidden_content', test1);
+        var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        datepicker.destroy();
+        $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
+        $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
     }
     // адвокати
     else if ($(checker).hasClass('client_select_step_hidden_content')) {
+        $('.user_advocate_name').text(data);
+        let date_js = new Date();
+        let date_month = date_js.getMonth() + 1;
+        let date_year = date_js.getFullYear();
+        let date_client = $('.client_info_id').attr('data-client');
+        let date_advocat = data_id;
         
-       
-        generate_practise(data_id);
+        let advocat_days_json = {
+            year: date_year,
+            month: date_month,
+            advocat: date_advocat,
+            client: date_client,
+        }
+        fetch_get_data(advocat_days_json);
+        // generate_practise(data_id);
         // create_all_doc_for_client('.practise_step_hidden_content', test2);
 
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
@@ -565,6 +592,20 @@ function click_select_item() {
 
 
 };
+
+function fetch_get_data(content) {
+    let url = `/api/blocked_days/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
+    fetch(url, {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          console.log('body: ', body);
+         
+      }); 
+}
 
 
 
@@ -622,14 +663,16 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                     disabled: false,
                     html: currentDate + '<span class="dp-note"></span>'
                 }
-              } else if (cellType == 'day') {
-                    var day = date.getDay(),
-                    isDisabled = disabledDays.indexOf(day) != -1;
+            }
+            //    else if (cellType == 'day') {
+            //         var day = date.getDay(),
+            //         isDisabled = disabledDays.indexOf(day) != -1;
     
-                return {
-                    disabled: isDisabled
-                }
-            } else {
+            //     return {
+            //         disabled: isDisabled
+            //     }
+            // } 
+            else {
                return {
                 disabled: false
               }

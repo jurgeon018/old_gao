@@ -1079,6 +1079,14 @@
     width: 100%;
     height: auto; }
 
+.hidden_message {
+  color: #727271;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  padding-bottom: 10px; }
+
 .error_reserve {
   color: red;
   font-size: 13px;
