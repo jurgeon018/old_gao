@@ -13,19 +13,23 @@ import json
 
 @api_view(['GET',])
 def blocked_days(request):
-    query    = request.query_params
-    print("query: ", query)
-    response = []
-    month    = query['month']
-    year     = query['year']
-    day      = datetime.strptime(f'{month}-{year}', "%m-%Y").date()
+    query    = request.query_params; print("query: ", query)
+    response = {"blocked_days":[]}
+    month    = int(query['month'])
+    year     = int(query['year'])
+    # date     = datetime.strptime(f'{month}-{year}', "%m-%Y").date
+    print(date)
     advocat  = query['advocat']
     client   = query['client']
     advocat  = User.objects.get(id=advocat)
     client   = User.objects.get(id=client)
-    days     = []
-    for day in days:
-        response.append(day)
+    for week in calendar.monthcalendar(year, month):
+        for week_day in week:
+            print(week_day)
+    # for week_day in UserWeekDay.objects.filter(user=advocat):
+    #     week_day 
+    # for day in days:
+    #     response['blocked_days'].append(day)
     return Response(response)
 
 
