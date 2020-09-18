@@ -165,10 +165,10 @@ class UserWeekDayInline(admin.TabularInline):
 @admin.register(UserWeekDay)
 class UserWeekDayAdmin(admin.ModelAdmin):
     pass 
-    # def has_delete_permission(self, request, obj=None):
-    #     return False 
-    # def has_add_permission(self, request):
-    #     return False 
+   
+    # search_fields = [
+    #     'week_day__name'
+    # ]
 
 
 @admin.register(WeekDay)

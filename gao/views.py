@@ -7,9 +7,46 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from box.core.sw_content.models import * 
+
 from sw_blog.models import Post 
+
 from .models import *
 
+from datetime import datetime, date, time, timedelta 
+
+
+@login_required
+def cabinet(request):
+    users = User.objects.filter(role=User.CLIENT_ROLE)
+    user = request.user
+    role = user.role
+    faculties = Faculty.objects.all()
+    advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
+    clients  = User.objects.filter(role=User.CLIENT_ROLE)
+    consultations = Consultation.objects.all()
+
+    now = datetime.now()
+    hours_list = []
+    for hours in range(9, 20):
+        # delta = timedelta(hours=hours, minutes=0, seconds=0)
+        # total_seconds = delta.total_seconds()
+        # minutes = int(total_seconds // 60)
+        # seconds = int(total_seconds % 60)
+        hours_list.append(f'{hours}.00')
+        if hours != 19:
+            hours_list.append(f'{hours}.30')
+    today = datetime.today()
+    dates = []
+    for days in range(0, 10):
+        dates.append(today + timedelta(days=days))
+    if role == User.ADVOCAT_ROLE:
+        consultations = consultations.filter(advocat=user).order_by('date')
+        clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
+    elif role == User.CLIENT_ROLE:
+        consultations = consultations.filter(client=user)
+        advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
+    finished_consultations = consultations.filter(status=Consultation.FINISHED)
+    return render(request, f'booking/cabinet_{role}.html', locals())
 
 def index(request):
     page, _ = Page.objects.get_or_create(code='index')
@@ -41,43 +78,6 @@ def about(request):
     page, _ = Page.objects.get_or_create(code='about')
     return render(request, 'about.html', locals())
 
-
-from datetime import datetime, date, time, timedelta 
-
-
-@login_required
-def cabinet(request):
-    users = User.objects.filter(role=User.CLIENT_ROLE)
-    user = request.user
-    role = user.role
-    faculties = Faculty.objects.all()
-    advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
-    clients  = User.objects.filter(role=User.CLIENT_ROLE)
-    consultations = Consultation.objects.all()
-
-    now = datetime.now()
-    hours_list = []
-    for hours in range(9, 20):
-        # delta = timedelta(hours=hours, minutes=0, seconds=0)
-        # total_seconds = delta.total_seconds()
-        # minutes = int(total_seconds // 60)
-        # seconds = int(total_seconds % 60)
-        hours_list.append(f'{hours}.00')
-        if hours != 19:
-            hours_list.append(f'{hours}.30')
-    today = datetime.today()
-    dates = []
-    for days in range(0, 10):
-        date = today + timedelta(days=days)
-        dates.append(date)
-    if role == User.ADVOCAT_ROLE:
-        consultations = consultations.filter(advocat=user).order_by('date')
-        clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
-    elif role == User.CLIENT_ROLE:
-        consultations = consultations.filter(client=user)
-        advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
-    finished_consultations = consultations.filter(status=Consultation.FINISHED)
-    return render(request, f'booking/cabinet_{role}.html', locals())
 
 
 @csrf_exempt

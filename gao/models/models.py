@@ -3,11 +3,13 @@ from django.db.models import Q
 from django.utils import timezone
 from django.urls import reverse
 from django.utils import timezone 
-import datetime
 from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser
 
-from tinymce.models import HTMLField
 from .mixins import * 
+
+import calendar 
+from datetime import datetime, date, time, timedelta
+
 
 # users area 
 
@@ -41,42 +43,68 @@ class User(AbstractUser):
       verbose_name="Галузі права", to="gao.Faculty", blank=True, related_name="advocats",
   )
 
-  # def get_free_dates(self):
-  #   free_dates = ...
-  #   return free_dates
+  def get_days_info(self, year, month):
+    days = []
+    for i in range(1, calendar.monthrange(year, month)[-1]+1):
+      day = date(year, month, i)
+      days.append({
+        "day":day, 
+        "status":self.get_day_status(day),
+      })
+    return days
 
-  # def date_is_free(self, date_to, date_from):
-  #   if self.role == User.ADVOCAT_ROLE:
-  #     consultations = Consultation.objects.filter(
-  #       advocat=self,
-  #     )
-  #   elif self.role == User.CLIENT_ROLE:
-  #     consultations = Consultation.objects.filter(
-  #       client=self,
-  #     )
-  #   consultations = consultations.filter(
-  #     date__lte=date_to,
-  #     date__gte=date_from,
-  #   )
-  #   times_from = consultations.values_list('start', flat=True)
-  #   times_to = consultations.values_list('end', flat=True)
-  #   # print("date", date)
-  #   # print("consultations", consultations)
-  #   # print("times_from", times_from)
-  #   # print("times_to", times_to)
-  #   if not times_from and not times_to:
-  #     is_free = True
-  #   # elif ...:
-  #   #   is_free == ...
-  #   else:
-  #     is_free = False 
-  #   return is_free
+  def get_day_status(self, day):
+    '''
+    rest        - зайнятий, без консультацій
+    blocked     - зайнятий, з консультаціями 
+    free        - вільний, без консультацій
+    partly_busy - вільний, з консультаціями 
+    unknown     - помилка в логіці перевірок
+    '''
+    week_days = UserWeekDay.objects.filter(user=self)
+    week_day_codes = week_days.values_list('week_day__code', flat=True)
+    if str(day.isoweekday()) not in week_day_codes:
+      status = 'rest'
+    elif False:
+      # TODO: !
+      status = 'blocked'
+    elif False:
+      # TODO: !
+      status = 'free'
+    elif False:
+      # TODO: !
+      status = 'partly_busy'
+    else:
+      status = 'unknown'
+    return status
+
+  def get_hours_info(self, date):
+    hours = []
+    date = datetime.strptime(date, "%d.%m.%Y")
+    for hour in range(0, 24):
+      hours.append({
+        "hour":datetime.strptime(f"{hour}:00", "%H:%M").time(),
+        "status":self.get_hour_status(date),
+      })
+      if hour != 24:
+        hours.append({
+          "hour":datetime.strptime(f"{hour}:30", "%H:%M").time(),
+          "status":self.get_hour_status(date),
+        })
+    return hours
   
-  def get_free_hours(self, date_from, date_to):
-    free_hours = ...
-    return free_hours 
+  def get_hour_status(self, hour):
+    if False:
+      # TODO: !
+      status = "free"
+    elif False:
+      # TODO: !
+      status = "busy"
+    else:
+      status = 'unknown'
+    return status 
 
-  def time_is_free(self, date, start, end):
+  def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
     if self.role == User.ADVOCAT_ROLE:
       consultations = consultations.filter(advocat=self)
@@ -96,35 +124,14 @@ class User(AbstractUser):
     # TODO: Обмеження по динамічному окремому дню(WorkingDay)
     # Обмеження по існуючих консультаціях
     consultations = consultations.filter(
-      # Консультація...
-      # ...починається раніше вибраної години початку і закінчується пізніше вибраної години закінчення. 
-      # Вибрані години находяться внутрі діапазону годин консультації.
       Q(start__lt=start, end__gt=end)|
-      # ...починається пізніше вибраної години початку і починається раніше вибраної години закінчення
-      # Години консультації находяться внутрі діапазону вибраних годин.
       Q(start__gt=start, start__lt=end)|
-      # ...закінчується пізніше вибраної години початку і закінчується раніше вибраної години закінчення
-      # Кінець консультації находиться між вибраними годинами.
       Q(end__gt=start, end__lt=end)|
-      # ...починається раніше вибраної години початку і починається раніше вибраної години закінчення
-      # Початок консультації находиться між вибраними годинами.
       Q(start__lt=start, start__gt=end)
     )
     if consultations.exists():
       return False
     return True
-    # for consult in consultations:
-    #   if consult.start < start and consult.end > end:
-    #     return False
-    #   elif consult.start > start and consult.start < end:
-    #     return False
-    #   elif consult.end > start and consult.end < end:
-    #     return False
-    #   elif consult.start < start and consult.start > end:
-    #     return False
-    #   else:
-    #     pass
-    # return True
 
   def get_working_days(self):
     return WorkingDay.objects.filter(advocat=self)
@@ -138,36 +145,6 @@ class User(AbstractUser):
 
   def get_client_consultations(self):
     return Consultation.objects.filter(client=self)
-
-  def get_busy_days(self, year, month):
-    advocat_id     = request.GET.get('advocat_id')
-    month          = request.GET.get('month')
-    year           = request.GET.get('year')
-    advocat        = User.objects.get(id=advocat_id)
-    special_days   = WorkingDay.objects.filter(advocat=advocat)
-    days_available = []
-    month_range = range(1, calendar.monthrange(year=int(year), month=int(month))[-1] + 1)
-    for i in month_range:
-      day = datetime.date(day=i, month=int(month), year=int(year))
-      if special_days.filter(date=day):
-          days_available.append(day.strftime('%d-%B-%Y'))
-          continue
-      if day.weekday() == 0 and not advocat.monday:
-          continue
-      if day.weekday() == 1 and not advocat.tuesday:
-          continue
-      if day.weekday() == 2 and not advocat.wednesday:
-          continue
-      if day.weekday() == 3 and not advocat.thursday:
-          continue
-      if day.weekday() == 4 and not advocat.friday:
-          continue
-      if day.weekday() == 5 and not advocat.saturday:
-          continue
-      if day.weekday() == 6 and not advocat.sunday:
-          continue
-      else:
-          days_available.append(day.strftime('%d-%B-%Y'))
 
   def __str__(self):
     return f"{self.first_name} {self.last_name} ({self.username}, {self.phone_number}, {self.email})"
@@ -185,7 +162,7 @@ class WeekDay(models.Model):
     fri = 5
     sat = 6
     sun = 7
-    SLUG_CHOICES = [
+    CODE_CHOICES = [
         [mon, "mon"],
         [tue, "tue"],
         [wed, "wed"],
@@ -195,10 +172,10 @@ class WeekDay(models.Model):
         [sun, "sun"],
     ]
     name = models.CharField(verbose_name="Назва", max_length=255, unique=True)
-    code = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=SLUG_CHOICES)
+    code = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=CODE_CHOICES)
 
     def __str__(self):
-        return f'{self.name}, {self.code}'
+        return f'{self.name}|{self.code}'
 
     class Meta:
         unique_together     = ['name','code']
@@ -216,7 +193,7 @@ class UserWeekDay(models.Model):
     # TODO: додати clean() метод який не буде дозволяти створювати start>end
 
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.user.username}: {self.week_day}, {self.start}-{self.end}'
 
     class Meta:
         unique_together = ['week_day','user']
@@ -224,7 +201,7 @@ class UserWeekDay(models.Model):
         verbose_name_plural = "Дні тижня адвоката"
 
 
-class WorkingDay(models.Model):
+class UserWorkingDay(models.Model):
     advocat   = models.ForeignKey(
         verbose_name="Адвокат", to="gao.User",
         on_delete=models.SET_NULL, blank=True, null=True,
@@ -345,7 +322,7 @@ class Consultation(TimestampMixin):
 
     @property
     def time(self):
-        time = 0
+        time = 1
         # if self.times.first().end and self.times.first().start :
         #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
         #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
@@ -373,11 +350,13 @@ class Consultation(TimestampMixin):
     
     @property
     def price(self):
+        price = 1
         time = self.time
+        # time = self.end - self.start 
         hours = time // 60
         minutes = (time % 60) / 60
         price = (self.advocat.rate * hours) + (self.advocat.rate * minutes)
-        return int(price)
+        return price 
     
     def get_files_by_user(self):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
