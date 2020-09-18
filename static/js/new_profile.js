@@ -448,9 +448,31 @@ let test_advocate = [
     },
 ]
 
+function generate_practise() {
+    fetch('/api/faculties/', {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          create_all_doc_for_client('.practise_step_hidden_content', body);
+      });      
+}
+function generate_advocate() {
+    fetch('/api/users/', {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          create_all_doc_for_client('.client_select_step_hidden_content', body);
+      });      
+}
 if ($('.practise_step_hidden_content').length >= 1) {
-    create_all_doc_for_client('.practise_step_hidden_content', test_practise);
-    create_all_doc_for_client('.client_select_step_hidden_content', test_advocate);
+    generate_practise();
+    generate_advocate();
 }
 
    
