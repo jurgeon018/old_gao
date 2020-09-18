@@ -30,8 +30,6 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
 
 
-
-
 class ConsultationListView(generics.ListCreateAPIView):
     pagination_class = CustomPagination
     serializer_class = ConsultationListSerializer
@@ -78,10 +76,6 @@ class ConsultationListView(generics.ListCreateAPIView):
             return Response(response)
         response = super().create(request, *args, **kwargs)
 
-        print("response", response)
-        print("response.data", response.data)
-        print(response.data.get('id'))
-        
         for file in request.FILES:
             document = ConsultationDocument.objects.create(
                 consultation=Consultation.objects.get(id=response.data.get('id')),
@@ -110,8 +104,8 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         response  = {"messages":[]}
         data      = request.data 
         date      = data.get('date')
-        start = data.get('start')
-        end   = data.get('end')
+        start     = data.get('start')
+        end       = data.get('end')
         advocat   = data.get('advocat')
         client    = data.get('client')
         if date and start and end and advocat and client:

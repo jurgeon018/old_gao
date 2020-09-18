@@ -7,40 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from box.core.sw_content.models import * 
+
 from sw_blog.models import Post 
+
 from .models import *
-
-
-def index(request):
-    page, _ = Page.objects.get_or_create(code='index')
-    page_is_index = True 
-    return render(request, 'index.html', locals())
-
-def blog(request):
-    page, _ = Page.objects.get_or_create(code='blog')
-    return render(request, 'blog.html', locals())
-
-def post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    page = post 
-    return render(request,'post.html', locals())
-
-def contacts(request):
-    page, _ = Page.objects.get_or_create(code='contacts')
-    return render(request, 'contacts.html', locals())
-
-def practice(request, pk):
-    return render(request, f'practices/practise-{pk}.html', locals())
-
-def member(request, slug):
-    member = Team.objects.get(slug=slug)
-    page = member 
-    return render(request, 'member.html', locals())
-
-def about(request):
-    page, _ = Page.objects.get_or_create(code='about')
-    return render(request, 'about.html', locals())
-
 
 from datetime import datetime, date, time, timedelta 
 
@@ -78,6 +48,37 @@ def cabinet(request):
         advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
     finished_consultations = consultations.filter(status=Consultation.FINISHED)
     return render(request, f'booking/cabinet_{role}.html', locals())
+
+def index(request):
+    page, _ = Page.objects.get_or_create(code='index')
+    page_is_index = True 
+    return render(request, 'index.html', locals())
+
+def blog(request):
+    page, _ = Page.objects.get_or_create(code='blog')
+    return render(request, 'blog.html', locals())
+
+def post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    page = post 
+    return render(request,'post.html', locals())
+
+def contacts(request):
+    page, _ = Page.objects.get_or_create(code='contacts')
+    return render(request, 'contacts.html', locals())
+
+def practice(request, pk):
+    return render(request, f'practices/practise-{pk}.html', locals())
+
+def member(request, slug):
+    member = Team.objects.get(slug=slug)
+    page = member 
+    return render(request, 'member.html', locals())
+
+def about(request):
+    page, _ = Page.objects.get_or_create(code='about')
+    return render(request, 'about.html', locals())
+
 
 
 @csrf_exempt
