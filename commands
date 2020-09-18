@@ -9,4 +9,5 @@ python3 manage.py sw_import -d import/
 python3 manage.py gen_advo
 python3 manage.py gen_clients
 python3 manage.py gen_consults
+python3 manage.py sw_import -d import/
 python3 manage.py runserver 127.0.0.1:8000 

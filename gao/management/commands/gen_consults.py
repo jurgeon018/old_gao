@@ -79,7 +79,7 @@ class Command(BaseCommand):
             start = datetime.strptime(f"{random.randint(x+1,23)}:{random.choice([0,30])}:00","%H:%M:%S").time()
 
             # date_is_free = advocat.date_is_free(date_to=consult_date, date_from=consult_date)
-            time_is_free = advocat.time_is_free(date=consult_date, start=start, end=end)
+            time_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
             # print("date_is_free: ", date_is_free)
             # print("time_is_free: ", time_is_free)
             # print("end: ", end)
