@@ -311,8 +311,8 @@ class Consultation(TimestampMixin):
         Q(start__lt=self.start, start__gt=self.end)
       )
       # if False:
-      if consultations.exists():
-        raise Exception('ERROR!!!')
+      # if consultations.exists():
+      #   raise Exception('ERROR!!!')
       super().save()
 
     @property

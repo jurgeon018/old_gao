@@ -35,10 +35,12 @@ def cabinet(request):
         hours_list.append(f'{hours}.00')
         if hours != 19:
             hours_list.append(f'{hours}.30')
+            
     today = datetime.today()
     dates = []
     for days in range(0, 10):
         dates.append(today + timedelta(days=days))
+        
     if role == User.ADVOCAT_ROLE:
         consultations = consultations.filter(advocat=user).order_by('date')
         clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))

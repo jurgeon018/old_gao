@@ -59,6 +59,7 @@ class Command(BaseCommand):
         # r = 1
         r = 100
         # r = 1000
+        # Consultation.objects.all().delete()
         for i in range(r):
             print()
             print(f'{i+1}/{r}')
@@ -72,11 +73,15 @@ class Command(BaseCommand):
             status        = random.choice(statuses)[0]
 
             # TODO: получити вільні дати у адвоката get_free_dates
-            consult_date  = date.today() + timedelta(days=random.randint(1, 20))
+            consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 20))
             # TODO: получити робочі і вільні години у адвоката по даті get_free_hours
-            x = random.randint(0,20)
-            end   = datetime.strptime(f"{x}:{random.choice([0,30])}:00","%H:%M:%S").time()
-            start = datetime.strptime(f"{random.randint(x+1,23)}:{random.choice([0,30])}:00","%H:%M:%S").time()
+            start = random.randint(0,20)
+            while True:
+                end   = random.randint(start+1,23)
+                if end > start:
+                    break
+            start = datetime.strptime(f"{start}:{random.choice([0,30])}:00","%H:%M:%S").time()
+            end   = datetime.strptime(f"{end}:{random.choice([0,30])}:00","%H:%M:%S").time()
 
             # date_is_free = advocat.date_is_free(date_to=consult_date, date_from=consult_date)
             time_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
@@ -85,8 +90,8 @@ class Command(BaseCommand):
             # print("end: ", end)
             # print("start: ", start)
             # if date_is_free and time_is_free:
-            if time_is_free:
-            # if True:
+            # if time_is_free:
+            if True:
                 consult, created = Consultation.objects.get_or_create(
                     advocat   = advocat,
                     client    = client,

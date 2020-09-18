@@ -12,7 +12,7 @@ import json
 
 
 @api_view(['GET'])
-def get_days_info(request):
+def get_days_info(request, type=None):
     query     = request.query_params#; print("query: ", query)
     month     = int(query['month'])
     year      = int(query['year'])
@@ -37,6 +37,32 @@ def get_hours_info(request):
     # TODO: перевірки по клієнту 
     return Response({
         "hours":advocat.get_hours_info(date),
+    })
+
+
+@api_view(['GET'])
+def get_working_hours_info(request):
+    query     = request.query_params#; print("query: ", query)
+    date      = query.get('date')
+    advocat   = query.get('advocat')
+    consultations = Consultation.objects.all()
+    
+    if date:
+        date      = datetime.strptime(date, "%d.%m.%Y")
+        consultations = consultations.filter(date=date)
+    if advocat:
+        advocat   = User.objects.get(id=advocat)
+        consultations = consultations.filter(advocat=advocat)
+
+    hours     = []
+    for consultation in consultations:
+        hours.append({
+            "id": consultation.id,
+            "start": consultation.start,
+            "end": consultation.end,
+        })
+    return Response({
+        "hours":hours,
     })
 
 
