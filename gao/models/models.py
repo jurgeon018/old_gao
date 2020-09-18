@@ -185,7 +185,7 @@ class WeekDay(models.Model):
     fri = 5
     sat = 6
     sun = 7
-    SLUG_CHOICES = [
+    CODE_CHOICES = [
         [mon, "mon"],
         [tue, "tue"],
         [wed, "wed"],
@@ -195,10 +195,10 @@ class WeekDay(models.Model):
         [sun, "sun"],
     ]
     name = models.CharField(verbose_name="Назва", max_length=255, unique=True)
-    code = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=SLUG_CHOICES)
+    code = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=CODE_CHOICES)
 
     def __str__(self):
-        return f'{self.name}, {self.code}'
+        return f'{self.name}|{self.code}'
 
     class Meta:
         unique_together     = ['name','code']
@@ -216,7 +216,7 @@ class UserWeekDay(models.Model):
     # TODO: додати clean() метод який не буде дозволяти створювати start>end
 
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.user.username}: {self.week_day}, {self.start}-{self.end}'
 
     class Meta:
         unique_together = ['week_day','user']
@@ -224,7 +224,7 @@ class UserWeekDay(models.Model):
         verbose_name_plural = "Дні тижня адвоката"
 
 
-class WorkingDay(models.Model):
+class UserWorkingDay(models.Model):
     advocat   = models.ForeignKey(
         verbose_name="Адвокат", to="gao.User",
         on_delete=models.SET_NULL, blank=True, null=True,

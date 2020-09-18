@@ -169,6 +169,9 @@ class UserWeekDayAdmin(admin.ModelAdmin):
     #     return False 
     # def has_add_permission(self, request):
     #     return False 
+    search_fields = [
+        'week_day__name'
+    ]
 
 
 @admin.register(WeekDay)

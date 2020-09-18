@@ -19,17 +19,19 @@ def blocked_days(request):
     year     = int(query['year'])
     # date     = datetime.strptime(f'{month}-{year}', "%m-%Y").date
     print(date)
-    advocat  = query['advocat']
-    client   = query['client']
-    advocat  = User.objects.get(id=advocat)
-    client   = User.objects.get(id=client)
-    for week in calendar.monthcalendar(year, month):
-        for week_day in week:
-            print(week_day)
-    # for week_day in UserWeekDay.objects.filter(user=advocat):
-    #     week_day 
-    # for day in days:
-    #     response['blocked_days'].append(day)
+    advocat      = query['advocat']
+    client       = query['client']
+    advocat      = User.objects.get(id=advocat)
+    client       = User.objects.get(id=client)
+    week_days    = UserWeekDay.objects.filter(user=advocat)
+    # print(week_days)
+    # working_days = UserWorkingDay.objects.filter(advocat=advocat)
+    range_end    = calendar.monthrange(year, month)[-1]
+    for i in range(1, range_end+1):
+        day = date(year, month, i)
+        week_day_codes = week_days.values_list('week_day__code', flat=True)
+        if week_day_codes and str(day.isoweekday()) not in week_day_codes:
+            response["blocked_days"].append(day)
     return Response(response)
 
 
