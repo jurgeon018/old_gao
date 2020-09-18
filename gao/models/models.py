@@ -12,7 +12,7 @@ from .mixins import *
 # users area 
 
 
-class User(AbstractUser, DaysMixin):
+class User(AbstractUser):
   CLIENT_ROLE  = 'client'
   ADVOCAT_ROLE = 'advocat'
   USER_ROLES = [
@@ -213,6 +213,7 @@ class UserWeekDay(models.Model):
     end      = models.TimeField(verbose_name="Закінчення робочого дня")
     
     # TODO: додати clean() метод який не буде дозволяти створювати дати які не кратні півгодинам
+    # TODO: додати clean() метод який не буде дозволяти створювати start>end
 
     def __str__(self):
         return f'{self.id}'
