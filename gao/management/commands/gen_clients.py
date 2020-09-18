@@ -7,7 +7,7 @@ class Command(BaseCommand):
         username="admin2"
     )
     user.role = User.CLIENT_ROLE
-    user.is_stuff = True
+    user.is_staff = True
     user.is_superuser = True
     user.set_password('admin2')
     user.save()

@@ -386,7 +386,7 @@
 													Додаткові файли:
 												</div>
 												<div class="consultation_file__block">
-												{% for document in consultation.documents %}
+												{% for document in consultation.get_documents %}
 													<a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
 														{{ document.file }}
 													</a>
@@ -626,7 +626,7 @@
 												<div class="docs_title midle_title midle_title_3 color_gold">
 													Консультація {{ forloop.counter }}
 												</div>
-												{% for document in consultation.documents %}
+												{% for document in consultation.get_documents %}
 													<a href="{{ document.file.url }}" class="doc_content standart_title standart_title_4 color_black">
 														{{ document.file }}
 													</a>
@@ -641,7 +641,6 @@
 								{% endfor %}
 								</div>
 							</div>
-							
 						</div>
 					</div>
 						</div>

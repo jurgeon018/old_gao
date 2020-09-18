@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.urls import reverse
 from django.utils import timezone 
@@ -40,17 +41,90 @@ class User(AbstractUser, DaysMixin):
       verbose_name="Галузі права", to="gao.Faculty", blank=True, related_name="advocats",
   )
 
+  # def get_free_dates(self):
+  #   free_dates = ...
+  #   return free_dates
+
+  # def date_is_free(self, date_to, date_from):
+  #   if self.role == User.ADVOCAT_ROLE:
+  #     consultations = Consultation.objects.filter(
+  #       advocat=self,
+  #     )
+  #   elif self.role == User.CLIENT_ROLE:
+  #     consultations = Consultation.objects.filter(
+  #       client=self,
+  #     )
+  #   consultations = consultations.filter(
+  #     date__lte=date_to,
+  #     date__gte=date_from,
+  #   )
+  #   times_from = consultations.values_list('start', flat=True)
+  #   times_to = consultations.values_list('end', flat=True)
+  #   # print("date", date)
+  #   # print("consultations", consultations)
+  #   # print("times_from", times_from)
+  #   # print("times_to", times_to)
+  #   if not times_from and not times_to:
+  #     is_free = True
+  #   # elif ...:
+  #   #   is_free == ...
+  #   else:
+  #     is_free = False 
+  #   return is_free
+  
   def get_free_hours(self, date_from, date_to):
     free_hours = ...
     return free_hours 
 
-  def get_free_dates(self):
-    free_dates = ...
-    return free_dates
-
-  def date_is_free(self):
-    is_free = ...
-    return is_free
+  def time_is_free(self, date, start, end):
+    consultations = Consultation.objects.filter(date=date)
+    if self.role == User.ADVOCAT_ROLE:
+      consultations = consultations.filter(advocat=self)
+    elif self.role == User.CLIENT_ROLE:
+      consultations = consultations.filter(client=self)
+    # Обмеження по статичному дню тижня
+    weekdays = UserWeekDay.objects.filter(
+      user=self, 
+      week_day__code=date.isoweekday(),
+    )
+    weekday = weekdays.first()
+    if weekday:
+      if start < weekday.start or end > weekday.end:
+        return False 
+    else:
+      return False 
+    # TODO: Обмеження по динамічному окремому дню(WorkingDay)
+    # Обмеження по існуючих консультаціях
+    consultations = consultations.filter(
+      # Консультація...
+      # ...починається раніше вибраної години початку і закінчується пізніше вибраної години закінчення. 
+      # Вибрані години находяться внутрі діапазону годин консультації.
+      Q(start__lt=start, end__gt=end)|
+      # ...починається пізніше вибраної години початку і починається раніше вибраної години закінчення
+      # Години консультації находяться внутрі діапазону вибраних годин.
+      Q(start__gt=start, start__lt=end)|
+      # ...закінчується пізніше вибраної години початку і закінчується раніше вибраної години закінчення
+      # Кінець консультації находиться між вибраними годинами.
+      Q(end__gt=start, end__lt=end)|
+      # ...починається раніше вибраної години початку і починається раніше вибраної години закінчення
+      # Початок консультації находиться між вибраними годинами.
+      Q(start__lt=start, start__gt=end)
+    )
+    if consultations.exists():
+      return False
+    return True
+    # for consult in consultations:
+    #   if consult.start < start and consult.end > end:
+    #     return False
+    #   elif consult.start > start and consult.start < end:
+    #     return False
+    #   elif consult.end > start and consult.end < end:
+    #     return False
+    #   elif consult.start < start and consult.start > end:
+    #     return False
+    #   else:
+    #     pass
+    # return True
 
   def get_working_days(self):
     return WorkingDay.objects.filter(advocat=self)
@@ -65,6 +139,36 @@ class User(AbstractUser, DaysMixin):
   def get_client_consultations(self):
     return Consultation.objects.filter(client=self)
 
+  def get_busy_days(self, year, month):
+    advocat_id     = request.GET.get('advocat_id')
+    month          = request.GET.get('month')
+    year           = request.GET.get('year')
+    advocat        = User.objects.get(id=advocat_id)
+    special_days   = WorkingDay.objects.filter(advocat=advocat)
+    days_available = []
+    month_range = range(1, calendar.monthrange(year=int(year), month=int(month))[-1] + 1)
+    for i in month_range:
+      day = datetime.date(day=i, month=int(month), year=int(year))
+      if special_days.filter(date=day):
+          days_available.append(day.strftime('%d-%B-%Y'))
+          continue
+      if day.weekday() == 0 and not advocat.monday:
+          continue
+      if day.weekday() == 1 and not advocat.tuesday:
+          continue
+      if day.weekday() == 2 and not advocat.wednesday:
+          continue
+      if day.weekday() == 3 and not advocat.thursday:
+          continue
+      if day.weekday() == 4 and not advocat.friday:
+          continue
+      if day.weekday() == 5 and not advocat.saturday:
+          continue
+      if day.weekday() == 6 and not advocat.sunday:
+          continue
+      else:
+          days_available.append(day.strftime('%d-%B-%Y'))
+
   def __str__(self):
     return f"{self.first_name} {self.last_name} ({self.username}, {self.phone_number}, {self.email})"
   
@@ -74,15 +178,6 @@ class User(AbstractUser, DaysMixin):
 
 
 class WeekDay(models.Model):
-    NAME_CHOICES = [
-        ["Понеділок","Понеділок"],
-        ["Вівторок","Вівторок"],
-        ["Середа","Середа"],
-        ["Четвер","Четвер"],
-        ["Пятниця","Пятниця"],
-        ["Субота","Субота"],
-        ["Неділя","Неділя"],
-    ]
     mon = 1
     tue = 2
     wed = 3
@@ -99,8 +194,8 @@ class WeekDay(models.Model):
         [sat, "sat"],
         [sun, "sun"],
     ]
-    name       = models.CharField(verbose_name="Назва", max_length=255, unique=True, choices=NAME_CHOICES)
-    code       = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=SLUG_CHOICES)
+    name = models.CharField(verbose_name="Назва", max_length=255, unique=True)
+    code = models.SlugField(verbose_name="Код", max_length=255, unique=True, choices=SLUG_CHOICES)
 
     def __str__(self):
         return f'{self.name}, {self.code}'
@@ -112,14 +207,18 @@ class WeekDay(models.Model):
 
 
 class UserWeekDay(models.Model):
-    week_day   = models.ForeignKey(verbose_name="День тижня", to="gao.WeekDay", on_delete=models.CASCADE)
-    user       = models.ForeignKey(verbose_name="Користувачі", to="gao.User", on_delete=models.CASCADE)
-    is_working = models.BooleanField(verbose_name="Робочий?", default=True)
+    week_day = models.ForeignKey(verbose_name="День тижня", to="gao.WeekDay", on_delete=models.CASCADE)
+    user     = models.ForeignKey(verbose_name="Користувачі", to="gao.User", on_delete=models.CASCADE)
+    start    = models.TimeField(verbose_name="Початок робочого дня")
+    end      = models.TimeField(verbose_name="Закінчення робочого дня")
+    
+    # TODO: додати clean() метод який не буде дозволяти створювати дати які не кратні півгодинам
 
     def __str__(self):
         return f'{self.id}'
 
     class Meta:
+        unique_together = ['week_day','user']
         verbose_name = "День тижня адвоката"
         verbose_name_plural = "Дні тижня адвоката"
 
@@ -127,16 +226,17 @@ class UserWeekDay(models.Model):
 class WorkingDay(models.Model):
     advocat   = models.ForeignKey(
         verbose_name="Адвокат", to="gao.User",
-        on_delete=models.SET_NULL, blank=True, null=True
+        on_delete=models.SET_NULL, blank=True, null=True,
     )
     date      = models.DateField(verbose_name="День")
-    time_from = models.TimeField(verbose_name="Працює з")
-    time_to   = models.TimeField(verbose_name="Працює до")
+    start = models.TimeField(verbose_name="Початок робочого дня")
+    end   = models.TimeField(verbose_name="Завершення робочого дня")
 
     def  __str__(self):
-        return f'{self.date}: {self.time_from} - {self.time_to}'
+        return f'{self.date}: {self.start} - {self.end}'
 
     class Meta:
+        unique_together = ['date', 'advocat']
         verbose_name = "Робочий день"
         verbose_name_plural = "Робочі дні"
 
@@ -148,7 +248,8 @@ class Faculty(TimestampMixin):
         return f'{self.name}'
 
     class Meta:
-        verbose_name = "Право"
+        verbose_name = "Галузь права"
+        verbose_name_plural = "Галузі права"
 
 
 # consultations area 
@@ -196,10 +297,10 @@ class Consultation(TimestampMixin):
       verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
       on_delete=models.SET_NULL, related_name="consulations",
     )
-    time_from = models.TimeField(
+    start = models.TimeField(
       verbose_name="Час початку",
     )
-    time_to = models.TimeField(
+    end = models.TimeField(
       verbose_name="Час завершення",
     )
     comment   = models.TextField(
@@ -219,10 +320,21 @@ class Consultation(TimestampMixin):
         on_delete=models.SET_NULL, blank=True, null=True,
     )
 
-    @property 
-    def times(self):
-        times = ConsultationTime.objects.filter(consultation=self)
-        return times 
+    def save(self, *args, **kwargs):
+      consultations = Consultation.objects.filter(
+        advocat=self.advocat,
+        client=self.client,
+        date=self.date,
+      ).filter(
+        Q(start__lt=self.start, end__gt=self.end)|
+        Q(start__gt=self.start, start__lt=self.end)|
+        Q(end__gt=self.start, end__lt=self.end)|
+        Q(start__lt=self.start, start__gt=self.end)
+      )
+      # if False:
+      if consultations.exists():
+        raise Exception('ERROR!!!')
+      super().save()
 
     @property
     def documents(self):
@@ -232,29 +344,29 @@ class Consultation(TimestampMixin):
     @property
     def time(self):
         time = 0
-        if self.times.first().time_to and self.times.first().time_from :
-            minutes = int(self.times.first().time_to.strftime('%M')) + int(self.times.first().time_from.strftime('%M'))
-            hours = (int(self.times.first().time_to.strftime('%H')) - int(self.times.first().time_from.strftime("%H")))
-            if minutes > 0:
-                hours -= 1
-            if minutes > 60:
-                hours += 1
-                minutes -= 60
-            time = 60 - minutes + (hours * 60)
+        # if self.times.first().end and self.times.first().start :
+        #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
+        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+        #     if minutes > 0:
+        #         hours -= 1
+        #     if minutes > 60:
+        #         hours += 1
+        #         minutes -= 60
+        #     time = 60 - minutes + (hours * 60)
         return time
     
     @property
     def full_time(self):
         time = 0
-        if self.times.first().time_to and self.times.first().time_from :
-            minutes = 60 - (int(self.times.first().time_to.strftime('%M')) + int(self.times.first().time_from.strftime('%M')))
-            hours = (int(self.times.first().time_to.strftime('%H')) - int(self.times.first().time_from.strftime("%H")))
-            if minutes > 0:
-                hours -= 1
-            if minutes > 60:
-                hours += 1
-                minutes -= 60
-            time = f"{hours} год. {minutes} хв."
+        # if self.times.first().end and self.times.first().start :
+        #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
+        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+        #     if minutes > 0:
+        #         hours -= 1
+        #     if minutes > 60:
+        #         hours += 1
+        #         minutes -= 60
+        #     time = f"{hours} год. {minutes} хв."
         return time
     
     @property
@@ -268,14 +380,16 @@ class Consultation(TimestampMixin):
     def get_files_by_user(self):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
         return 
-    
+
     class Meta:
         verbose_name = 'Консультація'
         verbose_name_plural = 'Консультації'
 
     def __str__(self):
-        return f'{self.date}'
-
+        res = f'{self.date}, {self.start}-{self.end}, {self.advocat.username}'
+        if self.client:
+          res += f' -> {self.client.username}'
+        return res 
 
 
 class ConsultationDocument(TimestampMixin):
@@ -284,7 +398,7 @@ class ConsultationDocument(TimestampMixin):
         verbose_name="Автор", to="gao.User", on_delete=models.SET_NULL, null=True, blank=False,
     )
     consultation = models.ForeignKey(
-        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False,
+        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False, related_name="documents"
     )
 
     def __str__(self):
@@ -297,7 +411,7 @@ class ConsultationDocument(TimestampMixin):
 
 class ConsultationPayment(TimestampMixin):
     consultation = models.OneToOneField(
-        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False,
+        verbose_name="Консультація", to="gao.Consultation", on_delete=models.SET_NULL, null=True, blank=False, related_name="payment"
     )
     amount = models.FloatField(verbose_name="Сумма")
 

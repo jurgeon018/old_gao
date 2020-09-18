@@ -18,18 +18,6 @@ class AdvocateListSerializer(serializers.ModelSerializer):
         exclude = ['password', 'groups', 'user_permissions',]
 
 
-class ConsultationListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Consultation 
-        exclude = []
-
-
-class ConsultationDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Consultation 
-        exclude = []
-
-
 class ConsultationDocumentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationDocument 
@@ -51,6 +39,28 @@ class ConsultationPaymentListSerializer(serializers.ModelSerializer):
 class ConsultationPaymentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationPayment 
+        exclude = []
+
+
+class ConsultationListSerializer(serializers.ModelSerializer):
+    # date    = serializers.DateTimeField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
+    # created = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    # updated = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    documents = ConsultationDocumentListSerializer(many=True, read_only=True)
+    payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
+    class Meta:
+        model = Consultation 
+        exclude = []
+
+
+class ConsultationDetailSerializer(serializers.ModelSerializer):
+    # date    = serializers.DateTimeField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
+    # created = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    # updated = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    documents = ConsultationDocumentListSerializer(many=True, read_only=True)
+    payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
+    class Meta:
+        model = Consultation 
         exclude = []
 
 
