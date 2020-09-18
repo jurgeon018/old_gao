@@ -16,7 +16,10 @@ class UserListView(generics.ListCreateAPIView):
         queryset    = super().get_queryset()
         request     = self.request 
         data        = request.query_params
-        faculty_ids = json.loads(data.get('faculty_ids', []))
+        faculty_ids = json.loads(data.get('faculty_ids', "[]"))
+        role        = data.get('role')
+        if role:
+            queryset = queryset.filter(role=role)
         if faculty_ids:
             queryset = queryset.filter(faculties__id__in=faculty_ids)
         return queryset
