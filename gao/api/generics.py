@@ -6,20 +6,19 @@ from .paginators import *
 import datetime
 import calendar
 from django.http import JsonResponse
-
+import json 
 
 class UserListView(generics.ListCreateAPIView):
     serializer_class = UserListSerializer
     queryset = User.objects.all()
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        request = self.request 
-        data = request.query_params
-        faculty_ids = data.get('faculty_ids')
+        queryset    = super().get_queryset()
+        request     = self.request 
+        data        = request.query_params
+        faculty_ids = json.loads(data.get('faculty_ids', []))
         if faculty_ids:
             queryset = queryset.filter(faculties__id__in=faculty_ids)
-        print(data, request)
         return queryset
 
 
@@ -36,20 +35,21 @@ class ConsultationListView(generics.ListCreateAPIView):
     queryset = Consultation.objects.all()
 
     def create(self, request, *args, **kwargs):
+        print("request.user", request.user)
         response  = {"messages":[]}
         data      = request.data 
         date      = data['date']
-        time_from = data['time_from']
-        time_to   = data['time_to']
+        start = data['start']
+        end   = data['end']
         advocat   = data['advocat']
         client    = data['client']
         consultations = Consultation.objects.filter(
             date      = date, 
-            time_from = time_from, 
-            time_to   = time_to,
+            start = start, 
+            end   = end,
         )
-        advocat_consultations = Consultation.objects.filter(advocat=advocat)
-        client_consultations  = Consultation.objects.filter(client=client)
+        advocat_consultations = consultations.filter(advocat=advocat)
+        client_consultations  = consultations.filter(client=client)
         # TODO: запхати таку перевірку у Consultation.save()
         if client_consultations.exists() and advocat_consultations.exists():
             response['messages'].append({
@@ -74,6 +74,21 @@ class ConsultationListView(generics.ListCreateAPIView):
             })
             return Response(response)
         response = super().create(request, *args, **kwargs)
+
+        print("response", response)
+        print("response.data", response.data)
+        print(response.data.get('id'))
+        
+        for file in request.FILES:
+            document = ConsultationDocument.objects.create(
+                consultation=Consultation.objects.get(id=response.data.get('id')),
+                file=file,
+            )
+            if request.user.is_authenticated:
+                document.author=request.user 
+            else:
+                document.author=User.objects.get(id=client)
+            document.save()
         return response
 
     def get_queryset(self):
@@ -91,41 +106,50 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         response  = {"messages":[]}
         data      = request.data 
-        date      = data['date']
-        time_from = data['time_from']
-        time_to   = data['time_to']
-        advocat   = data['advocat']
-        client    = data['client']
-        consultations = Consultation.objects.filter(
-            date      = date, 
-            time_from = time_from, 
-            time_to   = time_to,
-        )
-        advocat_consultations = Consultation.objects.filter(advocat=advocat)
-        client_consultations  = Consultation.objects.filter(client=client)
-        # TODO: запхати таку перевірку у Consultation.save()
-        if client_consultations.exists() and advocat_consultations.exists():
+        date      = data.get('date')
+        start = data.get('start')
+        end   = data.get('end')
+        advocat   = data.get('advocat')
+        client    = data.get('client')
+        if date and start and end and advocat and client:
+            consultations = Consultation.objects.filter(
+                date      = date, 
+                start = start, 
+                end   = end,
+            )
+            advocat_consultations = Consultation.objects.filter(advocat=advocat)
+            client_consultations  = Consultation.objects.filter(client=client)
+            # TODO: запхати таку перевірку у Consultation.save()
+            if client_consultations.exists() and advocat_consultations.exists():
+                response['messages'].append({
+                    'text':'Ця година вже зайнята іншим клієнтом', 
+                    'status':'bad',
+                })
+                response['messages'].append({
+                    'text':'Ця година вже зайнята іншою консультацією', 
+                    'status':'bad',
+                })
+                return Response(response)
+            elif advocat_consultations.exists():
+                response['messages'].append({
+                    'text':'Ця година вже зайнята іншим клієнтом', 
+                    'status':'bad',
+                })
+                return Response(response)
+            elif client_consultations.exists():
+                response['messages'].append({
+                    'text':'Ця година вже зайнята іншою консультацією', 
+                    'status':'bad',
+                })
+                return Response(response)
+        elif "mark" in request.data:
+            # response = 
+            super().update(request, *args, **kwargs)
             response['messages'].append({
-                'text':'Ця година вже зайнята іншим клієнтом', 
-                'status':'bad',
+                'text':'Консультацію було успішно оцінено',
+                'status':'success',
             })
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншою консультацією', 
-                'status':'bad',
-            })
-            return Response(response)
-        elif advocat_consultations.exists():
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншим клієнтом', 
-                'status':'bad',
-            })
-            return Response(response)
-        elif client_consultations.exists():
-            response['messages'].append({
-                'text':'Ця година вже зайнята іншою консультацією', 
-                'status':'bad',
-            })
-            return Response(response)
+            return Response(response)#.data
         response = super().update(request, *args, **kwargs)
         return response
 
@@ -180,16 +204,3 @@ class FacultyDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FacultyDetailSerializer
     queryset = Faculty.objects.all()
 
-
-class AdvocateListView(generics.ListCreateAPIView):
-    serializer_class = AdvocateListSerializer
-    queryset = User.objects.all()
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        request = self.request 
-        data = request.query_params
-        faculty = data.get('faculty')
-        if faculty:
-            queryset = queryset.filter(faculties__id__in=[faculty])
-        return queryset

@@ -32,20 +32,13 @@ class ConsultationDocumentInline(admin.StackedInline):
     model = ConsultationDocument
     classes = ['collapse']
 
-# class ConsultationTimeInline(admin.StackedInline):
-#     extra = 0
-#     model = ConsultationTime
-#     classes = ['collapse']
-
 @admin.register(Consultation)
 class ConsultationAdmin(ImportExportModelAdmin):
     resource_class = ConsultationResource
     inlines = [
         ConsultationDocumentInline,
-        # ConsultationTimeInline
     ]
     
-
 
 @admin.register(ConsultationDocument)
 class ConsultationDocumentAdmin(ImportExportModelAdmin):
@@ -60,6 +53,9 @@ class ConsultationPaymentAdmin(ImportExportModelAdmin):
 @admin.register(Faculty)
 class FacultyAdmin(ImportExportModelAdmin):
     resource_class = FacultyResource
+    search_fields = [
+        'name',
+    ]
 
 
 class SliderInline(admin.StackedInline):
@@ -156,113 +152,41 @@ class DocumentAdmin(admin.ModelAdmin):
     pass 
 
 
-class CustomUserAdmin(UserAdmin):
-    inlines = [
-        # ProfileInline,
-        # OrderInline,
-        DocumentInline
+class UserWeekDayInline(admin.TabularInline):
+    model = UserWeekDay
+    exclude = []
+    extra = 0
+    classes = ['collapse']
+    autocomplete_fields = [
+        'week_day',
     ]
 
-    fieldsets = (
-        (_('Personal info'), {
-            'fields': (
-                'first_name', 
-                'last_name', 
-                'full_name',
-                'role',
-                'email',
-                'phone_number',
-                'birth_date',
-                'sex',
-            )
-        }),
-        (None, {
-            'fields': (
-                'username', 
-                'password'
-            )
-        }),
-        # (_('Permissions'), {
-        #     'fields': (
-        #         'is_active', 
-        #         'is_staff', 
-        #         'is_superuser', 
-        #         'groups', 
-        #         'user_permissions'
-        #     ),
-        # }),
-        # (_('Important dates'), {
-        #     'fields': (
-        #         'last_login', 
-        #         'date_joined',
-        #     ),
-        # }),
-    )
-    readonly_fields = [
-        # 'username',
-        # 'first_name',
-        # 'last_name',
-        # 'email',
-        # 'phone_number',
-        # 'last_login',
-        # 'date_joined',
-    ]
-    add_fieldsets = (
-        (None, {
-            'classes': (
-                'wide',
-            ),
-            'fields': (
-                'username', 
-                'password1', 
-                'password2'
-            ),
-        }),
-    )
+
+@admin.register(UserWeekDay)
+class UserWeekDayAdmin(admin.ModelAdmin):
+    pass 
+    # def has_delete_permission(self, request, obj=None):
+    #     return False 
+    # def has_add_permission(self, request):
+    #     return False 
 
 
-    list_per_page = 100
-    save_as_continue = False 
-    save_on_top = True 
-
-    list_display = (
-        'id', 
-        'username',
-        'email',
-        'first_name',
-        'last_name',
-        # 'phone_number',
-    )
-    list_display_links = [
-        'id',
-        'email',
-        'username',
-        'first_name',
-        'last_name',
-        # 'phone_number',
-    ]
+@admin.register(WeekDay)
+class WeekDayAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        return False 
+    def has_add_permission(self, request):
+        return False 
     search_fields = [
-        'email',
-        'username',
-        'first_name',
-        'last_name',
-        # 'phone_number',
+        'name'
     ]
 
-
-admin.site.register(Client, ClientAdmin)
-admin.site.register(Team, TeamAdmin)
-admin.site.register(Slider, SliderAdmin)
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(Document, DocumentAdmin)
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     inlines = [
-        # ProfileInline,
-        # OrderInline,
+        UserWeekDayInline, 
     ]
-
     fieldsets = (
         (_('Personal info'), {
             'fields': (
@@ -283,15 +207,16 @@ class CustomUserAdmin(UserAdmin):
                 'password'
             )
         }),
-        # (_('Permissions'), {
-        #     'fields': (
-        #         'is_active', 
-        #         'is_staff', 
-        #         'is_superuser', 
-        #         'groups', 
-        #         'user_permissions'
-        #     ),
-        # }),
+        (_('Permissions'), {
+            'fields': (
+                'is_active', 
+                'is_staff', 
+                'is_superuser', 
+                'groups', 
+                'user_permissions'
+            ),
+            'classes':['collapse']
+        }),
         # (_('Important dates'), {
         #     'fields': (
         #         'last_login', 
@@ -299,15 +224,6 @@ class CustomUserAdmin(UserAdmin):
         #     ),
         # }),
     )
-    readonly_fields = [
-        # 'username',
-        # 'first_name',
-        # 'last_name',
-        # 'email',
-        # 'phone_number',
-        # 'last_login',
-        # 'date_joined',
-    ]
     add_fieldsets = (
         (None, {
             'classes': (
@@ -320,13 +236,13 @@ class CustomUserAdmin(UserAdmin):
             ),
         }),
     )
-
-
     list_per_page = 100
     save_as_continue = False 
     save_on_top = True 
-
-    filter_horizontal = ["faculties"]
+    # filter_horizontal = ["faculties"]
+    autocomplete_fields = [
+        'faculties'
+    ]
     list_display = (
         'id', 
         'username',
@@ -352,10 +268,13 @@ class CustomUserAdmin(UserAdmin):
     ]
 
 
-class CustomGroup(GroupAdmin):
-    exclude = []
-
-@admin.register(WorkingDay)
+# @admin.register(WorkingDay)
 class WorkingDayAdmin(admin.ModelAdmin):
 		exclude = []
-    
+
+
+admin.site.register(Client, ClientAdmin)
+admin.site.register(Team, TeamAdmin)
+admin.site.register(Slider, SliderAdmin)
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Document, DocumentAdmin)
