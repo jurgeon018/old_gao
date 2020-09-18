@@ -575,6 +575,15 @@ function click_select_item() {
             client: date_client,
         }
         fetch_get_data(advocat_days_json);
+
+
+        // статуси 
+        // blocked - зайнятий 
+        // rest - зайнятий
+        // partly_busy - напів зайнятий
+        // free - вільний
+        // unknows - вільний
+        
         // generate_practise(data_id);
         // create_all_doc_for_client('.practise_step_hidden_content', test2);
 
@@ -594,7 +603,7 @@ function click_select_item() {
 };
 
 function fetch_get_data(content) {
-    let url = `/api/blocked_days/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
+    let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
     fetch(url, {
         method: "GET",
       })
