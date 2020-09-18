@@ -197,9 +197,11 @@ class FacultyListView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        request = self.request 
-        data = request.query_params
-        print(data, request)
+        request  = self.request 
+        data     = request.query_params
+        advocat  = data.get('advocat')
+        if advocat:
+            queryset = queryset.filter(advocat__id__in=[advocat])
         return queryset
 
 
