@@ -180,9 +180,8 @@ class ConsultationPaymentListView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        request = self.request 
-        data = request.query_params
-        print(data, request)
+        request  = self.request 
+        data     = request.query_params
         return queryset
 
 
@@ -201,7 +200,8 @@ class FacultyListView(generics.ListCreateAPIView):
         data     = request.query_params
         advocat  = data.get('advocat')
         if advocat:
-            queryset = queryset.filter(advocat__id__in=[advocat])
+            ids = User.objects.get(id=advocat).faculties.all().values_list('id', flat=True)
+            queryset = queryset.filter(id__in=ids)
         return queryset
 
 
