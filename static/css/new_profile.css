@@ -482,6 +482,9 @@
   .step_date_prof_passive {
     background: #d2a35140;
     pointer-events: none; }
+  .step_date_prof_blocked {
+    background: #d2a35140;
+    pointer-events: none; }
 .step_date__block {
   padding: 15px;
   border-radius: 20px;
@@ -678,7 +681,6 @@
   margin-bottom: 20px;
   width: 150px; }
 .advocate_calender_time__block {
-  display: grid;
   grid-template-columns: repeat(11, 1fr);
   margin-top: 15px; }
   .advocate_calender_time__block .adv_cal_time:nth-child(1) {
@@ -775,7 +777,6 @@
   margin: 0 auto;
   width: fit-content;
   display: flex;
-  margin-top: 20px;
   background: transparent;
   cursor: pointer; }
 
@@ -1057,6 +1058,42 @@
   width: 160px;
   border-radius: 20px; }
 
+.time_advocate_calender_navigate {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%); }
+
+.advocate_time_arrow {
+  width: 15px;
+  cursor: pointer; }
+  .advocate_time_arrow_1 {
+    transform: rotate(90deg);
+    margin-left: -18px; }
+  .advocate_time_arrow_2 {
+    transform: rotate(-90deg);
+    margin-right: -18px; }
+  .advocate_time_arrow svg {
+    width: 100%;
+    height: auto; }
+
+.error_reserve {
+  color: red;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 10px 0px;
+  text-align: center; }
+
+.all_calender__wrapper {
+  position: relative; }
+
+#tab_33 {
+  padding-left: 0;
+  padding-right: 30px; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;
@@ -1097,6 +1134,10 @@
   .consultation_star__block p {
     margin-bottom: 10px; } }
 @media (max-width: 1170px) {
+  #tab_33 {
+    padding-left: 15px;
+    padding-right: 15px; }
+
   .advocate_calender_container {
     flex-direction: column; }
 

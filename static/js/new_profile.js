@@ -3,7 +3,6 @@
 
 
 
-console.log('olexiy');
 
 
 
@@ -11,6 +10,30 @@ console.log('olexiy');
 
 if ($('.advocate_calender_container').length == 1) {
     
+    $('.advocate_calender_time__block').slick({
+        dots: false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 11,
+        slidesToScroll: 11,
+        // responsive: [
+        //   {
+        //     breakpoint: 1200,
+        //     settings: {
+        //       slidesToShow: 3,
+        //       slidesToScroll: 3,
+        //       infinite: true,
+        //       dots: true
+        //     }
+        //   }
+        // ]
+      });
+      $('.advocate_time_arrow_1').click(function () {
+        $(".advocate_calender_time__block").slick('slickPrev');
+      });
+      $('.advocate_time_arrow_2').click(function () {
+        $(".advocate_calender_time__block").slick('slickNext');
+      });
 
     $('.status_select').select2({
         minimumResultsForSearch: Infinity,
@@ -53,7 +76,7 @@ if ($('.advocate_calender_container').length == 1) {
 
       let test_json = [{
           transition: 1,
-          clockwork: 9,
+          clockwork: '9.00',
           name: 'test_client1',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -72,7 +95,7 @@ if ($('.advocate_calender_container').length == 1) {
       }, 
       {
           transition: 1,
-          clockwork: 10,
+          clockwork: '10.00',
           name: 'test_client2',
           type_user: 'адвокат',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -91,7 +114,7 @@ if ($('.advocate_calender_container').length == 1) {
       },
       {
           transition: 2,
-          clockwork: 11,
+          clockwork: '11.00',
           name: 'test_client3',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -110,7 +133,7 @@ if ($('.advocate_calender_container').length == 1) {
       },
       {
           transition: 1,
-          clockwork: 13,
+          clockwork: '13.00',
           name: 'test_client4',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -129,7 +152,7 @@ if ($('.advocate_calender_container').length == 1) {
       },
       {
           transition: 3,
-          clockwork: 14,
+          clockwork: '14.00',
           name: 'test_client5',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -148,7 +171,7 @@ if ($('.advocate_calender_container').length == 1) {
       },
       {
           transition: 1,
-          clockwork: 17,
+          clockwork: '17.00',
           name: 'test_client6',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -167,7 +190,7 @@ if ($('.advocate_calender_container').length == 1) {
       },
       {
           transition: 2,
-          clockwork: 18,
+          clockwork: '18.00',
           name: 'test_client7',
           type_user: 'клієнт',
           branch: ['Судова галузь', 'Податкова галузь'],
@@ -190,6 +213,7 @@ if ($('.advocate_calender_container').length == 1) {
     $('.advocate_calender_item__block').children().remove();
 
     let left_position = 100 / 11;
+    let current_slides = $('.advocate_calender_time__block').find('.slick-active');
     let all_clock_calender = $('.adv_cal_time');
     
     let grid_counter = Number(array_current_transition.length);
@@ -197,28 +221,39 @@ if ($('.advocate_calender_container').length == 1) {
 
     let current_task_width = 0;
     for (let i = 0; i < grid_counter ; i++) {
-        
         let current_margin;
         let item_left;
+        let check_active;
+        let current_time = [];
+        
         $.each(array_current_transition, function(index, value) {
             if (index == i) {
-                $.each(all_clock_calender, function(index, sub_value) {
-                    if ($(sub_value).attr('data-clock') == value.clockwork) {
-                        current_margin = $(sub_value).index();
+                $.each(current_slides, function(index, sub_value) {
+                    if ($(sub_value).find('.adv_cal_time').attr('data-clock') == value.clockwork) {
+                        current_time.push(value.clockwork);
+                        current_margin = index;
+                    } else {
+
                     }
                 });
                 item_left = (left_position * current_margin);
                 current_task_width = value.transition;
             }
         });
-        
+        if (current_time.length == 0) {
+            check_active = false;
+        } else {
+            check_active = true;
+        }
         let test_json = {
             current_width: left_position,
             // current_transition: current_task_width,
             left: item_left,
-            info: array_current_transition[i]
+            info: array_current_transition[i],
         }
-        $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
+        if (check_active == true) {
+            $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
+        }
     }
 
     function create_row_item(content) {
@@ -348,6 +383,26 @@ if ($('.advocate_calender_container').length == 1) {
         });
 
     });
+
+    $('.advocate_time_arrow').on('click', function() {
+
+        let old_prof = $('.advocate_calender_item__block').find('.advocate_calender_item_prof');
+
+        $.each(old_prof, function(index, value) {
+            setTimeout(() => {
+                $(value).css('top', '-1000px');
+                $(value).css('max-height', '0px');
+            }, 200);
+            setTimeout(() => {
+                create_calender(test_json);
+            }, 400);
+        });
+
+    });
+
+
+
+    
 
 }
 
@@ -815,35 +870,167 @@ function check_user_valid() {
 $('.step_date_prof').on('click', add_clockwork);
 
 function add_clockwork() {
+    let all_clockwork = $('.step_date_prof');
+    let current_index;
+    let before_index;
+    let after_index;
+    let check_active;
+    if ($(this).hasClass('step_date_prof_active')) {
+        check_active = true;
+    } else {
+        check_active = false;
+    }
+    $(this).toggleClass('step_date_prof_active');
+    let active_clockwork = $('.step_date_prof_active');
+
+    if (active_clockwork.length == 1) {
+        current_index = Number($(this).index());
+        before_index = current_index - 1;
+        after_index = current_index + 1;
+    } else if (active_clockwork.length >= 2) {
+        current_index = undefined;
+        before_index = $(active_clockwork).first().index() - 1;
+        after_index = $(active_clockwork).last().index() + 1;
+    }
+    if ($(this).index() != before_index && $(this).index() != after_index && check_active == true) {
+        $('.step_date_prof').removeClass('step_date_prof_active');
+    } else {
+
+    }
+    
+
+    
+
     if ($(this).hasClass('step_date_prof_passive')) {
 
     } else {
+       
+        $.each(all_clockwork, function(index, value) {
+            if ($(value).hasClass('step_date_prof_passive') || $(value).hasClass('step_date_prof_active')) {
+                $(value).removeClass('step_date_prof_blocked');
+            } else {
+                $(value).addClass('step_date_prof_blocked');
+            }
+        });
+
+        if ($('.step_date_prof').hasClass('step_date_prof_passive') || $('.step_date_prof').hasClass('step_date_prof_active')) {
+            
+        } else {
+            $('.step_date_prof').addClass('step_date_prof_blocked');
+        }
+
+        if (all_clockwork[before_index] != undefined) {
+            $(all_clockwork[before_index]).removeClass('step_date_prof_blocked');
+        }
+        if (all_clockwork[after_index] != undefined) {
+            $(all_clockwork[after_index]).removeClass('step_date_prof_blocked');
+        }
+        if (all_clockwork[current_index] != undefined) {
+            $(all_clockwork[current_index]).removeClass('step_date_prof_blocked');
+        }
+            
+
+            
+        
+
+      
+        
+
         let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
-        $(this).toggleClass('step_date_prof_active');
         let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
         $('.step_access').text(transform_clock(current_clock * attr));
     }
+
+    if ($('.step_date_prof_active').length == 0) {
+        $('.step_date_prof').removeClass('step_date_prof_blocked');
+    }
 }
 
-$('.step_access_btn').on('click', function() {
-    let current_clock = transform_minute(Number($('.step_access').text()));
-    console.log('current_clock: ', current_clock);
-    let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
-    let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
 
-    let current_sum = current_cost / duration;
-    let sum = current_sum * current_clock;
+$('.save_reserve_date_btn').on('click', function() {
+    let date_value = $('.datapicker_user').val();
+    console.log('date_value: ', date_value);
+    let first_clock = $('.first_advocate_user_clock').attr('data-clock');
+    let second_clock = $('.second_advocate_user_clock').attr('data-clock');
 
-    $('.advocate_select_time').find('.step_select').addClass('step_select_active');
-    $('.current_clock_num').text(transform_clock(current_clock));
-    $('.all_price_consultation').attr('data-price', sum);
-    
+    if (date_value == '') {
+        $('.error_reserve').text('Вкажіть дату');
+    } else if (first_clock == '0' && second_clock == '0') {
+        $('.error_reserve').text('Вкажіть час');
+    } else {
+        $('.error_reserve').text('');
 
-
-      $('.all_price_consultation').text(sum);
-    // counter_num('.all_price_consultation', 1000, sum);
-    check_user_valid();
+            
+    }
 })
+$('.step_access_btn').on('click', function() {
+    if ($(this).hasClass('step_advocate_btn')) {
+        
+            let result_clock = find_order_clock();
+            
+            $('.first_advocate_user_clock').text(result_clock.first);
+            $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
+            $('.second_advocate_user_clock').text(result_clock.second);
+            $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
+
+        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+    } else {
+        let current_clock = transform_minute(Number($('.step_access').text()));
+        if (current_clock == 0) {
+            $('.step_access').css('border', '1px solid red');
+            $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+            check_user_valid();
+            $('.all_price_consultation').text(0);
+    
+        } else {
+            $('.step_access').css('border', '1px solid #D2A351');
+    
+            let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
+            let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
+    
+            let current_sum = current_cost / duration;
+            let sum = current_sum * current_clock;
+    
+            $('.advocate_select_time').find('.step_select').addClass('step_select_active');
+            $('.current_clock_num').text(transform_clock(current_clock));
+            $('.all_price_consultation').attr('data-price', sum);
+            
+            let result_clock = find_order_clock();
+            
+            $('.clock_manager_first').text(result_clock.first);
+            $('.clock_manager_second').text(result_clock.second);
+            $('.all_price_consultation').text(sum);
+            // counter_num('.all_price_consultation', 1000, sum);
+            check_user_valid();
+        }
+    }
+})
+
+
+function find_order_clock() {
+    let result = {
+        first: 0,
+        second: 0
+    }
+    let all_clock_user = $('.step_date_prof_active');
+    let first_clock;
+    let second_clock;
+    let transition_clock = Number($('.step_date__wrap').attr('data-transition'));
+    if (all_clock_user.length == 1) {
+        let first_minute = transform_minute(Number($(all_clock_user).attr('data-clock')));
+        first_clock = transform_clock(first_minute);
+        second_clock = transform_clock(first_minute + transition_clock);
+    } else {
+        let first_active = Number($(all_clock_user).first().attr('data-clock'));
+        let second_active = Number($(all_clock_user).last().attr('data-clock'));
+        first_clock = transform_clock(transform_minute(first_active));
+        second_clock = transform_clock(transform_minute(second_active) + transition_clock);
+    }
+    result.first = first_clock;
+    result.second = second_clock;
+    return result;  
+}
+
 
 // className - імя класа
 // duration_animation - тривалість анімації (2000)

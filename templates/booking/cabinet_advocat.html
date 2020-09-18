@@ -189,19 +189,44 @@
 											</div>
 											{% endfor %}
 										</div>
-                      <div class="advocate_calender_time__block">
-                          {% for hour in hours_list %}
-                          <div data-clock='{{hour}}' class="adv_cal_time">
-                              <div class="grid_inner">
-                                  <div class="grid_content">
-                                      {{hour}}
-                                  </div>
-                              </div>
-                          </div>
-                          {% endfor %}
-                      </div>
-                      <div class="advocate_calender_item__block">
-                          <!-- // тут генерується календар -->
+										<div class="all_calender__wrapper">
+											<div class="advocate_calender_time__block">
+												{% for hour in hours_list %}
+												<div data-clock='{{hour}}' class="adv_cal_time">
+													<div class="grid_inner">
+														<div class="grid_content">
+															{{hour}}
+														</div>
+													</div>
+												</div>
+												{% endfor %}
+											</div>
+											<div class="time_advocate_calender_navigate">
+												<div class="advocate_time_arrow advocate_time_arrow_1">
+													<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+													viewBox="0 0 2117 2117"
+													xmlns:xlink="http://www.w3.org/1999/xlink">
+														<g id="Layer_x0020_1">
+															<metadata id="CorelCorpID_0Corel-Layer"/>
+															<path fill='#D2A351' fill-rule='nonzero' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+														</g>
+													</svg>
+												</div>
+												<div class="advocate_time_arrow advocate_time_arrow_2">
+													<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+													viewBox="0 0 2117 2117"
+													xmlns:xlink="http://www.w3.org/1999/xlink">
+														<g id="Layer_x0020_1">
+															<metadata id="CorelCorpID_0Corel-Layer"/>
+															<path fill='#D2A351' fill-rule='nonzero' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+														</g>
+													</svg>
+												</div>
+											</div>
+										</div>
+										
+                      					<div class="advocate_calender_item__block">
+                          					<!-- // тут генерується календар -->
 										</div>
 										
 										<div class="reserve_btn button_transparent">
@@ -232,12 +257,12 @@
 												</div>
 												<div class="reserve_contents advocate_user_clock__block">
 													з 
-													<div data-clock="9.00" class="advocate_user_clock">
-														9.00
+													<div data-clock="0" class="first_advocate_user_clock advocate_user_clock">
+														0
 													</div>
 													по
-													<div data-clock="10.00" class="advocate_user_clock">
-														10.00
+													<div data-clock="0" class="second_advocate_user_clock advocate_user_clock">
+														0
 													</div>
 													<div class="advocate_step_hidden_content step_hidden_content">
 														<div class="step_date__block">
@@ -261,7 +286,7 @@
 																	<div class="step_access standart_title standart_title_3 color_black">
 																		
 																	</div>
-																	<div class="step_access_btn">
+																	<div class="step_access_btn step_advocate_btn">
 																		<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
 																		viewBox="0 0 8819 8819"
 																		xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -290,7 +315,10 @@
 													<textarea></textarea>
 												</div>
 											</div>
-											<input type="submit" class="save_reserve_date_btn button_transparent">
+											<div class="error_reserve"></div>
+											<div type="submit" class="save_reserve_date_btn button_transparent">
+												Отправить
+											</div>
 										</form>
 									</div>
 								</div>
