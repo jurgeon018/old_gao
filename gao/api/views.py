@@ -51,12 +51,16 @@ def get_working_hours_info(request):
         date=date,
         advocat=advocat,
     )
+
     # TODO: перенести в модель в метод User.get_working_hours(date)
+    working_hours = []
     user_working_day = UserWorkingDay.objects.filter(
-        user=advocat, date=date,
+        advocat=advocat, 
+        date=date,
     ).first()
     user_week_day = UserWeekDay.objects.filter(
-        user=advocat, week_day__code=date.isoweekday(),
+        user=advocat, 
+        week_day__code=date.isoweekday(),
     ).first()
     if user_working_day:
         start = user_working_day.start
@@ -65,12 +69,28 @@ def get_working_hours_info(request):
         start = user_week_day.start
         end = user_week_day.end
     else:
-        start = None 
-        end = None 
-    working_hours = []
-    for raw_working_hour in range(start, end+1):
-        working_hour = ...
-        working_hours.append(working_hour)
+        start = None
+        end = None
+    if start and end:
+        start = time.strftime(start, '%H:%M')
+        end   = time.strftime(end, '%H:%M')
+        if start.endswith(':30'):
+            start = start.split(':')[0]
+            start = int(start)+1
+        else:
+            start = start.split(':')[0]
+        if end.endswith(':30'):
+            end = end.split(':')[0]
+            end = int(end) + 1 
+        else:
+            end = end.split(':')[0]
+        raw_working_hours = list(range(int(start), int(end)+1))
+        for raw_working_hour in raw_working_hours:
+            working_hour = raw_working_hour
+            working_hours.append(f'{working_hour}:00')
+            if raw_working_hour != raw_working_hours[-1]:
+                working_hours.append(f"{working_hour}:30")
+    # get_working_hours(date)
     hours = []
     for consultation in consultations:
         hours.append({
