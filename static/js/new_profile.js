@@ -50,7 +50,7 @@ if ($('.advocate_calender_container').length == 1) {
     
     $('.advocate_slick_date__block').slick({
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 300,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -549,6 +549,7 @@ function click_select_item() {
     console.log('checker: ', checker);
     // практики
     if ($(checker).hasClass('practise_step_hidden_content')) {
+        $('.pract_step_select').find('.step_active_content').attr('data-id', $(this).attr('data-id'));
         generate_advocate(data_id);
         $('.user_advocate_type_work').text(data);
         $('.user_advocate_name').text('Оберіть адвоката');
@@ -562,6 +563,7 @@ function click_select_item() {
     // адвокати
     else if ($(checker).hasClass('client_select_step_hidden_content')) {
         $('.user_advocate_name').text(data);
+        $('.advoc_step_select').find('.step_active_content').attr('data-id', $(this).attr('data-id'));
         let date_js = new Date();
         let date_month = date_js.getMonth() + 1;
         let date_year = date_js.getFullYear();
@@ -574,35 +576,21 @@ function click_select_item() {
             advocat: date_advocat,
             client: date_client,
         }
-        fetch_get_data(advocat_days_json);
+        fetch_get_data_user_calender(advocat_days_json);
 
-
-        // статуси 
-        // blocked - зайнятий 
-        // rest - зайнятий
-        // partly_busy - напів зайнятий
-        // free - вільний
-        // unknows - вільний
-        
         // generate_practise(data_id);
         // create_all_doc_for_client('.practise_step_hidden_content', test2);
 
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
 
-        var datepicker = $('#datapicker_user').datepicker().data('datepicker');
-        datepicker.destroy();
-        var weekenddDays = [0, 6];
-        var reserve = ["20-August-2020", "21-August-2020"];
-        var busy = ["25-August-2020", "27-August-2020"];
-        var months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
-        create_client_calender(weekenddDays, reserve, busy, months_items);
+        
     }
 
 
 };
 
-function fetch_get_data(content) {
+function fetch_get_data_user_calender(content) {
     let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
     fetch(url, {
         method: "GET",
@@ -612,11 +600,72 @@ function fetch_get_data(content) {
       })
       .then((body) => {
           console.log('body: ', body);
-         
+        let datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        let months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
+        let weekenddDays = [0, 6];
+        // reserve - повністю зайнятий
+        let reserve = [];
+        
+        // busy - напів зайнятий
+        let busy = [];
+        
+        // статуси 
+        // blocked - зайнятий 
+        // rest - зайнятий
+        // partly_busy - напів зайнятий
+        // free - вільний
+        // unknows - вільний
+
+        $.each(body.days, function(index, value) {
+            if (value.status == 'blocked' || value.status == 'rest') {
+                reserve.push(find_month(value.day));
+            } else 
+            if (value.status == 'partly_busy') {
+                busy.push(find_month(value.day));
+            }
+        });
+       
+        console.log('busy: ', busy);
+        console.log('reserve: ', reserve);
+        datepicker.destroy();
+        create_client_calender(weekenddDays, reserve, busy, months_items);
       }); 
 }
 
-
+function find_month(value) {
+    const dates = value.split('-');
+    let current_date;
+    let current_year = dates[0];
+    let current_month;
+    let current_day = dates[2];
+    if (dates[1] == '01') {
+        current_month = 'january';
+    } else if (dates[1] == '02') {
+        current_month = 'feburary';
+    } else if (dates[1] == '03') {
+        current_month = 'March';
+    } else if (dates[1] == '04') {
+        current_month = 'April';
+    } else if (dates[1] == '05') {
+        current_month = 'May';
+    } else if (dates[1] == '06') {
+        current_month = 'June';
+    } else if (dates[1] == '07') {
+        current_month = 'July';
+    } else if (dates[1] == '08') {
+        current_month = 'August';
+    } else if (dates[1] == '09') {
+        current_month = 'September';
+    } else if (dates[1] == '10') {
+        current_month = 'October';
+    } else if (dates[1] == '11') {
+        current_month = 'November';
+    } else if (dates[1] == '12') {
+        current_month = 'December';
+    }     
+    current_date = `${current_day}-${current_month}-${current_year}`;
+    return current_date;               
+}
 
 $('.docs_title_btn').on('click', function() {
     let wrap = $(this).parents('.docs__wrap');
@@ -629,14 +678,14 @@ if ($('.advocate_user_input__block').length >= 1) {
         var weekenddDays = [0, 6];
         var reserve = ["20-August-2020", "21-August-2020"];
         var busy = ["25-August-2020", "27-August-2020"];
-        var months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
+        var months_items = ['january','feburary','March','April','May','June','July','August','September','October','November','December'];
         create_client_calender(weekenddDays, reserve, busy, months_items);
 }
 
 function create_clockwork_client(content) {
     let step_date_prof = document.createElement('div');
 
-    if (content.reserve == false) {
+    if (content.status == 'unknown' || content.status == 'free') {
         step_date_prof.classList.add('step_date_prof', 'button_transparent');
     } else {
         step_date_prof.classList.add('step_date_prof', 'button_transparent', 'step_date_prof_passive');
@@ -648,6 +697,8 @@ function create_clockwork_client(content) {
 
     return step_date_prof;
 }
+
+
 
 
     
@@ -743,21 +794,56 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                     reserve: false,
                 },
             ]
-    
-            $('.step_date__wrap').children().remove();
-    
-            console.log('test_json: ', test_json);
-            $.each(test_json, function(index, value) {
-                console.log('value: ', value);
-                $('.step_date__wrap')[0].appendChild(create_clockwork_client(value));
-            });
+
+            let client;
+            let advocate;
+            let current_date;
+            
+            if ($('.reserve_hidden_content').length >= 1) {
+                current_date = $('.datapicker_user').val();
+                client = $('.advocat_info_id').attr('data-advocat');
+                advocate = $('.advocat_info_id').attr('data-advocat');
+            } else {
+                current_date = replasor_text();
+                client = $('.client_info_id').attr('data-client');
+                advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+            }
+            fetch(`/api/get_hours_info/?date=${current_date}&advocat=${advocate}&client=${client}`, {
+                method: "GET",
+              })
+              .then((data) => {
+                return data.json();
+              })
+              .then((body) => {
+                  $('.step_date__wrap').children().remove();
+
+                  $.each(body.hours, function(index, value) {
+                      let delete_space = value.hour.replace(/\s+/g, '');
+                      let words = delete_space.split(':');
+                      let date = new Date(0, 0, 0, words[0], words[1], words[2]);
+                      let current_clock_json = {
+                         hours: date.getHours() * 60 + date.getMinutes(),
+                         status: value.status
+                      }
+                        
+                      $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
+                  });
+              });    
+
+         
             
         }
         
      });
 }
  
- 
+function replasor_text() {
+    let client_date = $('.advocate_user_date').text();
+    let delete_space = client_date.replace(/\s+/g, '');
+    let words_date = delete_space.split('.');
+    let current_date = `${words_date[1]}.${words_date[2]}.${words_date[3]}`;
+    return current_date;
+}
 
 $('.data_step_select_btn').on('click', function() {
     if ($(this).hasClass('visible')) {
@@ -833,24 +919,62 @@ let create_advocate_files = (content) => {
 
 
 
+$('.pseudo_btn').click(function(e) {
+	e.preventDefault();
+  var nb_attachments = $('form input').length;
+  var $input = $('<input type="file" name=attachment-' + nb_attachments + '>');
+  $input.on('change', function(evt) {
+    var f = evt.target.files[0];
+    let value_object = {
+        input: $(this),
+        name: f.name
+    }
+    $('.advocate_download__block')[0].appendChild(create_client_files(value_object));
+  });
+  $input.hide();
+  $input.trigger('click');
+});
 
 
 
 
 // додавання файлів клієнтом
 $('.input_user_file').on('change', function() {
-    let file_create = $('#input_user_file')[0];
-    let files = file_create.files;
-    if (files.length == 1) {
-        $('.new_files_info').text(`${files.length} новий файл`);
-    } else {
-        $('.new_files_info').text(`${files.length} нових файлів`);
-    }
-    $('.new_files_users').children().remove();
+    
+    // let fileData = this.files;
+    // console.log('fileData: ', fileData);
 
-    $.each(files, function(index, value ){
-        $('.new_files_users')[0].appendChild(create_client_files(value));
-    });
+    // let Formdata = new FormData();
+    // jQuery.each(fileData, function(i, file) {
+    //     Formdata.append(`document[${i}]`, file);
+    //     console.log('Formdata: ', Formdata.getAll(`document[${i}]`));
+    // });
+    // formData.delete(name) – удаляет поле с заданным именем name,
+
+
+    // fetch('/test/', {
+    //     method: 'POST',
+    //     body: Formdata,
+    // })
+    // .then(data => {
+    //     return data.json();
+    // })
+    // .then(data => {
+     
+    // })
+
+    // let file_create = $('#input_user_file')[0];
+    // let files = file_create.files;
+    // if (files.length == 1) {
+    //     $('.new_files_info').text(`${files.length} новий файл`);
+    // } else {
+    //     $('.new_files_info').text(`${files.length} нових файлів`);
+    // }
+    // $('.new_files_users').children().remove();
+
+    // $.each(files, function(index, value ){
+    //     $('.new_files_users')[0].appendChild(create_client_files(value));
+    // });
 });
 
 
@@ -864,20 +988,20 @@ let create_client_files = (content) => {
     advocate_download_name.textContent = content.name;
     
 
-    // let svg_span = document.createElement('span');
-    // svg_span.classList.add('advocate_download_close');
+    let svg_span = document.createElement('span');
+    svg_span.classList.add('advocate_download_close');
 
-    // svg_span.innerHTML = `
-    //     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
-    //         <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
-    //         </path>
-    //     </svg>
-    // `;
-    // $(svg_span).on('click', delete_file);
+    svg_span.innerHTML = `
+        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+            </path>
+        </svg>
+    `;
+    $(svg_span).on('click', delete_file);
 
-
+    $(advocate_download_prof).append($(content.input));
     advocate_download_prof.appendChild(advocate_download_name);
-    // advocate_download_prof.appendChild(svg_span);
+    advocate_download_prof.appendChild(svg_span);
 
     
         return advocate_download_prof;
@@ -926,7 +1050,43 @@ function delete_file() {
 $('.submit_wrapper').on('click', function() {
     check_user_valid();
 })
+$('.submit_user_order').on('click', function() {
+    let Formdata = new FormData();
+    let client = $('.client_info_id').attr('data-client');
+    let practise = $('.pract_step_select').find('.step_active_content').attr('data-id');
+    let advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+    let date = $('.advocate_user_date').text();
+    let clock_first = $('.clock_manager_first').text();
+    let clock_lat = $('.clock_manager_second').text();
+    let url = $('.user_order_of_advocate').attr('action');
 
+    let file_array = $('.new_advocate_download_prof').find('input');
+    jQuery.each(file_array, function(i, file) {
+        let fileData = file.files[0];
+        Formdata.append(`document[${i}]`, fileData);
+    });
+
+    Formdata.append(`client`, client);
+    Formdata.append(`practise`, practise);
+    Formdata.append(`advocate`, advocate);
+    Formdata.append(`date`, date);
+    Formdata.append(`clock_first`, clock_first);
+    Formdata.append(`clock_lat`, clock_lat);
+
+    fetch(url, {
+        method: 'POST',
+        body: Formdata,
+    })
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+     
+    })
+
+   
+    
+});
 function check_user_valid() {
     let all_check_items = $('.step_select');
     let all_count = $('.step_select').length;

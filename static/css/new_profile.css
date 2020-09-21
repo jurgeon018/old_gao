@@ -418,7 +418,8 @@
   margin-bottom: 40px; }
 
 .pseudo_btn {
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block; }
 
 .input_user_file {
   opacity: 0;
