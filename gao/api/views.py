@@ -32,6 +32,7 @@ def get_hours_info(request):
     date      = query['date']
     advocat   = query['advocat']
     client    = query['client']
+    date      = datetime.strptime(date, "%d.%m.%Y")
     advocat   = User.objects.get(id=advocat)
     client    = User.objects.get(id=client)
     # TODO: перевірки по клієнту 
@@ -51,46 +52,6 @@ def get_working_hours_info(request):
         date=date,
         advocat=advocat,
     )
-
-    # TODO: перенести в модель в метод User.get_working_hours(date)
-    working_hours = []
-    user_working_day = UserWorkingDay.objects.filter(
-        advocat=advocat, 
-        date=date,
-    ).first()
-    user_week_day = UserWeekDay.objects.filter(
-        user=advocat, 
-        week_day__code=date.isoweekday(),
-    ).first()
-    if user_working_day:
-        start = user_working_day.start
-        end = user_working_day.end
-    elif user_week_day:
-        start = user_week_day.start
-        end = user_week_day.end
-    else:
-        start = None
-        end = None
-    if start and end:
-        start = time.strftime(start, '%H:%M')
-        end   = time.strftime(end, '%H:%M')
-        if start.endswith(':30'):
-            start = start.split(':')[0]
-            start = int(start)+1
-        else:
-            start = start.split(':')[0]
-        if end.endswith(':30'):
-            end = end.split(':')[0]
-            end = int(end) + 1 
-        else:
-            end = end.split(':')[0]
-        raw_working_hours = list(range(int(start), int(end)+1))
-        for raw_working_hour in raw_working_hours:
-            working_hour = raw_working_hour
-            working_hours.append(f'{working_hour}:00')
-            if raw_working_hour != raw_working_hours[-1]:
-                working_hours.append(f"{working_hour}:30")
-    # get_working_hours(date)
     hours = []
     for consultation in consultations:
         hours.append({
@@ -100,7 +61,7 @@ def get_working_hours_info(request):
         })
     return Response({
         "hours":hours,
-        "working_hours":working_hours,
+        "working_hours":advocat.get_hours_info(date),
     })
 
 
