@@ -56,8 +56,8 @@ def get_working_hours_info(request):
     for consultation in consultations:
         hours.append({
             "id": consultation.id,
-            "start": consultation.start,
-            "end": consultation.end,
+            "start": time.strftime(consultation.start, "%H:%M"),
+            "end": time.strftime(consultation.end, "%H:%M"),
         })
     return Response({
         "hours":hours,
