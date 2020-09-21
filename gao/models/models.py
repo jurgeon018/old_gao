@@ -66,13 +66,13 @@ class User(AbstractUser):
     if str(day.isoweekday()) not in week_day_codes:
       status = 'rest'
     elif False:
-      # TODO: !
+      # TODO: ! blocked
       status = 'blocked'
     elif False:
-      # TODO: !
+      # TODO: ! free
       status = 'free'
     elif False:
-      # TODO: !
+      # TODO: ! partly_busy
       status = 'partly_busy'
     else:
       status = 'unknown'
@@ -81,6 +81,7 @@ class User(AbstractUser):
   def get_hours_info(self, date):
     hours = []
     date = datetime.strptime(date, "%d.%m.%Y")
+    # TODO: замінити 0 і 24 на справжні години початку і завершення робочого дня у адвоката 
     for hour in range(0, 24):
       hours.append({
         "hour":datetime.strptime(f"{hour}:00", "%H:%M").time(),
@@ -95,10 +96,10 @@ class User(AbstractUser):
   
   def get_hour_status(self, hour):
     if False:
-      # TODO: !
+      # TODO: ! free
       status = "free"
     elif False:
-      # TODO: !
+      # TODO: ! busy
       status = "busy"
     else:
       status = 'unknown'

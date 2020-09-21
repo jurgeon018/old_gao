@@ -43,18 +43,35 @@ def get_hours_info(request):
 @api_view(['GET'])
 def get_working_hours_info(request):
     query     = request.query_params#; print("query: ", query)
-    date      = query.get('date')
-    advocat   = query.get('advocat')
-    consultations = Consultation.objects.all()
-    
-    if date:
-        date      = datetime.strptime(date, "%d.%m.%Y")
-        consultations = consultations.filter(date=date)
-    if advocat:
-        advocat   = User.objects.get(id=advocat)
-        consultations = consultations.filter(advocat=advocat)
-
-    hours     = []
+    date      = query['date']
+    advocat   = query['advocat']
+    date      = datetime.strptime(date, "%d.%m.%Y")
+    advocat   = User.objects.get(id=advocat)
+    consultations = Consultation.objects.filter(
+        date=date,
+        advocat=advocat,
+    )
+    # TODO: перенести в модель в метод User.get_working_hours(date)
+    user_working_day = UserWorkingDay.objects.filter(
+        user=advocat, date=date,
+    ).first()
+    user_week_day = UserWeekDay.objects.filter(
+        user=advocat, week_day__code=date.isoweekday(),
+    ).first()
+    if user_working_day:
+        start = user_working_day.start
+        end = user_working_day.end
+    elif user_week_day:
+        start = user_week_day.start
+        end = user_week_day.end
+    else:
+        start = None 
+        end = None 
+    working_hours = []
+    for raw_working_hour in range(start, end+1):
+        working_hour = ...
+        working_hours.append(working_hour)
+    hours = []
     for consultation in consultations:
         hours.append({
             "id": consultation.id,
@@ -63,6 +80,7 @@ def get_working_hours_info(request):
         })
     return Response({
         "hours":hours,
+        "working_hours":working_hours,
     })
 
 
