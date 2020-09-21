@@ -24,7 +24,6 @@ def cabinet(request):
     advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
     clients  = User.objects.filter(role=User.CLIENT_ROLE)
     consultations = Consultation.objects.all()
-
     now = datetime.now()
     hours_list = []
     for hours in range(9, 20):
@@ -35,6 +34,13 @@ def cabinet(request):
         hours_list.append(f'{hours}.00')
         if hours != 19:
             hours_list.append(f'{hours}.30')
+    # today = datetime.today()
+    # hours_list = user.get_hours_info(today)
+    # while not hours_list:
+    #     today = datetime.today() + timedelta(days=1)
+    #     print(today)
+    #     hours_list = user.get_hours_info(today)
+    # print(hours_list)
     today = datetime.today()
     dates = []
     for days in range(0, 10):

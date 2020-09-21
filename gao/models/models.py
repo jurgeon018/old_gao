@@ -66,13 +66,13 @@ class User(AbstractUser):
     if str(day.isoweekday()) not in week_day_codes:
       status = 'rest'
     elif False:
-      # TODO: !
+      # TODO: ! blocked
       status = 'blocked'
     elif False:
-      # TODO: !
+      # TODO: ! free
       status = 'free'
     elif False:
-      # TODO: !
+      # TODO: ! partly_busy
       status = 'partly_busy'
     else:
       status = 'unknown'
@@ -80,25 +80,58 @@ class User(AbstractUser):
 
   def get_hours_info(self, date):
     hours = []
-    date = datetime.strptime(date, "%d.%m.%Y")
-    for hour in range(0, 24):
-      hours.append({
-        "hour":datetime.strptime(f"{hour}:00", "%H:%M").time(),
-        "status":self.get_hour_status(date),
-      })
-      if hour != 24:
+    user_working_day = UserWorkingDay.objects.filter(
+      advocat=self, 
+      date=date,
+    ).first()
+    user_week_day = UserWeekDay.objects.filter(
+      user=self, 
+      week_day__code=date.isoweekday(),
+    ).first()
+    if user_working_day:
+      start = user_working_day.start
+      end = user_working_day.end
+    elif user_week_day:
+      start = user_week_day.start
+      end = user_week_day.end
+    else:
+      start = None
+      end = None
+      # TODO: ЗАБРАТИ ДО СРАКИ ТО ШО ЗНИЗУ
+      # start = datetime.strptime('09:00:00','%H:%M:%S').time()
+      # end = datetime.strptime('19:00:00','%H:%M:%S').time()
+    if start and end:
+      start = time.strftime(start, '%H:%M')
+      end   = time.strftime(end, '%H:%M')
+      if start.endswith(':30'):
+        start = start.split(':')[0]
+        start = int(start)+1
+      else:
+        start = start.split(':')[0]
+      if end.endswith(':30'):
+        end = end.split(':')[0]
+        end = int(end) + 1 
+      else:
+        end = end.split(':')[0]
+      raw_hours = list(range(int(start), int(end)+1))
+      for raw_working_hour in raw_hours:
         hours.append({
-          "hour":datetime.strptime(f"{hour}:30", "%H:%M").time(),
-          "status":self.get_hour_status(date),
-        })
+          "hour":f'{raw_working_hour}:00',
+          "status":self.get_hour_status(raw_working_hour)
+        })    
+        if raw_working_hour != raw_hours[-1]:
+          hours.append({
+            "hour":f"{raw_working_hour}:30",
+            "status":self.get_hour_status(raw_working_hour)
+          })      
     return hours
-  
+
   def get_hour_status(self, hour):
     if False:
-      # TODO: !
+      # TODO: ! free
       status = "free"
     elif False:
-      # TODO: !
+      # TODO: ! busy
       status = "busy"
     else:
       status = 'unknown'
@@ -311,8 +344,8 @@ class Consultation(TimestampMixin):
         Q(start__lt=self.start, start__gt=self.end)
       )
       # if False:
-      if consultations.exists():
-        raise Exception('ERROR!!!')
+      # if consultations.exists():
+      #   raise Exception('ERROR!!!')
       super().save()
 
     @property
@@ -320,42 +353,49 @@ class Consultation(TimestampMixin):
       documents = ConsultationDocument.objects.filter(consultation=self)
       return documents
 
-    @property
-    def time(self):
-        time = 1
-        # if self.times.first().end and self.times.first().start :
-        #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
-        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-        #     if minutes > 0:
-        #         hours -= 1
-        #     if minutes > 60:
-        #         hours += 1
-        #         minutes -= 60
-        #     time = 60 - minutes + (hours * 60)
-        return time
+    # @property
+    # def time(self):
+    #     time = 1
+    #     # if self.times.first().end and self.times.first().start :
+    #     #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
+    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+    #     #     if minutes > 0:
+    #     #         hours -= 1
+    #     #     if minutes > 60:
+    #     #         hours += 1
+    #     #         minutes -= 60
+    #     #     time = 60 - minutes + (hours * 60)
+    #     return time
     
+    # @property
+    # def full_time(self):
+    #     time = 0
+    #     # if self.times.first().end and self.times.first().start :
+    #     #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
+    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+    #     #     if minutes > 0:
+    #     #         hours -= 1
+    #     #     if minutes > 60:
+    #     #         hours += 1
+    #     #         minutes -= 60
+    #     #     time = f"{hours} год. {minutes} хв."
+    #     return time
+
     @property
     def full_time(self):
-        time = 0
-        # if self.times.first().end and self.times.first().start :
-        #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
-        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-        #     if minutes > 0:
-        #         hours -= 1
-        #     if minutes > 60:
-        #         hours += 1
-        #         minutes -= 60
-        #     time = f"{hours} год. {minutes} хв."
-        return time
-    
+      return 2 
+
     @property
     def price(self):
-        price = 1
-        time = self.time
+        price = self.advocat.rate
+        # time = self.time
         # time = self.end - self.start 
-        hours = time // 60
-        minutes = (time % 60) / 60
-        price = (self.advocat.rate * hours) + (self.advocat.rate * minutes)
+        # hours = time // 60
+        # minutes = (time % 60) / 60
+        # hours   = self.advocat.rate * hours
+        # minutes = self.advocat.rate * minutes
+        # price   = hours + minutes
+        price *= self.full_time 
         return price 
     
     def get_files_by_user(self):
