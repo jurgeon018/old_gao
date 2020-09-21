@@ -41,6 +41,7 @@ class Command(BaseCommand):
             username="admin",
         )
         user.role = User.ADVOCAT_ROLE
+        user.rate = 100
         user.is_staff = True
         user.is_superuser = True
         user.set_password("admin")

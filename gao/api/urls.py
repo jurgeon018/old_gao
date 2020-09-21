@@ -24,6 +24,8 @@ urlpatterns = [
 
     path("faculties/", FacultyListView.as_view()),
     path("faculties/<pk>/", FacultyDetailView.as_view()),
+
+    path('googlemeet/', googlemeet)
 ]
 
 

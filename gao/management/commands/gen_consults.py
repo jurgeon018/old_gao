@@ -65,9 +65,11 @@ class Command(BaseCommand):
             print(f'{i+1}/{r}')
             formats       = Consultation.FORMATS
             statuses      = Consultation.STATUSES
+            faculties     = Faculty.objects.all()
             advocats      = User.objects.filter(role=User.ADVOCAT_ROLE)
             clients       = User.objects.filter(role=User.CLIENT_ROLE)
             advocat       = random.choice(advocats)
+            faculty       = random.choice(faculties)
             client        = random.choice(clients)
             format        = random.choice(formats)[0]
             status        = random.choice(statuses)[0]

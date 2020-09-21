@@ -79,7 +79,7 @@ class User(AbstractUser):
     return status
 
   def get_hours_info(self, date):
-    working_hours = []
+    hours = []
     user_working_day = UserWorkingDay.objects.filter(
       advocat=self, 
       date=date,
@@ -97,6 +97,9 @@ class User(AbstractUser):
     else:
       start = None
       end = None
+      # TODO: ЗАБРАТИ ДО СРАКИ ТО ШО ЗНИЗУ
+      # start = datetime.strptime('09:00:00','%H:%M:%S').time()
+      # end = datetime.strptime('19:00:00','%H:%M:%S').time()
     if start and end:
       start = time.strftime(start, '%H:%M')
       end   = time.strftime(end, '%H:%M')
@@ -110,18 +113,18 @@ class User(AbstractUser):
         end = int(end) + 1 
       else:
         end = end.split(':')[0]
-      raw_working_hours = list(range(int(start), int(end)+1))
-      for raw_working_hour in raw_working_hours:
-        working_hours.append({
+      raw_hours = list(range(int(start), int(end)+1))
+      for raw_working_hour in raw_hours:
+        hours.append({
           "hour":f'{raw_working_hour}:00',
           "status":self.get_hour_status(raw_working_hour)
         })    
-        if raw_working_hour != raw_working_hours[-1]:
-          working_hours.append({
+        if raw_working_hour != raw_hours[-1]:
+          hours.append({
             "hour":f"{raw_working_hour}:30",
             "status":self.get_hour_status(raw_working_hour)
           })      
-    return working_hours
+    return hours
 
   def get_hour_status(self, hour):
     if False:
@@ -350,42 +353,49 @@ class Consultation(TimestampMixin):
       documents = ConsultationDocument.objects.filter(consultation=self)
       return documents
 
-    @property
-    def time(self):
-        time = 1
-        # if self.times.first().end and self.times.first().start :
-        #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
-        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-        #     if minutes > 0:
-        #         hours -= 1
-        #     if minutes > 60:
-        #         hours += 1
-        #         minutes -= 60
-        #     time = 60 - minutes + (hours * 60)
-        return time
+    # @property
+    # def time(self):
+    #     time = 1
+    #     # if self.times.first().end and self.times.first().start :
+    #     #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
+    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+    #     #     if minutes > 0:
+    #     #         hours -= 1
+    #     #     if minutes > 60:
+    #     #         hours += 1
+    #     #         minutes -= 60
+    #     #     time = 60 - minutes + (hours * 60)
+    #     return time
     
+    # @property
+    # def full_time(self):
+    #     time = 0
+    #     # if self.times.first().end and self.times.first().start :
+    #     #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
+    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
+    #     #     if minutes > 0:
+    #     #         hours -= 1
+    #     #     if minutes > 60:
+    #     #         hours += 1
+    #     #         minutes -= 60
+    #     #     time = f"{hours} год. {minutes} хв."
+    #     return time
+
     @property
     def full_time(self):
-        time = 0
-        # if self.times.first().end and self.times.first().start :
-        #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
-        #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-        #     if minutes > 0:
-        #         hours -= 1
-        #     if minutes > 60:
-        #         hours += 1
-        #         minutes -= 60
-        #     time = f"{hours} год. {minutes} хв."
-        return time
-    
+      return 2 
+
     @property
     def price(self):
-        price = 1
-        time = self.time
+        price = self.advocat.rate
+        # time = self.time
         # time = self.end - self.start 
-        hours = time // 60
-        minutes = (time % 60) / 60
-        price = (self.advocat.rate * hours) + (self.advocat.rate * minutes)
+        # hours = time // 60
+        # minutes = (time % 60) / 60
+        # hours   = self.advocat.rate * hours
+        # minutes = self.advocat.rate * minutes
+        # price   = hours + minutes
+        price *= self.full_time 
         return price 
     
     def get_files_by_user(self):
