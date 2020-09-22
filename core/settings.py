@@ -38,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'box.core.middleware.DisableCSRF',
 ]
 ROOT_URLCONF = 'gao.urls'
 TEMPLATES = [
@@ -111,3 +112,24 @@ LIQPAY_PRIVATE_KEY = 'SDF'
 LIQPAY_PUBLIC_KEY = 'SDF'
 LIQPAY_SANDBOX_MODE = 1
 LOGIN_REDIRECT_URL = 'cabinet'
+REST_FRAMEWORK = {
+    # 'DEFAULT_RENDERER_CLASSES': [
+    #     'rest_framework.renderers.JSONRenderer',
+    # ],
+    # 'DEFAULT_PARSER_CLASSES': [
+    #     'rest_framework.parsers.JSONParser',
+    # ]
+    'DATE_INPUT_FORMATS':[
+        '%d.%m.%Y',
+    ]
+}
+
+DATE_INPUT_FORMATS = [
+    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+    '%b %d %Y', '%b %d, %Y',            # 'Oct 25 2006', 'Oct 25, 2006'
+    '%d %b %Y', '%d %b, %Y',            # '25 Oct 2006', '25 Oct, 2006'
+    '%B %d %Y', '%B %d, %Y',            # 'October 25 2006', 'October 25, 2006'
+    '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
+]
+
+

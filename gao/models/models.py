@@ -77,29 +77,60 @@ class User(AbstractUser):
     else:
       status = 'unknown'
     return status
-
-  def get_hours_info(self, date):
-    hours = []
-    user_working_day = UserWorkingDay.objects.filter(
-      advocat=self, 
-      date=date,
-    ).first()
-    user_week_day = UserWeekDay.objects.filter(
+    
+  def get_week_day(self, date):
+    week_day = UserWeekDay.objects.filter(
       user=self, 
       week_day__code=date.isoweekday(),
     ).first()
-    if user_working_day:
-      start = user_working_day.start
-      end = user_working_day.end
-    elif user_week_day:
-      start = user_week_day.start
-      end = user_week_day.end
+    return week_day
+  
+  def get_working_day(self, date):
+    working_day = UserWorkingDay.objects.filter(
+      advocat=self, 
+      date=date,
+    ).first()
+    return working_day
+
+  def get_working_hours_range(self, date):
+    working_day = self.get_working_day(date)
+    week_day = self.get_week_day(date)
+    if working_day:
+      start    = working_day.start
+      end      = working_day.end
+      week_day = working_day
+    elif week_day:
+      start    = week_day.start
+      end      = week_day.end
+      week_day = week_day
     else:
-      start = None
-      end = None
-      # TODO: ЗАБРАТИ ДО СРАКИ ТО ШО ЗНИЗУ
-      # start = datetime.strptime('09:00:00','%H:%M:%S').time()
-      # end = datetime.strptime('19:00:00','%H:%M:%S').time()
+      start    = None
+      end      = None
+    return {
+      'start':start, 
+      "end":end,
+      "week_day":week_day,
+    }
+
+  def get_hours_info(self, date):
+    consultations = Consultation.objects.filter(
+      date=date,
+      advocat=self,
+    )
+    hours = []
+    for consultation in consultations:
+      hours.append({
+        "consultation_id": consultation.id,
+        "start": time.strftime(consultation.start, "%H:%M"),
+        "end": time.strftime(consultation.end, "%H:%M"),
+      })
+    return hours
+
+  def get_working_hours_info(self, date):
+    working_hours_range = self.get_working_hours_range(date)
+    start = working_hours_range['start']
+    end   = working_hours_range['end']
+    hours = []
     if start and end:
       start = time.strftime(start, '%H:%M')
       end   = time.strftime(end, '%H:%M')
@@ -143,25 +174,32 @@ class User(AbstractUser):
       consultations = consultations.filter(advocat=self)
     elif self.role == User.CLIENT_ROLE:
       consultations = consultations.filter(client=self)
-    # Обмеження по статичному дню тижня
-    weekdays = UserWeekDay.objects.filter(
-      user=self, 
-      week_day__code=date.isoweekday(),
-    )
-    weekday = weekdays.first()
-    if weekday:
-      if start < weekday.start or end > weekday.end:
+    # Обмеження по статичному дню тижня і по динамічному окремому дню
+    working_hours_range = self.get_working_hours_range(date)
+    start    = working_hours_range['start']
+    end      = working_hours_range['end']
+    week_day = working_hours_range['week_day']
+    if start and end and week_day:
+      if start < week_day.start or end > week_day.end:
         return False 
     else:
       return False 
-    # TODO: Обмеження по динамічному окремому дню(WorkingDay)
     # Обмеження по існуючих консультаціях
-    consultations = consultations.filter(
-      Q(start__lt=start, end__gt=end)|
-      Q(start__gt=start, start__lt=end)|
-      Q(end__gt=start, end__lt=end)|
-      Q(start__lt=start, start__gt=end)
-    )
+    consultations = Consultation.get_intersected(consultations, start, end)
+    # 
+    # c = Consultation.objects.get(id=346)
+    # print("c.start < start, c.end > end: ", c.start < start, c.end > end)
+    # print("c.start > start, c.start < end: ", c.start > start, c.start < end)
+    # print("c.end > start, c.end < end: ", c.end > start, c.end < end)
+    # print("c.start < start, c.start > end: ", c.start < start, c.start > end)
+    # print("c: ", c)
+    # print("consultations: ", consultations)
+    # print("date: ", date)
+    # print("start: ", start)
+    # print("end: ", end)
+    # print("week_day: ", week_day)
+    # print()
+    # 
     if consultations.exists():
       return False
     return True
@@ -283,12 +321,13 @@ class Consultation(TimestampMixin):
     ZOOM   = 'ZOOM'
     MOBILE = 'MOBILE'
     FORMATS = [
-        (SKYPE,  "SKYPE"),
-        (VIBER,  "VIBER"),
-        (GMEET,  "GMEET"),
-        (ZOOM,   "ZOOM"),
-        (MOBILE, "MOBILE"),
+      (SKYPE,  "SKYPE"),
+      (VIBER,  "VIBER"),
+      (GMEET,  "GMEET"),
+      (ZOOM,   "ZOOM"),
+      (MOBILE, "MOBILE"),
     ]
+    link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
     format    = models.CharField(
       verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
     )
@@ -337,21 +376,28 @@ class Consultation(TimestampMixin):
         advocat=self.advocat,
         client=self.client,
         date=self.date,
-      ).filter(
-        Q(start__lt=self.start, end__gt=self.end)|
-        Q(start__gt=self.start, start__lt=self.end)|
-        Q(end__gt=self.start, end__lt=self.end)|
-        Q(start__lt=self.start, start__gt=self.end)
       )
+      consultations = Consultation.get_intersected(consultations, self.start, self.end)
       # if False:
-      # if consultations.exists():
-      #   raise Exception('ERROR!!!')
+      if consultations.exists():
+        raise Exception('ERROR!!!')
       super().save()
 
-    @property
-    def documents(self):
-      documents = ConsultationDocument.objects.filter(consultation=self)
-      return documents
+    @classmethod
+    def get_intersected(cls, consultations, start, end):
+      consultations = consultations.filter(
+        # Години консультації між вибраними годинами
+        Q(start__lt=start, end__gt=end)|
+        # Початок консультації між вибраними годинами
+        Q(start__gt=start, start__lt=end)|
+        # Закінчення консультації між вибраними годинами
+        Q(end__gt=start, end__lt=end)|
+        # Вибрані години між годинами консультації
+        Q(start__lt=start, start__gt=end)|
+        # Вибрані години співпадають з годинами консультації
+        Q(start=start, end=end)
+      )
+      return consultations
 
     # @property
     # def time(self):
@@ -401,6 +447,11 @@ class Consultation(TimestampMixin):
     def get_files_by_user(self):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
         return 
+
+    @property
+    def documents(self):
+      documents = ConsultationDocument.objects.filter(consultation=self)
+      return documents
 
     class Meta:
         verbose_name = 'Консультація'

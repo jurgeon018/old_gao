@@ -43,9 +43,11 @@ class ConsultationPaymentDetailSerializer(serializers.ModelSerializer):
 
 
 class ConsultationListSerializer(serializers.ModelSerializer):
-    # date    = serializers.DateTimeField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
-    # created = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
-    # updated = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    date      = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
+    start     = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    end       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
     payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
     class Meta:
@@ -54,9 +56,11 @@ class ConsultationListSerializer(serializers.ModelSerializer):
 
 
 class ConsultationDetailSerializer(serializers.ModelSerializer):
-    # date    = serializers.DateTimeField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
-    # created = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
-    # updated = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    date      = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
+    start     = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    end       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
     payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
     class Meta:

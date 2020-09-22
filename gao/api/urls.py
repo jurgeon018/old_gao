@@ -1,10 +1,10 @@
 from django.urls import path, include 
 from .views import * 
-from .generics import * 
 
 
 
 urlpatterns = [
+    path('googlemeet/', googlemeet),
     path("get_days_info/", get_days_info),
     path("get_hours_info/", get_hours_info),
     path("get_working_hours_info/", get_working_hours_info),
@@ -25,7 +25,6 @@ urlpatterns = [
     path("faculties/", FacultyListView.as_view()),
     path("faculties/<pk>/", FacultyDetailView.as_view()),
 
-    path('googlemeet/', googlemeet)
 ]
 
 
