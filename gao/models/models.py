@@ -148,16 +148,16 @@ class User(AbstractUser):
       for raw_working_hour in raw_hours:
         hours.append({
           "hour":f'{raw_working_hour}:00',
-          "status":self.get_hour_status(raw_working_hour)
+          "status":self.get_hour_status(date, raw_working_hour)
         })    
         if raw_working_hour != raw_hours[-1]:
           hours.append({
             "hour":f"{raw_working_hour}:30",
-            "status":self.get_hour_status(raw_working_hour)
+            "status":self.get_hour_status(date, raw_working_hour)
           })      
     return hours
 
-  def get_hour_status(self, hour):
+  def get_hour_status(self, date, hour):
     if False:
       # TODO: ! free
       status = "free"
@@ -167,6 +167,13 @@ class User(AbstractUser):
     else:
       status = 'unknown'
     return status 
+
+  def hour_is_free(self, date, hour):
+    hour = datetime.strptime(hour, "%H:%M")
+    for working_hour in self.get_working_hours_info(date):
+      if hour == working_hour['hour'] and working_hour['status'] == 'free':
+        return False 
+    return False 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -186,26 +193,9 @@ class User(AbstractUser):
       return False 
     # Обмеження по існуючих консультаціях
     consultations = Consultation.get_intersected(consultations, start, end)
-    # 
-    # c = Consultation.objects.get(id=346)
-    # print("c.start < start, c.end > end: ", c.start < start, c.end > end)
-    # print("c.start > start, c.start < end: ", c.start > start, c.start < end)
-    # print("c.end > start, c.end < end: ", c.end > start, c.end < end)
-    # print("c.start < start, c.start > end: ", c.start < start, c.start > end)
-    # print("c: ", c)
-    # print("consultations: ", consultations)
-    # print("date: ", date)
-    # print("start: ", start)
-    # print("end: ", end)
-    # print("week_day: ", week_day)
-    # print()
-    # 
     if consultations.exists():
       return False
     return True
-
-  def get_working_days(self):
-    return WorkingDay.objects.filter(advocat=self)
 
   def get_consultations(self):
     if self.role == User.ADVOCAT_ROLE:
