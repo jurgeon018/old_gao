@@ -40,12 +40,12 @@ class UserWeekDayResource(ModelResource):
     start = Field(
         attribute='start', 
         column_name='start', 
-        widget=TimeWidget('%H:%M:%S'),
+        widget=TimeWidget('%H:%M'),
     ) 
     end = Field(
         attribute='end', 
         column_name='end', 
-        widget=TimeWidget('%H:%M:%S'),
+        widget=TimeWidget('%H:%M'),
     ) 
     class Meta:
         model = UserWeekDay

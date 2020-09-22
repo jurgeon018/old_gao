@@ -61,51 +61,53 @@ class Command(BaseCommand):
         # r = 1000
         # Consultation.objects.all().delete()
         for i in range(r):
-            print()
-            print(f'{i+1}/{r}')
-            formats       = Consultation.FORMATS
-            statuses      = Consultation.STATUSES
-            faculties     = Faculty.objects.all()
-            advocats      = User.objects.filter(role=User.ADVOCAT_ROLE)
-            clients       = User.objects.filter(role=User.CLIENT_ROLE)
-            advocat       = random.choice(advocats)
-            faculty       = random.choice(faculties)
-            client        = random.choice(clients)
-            format        = random.choice(formats)[0]
-            status        = random.choice(statuses)[0]
+          print()
+          print(f'{i+1}/{r}')
+          formats       = Consultation.FORMATS
+          statuses      = Consultation.STATUSES
+          faculties     = Faculty.objects.all()
+          advocats      = User.objects.filter(role=User.ADVOCAT_ROLE)
+          clients       = User.objects.filter(role=User.CLIENT_ROLE)
+          advocat       = random.choice(advocats)
+          faculty       = random.choice(faculties)
+          client        = random.choice(clients)
+          format        = random.choice(formats)[0]
+          status        = random.choice(statuses)[0]
 
-            # TODO: получити вільні дати у адвоката get_free_dates
-            consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 10))
-            # TODO: получити вільні години у адвоката по даті 
-            # TODO: получити робочі години у адвоката по даті 
+          # TODO: получити вільні дати у адвоката get_free_dates
+          consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 10))
+          # TODO: получити вільні години у адвоката по даті 
+          # TODO: получити робочі години у адвоката по даті 
+          while True:
             start = random.randint(0,20)
-            while True:
-                end   = random.randint(start+1,23)
-                if end > start:
-                    break
-            start = datetime.strptime(f"{start}:{random.choice([0,30])}","%H:%M").time()
-            end   = datetime.strptime(f"{end}:{random.choice([0,30])}","%H:%M").time()
+            if True:
+                break
+          while True:
+            end   = random.randint(start+1,23)
+            if end > start:
+                break
+          start = datetime.strptime(f"{start}:{random.choice([0,30])}","%H:%M").time()
+          end   = datetime.strptime(f"{end}:{random.choice([0,30])}","%H:%M").time()
 
-            # date_is_free = advocat.date_is_free(date_to=consult_date, date_from=consult_date)
-            timerange_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
-            print("date_is_free: ", date_is_free)
-            print("time_is_free: ", time_is_free)
-            print("end: ", end)
-            print("start: ", start)
-            if timerange_is_free:
-            # if True:
-                consult, created = Consultation.objects.get_or_create(
-                    advocat   = advocat,
-                    client    = client,
-                    date      = consult_date,
-                    start     = start,
-                    end       = end,
-                    # format    = format,
-                    # status    = status,
-                )
-                print(consult, created)
-            else:
-                print(F'TIMERANGE {start}:{end} IS NOT FREE')
+          # date_is_free = advocat.date_is_free(date_to=consult_date, date_from=consult_date)
+          timerange_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
+          print("timerange_is_free: ", timerange_is_free)
+          print("end: ", end)
+          print("start: ", start)
+          if timerange_is_free:
+          # if True:
+              consult, created = Consultation.objects.get_or_create(
+                  advocat   = advocat,
+                  client    = client,
+                  date      = consult_date,
+                  start     = start,
+                  end       = end,
+                  # format    = format,
+                  # status    = status,
+              )
+              print(consult, created)
+          else:
+              print(F'TIMERANGE {start}:{end} IS NOT FREE')
         print('ok')
 
         # client    = User.objects.get(id=7)
