@@ -75,7 +75,8 @@ class Command(BaseCommand):
             status        = random.choice(statuses)[0]
 
             # TODO: получити вільні дати у адвоката get_free_dates
-            consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 20))
+            consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 10))
+            # consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 20))
             # TODO: получити вільні години у адвоката по даті 
             # TODO: получити робочі години у адвоката по даті 
             start = random.randint(0,20)
