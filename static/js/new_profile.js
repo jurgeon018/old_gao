@@ -1138,43 +1138,64 @@ $('.submit_wrapper').on('click', function() {
     check_user_valid();
 })
 $('.submit_user_order').on('click', function() {
-    let Formdata = new FormData();
-    let client = $('.client_info_id').attr('data-client');
-    let practise = $('.pract_step_select').find('.step_active_content').attr('data-id');
-    let advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
-    let date = $('.advocate_user_date').attr('data-date');
-    let clock_first = $('.clock_manager_first').text();
-    let clock_lat = $('.clock_manager_second').text();
-    let url = $('.user_order_of_advocate').attr('action');
-    let csrftoken = $('.hidden_wrap_inp').find('input').val();
-    let file_array = $('.new_advocate_download_prof').find('input');
-    jQuery.each(file_array, function(i, file) {
+
+    let all_order_vars = create_obgect_order();
+    append_form_data(all_order_vars);
+    fetch_order(all_order_vars);
+   
+});
+
+function create_obgect_order() {
+
+    let object = {
+        Formdata: new FormData(),
+        client: $('.client_info_id').attr('data-client'),
+        practise: $('.pract_step_select').find('.step_active_content').attr('data-id'),
+        advocate: $('.advoc_step_select').find('.step_active_content').attr('data-id'),
+        date: $('.advocate_user_date').attr('data-date'),
+        clock_first: $('.clock_manager_first').text().replace('.', ':'),
+        clock_last: $('.clock_manager_second').text().replace('.', ':'),
+        url: $('.user_order_of_advocate').attr('action'),
+        csrftoken: $('.hidden_wrap_inp').find('input').val(),
+        file_array: $('.new_advocate_download_prof').find('input')
+    }
+    return object;
+}
+function append_form_data(all_order_vars) {
+    jQuery.each(all_order_vars.file_array, function(i, file) {
         let fileData = file.files[0];
-        Formdata.append(`document[${i}]`, fileData);
+        all_order_vars.Formdata.append(`document[${i}]`, fileData);
     });
 
-    Formdata.append(`client`, client);
-    Formdata.append(`faculty`, practise);
-    Formdata.append(`advocat`, advocate);
-    Formdata.append(`date`, date);
-    Formdata.append(`start`, clock_first);
-    Formdata.append(`end`, clock_lat);
-    Formdata.append(`csrftoken`, csrftoken);
-
-    fetch(url, {
+    all_order_vars.Formdata.append(`client`, all_order_vars.client);
+    all_order_vars.Formdata.append(`faculty`, all_order_vars.practise);
+    all_order_vars.Formdata.append(`advocat`, all_order_vars.advocate);
+    all_order_vars.Formdata.append(`date`, all_order_vars.date);
+    all_order_vars.Formdata.append(`start`, all_order_vars.clock_first);
+    all_order_vars.Formdata.append(`end`, all_order_vars.clock_last);
+    all_order_vars.Formdata.append(`csrftoken`, all_order_vars.csrftoken);
+    
+    if (all_order_vars.comment != undefined) {
+        all_order_vars.Formdata.append(`comment`, all_order_vars.comment); 
+    }
+        
+}
+function fetch_order(content) {
+    fetch(content.url, {
         method: 'POST',
-        body: Formdata,
+        body: content.Formdata,
     })
     .then(data => {
         return data.json();
     })
     .then(data => {
-     
+        if (data.messages[0].status == 'bad') {
+            alert(data.messages[0].text);
+        }
     })
+}
 
-   
-    
-});
+
 function check_user_valid() {
     let all_check_items = $('.step_select');
     let all_count = $('.step_select').length;
@@ -1291,7 +1312,36 @@ $('.save_reserve_date_btn').on('click', function() {
     } else {
         $('.error_reserve').text('');
 
-            
+        let object = {
+            Formdata: new FormData(),
+            client: $('.advocat_info_id').attr('data-advocat'),
+            practise: $('.advocate_download_name').first().attr('data-id'),
+            advocate: $('.advocat_info_id').attr('data-advocat'),
+            date: $('.datapicker_user').val(),
+            clock_first: $('.first_advocate_user_clock').attr('data-clock').replace('.', ':'),
+            clock_last: $('.second_advocate_user_clock').attr('data-clock').replace('.', ':'),
+            url: '/api/consultations/',
+            csrftoken: $('.hidden_wrap_inp').find('input').val(),
+            comment: $('.advocate_user_comment__block').find('textarea').val()
+        }
+       
+        append_form_data(object);
+        fetch_order(object);
+
+        function append_form_data(all_order_vars) {
+            jQuery.each(all_order_vars.file_array, function(i, file) {
+                let fileData = file.files[0];
+                all_order_vars.Formdata.append(`document[${i}]`, fileData);
+            });
+        
+            all_order_vars.Formdata.append(`client`, all_order_vars.client);
+            all_order_vars.Formdata.append(`faculty`, all_order_vars.practise);
+            all_order_vars.Formdata.append(`advocat`, all_order_vars.advocate);
+            all_order_vars.Formdata.append(`date`, all_order_vars.date);
+            all_order_vars.Formdata.append(`start`, all_order_vars.clock_first);
+            all_order_vars.Formdata.append(`end`, all_order_vars.clock_last);
+            all_order_vars.Formdata.append(`csrftoken`, all_order_vars.csrftoken);
+        }
     }
 })
 $('.step_access_btn').on('click', function() {
