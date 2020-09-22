@@ -184,8 +184,9 @@
 										</div>
 										<div class="advocate_slick_date__block">	
 											{% for date in dates %}
-											<div data-day_id='1' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
-												{{date}}
+											<div data-day_id='1' data-date='{{date|date:"d.m.Y"}}' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
+												{{date|date:"d.m.Y"}}
+												<!-- {{date}} -->
 											</div>
 											{% endfor %}
 										</div>

@@ -208,6 +208,18 @@ if ($('.advocate_calender_container').length == 1) {
           }]
       }];
       create_calender(test_json);
+            let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
+            let id_advocat = $('.advocat_info_id').attr('data-advocat');
+
+              fetch(`/api/get_working_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
+                method: "GET",
+              })
+              .then((data) => {
+                return data.json();
+              })
+              .then((body) => {
+                  console.log('body: ', body);
+              }); 
 
    function create_calender(array_current_transition) {
     $('.advocate_calender_item__block').children().remove();
@@ -292,6 +304,18 @@ if ($('.advocate_calender_container').length == 1) {
             setTimeout(() => {
             $(table_task).css('left', '0');
 
+
+            // fetch(`/api/get_working_hours_info/?date=01.10.2020&advocat=3`, {
+            //     method: "GET",
+            //   })
+            //   .then((data) => {
+            //     return data.json();
+            //   })
+            //   .then((body) => {
+            //       console.log('body: ', body);
+            //   });   
+            
+
                 $.each(array_current_transition, function(index, value) {
                     if (value.clockwork == id) {
                         // зміна імені
@@ -316,7 +340,7 @@ if ($('.advocate_calender_container').length == 1) {
                          // зміна дати
                          $(table_task).find('.advocate_data_user_title').text(value.date);
                          
-                         // зміна дати
+                         // зміна часу
                          let current_clock;
                          let current_transition = (value.clockwork + value.transition) + '.00';
     
