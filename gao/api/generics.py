@@ -2,11 +2,12 @@ from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import * 
 from .paginators import * 
-
+from ..calendar import generate_hangouts_link
 import datetime
 import calendar
 from django.http import JsonResponse
 import json 
+from datetime import datetime, time 
 
 class UserListView(generics.ListCreateAPIView):
     serializer_class = UserListSerializer
@@ -36,57 +37,46 @@ class ConsultationListView(generics.ListCreateAPIView):
     queryset = Consultation.objects.all()
 
     def create(self, request, *args, **kwargs):
-        # TODO: перевірки через User.timerange_is_free
-        # print("request.user", request.user)
-        # response  = {"messages":[]}
-        # data      = request.data 
-        # date      = data['date']
-        # start     = data['start']
-        # end       = data['end']
-        # advocat   = data['advocat']
-        # client    = data['client']
-        # consultations = Consultation.objects.filter(
-        #     date  = date, 
-        #     start = start, 
-        #     end   = end,
-        # )
-        # advocat_consultations = consultations.filter(advocat=advocat)
-        # client_consultations  = consultations.filter(client=client)
-        # if client_consultations.exists() and advocat_consultations.exists():
-        #     response['messages'].append({
-        #         'text':'Ця година вже зайнята іншим клієнтом', 
-        #         'status':'bad',
-        #     })
-        #     response['messages'].append({
-        #         'text':'Ця година вже зайнята іншою консультацією', 
-        #         'status':'bad',
-        #     })
-        #     return Response(response)
-        # elif advocat_consultations.exists():
-        #     response['messages'].append({
-        #         'text':'Ця година вже зайнята іншим клієнтом', 
-        #         'status':'bad',
-        #     })
-        #     return Response(response)
-        # elif client_consultations.exists():
-        #     response['messages'].append({
-        #         'text':'Ця година вже зайнята іншою консультацією', 
-        #         'status':'bad',
-        #     })
-        #     return Response(response)
-        response = super().create(request, *args, **kwargs)
+      response  = {"messages":[], 'documents':[]}
+      data      = request.data 
+      date      = datetime.strptime(data['date'], '%d.%m.%Y')
+      start     = datetime.strptime(data['start'], '%H:%M').time()
+      end       = datetime.strptime(data['end'], '%H:%M').time()
+      advocat   = User.objects.get(id=data['advocat'])
+      client    = User.objects.get(id=data['client'])
+      if not advocat.timerange_is_free(date, start, end):
+        response['messages'].append({
+          'text':'Ця година вже зайнята іншим клієнтом',
+          'status':'bad',
+        })
+      if not client.timerange_is_free(date, start, end):
+        response['messages'].append({
+          'text':'Ця година вже зайнята іншою консультацією',
+          'status':'bad',
+        })
+      response = super().create(request, *args, **kwargs)
+      documents = []
+      consultation = Consultation.objects.get(id=response.data.get('id'))
+      for file in request.FILES:
+        document = ConsultationDocument.objects.create(
+          consultation=consultation,
+          file=file,
+        )
+        if request.user.is_authenticated:
+          document.author=request.user
+        else:
+          document.author=client
+        document.save()
+        documents.append(document.id)
+      response.data['documents'] = documents
+      if data.get('format') == 'GMEET':
+        link = generate_hangouts_link(request)
+        response.data['link'] = link
+        consultation.link = link
+        consultation.save()
+      print(response.data)
+      return response
 
-        for file in request.FILES:
-            document = ConsultationDocument.objects.create(
-                consultation=Consultation.objects.get(id=response.data.get('id')),
-                file=file,
-            )
-            if request.user.is_authenticated:
-                document.author=request.user 
-            else:
-                document.author=User.objects.get(id=client)
-            document.save()
-        return response
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -96,7 +86,6 @@ class ConsultationListView(generics.ListCreateAPIView):
 
 
 class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
-    pagination_class = CustomPagination
     serializer_class = ConsultationDetailSerializer
     queryset = Consultation.objects.all()
 

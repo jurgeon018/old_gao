@@ -97,9 +97,6 @@ class User(AbstractUser):
     else:
       start = None
       end = None
-      # TODO: ЗАБРАТИ ДО СРАКИ ТО ШО ЗНИЗУ
-      # start = datetime.strptime('09:00:00','%H:%M:%S').time()
-      # end = datetime.strptime('19:00:00','%H:%M:%S').time()
     if start and end:
       start = time.strftime(start, '%H:%M')
       end   = time.strftime(end, '%H:%M')
@@ -164,6 +161,7 @@ class User(AbstractUser):
     )
     if consultations.exists():
       return False
+    print('True')
     return True
 
   def get_working_days(self):
@@ -283,12 +281,13 @@ class Consultation(TimestampMixin):
     ZOOM   = 'ZOOM'
     MOBILE = 'MOBILE'
     FORMATS = [
-        (SKYPE,  "SKYPE"),
-        (VIBER,  "VIBER"),
-        (GMEET,  "GMEET"),
-        (ZOOM,   "ZOOM"),
-        (MOBILE, "MOBILE"),
+      (SKYPE,  "SKYPE"),
+      (VIBER,  "VIBER"),
+      (GMEET,  "GMEET"),
+      (ZOOM,   "ZOOM"),
+      (MOBILE, "MOBILE"),
     ]
+    link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
     format    = models.CharField(
       verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
     )
@@ -344,8 +343,8 @@ class Consultation(TimestampMixin):
         Q(start__lt=self.start, start__gt=self.end)
       )
       # if False:
-      # if consultations.exists():
-      #   raise Exception('ERROR!!!')
+      if consultations.exists():
+        raise Exception('ERROR!!!')
       super().save()
 
     @property

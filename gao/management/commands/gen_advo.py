@@ -7,9 +7,9 @@ from ...models import *
 import random 
 advocats = [
     {
-        "name":"Боровець",
-        "username":"borovec",
-        "password":"borovec",
+        "name":"Адвокат 1",
+        "username":"advocat1",
+        "password":"advocat1",
         "faculties":[1,2,3],
         "rate":100,
     },
@@ -35,6 +35,9 @@ advocats = [
         "rate":130,
     },
 ]
+
+
+
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         user, _ = User.objects.get_or_create(
