@@ -76,6 +76,8 @@ class Command(BaseCommand):
 
             # TODO: получити вільні дати у адвоката get_free_dates
             consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 10))
+            # if consult_date == date.today():
+            #     print('!!!!!')
             # consult_date  = date.today() - timedelta(days=1) + timedelta(days=random.randint(1, 20))
             # TODO: получити вільні години у адвоката по даті 
             # TODO: получити робочі години у адвоката по даті 

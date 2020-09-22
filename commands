@@ -1,5 +1,10 @@
 pip3 install -r requirements.txt
 sudo pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+pip3 install google_auth_oauthlib
+pip3 install googleapiclient
+pip install --upgrade google-api-python-client
+
+
 
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 rm db.sqlite3
