@@ -922,6 +922,7 @@
         width: 150px;
     }
     &_time__block {
+        display: grid;
         grid-template-columns: repeat(11, 1fr);
         margin-top: 15px;
         .adv_cal_time:nth-child(1) {
@@ -965,6 +966,9 @@
             background-color: #D2A351;
         }
     }
+}
+.adv_cal_time {
+
 }
 .reserve_hidden_content {
     .datapicker_user {
@@ -1067,6 +1071,8 @@
 
 }
 .adv_cal_time {
+    position: relative;
+    transition: all .2s;
     text-align: center;
     color: #fff;
     font-size: 14px;
@@ -1421,11 +1427,17 @@
     text-align: center;
 }
 
-
-.all_calender__wrapper {
-    position: relative;
+.scroll_calender__wrapper {
+    overflow: auto;
 }
-
+.all_calender__wrapper {
+    transition: all .2s;
+    position: relative;
+    width: 1000px;
+}
+.advocate_calender_item__block {
+    width: 1000px;
+}
 #tab_33 {
     padding-left: 0;
     padding-right: 30px;

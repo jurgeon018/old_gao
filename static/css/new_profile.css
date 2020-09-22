@@ -682,6 +682,7 @@
   margin-bottom: 20px;
   width: 150px; }
 .advocate_calender_time__block {
+  display: grid;
   grid-template-columns: repeat(11, 1fr);
   margin-top: 15px; }
   .advocate_calender_time__block .adv_cal_time:nth-child(1) {
@@ -807,6 +808,8 @@
   width: fit-content; }
 
 .adv_cal_time {
+  position: relative;
+  transition: all .2s;
   text-align: center;
   color: #fff;
   font-size: 14px;
@@ -1096,8 +1099,16 @@
   margin: 10px 0px;
   text-align: center; }
 
+.scroll_calender__wrapper {
+  overflow: auto; }
+
 .all_calender__wrapper {
-  position: relative; }
+  transition: all .2s;
+  position: relative;
+  width: 1000px; }
+
+.advocate_calender_item__block {
+  width: 1000px; }
 
 #tab_33 {
   padding-left: 0;

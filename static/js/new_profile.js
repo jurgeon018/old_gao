@@ -10,31 +10,7 @@
 
 if ($('.advocate_calender_container').length == 1) {
     
-    $('.advocate_calender_time__block').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 11,
-        slidesToScroll: 11,
-        // responsive: [
-        //   {
-        //     breakpoint: 1200,
-        //     settings: {
-        //       slidesToShow: 3,
-        //       slidesToScroll: 3,
-        //       infinite: true,
-        //       dots: true
-        //     }
-        //   }
-        // ]
-      });
-      $('.advocate_time_arrow_1').click(function () {
-        $(".advocate_calender_time__block").slick('slickPrev');
-      });
-      $('.advocate_time_arrow_2').click(function () {
-        $(".advocate_calender_time__block").slick('slickNext');
-      });
-
+  
     $('.status_select').select2({
         minimumResultsForSearch: Infinity,
         selectOnClose: true,
@@ -74,162 +50,24 @@ if ($('.advocate_calender_container').length == 1) {
       });
 
 
-      let test_json = [{
-          transition: 1,
-          clockwork: '9.00',
-          name: 'test_client1',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'Skype',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      }, 
-      {
-          transition: 1,
-          clockwork: '10.00',
-          name: 'test_client2',
-          type_user: 'адвокат',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'Завершено',
-          date: 'Середа. 15.08.2020.',
-          communication: 'GoogleMeet',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      },
-      {
-          transition: 2,
-          clockwork: '11.00',
-          name: 'test_client3',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'Skype',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      },
-      {
-          transition: 1,
-          clockwork: '13.00',
-          name: 'test_client4',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'GoogleMeet',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      },
-      {
-          transition: 3,
-          clockwork: '14.00',
-          name: 'test_client5',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'Skype',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      },
-      {
-          transition: 1,
-          clockwork: '17.00',
-          name: 'test_client6',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'Paint',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      },
-      {
-          transition: 2,
-          clockwork: '18.00',
-          name: 'test_client7',
-          type_user: 'клієнт',
-          branch: ['Судова галузь', 'Податкова галузь'],
-          status: 'В очікуванні',
-          date: 'Середа. 15.08.2020.',
-          communication: 'Skype',
-          price: '1000 грн',
-          files: [{
-              file_name: 'file1',
-              file_url: '/media/test_url/file1.pdf'
-          },
-          {
-              file_name: 'file2',
-              file_url: '/media/test_url/file2.pdf'
-          }]
-      }];
-      create_calender(test_json);
-            let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
-            let id_advocat = $('.advocat_info_id').attr('data-advocat');
+     
 
-              fetch(`/api/get_working_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
-                method: "GET",
-              })
-              .then((data) => {
-                return data.json();
-              })
-              .then((body) => {
-                  console.log('body: ', body);
-              }); 
 
-   function create_calender(array_current_transition) {
+    create_all_calender(true);
+
+       
+           
+
+   function create_calender(consultation) {
+    let width_item = consultation.working_hours.length;
+    console.log('width_item: ', width_item);
     $('.advocate_calender_item__block').children().remove();
 
-    let left_position = 100 / 11;
-    let current_slides = $('.advocate_calender_time__block').find('.slick-active');
+    let left_position = 100 / width_item;
+    // let current_slides = $('.advocate_calender_time__block').find('.slick-active');
     let all_clock_calender = $('.adv_cal_time');
     
-    let grid_counter = Number(array_current_transition.length);
-
+    let grid_counter = Number(consultation.hours.length);
 
     let current_task_width = 0;
     for (let i = 0; i < grid_counter ; i++) {
@@ -238,18 +76,29 @@ if ($('.advocate_calender_container').length == 1) {
         let check_active;
         let current_time = [];
         
-        $.each(array_current_transition, function(index, value) {
+        $.each(consultation.hours, function(index, value) {
+            let current_clockworks = value.start.replace(':', '.');
+            
             if (index == i) {
-                $.each(current_slides, function(index, sub_value) {
-                    if ($(sub_value).find('.adv_cal_time').attr('data-clock') == value.clockwork) {
-                        current_time.push(value.clockwork);
+                $.each(all_clock_calender, function(index, sub_value) {
+                    if ($(sub_value).attr('data-clock') == current_clockworks) {
+                        current_time.push(current_clockworks);
                         current_margin = index;
                     } else {
 
                     }
                 });
                 item_left = (left_position * current_margin);
-                current_task_width = value.transition;
+
+                // якась робота з датами, просто не лізь сюди
+                let dates_start = value.start.split(':');
+                let dates_end = value.end.split(':');
+                let date_start = new Date(2020, 09, 22, dates_start[0], dates_start[1], 05);
+                let date_end = new Date(2020, 09, 22, dates_end[0], dates_end[1], 05);
+                let diff = date_end.getTime() - date_start.getTime();
+                let curent_min = diff / (1000 * 60);
+                let interval = Number($('.all_calender__wrapper').attr('data-interval'));
+                current_task_width = curent_min / interval;
             }
         });
         if (current_time.length == 0) {
@@ -259,9 +108,9 @@ if ($('.advocate_calender_container').length == 1) {
         }
         let test_json = {
             current_width: left_position,
-            // current_transition: current_task_width,
+            current_transition: current_task_width,
             left: item_left,
-            info: array_current_transition[i],
+            info: consultation.hours[i],
         }
         if (check_active == true) {
             $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
@@ -269,15 +118,18 @@ if ($('.advocate_calender_container').length == 1) {
     }
 
     function create_row_item(content) {
+        console.log('content: ', content);
         let advocate_calender_item_prof = document.createElement('div');
         advocate_calender_item_prof.classList.add('advocate_calender_item_prof');
-        advocate_calender_item_prof.setAttribute(`data-clockwork`, content.info.clockwork);
+        advocate_calender_item_prof.setAttribute(`data-clockwork`, content.info.start.replace(':', '.'));
     
         let advocate_calender_task = document.createElement('div');
         $(advocate_calender_task).css('left', `${content.left}%`);
-        $(advocate_calender_task).css('width', `${(content.current_width * content.info.transition) - 2}%`);
+        $(advocate_calender_task).css('width', `${(content.current_width * content.current_transition) - 2}%`);
         advocate_calender_task.classList.add('advocate_calender_task');
+        advocate_calender_task.setAttribute(`data-id`, content.info.consultation_id);
     
+
         advocate_calender_item_prof.appendChild(advocate_calender_task);
     
         for (let i = 0; i < 11; i++) {
@@ -316,7 +168,7 @@ if ($('.advocate_calender_container').length == 1) {
             //   });   
             
 
-                $.each(array_current_transition, function(index, value) {
+                $.each(consultation, function(index, value) {
                     if (value.clockwork == id) {
                         // зміна імені
                         $(table_task).find('.advocate_info_name').text(value.name);
@@ -386,8 +238,212 @@ if ($('.advocate_calender_container').length == 1) {
             setTimeout(() => {
                 $(value).css('top', '0px');
                 $(value).css('max-height', '1000px');
+                $(value).css('grid-template-columns', `repeat(${width_item}, 1fr)`);
+
             }, 200);
         });
+   }
+
+
+   
+   
+   function create_all_calender(check_calender) {
+    
+   
+
+    let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
+    let id_advocat = $('.advocat_info_id').attr('data-advocat');
+
+      fetch(`/api/get_working_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          console.log('body: ', body);
+          if (check_calender == true) {
+            $('.all_calender__wrapper').css('opacity', '0');
+
+            setTimeout(() => {
+                $('.advocate_calender_time__block').children().remove();
+
+                  create_time_item(body.working_hours);
+            }, 200);
+          }
+
+          setTimeout(() => {
+            $('.all_calender__wrapper').css('opacity', '1');
+          
+            let test_json = [{
+              transition: 1,
+              clockwork: '9.00',
+              name: 'test_client1',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'Skype',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          }, 
+          {
+              transition: 1,
+              clockwork: '10.00',
+              name: 'test_client2',
+              type_user: 'адвокат',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'Завершено',
+              date: 'Середа. 15.08.2020.',
+              communication: 'GoogleMeet',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          },
+          {
+              transition: 2,
+              clockwork: '11.00',
+              name: 'test_client3',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'Skype',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          },
+          {
+              transition: 1,
+              clockwork: '13.00',
+              name: 'test_client4',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'GoogleMeet',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          },
+          {
+              transition: 3,
+              clockwork: '14.00',
+              name: 'test_client5',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'Skype',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          },
+          {
+              transition: 1,
+              clockwork: '17.00',
+              name: 'test_client6',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'Paint',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+          },
+          {
+              transition: 2,
+              clockwork: '18.00',
+              name: 'test_client7',
+              type_user: 'клієнт',
+              branch: ['Судова галузь', 'Податкова галузь'],
+              status: 'В очікуванні',
+              date: 'Середа. 15.08.2020.',
+              communication: 'Skype',
+              price: '1000 грн',
+              files: [{
+                  file_name: 'file1',
+                  file_url: '/media/test_url/file1.pdf'
+              },
+              {
+                  file_name: 'file2',
+                  file_url: '/media/test_url/file2.pdf'
+              }]
+            }];
+              create_calender(body);
+          }, 420);
+      });  
+    
+
+    function create_time_item(content) {
+        $('.advocate_calender_time__block').css('grid-template-columns', `repeat(${content.length}, 1fr)`);
+
+        let product_item = "";
+        $.each(content, function(index, value) {
+            let new_clock = value.hour.replace(':', '.');
+            product_item += `
+            <div data-clock='${new_clock}' class="adv_cal_time">
+                <div class="grid_inner">
+                    <div class="grid_content">
+                        ${new_clock}
+                    </div>
+                </div>
+            </div>
+              
+            `;
+          });
+            
+        $(".advocate_calender_time__block")[0].innerHTML = product_item;
+    }
+
+    // let new_prof = $('.adv_cal_time');
+
+        // $.each(new_prof, function(index, value) {
+        //     setTimeout(() => {
+        //         $(value).css('top', '0px');
+        //         $(value).css('max-height', '1000px');
+        //     }, 200);
+        // });
+      
+    
    }
 
     $('.advocate_slick_date_prof').on('click', function() {
@@ -402,7 +458,7 @@ if ($('.advocate_calender_container').length == 1) {
                 $(value).css('max-height', '0px');
             }, 200);
             setTimeout(() => {
-                create_calender(test_json);
+                create_all_calender(true);
             }, 400);
         });
 
@@ -418,7 +474,7 @@ if ($('.advocate_calender_container').length == 1) {
                 $(value).css('max-height', '0px');
             }, 200);
             setTimeout(() => {
-                create_calender(test_json);
+                create_all_calender(false);
             }, 400);
         });
 
@@ -707,6 +763,7 @@ if ($('.advocate_user_input__block').length >= 1) {
 }
 
 function create_clockwork_client(content) {
+    console.log('content: ', content);
     let step_date_prof = document.createElement('div');
 
     if (content.status == 'unknown' || content.status == 'free') {
@@ -778,6 +835,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                 current_data = `П'ятниця. ${formattedDate}`;
             }
             $('.advocate_user_date').text(current_data);
+            $('.advocate_user_date').attr('data-date', formattedDate);
             $('.step_access').text('');
             $('.current_clock_num').text(0);
             $('.all_price_consultation').text(0);
@@ -844,13 +902,17 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                   $.each(body.hours, function(index, value) {
                       let delete_space = value.hour.replace(/\s+/g, '');
                       let words = delete_space.split(':');
-                      let date = new Date(0, 0, 0, words[0], words[1], words[2]);
+                      let date = new Date(0, 0, 0, words[0], words[1], 0);
                       let current_clock_json = {
                          hours: date.getHours() * 60 + date.getMinutes(),
                          status: value.status
                       }
+                      if (current_clock_json.hours <= 360) {
+                        //   в цей час потрібно спати, а не працювати
+                      } else {
+                        $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
+                      }
                         
-                      $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
                   });
               });    
 
@@ -860,6 +922,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
         
      });
 }
+
  
 function replasor_text() {
     let client_date = $('.advocate_user_date').text();
@@ -1079,11 +1142,11 @@ $('.submit_user_order').on('click', function() {
     let client = $('.client_info_id').attr('data-client');
     let practise = $('.pract_step_select').find('.step_active_content').attr('data-id');
     let advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
-    let date = $('.advocate_user_date').text();
+    let date = $('.advocate_user_date').attr('data-date');
     let clock_first = $('.clock_manager_first').text();
     let clock_lat = $('.clock_manager_second').text();
     let url = $('.user_order_of_advocate').attr('action');
-
+    let csrftoken = $('.hidden_wrap_inp').find('input').val();
     let file_array = $('.new_advocate_download_prof').find('input');
     jQuery.each(file_array, function(i, file) {
         let fileData = file.files[0];
@@ -1091,11 +1154,12 @@ $('.submit_user_order').on('click', function() {
     });
 
     Formdata.append(`client`, client);
-    Formdata.append(`practise`, practise);
-    Formdata.append(`advocate`, advocate);
+    Formdata.append(`faculty`, practise);
+    Formdata.append(`advocat`, advocate);
     Formdata.append(`date`, date);
-    Formdata.append(`clock_first`, clock_first);
-    Formdata.append(`clock_lat`, clock_lat);
+    Formdata.append(`start`, clock_first);
+    Formdata.append(`end`, clock_lat);
+    Formdata.append(`csrftoken`, csrftoken);
 
     fetch(url, {
         method: 'POST',

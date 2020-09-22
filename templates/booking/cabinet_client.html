@@ -20,6 +20,9 @@
 				<div class="user_name midle_title midle_title_3 color_gold">
 					Бурега Назар Васильович
 				</div>
+				<div class="hidden_wrap_inp">
+					{% csrf_token %}
+				</div>
 				<div data-client='{{request.user.id}}' class="client_info_id user_type standart_title standart_title_4 color_black">
 					клієнт
 				</div>
@@ -49,6 +52,7 @@
 								Сканкопії інших документів  -->
 							</div>
 							<div class="main_doc_link__block">
+								
 								<div data-tab='3' class="button_transparent main_doc_link main_doc_link_active">
 									Бронювання
 								</div>
@@ -58,7 +62,7 @@
 							</div>
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="main_doc_content main_doc_content_active">
-									<form action="/test/" class="new_form user_order_of_advocate">
+									<form action="/api/consultations/" class="new_form user_order_of_advocate">
 										<div class="step_title standart_title standart_title_4 color_black">
 											<span class="step_text color_gold">
 												Крок 1.
