@@ -17,12 +17,46 @@ if ($('.advocate_calender_container').length == 1) {
         dropdownAutoWidth: true,
         width: 'resolve',
     });
+
+    $('.status_select').on('select2:select', function (e) {
+        var data = e.params.data.id;
+
+        fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+        
+        })
+    });
+
+    
     $('.communicate_select').select2({
         minimumResultsForSearch: Infinity,
         selectOnClose: true,
         dropdownAutoWidth: true,
         width: 'resolve',
     });
+
+    $('.communicate_select').on('select2:select', function (e) {
+        var data = e.params.data.id;
+
+        fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+        
+        })
+    });
+
+
     
     $('.advocate_slick_date__block').slick({
         dots: false,
@@ -51,7 +85,18 @@ if ($('.advocate_calender_container').length == 1) {
 
 
      
-
+// якась робота з датами, просто не лізь сюди
+function generate_interval(start, end) {
+    let dates_start = start.split(':');
+    let dates_end = end.split(':');
+    let date_start = new Date(2020, 09, 22, dates_start[0], dates_start[1], 05);
+    let date_end = new Date(2020, 09, 22, dates_end[0], dates_end[1], 05);
+    let diff = date_end.getTime() - date_start.getTime();
+    let curent_min = diff / (1000 * 60);
+    let interval = Number($('.all_calender__wrapper').attr('data-interval'));
+    let result = curent_min / interval
+    return result;
+}
 
     create_all_calender(true);
 
@@ -90,15 +135,8 @@ if ($('.advocate_calender_container').length == 1) {
                 });
                 item_left = (left_position * current_margin);
 
-                // якась робота з датами, просто не лізь сюди
-                let dates_start = value.start.split(':');
-                let dates_end = value.end.split(':');
-                let date_start = new Date(2020, 09, 22, dates_start[0], dates_start[1], 05);
-                let date_end = new Date(2020, 09, 22, dates_end[0], dates_end[1], 05);
-                let diff = date_end.getTime() - date_start.getTime();
-                let curent_min = diff / (1000 * 60);
-                let interval = Number($('.all_calender__wrapper').attr('data-interval'));
-                current_task_width = curent_min / interval;
+                
+                current_task_width = generate_interval(value.start, value.end);
             }
         });
         if (current_time.length == 0) {
@@ -152,80 +190,70 @@ if ($('.advocate_calender_container').length == 1) {
             let wrap = $(this).parents('.advocate_calender_item_prof');
             let table_task = $('.advocate_calender_info');
             let id = Number($(wrap).attr('data-clockwork'));
+            let fetch_id = $(this).attr('data-id');
             $(table_task).css('left', '-100%');
             setTimeout(() => {
             $(table_task).css('left', '0');
 
 
-            // fetch(`/api/get_working_hours_info/?date=01.10.2020&advocat=3`, {
-            //     method: "GET",
-            //   })
-            //   .then((data) => {
-            //     return data.json();
-            //   })
-            //   .then((body) => {
-            //       console.log('body: ', body);
-            //   });   
-            
-
-                $.each(consultation, function(index, value) {
-                    if (value.clockwork == id) {
-                        // зміна імені
-                        $(table_task).find('.advocate_info_name').text(value.name);
-    
-                        // зміна типу юзера
-                        $(table_task).find('.advocate_info_subname').text(value.type_user);
-    
-                        // зміна галузей
-                        $('.branch__wrap').children().remove();
-                        $.each(value.branch, function(index, sub_value) {
-                            let branch_item = document.createElement('div');
-                            branch_item.classList.add('advocate_type_work', 'standart_title', 'standart_title_4', 'color_black');
-                            branch_item.textContent = sub_value;
-                            $('.branch__wrap')[0].appendChild(branch_item);
-                        });
-    
-                        // зміна статуса
-                        $('.status_select').val(value.status);
-                        $('.status_select').trigger('change');
-    
-                         // зміна дати
-                         $(table_task).find('.advocate_data_user_title').text(value.date);
-                         
-                         // зміна часу
-                         let current_clock;
-                         let current_transition = (value.clockwork + value.transition) + '.00';
-    
-                         if (value.clockwork <= 9) {
-                            current_clock = '0' + value.clockwork + '.00';
-                         } else {
-                            current_clock = value.clockwork + '.00';
-                         }
+            fetch(`/api/consultations/${fetch_id}/`, {
+                method: "GET",
+              })
+              .then((data) => {
+                return data.json();
+              })
+              .then((body) => {
+                  console.log('body: ', body);
+                    // зміна айді консультації
+                    $('.advocate_calender_info').attr('data-id', fetch_id);
+                    // зміна імені
+                    $(table_task).find('.advocate_info_name').text('body.name');
                         
-                         $(table_task).find('.user_date_span').text(`з ${current_clock} по ${current_transition}.`);
-    
-                        // зміна тривалості
-                        $(table_task).find('.user_transition_span').text(`консультація -  ${value.transition} год.`);
-    
-                        // зміна комунікації
-                        $('.communicate_select').val(value.communication);
-                        $('.communicate_select').trigger('change');
-    
-                        // зміна тривалості
-                        $(table_task).find('.advocate_price_span').text(value.price);
-    
-                         // зміна файлів
-                         $('.info_consultation_file__block').children().remove();
-                         $.each(value.files, function(index, sub_value) {
-                            let consultation_file = document.createElement('a');
-                            consultation_file.classList.add('consultation_file', 'standart_title', 'standart_title_4', 'color_black');
-                            consultation_file.textContent = sub_value.file_name;
-                            consultation_file.setAttribute(`href`, sub_value.file_url);
-    
-                            $('.info_consultation_file__block')[0].appendChild(consultation_file);
-                        });
-                    }
-                });
+                    // зміна типу юзера
+                    // $(table_task).find('.advocate_info_subname').text(body.type_user);
+
+                    // зміна галузей
+                    $('.branch__wrap').children().remove();
+                    $.each(body.faculty, function(index, sub_value) {
+                        let branch_item = document.createElement('div');
+                        branch_item.classList.add('advocate_type_work', 'standart_title', 'standart_title_4', 'color_black');
+                        branch_item.textContent = sub_value;
+                        $('.branch__wrap')[0].appendChild(branch_item);
+                    });
+
+                    // зміна статуса
+                    $('.status_select').val(body.status);
+                    $('.status_select').trigger('change');
+
+                    // зміна дати
+                    $(table_task).find('.advocate_data_user_title').text(body.date);
+                    
+                    // зміна часу
+                    $(table_task).find('.user_date_span').text(`з ${body.start} по ${body.end}.`);
+                    
+                    // зміна тривалості
+                    $(table_task).find('.user_transition_span').text(`консультація -  ${generate_interval(body.start, body.end)} год.`);
+
+                    // зміна комунікації
+                    $('.communicate_select').val(body.format);
+                    $('.communicate_select').trigger('change');
+
+                    // зміна ціни
+                    $(table_task).find('.advocate_price_span').text(body.price);
+
+                    // зміна файлів
+                    $('.info_consultation_file__block').children().remove();
+                    $.each(body.documents, function(index, sub_value) {
+                        let consultation_file = document.createElement('a');
+                        consultation_file.classList.add('consultation_file', 'standart_title', 'standart_title_4', 'color_black');
+                        consultation_file.textContent = sub_value.file_name;
+                        consultation_file.setAttribute(`href`, sub_value.file_url);
+
+                        $('.info_consultation_file__block')[0].appendChild(consultation_file);
+                    });
+              });   
+            
+                       
             }, 200);
         })
     
@@ -485,6 +513,54 @@ if ($('.advocate_calender_container').length == 1) {
     
 
 }
+// блочок який лиш для адвокатів закінчується
+
+
+$('.delete_this_consultation').on('click', user_delete);
+   
+function user_delete() {
+    $.fancybox.open({
+        src: '#modal_delete_consultation',
+        touch: false,
+    }); 
+}
+
+$('.user_cancel').on('click', function() {
+    $.fancybox.close({
+        src: '#modal_delete_consultation',
+    }); 
+});
+$('.user_acceses').on('click', function() {
+    
+    fetch(`/api/project_users/${users_id}/`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+            // console.log('data: ', data);
+        })
+    let all_users = $('.create_user_section').find('.sub_tab_card__block');
+    console.log('all_users: ', all_users);
+    
+    $.each(all_users,function(index,value){
+          if ($(value).attr('data-user') == users_id) {
+              console.log('$(value): ', $(value));
+            $(value).remove();
+        }
+      });
+    $.fancybox.close({
+        src: '#modal_delete_user',
+    }); 
+});
+
+
+
 
 let test_practise = [
     {

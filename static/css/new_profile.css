@@ -453,13 +453,15 @@
   .consultation_file:hover {
     color: #D2A351; }
 .consultation_prof {
+  position: relative;
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
   border: 1px solid #D2A351;
   width: 100%;
   margin-bottom: 30px;
-  padding: 15px; }
+  padding: 15px;
+  padding-right: 40px; }
   .consultation_prof .advocate_type__block {
     margin-bottom: 10px;
     margin-top: 10px; }
@@ -880,9 +882,15 @@
   transition: all .2s;
   text-align: center;
   cursor: pointer; }
-
-.advocate_slick_date_prof_active {
-  color: #D2A351; }
+  .advocate_slick_date_prof_active {
+    color: #D2A351; }
+  .advocate_slick_date_prof_passive {
+    pointer-events: none;
+    background: #000;
+    color: #fff;
+    opacity: 0.3;
+    border-radius: 5px;
+    cursor: default; }
 
 .slick-arrow {
   display: none !important; }
@@ -1114,6 +1122,32 @@
   padding-left: 0;
   padding-right: 30px; }
 
+.absolute_change__block {
+  position: absolute;
+  display: flex;
+  top: 7px;
+  right: 8px;
+  align-items: center; }
+
+.delete_this_consultation {
+  cursor: pointer;
+  margin-left: 5px; }
+  .delete_this_consultation svg {
+    transition: all .2s;
+    width: 15px;
+    color: #D2A351; }
+    .delete_this_consultation svg:hover {
+      color: #ff0000; }
+
+.cancel_this_consultation {
+  cursor: pointer; }
+  .cancel_this_consultation svg {
+    transition: all .2s;
+    width: 15px;
+    color: #D2A351; }
+    .cancel_this_consultation svg:hover {
+      color: #ff0000; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;
@@ -1141,15 +1175,17 @@
 
   .consultation_prof {
     flex-direction: column;
-    width: 45%;
-    margin: 20px; }
+    width: 100%;
+    margin: 0;
+    margin-bottom: 20px; }
 
   .consultation_section {
     width: 100%; }
 
   .consultation__block {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    flex-direction: column; }
 
   .consultation_star__block p {
     margin-bottom: 10px; } }

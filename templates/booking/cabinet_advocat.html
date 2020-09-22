@@ -11,6 +11,21 @@
 
 {% block content %}
 <body class="card">
+	<form action='' class="cmxform" id="modal_delete_consultation" style="display:none;">
+		<div class="none_item__wrap">
+			<div class="no_item">
+				Ви дійсно хочете видалити цього користувача?
+			</div>
+			<div class="manager_change">
+				<div class="btn_style user_cancel">
+					Я ще подумаю
+				</div>
+				<div class="btn_style user_acceses">
+					Так
+				</div>
+			</div>
+		</div>						
+	</form>
 		<header class="kabinet">
 				<div class="kab__title-wrap">
 					<div class="kab__title">
@@ -70,7 +85,7 @@
 							<!-- календар -->
 							<div class="main_doc_content__block">
 								<div id="profile_3" class="advocate_calender_container main_doc_content main_doc_content_active">
-									<div class="advocate_calender_info">
+									<div class="advocate_calender_info" data-id="введи сюди айді консультації">
                                         <div class="advocate_info_name advocate_name main_title main_title_4 color_gold">
                                             Боровець Микола
 										</div>
@@ -78,7 +93,7 @@
 											{% csrf_token %}
 										</div>
                                         <div class="advocate_info_subname advocate_subname standart_title standart_title_4 color_black">
-                                            Клієнт
+                                            <!-- Клієнт -->
                                         </div>
                                         <div class="advocate_type__block">
                                             <div class="advocate_type_title__block">
@@ -101,9 +116,9 @@
                                         </div>
                                        <div class="advocate_calender_select">
 											<select style="width: 100%;" class="status_select" name="status">
-												<option class="advocate_subname standart_title standart_title_4 color_black" value="Завершено">Завершено</option>
-												<option class="advocate_subname standart_title standart_title_4 color_black" selected='selected' value="В очікуванні">В очікуванні</option>
-												<option class="advocate_subname standart_title standart_title_4 color_black" value="Переглянуто">Переглянуто</option>
+												<option class="advocate_subname standart_title standart_title_4 color_black" value="1">Завершено</option>
+												<option class="advocate_subname standart_title standart_title_4 color_black" selected='selected' value="2">В очікуванні</option>
+												<option class="advocate_subname standart_title standart_title_4 color_black" value="3">Переглянуто</option>
 											</select>
                                        </div>
                                         <div class="consultation_section consultation_center">
@@ -131,9 +146,9 @@
                                                 </div>
                                             <div class="advocate_calender_select">
                                               <select style="width: 100%;" class="communicate_select" name="status">
-                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Skype">Skype</option>
-                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" selected='selected' value="GoogleMeet">GoogleMeet</option>
-                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="Paint">Paint</option>
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="1">Skype</option>
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" selected='selected' value="2">GoogleMeet</option>
+                                                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="3">Paint</option>
                                               </select>
                                             </div>
                                             </div>
@@ -341,7 +356,15 @@
 									<div class="consultation__block">
 									<!-- вивід із адмінки -->
 									{% for consultation in consultations %}
-										<div class="consultation_prof">
+										<div data-id={{consultation.id}} class="consultation_prof">
+											<div class="absolute_change__block">
+												<div title="Відмінити консультацію" class="cancel_this_consultation">
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
+												</div>
+												<div title="Видалити консультацію" class="delete_this_consultation">
+													<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+												</div>
+											</div>
 											<div class="consultation_section consultation_left">
 												<div class="advocate_photo">
 													<img src="/static/img/about-us/about-img.png" alt="">
@@ -418,7 +441,6 @@
 												</div>
 												
 											</div>
-											{% if consultation.get_documents.exists %}
 											<div class="consultation_section consultation_right">
 												<div class="consultation_title main_title main_title_4 color_green">
 													Додаткові файли:
@@ -428,10 +450,13 @@
 													<a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
 														{{ document.file }}
 													</a>
+													{%empty%}
+													<div class="none_files__block standart_title standart_title_4 color_black">
+														немає додаткових файлів
+													</div>
 												{% endfor %}
 												</div>
 											</div>
-											{% endif %}
 										</div>
 									{% endfor %}
 									</div>
