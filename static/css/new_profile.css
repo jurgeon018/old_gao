@@ -1322,10 +1322,7 @@
     display: block; } }
 @media (max-width: 578px) {
   .reserve_hidden_content {
-    padding: 15px 20px; }
-
-  .advocate_user_clock__block {
-    flex-direction: column; } }
+    padding: 15px 20px; } }
 @media (max-width: 492px) {
   .new_files_users__block {
     flex-direction: column;

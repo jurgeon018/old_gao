@@ -1390,8 +1390,10 @@ function fetch_order(content) {
         return data.json();
     })
     .then(data => {
-        if (data.messages[0].status == 'bad') {
-            alert(data.messages[0].text);
+       
+        if ($('.reserve_hidden_content').length >= 1) {
+            console.log(12312332);
+            create_all_calender(true);
         }
     })
 }
@@ -1537,6 +1539,7 @@ $('.save_reserve_date_btn').on('click', function() {
             }
               append_form_data(object);
               fetch_order(object);
+              
           })
 
         function append_form_data(all_order_vars) {
