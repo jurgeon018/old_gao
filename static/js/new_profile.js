@@ -852,7 +852,7 @@ function click_select_item() {
 
 function fetch_get_data_user_calender(content) {
     let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
-    fetch(url, {
+      fetch(url, {
         method: "GET",
       })
       .then((data) => {
@@ -861,7 +861,7 @@ function fetch_get_data_user_calender(content) {
       .then((body) => {
           console.log('body: ', body);
         let datepicker = $('#datapicker_user').datepicker().data('datepicker');
-        let months_items = ['january','feburary','March','April','May','June','July','August','September','November','December'];
+        let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
         let weekenddDays = [0, 6];
         // reserve - повністю зайнятий
         let reserve = [];
@@ -885,8 +885,6 @@ function fetch_get_data_user_calender(content) {
             }
         });
        
-        console.log('busy: ', busy);
-        console.log('reserve: ', reserve);
         datepicker.destroy();
         create_client_calender(weekenddDays, reserve, busy, months_items);
       }); 
@@ -960,20 +958,56 @@ function create_clockwork_client(content) {
 }
 
 
-
-
+function return_current_date(date) {
+    let current_month = date.getMonth() + 1;
+    let date_year = date.getFullYear();
+    let date_month = ((current_month<10)?'0':'')+current_month;
+    let date_day = ((date.getDate()<10)?'0':'')+date.getDate();
+    let result = `${date_year}-${date_month}-${date_day}`;
+    return result;
+}
+function update_datepicker(disabledDays, reserved_days, busy_days, months) {
+    var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+    // datepicker.update({
+    $('#datapicker_user').datepicker({
+        onRenderCell: function(date, cellType) {
+            var currentDate = date.getDate();
+            var myDate = return_current_date(date);
+           
+            if (reserved_days.indexOf(myDate) != -1){
+                return {
+                    classes: 'disable_day',
+                    disabled: true
+                }
+            }
+            if (busy_days.indexOf(myDate) != -1){
+                return {
+                    classes: 'busy_day',
+                    disabled: false,
+                    html: currentDate + '<span class="dp-note"></span>'
+                }
+            }
+        },
+    })
+    setTimeout(() => {
+        $('.load_spin').removeClass('load_spin_active');
+    }, 200);
+}
     
 
 function create_client_calender(disabledDays, reserved_days, busy_days, months) {
     var myDatepicker = $('#datapicker_user').datepicker({
         moveToOtherMonthsOnSelect: false,
         multipleDates: false,
+        showOtherMonths: false,
         minDate: new Date(),
         onRenderCell: function(date, cellType) {
             var currentDate = date.getDate();
             var myDate = ((date.getDate()<10)?'0':'')+date.getDate()+'-'+months[date.getMonth()]+'-'+date.getFullYear();
-       
+            
              if (reserved_days.indexOf(myDate)>-1) {
+                 
+                 
                return {
                 classes: 'disable_day',
                 disabled: true
@@ -1099,7 +1133,52 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
 
          
             
-        }
+        },
+        onChangeMonth: function(date_month, date_year) {
+            $('.load_spin').addClass('load_spin_active');
+            let date_client = $('.client_info_id').attr('data-client');
+            let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+            let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${date_advocat}&client=${date_client}`;
+            fetch(url, {
+              method: "GET",
+            })
+            .then((data) => {
+              return data.json();
+            })
+            .then((body) => {
+              let datepicker = $('#datapicker_user').datepicker().data('datepicker');
+              let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
+              let weekenddDays = [0, 6];
+              // reserve - повністю зайнятий
+              let reserve = [];
+              
+              
+              // busy - напів зайнятий
+              let busy = [];
+              
+              
+              // статуси 
+              // blocked - зайнятий 
+              // rest - зайнятий
+              // partly_busy - напів зайнятий
+              // free - вільний
+              // unknows - вільний
+      
+              $.each(body.days, function(index, value) {
+                  if (value.status == 'blocked' || value.status == 'rest') {
+                      reserve.push(value.day);
+                      
+                  } else 
+                  if (value.status == 'partly_busy') {
+                      busy.push(value.day);
+                  }
+              });
+
+              update_datepicker(weekenddDays, reserve, busy, months_items);
+            });
+
+            
+        },
         
      });
 }
