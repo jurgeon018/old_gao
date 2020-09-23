@@ -106,6 +106,30 @@ class ConsultationListView(generics.ListCreateAPIView):
   pagination_class = CustomPagination
   serializer_class = ConsultationListSerializer
   queryset = Consultation.objects.all()
+
+  def get_queryset(self):
+      queryset   = super().get_queryset()
+      request    = self.request
+      query      = request.query_params
+      date_from  = query.get('date_from')
+      date_to    = query.get('date_to')
+      date       = query.get('date') 
+      dates      = query.get('dates') 
+      statuses   = query.get('statuses') 
+      formats    = query.get('formats')
+      if date_from:
+        queryset = queryset.filter(date_from=date_from)
+      if date_to:
+        queryset = queryset.filter(date__lte=date_to)
+      if date:
+        queryset = queryset.filter(date=date)
+      if dates:
+        queryset = queryset.filter(date__in=dates)
+      if statuses:
+        queryset = queryset.filter(status__in=statuses)
+      if formats:
+        queryset = queryset.filter(format__in=formats)
+      return queryset 
   
   def create(self, request, *args, **kwargs):
     response  = {"messages":[]}

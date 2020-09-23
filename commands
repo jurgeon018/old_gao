@@ -1,7 +1,6 @@
 pip3 install -r requirements.txt
 sudo pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip3 install google_auth_oauthlib
-pip3 install googleapiclient
 pip3 install --upgrade google-api-python-client
 
 
@@ -12,9 +11,9 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py loaddata client team
 python3 manage.py gen_advo
-python3 manage.py sw_import -d import/
-python3 manage.py gen_advo
 python3 manage.py gen_clients
+python3 manage.py sw_import -d import/
 python3 manage.py gen_consults
 python3 manage.py sw_import -d import/
+python3 manage.py gen_consults
 python3 manage.py runserver 127.0.0.1:8000 

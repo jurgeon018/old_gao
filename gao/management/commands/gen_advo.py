@@ -43,6 +43,7 @@ class Command(BaseCommand):
         user, _ = User.objects.get_or_create(
             username="admin",
         )
+        user.full_name = 'Адмін'
         user.role = User.ADVOCAT_ROLE
         user.rate = 100
         user.is_staff = True
@@ -54,6 +55,7 @@ class Command(BaseCommand):
                 username=advocat['username'],
             )
             user.role = User.ADVOCAT_ROLE
+            user.full_name = advocat['name']
             user.is_stuff = True
             user.is_superuser = True
             user.set_password(advocat['password'])

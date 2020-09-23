@@ -12,7 +12,7 @@ class Command(BaseCommand):
     user.set_password('admin2')
     user.save()
     def handle(self, *args, **kwargs):
-        for i in range(100):
+        for i in range(10):
             user, created = User.objects.get_or_create(
                 username=f'client{i}'
             )
