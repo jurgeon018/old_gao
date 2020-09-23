@@ -449,7 +449,7 @@
 								<div id="profile_4" class="main_doc_content">
 									<div class="consultation__block">
 									{% for consultation in consultations %}
-										<div class="consultation_prof">
+										<div data-id={{consultation.id}} class="consultation_prof">
 											<div class="consultation_section consultation_left">
 												<div class="advocate_photo">
 													<img src="/static/img/about-us/about-img.png" alt="">
@@ -524,20 +524,20 @@
 														<div id="wrapper">
 															<form action="" method="post">
 															  <p class="clasificacion">
-																<input id="radio1" type="radio" name="estrellas" value="5">
-																<label for="radio1">&#9733;</label>
+																<input value="5" id="radio5" type="radio" name="estrellas">
+																<label data-value="5" class="check_star_btn" for="radio5">&#9733;</label>
 
-																<input id="radio2" type="radio" name="estrellas" value="4">
-																<label for="radio2">&#9733;</label>
+																<input value="4" checked id="radio4" type="radio" name="estrellas">
+																<label data-value="4" class="check_star_btn" for="radio4">&#9733;</label>
 
-																<input id="radio3" type="radio" name="estrellas" value="3">
-																<label for="radio3">&#9733;</label>
+																<input value="3" id="radio3" type="radio" name="estrellas">
+																<label data-value="3" class="check_star_btn" for="radio3">&#9733;</label>
 
-																<input checked id="radio4" type="radio" name="estrellas" value="2">
-																<label for="radio4">&#9733;</label>
+																<input value="2" id="radio2" type="radio" name="estrellas">
+																<label data-value="2" class="check_star_btn" for="radio2">&#9733;</label>
 
-																<input id="radio5" type="radio" name="estrellas" value="1">
-																<label for="radio5">&#9733;</label>
+																<input value="1" id="radio1" type="radio" name="estrellas">
+																<label data-value="1" class="check_star_btn" for="radio1">&#9733;</label>
 															  </p>
 															</form>
 														  </div>

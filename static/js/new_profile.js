@@ -587,6 +587,30 @@ $('.cancel_this_consultation').on('click', function() {
         })       
 });
 
+$('.check_star_btn').on('click', function() {
+    let wrap = $(this).parents('.consultation_prof');
+    let consultation_id = $(wrap).attr('data-id');
+    let star_value = Number($(this).attr('data-value'));
+    let data_json = {
+        mark: star_value
+    }
+    
+        fetch(`/api/consultations/${consultation_id}/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data_json),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+        
+        })
+});
+
 $('.delete_this_consultation').on('click', user_delete);
    
 function user_delete() {
