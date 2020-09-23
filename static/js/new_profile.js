@@ -1506,21 +1506,31 @@ $('.save_reserve_date_btn').on('click', function() {
     } else {
         $('.error_reserve').text('');
 
-        let object = {
-            Formdata: new FormData(),
-            client: $('.advocat_info_id').attr('data-advocat'),
-            practise: $('.advocate_download_name').first().attr('data-id'),
-            advocate: $('.advocat_info_id').attr('data-advocat'),
-            date: $('.datapicker_user').val(),
-            clock_first: $('.first_advocate_user_clock').attr('data-clock').replace('.', ':'),
-            clock_last: $('.second_advocate_user_clock').attr('data-clock').replace('.', ':'),
-            url: '/api/consultations/',
-            csrftoken: $('.hidden_wrap_inp').find('input').val(),
-            comment: $('.advocate_user_comment__block').find('textarea').val()
-        }
        
-        append_form_data(object);
-        fetch_order(object);
+       
+
+        fetch(`/api/faculties/`, {
+            method: "GET",
+          })
+          .then((data) => {
+            return data.json();
+          })
+          .then((body) => {
+            let object = {
+                Formdata: new FormData(),
+                client: $('.advocat_info_id').attr('data-advocat'),
+                practise: body[0].id,
+                advocate: $('.advocat_info_id').attr('data-advocat'),
+                date: $('.datapicker_user').val(),
+                clock_first: $('.first_advocate_user_clock').attr('data-clock').replace('.', ':'),
+                clock_last: $('.second_advocate_user_clock').attr('data-clock').replace('.', ':'),
+                url: '/api/consultations/',
+                csrftoken: $('.hidden_wrap_inp').find('input').val(),
+                comment: $('.advocate_user_comment__block').find('textarea').val()
+            }
+              append_form_data(object);
+              fetch_order(object);
+          })
 
         function append_form_data(all_order_vars) {
             jQuery.each(all_order_vars.file_array, function(i, file) {
