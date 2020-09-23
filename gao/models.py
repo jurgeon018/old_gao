@@ -65,19 +65,15 @@ class User(AbstractUser):
     week_days = UserWeekDay.objects.filter(user=self)
     week_day_codes = week_days.values_list('week_day__code', flat=True)
     if str(day.isoweekday()) not in week_day_codes:
-      status = 'rest'
-    elif False:
-      # TODO: ! blocked
-      status = 'blocked'
-    elif False:
-      # TODO: ! free
-      status = 'free'
-    elif False:
-      # TODO: ! partly_busy
-      status = 'partly_busy'
+      return 'rest'
     else:
-      status = 'unknown'
-    return status
+      statuses = [hour['is_free'] for hour in self.get_working_hours_info(day)]
+      if True not in statuses:
+        return 'blocked'
+      elif False not in statuses:
+        return 'free'
+      elif True in statuses and False in statuses:
+        return 'partly_busy'
 
   def get_week_day(self, date):
     """
