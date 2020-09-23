@@ -143,11 +143,13 @@ class ConsultationListView(generics.ListCreateAPIView):
     end       = datetime.strptime(data['end'], '%H:%M').time()
     advocat   = User.objects.get(id=data['advocat'])
     client    = User.objects.get(id=data['client'])
+    start     = data['start']
+    end       = data['end']
     working_hours_range = advocat.get_working_hours_range(date)
     week_day_start = working_hours_range['start']
     week_day_end   = working_hours_range['end']
-    if day_start and day_end:
-      if day_start < week_day_start or day_end > week_day_end:
+    if week_day_start and week_day_end:
+      if start < week_day_start or end > week_day_end:
         response["messages"].append({
           "text":"Цей час не є робочим.",
           "status":'bad',

@@ -78,7 +78,7 @@ class User(AbstractUser):
     else:
       status = 'unknown'
     return status
-    
+
   def get_week_day(self, date):
     """
     Получає:
@@ -198,7 +198,7 @@ class User(AbstractUser):
     else:
       status = "busy"
     return status 
-  
+
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
     if self.role == User.ADVOCAT_ROLE:
