@@ -946,7 +946,7 @@ function create_clockwork_client(content) {
     console.log('content: ', content);
     let step_date_prof = document.createElement('div');
 
-    if (content.status == 'unknown' || content.status == 'free') {
+    if (content.is_free == true) {
         step_date_prof.classList.add('step_date_prof', 'button_transparent');
     } else {
         step_date_prof.classList.add('step_date_prof', 'button_transparent', 'step_date_prof_passive');
@@ -1086,7 +1086,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                       let date = new Date(0, 0, 0, words[0], words[1], 0);
                       let current_clock_json = {
                          hours: date.getHours() * 60 + date.getMinutes(),
-                         status: value.status
+                         is_free: value.is_free
                       }
                     //   if (current_clock_json.hours <= 360) {
                     //     //   в цей час потрібно спати, а не працювати
@@ -1390,8 +1390,10 @@ function fetch_order(content) {
         return data.json();
     })
     .then(data => {
-        if (data.messages[0].status == 'bad') {
-            alert(data.messages[0].text);
+       
+        if ($('.reserve_hidden_content').length >= 1) {
+            console.log(12312332);
+            create_all_calender(true);
         }
     })
 }
@@ -1537,6 +1539,7 @@ $('.save_reserve_date_btn').on('click', function() {
             }
               append_form_data(object);
               fetch_order(object);
+              
           })
 
         function append_form_data(all_order_vars) {
