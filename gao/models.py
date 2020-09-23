@@ -474,8 +474,7 @@ class Consultation(TimestampMixin):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
         return 
 
-    @property
-    def documents(self):
+    def get_documents(self):
       documents = ConsultationDocument.objects.filter(consultation=self)
       return documents
 

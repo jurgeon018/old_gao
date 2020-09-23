@@ -4,6 +4,8 @@ from .views import *
 
 
 urlpatterns = [
+    
+    path('add_document/', add_document),
     path('googlemeet/', googlemeet),
     path("get_days_info/", get_days_info),
     path("get_hours_info/", get_hours_info),

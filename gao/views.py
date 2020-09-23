@@ -192,6 +192,9 @@ def update_profile(request):
     })
 
 
+from django.contrib.auth import update_session_auth_hash
+
+
 @csrf_exempt 
 def update_password(request):
     query = request.POST or request.GET
@@ -200,19 +203,18 @@ def update_password(request):
     password2     = query.get('password2')
     user = request.user
     if not user.check_password(old_password):
-        print('wrond')
         return JsonResponse({
             'message':'Неправильний пароль',
             'status':'BAD',
         })
     if password1 != password2:
-        print('passw')
         return JsonResponse({
             'message':'Паролі не співпадають',
             'status':'BAD',
         })
     print(password1)
     user.set_password(password1)
+    update_session_auth_hash(request, user)
     user.save()
     return JsonResponse({
         'status':"OK",
