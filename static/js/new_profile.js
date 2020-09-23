@@ -206,14 +206,14 @@ function generate_interval(start, end) {
                     // зміна айді консультації
                     $('.advocate_calender_info').attr('data-id', fetch_id);
                     // зміна імені
-                    $(table_task).find('.advocate_info_name').text('body.name');
+                    $(table_task).find('.advocate_info_name').text(body.username);
                         
                     // зміна типу юзера
                     // $(table_task).find('.advocate_info_subname').text(body.type_user);
 
                     // зміна галузей
                     $('.branch__wrap').children().remove();
-                    $.each(body.faculty, function(index, sub_value) {
+                    $.each(body.faculties, function(index, sub_value) {
                         let branch_item = document.createElement('div');
                         branch_item.classList.add('advocate_type_work', 'standart_title', 'standart_title_4', 'color_black');
                         branch_item.textContent = sub_value;
@@ -281,7 +281,7 @@ function generate_interval(start, end) {
     let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
     let id_advocat = $('.advocat_info_id').attr('data-advocat');
 
-      fetch(`/api/get_working_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
+      fetch(`/api/get_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
         method: "GET",
       })
       .then((data) => {
@@ -442,6 +442,8 @@ function generate_interval(start, end) {
 
     function create_time_item(content) {
         $('.advocate_calender_time__block').css('grid-template-columns', `repeat(${content.length}, 1fr)`);
+        $('.all_calender__wrapper').css('width', `${content.length * 50}px`);
+        $('.advocate_calender_item__block').css('width', `${content.length * 50}px`);
 
         let product_item = "";
         $.each(content, function(index, value) {
@@ -518,6 +520,10 @@ function generate_interval(start, end) {
 
 
 $('.save_data_practise_btn').on('click', function() {
+    
+});
+
+function get_fetch_for_active_practise() {
     let wrap = $('.advocate_practise_content__block');
     let id_advocat = $('.advocat_info_id').attr('data-advocat');
     let active_practise = $(wrap).find('.advocate_download_prof');
@@ -525,7 +531,6 @@ $('.save_data_practise_btn').on('click', function() {
 
     $.each(active_practise, function(index, value) {
         let id = $(value).find('.advocate_download_name').attr('data-id');
-        console.log('id: ', id);
        array_practise.push(id);
     });
 
@@ -546,9 +551,9 @@ $('.save_data_practise_btn').on('click', function() {
         return data.json();
     })
     .then(data => {
-        $('.acces_practise__block').text('Дані успіщно збережені');
+       
     })
-});
+}
 
 
 $('.file_photo').on('change', function() {
@@ -1083,11 +1088,11 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                          hours: date.getHours() * 60 + date.getMinutes(),
                          status: value.status
                       }
-                      if (current_clock_json.hours <= 360) {
-                        //   в цей час потрібно спати, а не працювати
-                      } else {
+                    //   if (current_clock_json.hours <= 360) {
+                    //     //   в цей час потрібно спати, а не працювати
+                    //   } else {
                         $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
-                      }
+                    //   }
                         
                   });
               });    
@@ -1322,6 +1327,8 @@ function delete_file() {
 
     setTimeout(() => {
         $(wrap).remove();
+
+        get_fetch_for_active_practise();
     }, 200);
 
 }
@@ -1706,9 +1713,8 @@ $('.step_select_radio').on('click', function() {
         let current_practise = $('.advocate_practise__block').find('.advocate_download_prof');
         $.each(current_practise, function(index, value) {
             if ($(value).find(".advocate_download_name").attr('data-id') == id_practise) {
-                
-                
                 $(value).remove();
+                get_fetch_for_active_practise();
             }
         });
         $(this).removeClass('step_select_text_active');
@@ -1719,6 +1725,7 @@ $('.step_select_radio').on('click', function() {
             id: id_practise
         }
         create_practise(practise_json);
+        get_fetch_for_active_practise();
     }
    
 });
