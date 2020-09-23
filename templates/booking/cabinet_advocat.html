@@ -475,16 +475,16 @@
 									Особисті дані
 								</div>
 								<div class="tab_left_data">
-									<div class="photo_advocate__block">
+									<label for="file_photo" class="photo_advocate__block">
 										<img src="/static/img/about-us/about-img.png" alt="" class="photo_advocate">
-									</div>
+									</label>
 									<div class="change_photo_in_cabinet">
 										<input class="file_photo" id="file_photo" type="file" name="img" accept="image/jpeg,image/png,image/gif">
-										<label class="main_title main_title_4 color_gold" for="file_photo">
+										<label class="label_main_title main_title main_title_4 color_gold" for="file_photo">
 											змінити фото
 										</label>
 										<div class="photo_answer standart_title standart_title_4 color_black">
-											
+
 										</div>
 									</div>
 									<div class="user-data-prof">
@@ -589,11 +589,9 @@
 											</div>
 											<div class="step_hidden_content">
 											{% for faculty in faculties %}
-											{% if faculty.name and faculty not in user.faculties.all %}
 												<div data-title="{{ faculty.name }}" data-id="{{ faculty.id }}" class="step_select_radio standart_title standart_title_2 color_black">
 													{{ faculty.name }}
 												</div>
-											{% endif %}
 											{% endfor %}
 											</div>
 										</div>
@@ -607,6 +605,9 @@
 											Зберегти
 										</div>
 									</div>
+								</div>
+								<div class="acces_practise__block main_title main_title_4 color_green">
+
 								</div>
 							</div>
 						</div>

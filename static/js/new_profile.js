@@ -513,6 +513,44 @@ function generate_interval(start, end) {
 
 }
 // блочок який лиш для адвокатів закінчується
+
+
+
+
+$('.save_data_practise_btn').on('click', function() {
+    let wrap = $('.advocate_practise_content__block');
+    let id_advocat = $('.advocat_info_id').attr('data-advocat');
+    let active_practise = $(wrap).find('.advocate_download_prof');
+    let array_practise = [];
+
+    $.each(active_practise, function(index, value) {
+        let id = $(value).find('.advocate_download_name').attr('data-id');
+        console.log('id: ', id);
+       array_practise.push(id);
+    });
+
+    let json = {
+        advocat_id: id_advocat,
+        faculty_ids: array_practise
+    }
+
+     fetch('/api/set_advocate_faculties/', {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+    })
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+     $('.acces_practise__block').text('Дані успіщно збережені');
+    })
+});
+
+
 $('.file_photo').on('change', function() {
     let id = $('.advocat_info_id').attr('data-advocat');
     let Formdata = new FormData();
@@ -528,7 +566,7 @@ $('.file_photo').on('change', function() {
             return data.json();
         })
         .then(data => {
-          $('.photo_answer').text('фото успішно змінено');
+          $('.photo_advocate').attr('src', data.image)
         })
 });
 $('.cancel_this_consultation').on('click', function() {
@@ -1213,6 +1251,16 @@ $('.set-wrap').on('click', function() {
 $('.step_change_btn').on('click', function() {
     let wrap = $(this).parents('.step_select');
     $(wrap).find('.step_hidden_content').toggleClass('step_hidden_content_active');
+
+    let current_practise = $('.advocate_practise_content__block').find('.advocate_download_prof');
+    let all_practise = $('.step_hidden_content').find('.step_select_radio');
+        $.each(all_practise, function(index, all_value) {
+            $.each(current_practise, function(index, current_value) {
+                if ($(all_value).attr('data-id') == $(current_value).find('.advocate_download_name').attr('data-id')) {
+                    $(all_value).addClass('step_select_text_active');
+                }
+            });
+        });
 });
 
 $(".main_doc_link").on("click", function(){
@@ -1231,9 +1279,17 @@ $('.advocate_download_close').on('click', delete_file);
 
 function delete_file() {
     let wrap = $(this).parents('.advocate_download_prof');
-
+    let id = $(wrap).find('.advocate_download_name').attr('data-id');
     $(wrap).css('max-height', '0px');
     $(wrap).css('left', '-100%');
+
+    let current_practise = $('.step_hidden_content').find('.step_select_radio');
+        $.each(current_practise, function(index, value) {
+            if ($(value).attr('data-id') == id) {
+                $(value).removeClass('step_select_text_active');
+            }
+        });
+
 
     setTimeout(() => {
         $(wrap).remove();
@@ -1604,26 +1660,26 @@ $('.reserve_btn').on('click', function() {
 
 
 $('.step_select_radio').on('click', function() {
-    let text = $(this).attr('data-title');
-    let wrap = $(this).parents('.step_select');
-
+    let id_practise = $(this).attr('data-id');
+    let name_practise = $(this).attr('data-title');
 
     if ($(this).hasClass('step_select_text_active')) {
-        let current_practise = $(wrap).find('.step_active_content__block').find('.step_active_content');
+        let current_practise = $('.advocate_practise__block').find('.advocate_download_prof');
         $.each(current_practise, function(index, value) {
-                console.log('text: ', text);
-                console.log('$(value).text: ', $(value).text());
-            if ($(value).text() == text) {
+            if ($(value).find(".advocate_download_name").attr('data-id') == id_practise) {
+                
+                
                 $(value).remove();
             }
         });
         $(this).removeClass('step_select_text_active');
     } else {
         $(this).addClass('step_select_text_active');
-        let test_json = {
-            textPractise: text,
+        let practise_json = {
+            name: name_practise,
+            id: id_practise
         }
-        $('.step_active_content__block')[0].appendChild(create_practise(test_json));
+        create_practise(practise_json);
     }
    
 });
@@ -1633,10 +1689,21 @@ $('.step_select_radio').on('click', function() {
 
 
 let create_practise = (content) => {
-    let step_active_content = document.createElement('div');
-        step_active_content.classList.add('step_active_content', 'standart_title', 'standart_title_4', 'color_gold');
-        step_active_content.textContent = content.textPractise;
-        return step_active_content;
+    let product_item = "";
+    product_item += `
+    <div class="advocate_download_prof">
+    <div data-id="${content.id}" class="advocate_download_name main_title main_title_4 color_gold">
+        ${content.name}
+    </div>
+    <svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+    </div>
+      
+    `;       
+    let old_html = $(".advocate_practise_content__block")[0].innerHTML;
+    $(".advocate_practise_content__block")[0].innerHTML = old_html + product_item;
+
+    $('.advocate_download_close').on('click', delete_file);
+
 }
 
 

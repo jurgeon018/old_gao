@@ -1176,6 +1176,29 @@
   opacity: 0;
   height: 1px; }
 
+.change_photo_in_cabinet {
+  position: relative; }
+
+.file_photo {
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.photo_advocate__block {
+  cursor: pointer;
+  display: block; }
+
+.label_main_title {
+  cursor: pointer; }
+
+.advocate_download_prof {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.advocate_download_name {
+  width: calc(100% - 25px); }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;
