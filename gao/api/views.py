@@ -21,6 +21,7 @@ def get_days_info(request, type=None):
   query   = request.query_params#; print("query: ", query)
   advocat = User.objects.get(id=query['advocat'])
   client  = User.objects.get(id=query['client'])
+
   # TODO: перевірки по клієнту 
   return Response({
       "days":advocat.get_days_info(int(query['year']), int(query['month'])),
@@ -32,7 +33,10 @@ def get_hours_info(request):
   query   = request.query_params
   date    = datetime.strptime(query['date'], "%d.%m.%Y")
   advocat = User.objects.get(id=query['advocat'])
-  client  = User.objects.get(id=query['client'])
+  client_id = query.get('client')
+  if client_id: 
+    client  = User.objects.get(id=client_id)
+
   # TODO: перевірки по клієнту 
   return Response({
     "hours-info":"Години у які вже є консультаціях",
