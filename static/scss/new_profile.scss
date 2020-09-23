@@ -1581,6 +1581,27 @@
         font-size: 11px;
     }
 }
+@media (max-width: 1300px) {
+    .reserve_hidden_content {
+        .reserve_clock__block, .reserve_date__block, .reserve_comment__block {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .reserve_clock__block {
+            margin-top: 15px;
+        }
+        .datapicker_user {
+            width: 100%;
+        }
+        .reserve_infos {
+            margin-bottom: 5px;
+        }
+    }
+    .reserve_contents {
+        width: 100%;
+    }
+    
+}
 @media (max-width: 1280px) {
     .advocate_select_profile__block {
         flex-direction: column;
