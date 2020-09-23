@@ -152,7 +152,7 @@ class User(AbstractUser):
 
   def get_working_hours_info(self, date):
     """
-    Повертає години з статусами, з робочого діапазону годин 
+    Повертає години з робочого діапазону годин 
     """
     working_hours_range = self.get_working_hours_range(date)
     start = working_hours_range['start']
@@ -178,25 +178,15 @@ class User(AbstractUser):
       hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")
       hours.append({
         "hour":datetime.strftime(hour, "%H:%M"),
-        # "status":self.get_hour_status(date, hour.time())
         'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
       })    
       if raw_hour != raw_hours[-1]:
         hour = datetime.strptime(f"{raw_hour}:30", "%H:%M")
         hours.append({
           "hour":datetime.strftime(hour, "%H:%M"),
-          # "status":self.get_hour_status(date, hour.time())
           'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
         })      
     return hours
-
-  # def get_hour_status(self, date, hour):
-  #   hour_is_free = self.timerange_is_free(date, hour, hour)
-  #   if hour_is_free:
-  #     status = "free"
-  #   else:
-  #     status = "busy"
-  #   return status 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -447,7 +437,7 @@ class Consultation(TimestampMixin):
     def get_intersected(cls, consultations, start, end):
       consultations = consultations.filter(
         # Години консультації між вибраними годинами
-        Q(start__lte=start, end__gte=end)|
+        Q(start__lte=start, end__gt=end)|
         # Початок консультації між вибраними годинами
         Q(start__gt=start, start__lt=end)|
         # Закінчення консультації між вибраними годинами
