@@ -54,7 +54,6 @@ class Command(BaseCommand):
           break
 
       while True:
-        print('iter')
         end = random.choice(hours_24)
         if end > start:
         # TODO: перевірки по клієнту
