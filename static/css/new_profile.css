@@ -1172,6 +1172,10 @@
 #modal_delete_consultation .user_cancel, #modal_delete_consultation .user_acceses {
   margin: 0px 10px; }
 
+.file_photo {
+  opacity: 0;
+  height: 1px; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;

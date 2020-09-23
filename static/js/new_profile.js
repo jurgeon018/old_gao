@@ -513,7 +513,24 @@ function generate_interval(start, end) {
 
 }
 // блочок який лиш для адвокатів закінчується
-
+$('.file_photo').on('change', function() {
+    let id = $('.advocat_info_id').attr('data-advocat');
+    let Formdata = new FormData();
+    let fileData = this.files[0];
+    console.log('fileData: ', fileData);
+    Formdata.append(`image`, fileData);
+   
+        fetch(`/api/users/${id}/`, {
+        method: 'PATCH',
+        body: Formdata,
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+          $('.photo_answer').text('фото успішно змінено');
+        })
+});
 $('.cancel_this_consultation').on('click', function() {
     let wrap = $(this).parents('.consultation_prof');
     let id = $(wrap).attr('data-id');
