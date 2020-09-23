@@ -546,7 +546,7 @@ $('.save_data_practise_btn').on('click', function() {
         return data.json();
     })
     .then(data => {
-     $('.acces_practise__block').text('Дані успіщно збережені');
+        $('.acces_practise__block').text('Дані успіщно збережені');
     })
 });
 
@@ -572,18 +572,22 @@ $('.file_photo').on('change', function() {
 $('.cancel_this_consultation').on('click', function() {
     let wrap = $(this).parents('.consultation_prof');
     let id = $(wrap).attr('data-id');
-    let data = {
+    let data_json = {
         status: 'DECLINED'
     }
         fetch(`/api/consultations/${id}/`, {
         method: 'PATCH',
-        body: JSON.stringify(data),
+        body: JSON.stringify(data_json),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
         })
         .then(data => {
             return data.json();
         })
         .then(data => {
-        
+            $('.status_advocate_subname').text(data_json.status);
         })       
 });
 
@@ -1068,9 +1072,10 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                 return data.json();
               })
               .then((body) => {
+                  console.log('body: ', body);
                   $('.step_date__wrap').children().remove();
 
-                  $.each(body.hours, function(index, value) {
+                  $.each(body.working_hours, function(index, value) {
                       let delete_space = value.hour.replace(/\s+/g, '');
                       let words = delete_space.split(':');
                       let date = new Date(0, 0, 0, words[0], words[1], 0);
