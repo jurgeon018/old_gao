@@ -47,7 +47,7 @@ def set_advocate_faculties(request):
   data        = request.data
   advocat_id  = data["advocat_id"]
   faculty_ids = data["faculty_ids"]
-  faculty_ids = json.loads(faculty_ids)
+  # faculty_ids = json.loads(faculty_ids)
   advocat     = User.objects.get(id=advocat_id)
   faculties   = Faculty.objects.filter(id__in=faculty_ids)
   advocat.faculties.clear()
