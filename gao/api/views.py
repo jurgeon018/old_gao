@@ -35,17 +35,9 @@ def get_hours_info(request):
   client  = User.objects.get(id=query['client'])
   # TODO: перевірки по клієнту 
   return Response({
-      "hours":advocat.get_working_hours_info(date),
-  })
-
-
-@api_view(['GET'])
-def get_working_hours_info(request):
-  query   = request.query_params
-  date    = datetime.strptime(query['date'], "%d.%m.%Y")
-  advocat = User.objects.get(id=query['advocat'])
-  return Response({
+    "hours-detail":"Години у які вже є консультації",
     "hours":advocat.get_hours_info(date),
+    "working_hours-detail":"Робочі години у адвоката по його графіку",
     "working_hours":advocat.get_working_hours_info(date),
   })
 
