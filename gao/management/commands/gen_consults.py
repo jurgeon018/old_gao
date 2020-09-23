@@ -50,7 +50,7 @@ class Command(BaseCommand):
         # TODO: перевірки по клієнту
         hour_is_free = advocat.hour_is_free(consult_date, start)
         # if hour_is_free:
-        if True:
+        if start != hours_24[-1]:
           break
 
       while True:
@@ -61,7 +61,7 @@ class Command(BaseCommand):
         # hour_is_free = advocat.hour_is_free(consult_date, end)
         # if hour_is_free and end > start:
           break
-      
+
       timerange_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
       if timerange_is_free:
         consult, created = Consultation.objects.get_or_create(
