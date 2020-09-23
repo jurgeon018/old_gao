@@ -32,6 +32,7 @@ urlpatterns = [
     path('',                 index,    name='index' ),
     path('contacts/',        contacts, name='contacts'),
     path('cabinet/',  cabinet,  name='cabinet'),
+    path('payment/',         payment,  name='payment'),
     path('blog/',            blog,     name='blog'),
     path('about/',           about,    name='about'),
     path('post/<slug>/',     post,     name='post'),

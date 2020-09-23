@@ -12,11 +12,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User 
         exclude = ['password', 'groups', 'user_permissions', ]
         
-class AdvocateListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ['password', 'groups', 'user_permissions',]
-
 
 class ConsultationDocumentListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,13 +25,7 @@ class ConsultationDocumentDetailSerializer(serializers.ModelSerializer):
         exclude = []
 
 
-class ConsultationPaymentListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ConsultationPayment 
-        exclude = []
-
-
-class ConsultationPaymentDetailSerializer(serializers.ModelSerializer):
+class ConsultationPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationPayment 
         exclude = []
@@ -49,7 +38,14 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
-    payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
+    payment   = ConsultationPaymentSerializer(many=True, read_only=True)
+    price     = serializers.SerializerMethodField()
+    advocat   = UserDetailSerializer()
+    client    = UserDetailSerializer()
+
+    def get_price(self, consultation):
+        return consultation.price 
+
     class Meta:
         model = Consultation 
         exclude = []
@@ -62,7 +58,14 @@ class ConsultationDetailSerializer(serializers.ModelSerializer):
     created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
-    payment   = ConsultationPaymentListSerializer(many=True, read_only=True)
+    payment   = ConsultationPaymentSerializer(many=True, read_only=True)
+    price     = serializers.SerializerMethodField()
+    advocat   = UserDetailSerializer()
+    client    = UserDetailSerializer()
+
+    def get_price(self, consultation):
+        return consultation.price 
+
     class Meta:
         model = Consultation 
         exclude = []

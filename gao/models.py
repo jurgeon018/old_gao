@@ -4,10 +4,9 @@ from django.utils import timezone
 from django.urls import reverse
 from django.utils import timezone 
 from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser
+from django.core.exceptions import ValidationError
 
-from .mixins import * 
-
-import calendar 
+from calendar import monthrange
 from datetime import datetime, date, time, timedelta
 
 
@@ -45,7 +44,7 @@ class User(AbstractUser):
 
   def get_days_info(self, year, month):
     days = []
-    for i in range(1, calendar.monthrange(year, month)[-1]+1):
+    for i in range(1, monthrange(year, month)[-1]+1):
       day = date(year, month, i)
       days.append({
         "day":day, 
@@ -107,7 +106,7 @@ class User(AbstractUser):
       start    = None
       end      = None
     return {
-      'start':start, 
+      'start':start,
       "end":end,
       "week_day":week_day,
     }
@@ -130,31 +129,32 @@ class User(AbstractUser):
     working_hours_range = self.get_working_hours_range(date)
     start = working_hours_range['start']
     end   = working_hours_range['end']
+    if not start or not end:
+      return []
     hours = []
-    if start and end:
-      start = time.strftime(start, '%H:%M')
-      end   = time.strftime(end, '%H:%M')
-      if start.endswith(':30'):
-        start = start.split(':')[0]
-        start = int(start)+1
-      else:
-        start = start.split(':')[0]
-      if end.endswith(':30'):
-        end = end.split(':')[0]
-        end = int(end) + 1 
-      else:
-        end = end.split(':')[0]
-      raw_hours = list(range(int(start), int(end)+1))
-      for raw_working_hour in raw_hours:
+    start = time.strftime(start, '%H:%M')
+    end   = time.strftime(end, '%H:%M')
+    if start.endswith(':30'):
+      start = start.split(':')[0]
+      start = int(start)+1
+    else:
+      start = start.split(':')[0]
+    if end.endswith(':30'):
+      end = end.split(':')[0]
+      end = int(end) + 1 
+    else:
+      end = end.split(':')[0]
+    raw_hours = list(range(int(start), int(end)+1))
+    for raw_working_hour in raw_hours:
+      hours.append({
+        "hour":f'{raw_working_hour}:00',
+        "status":self.get_hour_status(date, raw_working_hour)
+      })    
+      if raw_working_hour != raw_hours[-1]:
         hours.append({
-          "hour":f'{raw_working_hour}:00',
+          "hour":f"{raw_working_hour}:30",
           "status":self.get_hour_status(date, raw_working_hour)
-        })    
-        if raw_working_hour != raw_hours[-1]:
-          hours.append({
-            "hour":f"{raw_working_hour}:30",
-            "status":self.get_hour_status(date, raw_working_hour)
-          })      
+        })      
     return hours
 
   def get_hour_status(self, date, hour):
@@ -169,7 +169,6 @@ class User(AbstractUser):
     return status 
 
   def hour_is_free(self, date, hour):
-    hour = datetime.strptime(hour, "%H:%M")
     for working_hour in self.get_working_hours_info(date):
       if hour == working_hour['hour'] and working_hour['status'] == 'free':
         return False 
@@ -188,9 +187,9 @@ class User(AbstractUser):
     week_day = working_hours_range['week_day']
     if start and end and week_day:
       if start < week_day.start or end > week_day.end:
-        return False 
+        return False
     else:
-      return False 
+      return False
     # Обмеження по існуючих консультаціях
     consultations = Consultation.get_intersected(consultations, start, end)
     if consultations.exists():
@@ -250,8 +249,22 @@ class UserWeekDay(models.Model):
     start    = models.TimeField(verbose_name="Початок робочого дня")
     end      = models.TimeField(verbose_name="Закінчення робочого дня")
     
-    # TODO: додати clean() метод який не буде дозволяти створювати дати які не кратні півгодинам
-    # TODO: додати clean() метод який не буде дозволяти створювати start>end
+    def clean(self):
+      if self.start > self.end:
+        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв")
+
+    def save(self):
+      if self.start > self.end:
+        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв")
+      super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.user.username}: {self.week_day}, {self.start}-{self.end}'
@@ -271,6 +284,23 @@ class UserWorkingDay(models.Model):
     start = models.TimeField(verbose_name="Початок робочого дня")
     end   = models.TimeField(verbose_name="Завершення робочого дня")
 
+    def clean(self):
+      if self.start > self.end:
+        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв") 
+    
+    def save(self, *args, **kwargs):
+      if self.start > self.end:
+        raise ValidationError("Година початку більша за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв") 
+      super().save(*args, **kwargs)
+
     def  __str__(self):
         return f'{self.date}: {self.start} - {self.end}'
 
@@ -278,6 +308,14 @@ class UserWorkingDay(models.Model):
         unique_together = ['date', 'advocat']
         verbose_name = "Робочий день"
         verbose_name_plural = "Робочі дні"
+
+
+class TimestampMixin(models.Model):
+    created = models.DateTimeField(verbose_name="Створено", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(verbose_name="Оновлено", auto_now_add=False, auto_now=True)
+
+    class Meta:
+        abstract = True 
 
 
 class Faculty(TimestampMixin):
@@ -295,15 +333,15 @@ class Faculty(TimestampMixin):
 
 
 class Consultation(TimestampMixin):
-    STATUS1 = 'STATUS1'
-    STATUS2 = 'STATUS2'
-    STATUS3 = 'STATUS3'
-    FINISHED = 'FINISHED'
+    UNORDERED   = 'UNORDERED'
+    DECLINED    = 'DECLINED'
+    IN_PROGRESS = 'IN_PROGRESS'
+    FINISHED    = 'FINISHED'
     STATUSES = (
-        (STATUS1, "STATUS1"),
-        (STATUS2, "STATUS2"),
-        (STATUS3, "STATUS3"),
-        (FINISHED, "FINISHED"),
+      (UNORDERED, "Незавершено"),
+      (DECLINED, "Відмовлено"),
+      (IN_PROGRESS, "В процессі"),
+      (FINISHED, "Завершено"),
     )
     SKYPE  = 'SKYPE'
     VIBER  = 'VIBER'
@@ -322,14 +360,8 @@ class Consultation(TimestampMixin):
       verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
     )
     status    = models.CharField(
-      verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=STATUS1, max_length=255,
+      verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=UNORDERED, max_length=255,
     )
-    # status    = models.ForeignKey(
-    # verbose_name="Статус", to="gao.Status", on_delete=models.SET_NULL, null=True, blank=True,
-    #)
-    # format    = models.ForeignKey(
-    # verbose_name="Формат", to="gao.Format", on_delete=models.SET_NULL, null=True, blank=True,
-    #)
     date      = models.DateField(
       verbose_name="Дата",
     )
@@ -337,7 +369,6 @@ class Consultation(TimestampMixin):
       verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
       on_delete=models.SET_NULL, related_name="consulations",
     )
-    # TODO: clean метод який не позволить створити консультацію з start > end
     start = models.TimeField(
       verbose_name="Час початку",
     )
@@ -361,15 +392,29 @@ class Consultation(TimestampMixin):
         on_delete=models.SET_NULL, blank=True, null=True,
     )
 
+    def clean(self):
+      if self.start > self.end:
+        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв")
+
     def save(self, *args, **kwargs):
+      if self.start > self.end:
+        raise ValidationError("Година початку більша за годину закінчення")
+      if self.start.minute % 30 !=0:
+        raise ValidationError("Година початку мусить бути кратною 30хв")
+      if self.end.minute % 30 !=0:
+        raise ValidationError("Година закінчення мусить бути кратною 30хв") 
+
       consultations = Consultation.objects.filter(
         advocat=self.advocat,
         client=self.client,
         date=self.date,
       )
       consultations = Consultation.get_intersected(consultations, self.start, self.end)
-      # if False:
-      if consultations.exists():
+      if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
         raise Exception('ERROR!!!')
       super().save()
 
@@ -389,51 +434,32 @@ class Consultation(TimestampMixin):
       )
       return consultations
 
-    # @property
-    # def time(self):
-    #     time = 1
-    #     # if self.times.first().end and self.times.first().start :
-    #     #     minutes = int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M'))
-    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-    #     #     if minutes > 0:
-    #     #         hours -= 1
-    #     #     if minutes > 60:
-    #     #         hours += 1
-    #     #         minutes -= 60
-    #     #     time = 60 - minutes + (hours * 60)
-    #     return time
-    
-    # @property
-    # def full_time(self):
-    #     time = 0
-    #     # if self.times.first().end and self.times.first().start :
-    #     #     minutes = 60 - (int(self.times.first().end.strftime('%M')) + int(self.times.first().start.strftime('%M')))
-    #     #     hours = (int(self.times.first().end.strftime('%H')) - int(self.times.first().start.strftime("%H")))
-    #     #     if minutes > 0:
-    #     #         hours -= 1
-    #     #     if minutes > 60:
-    #     #         hours += 1
-    #     #         minutes -= 60
-    #     #     time = f"{hours} год. {minutes} хв."
-    #     return time
-
     @property
     def full_time(self):
-      return 2 
+      start   = time.strftime(self.start, "%H:%M:%S")
+      end     = time.strftime(self.end, "%H:%M:%S")
+      tdelta  = datetime.strptime(end, '%H:%M:%S') - datetime.strptime(start, '%H:%M:%S')
+      days    = tdelta.days 
+      seconds = tdelta.seconds 
+      minutes = (seconds//60)%60
+      hours   = seconds // 3600
+      return {
+        "seconds":seconds,
+        "minutes":minutes,
+        "hours":hours,
+      }
 
     @property
     def price(self):
-        price = self.advocat.rate
-        # time = self.time
-        # time = self.end - self.start 
-        # hours = time // 60
-        # minutes = (time % 60) / 60
-        # hours   = self.advocat.rate * hours
-        # minutes = self.advocat.rate * minutes
-        # price   = hours + minutes
-        price *= self.full_time 
-        return price 
-    
+      full_time = self.full_time
+      seconds   = full_time['seconds']
+      minutes   = full_time['minutes']
+      hours     = full_time['hours']
+      rate      = self.advocat.rate
+      price     = rate * hours 
+      price     = price + (minutes/60 * rate)
+      return price 
+
     def get_files_by_user(self):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
         return 
