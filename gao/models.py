@@ -478,7 +478,6 @@ class Consultation(TimestampMixin):
       minutes = (seconds//60)%60
       hours   = seconds // 3600
       return {
-        "seconds":seconds,
         "minutes":minutes,
         "hours":hours,
       }
@@ -486,7 +485,6 @@ class Consultation(TimestampMixin):
     @property
     def price(self):
       full_time = self.full_time
-      seconds   = full_time['seconds']
       minutes   = full_time['minutes']
       hours     = full_time['hours']
       rate      = self.advocat.rate

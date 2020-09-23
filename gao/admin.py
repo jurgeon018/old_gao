@@ -32,8 +32,33 @@ class ConsultationDocumentInline(admin.StackedInline):
     model = ConsultationDocument
     classes = ['collapse']
 
+
 @admin.register(Consultation)
 class ConsultationAdmin(ImportExportModelAdmin):
+    list_filter = [
+        # 'advocat',
+        'date',
+        'format',
+        'status',
+    ]
+    list_display = [
+        'id',
+        'date',
+        'start',
+        'end',
+        'advocat',
+        'client',
+        'faculty',
+    ]
+    autocomplete_fields = [
+        'advocat',
+        'client',
+        'faculty',
+    ]
+    search_fields = [
+        'advocat__full_name',
+        'faculty__name',
+    ]
     resource_class = ConsultationResource
     inlines = [
         ConsultationDocumentInline,
