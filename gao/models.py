@@ -198,7 +198,7 @@ class User(AbstractUser):
     else:
       status = "busy"
     return status 
-
+  
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
     if self.role == User.ADVOCAT_ROLE:
