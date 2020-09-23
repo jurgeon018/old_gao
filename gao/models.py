@@ -20,6 +20,7 @@ class User(AbstractUser):
     (CLIENT_ROLE, "client"),
     (ADVOCAT_ROLE, "advocat"),
   ]
+  image        = models.ImageField(verbose_name="Зображення", blank=True, null=True)
   full_name    = models.CharField(
       verbose_name="Повне ім'я", max_length=150, blank=False, null=False,
   )

@@ -7,7 +7,6 @@ urlpatterns = [
     path('googlemeet/', googlemeet),
     path("get_days_info/", get_days_info),
     path("get_hours_info/", get_hours_info),
-    path("get_working_hours_info/", get_working_hours_info),
     path("set_advocate_faculties/", set_advocate_faculties),
 
     path("users/", UserListView.as_view()),

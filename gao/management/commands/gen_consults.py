@@ -38,9 +38,9 @@ class Command(BaseCommand):
 
       while True:
         # print('iter')
-        consult_date  = date.today() - timedelta(days=3) + timedelta(days=random.randint(1, 10))
+        day  = date.today() - timedelta(days=3) + timedelta(days=random.randint(1, 10))
         # TODO: перевірки по клієнту
-        # if advocat.day_is_free(consult_date):
+        # if advocat.day_is_free(day):
         if True:
           break
 
@@ -48,26 +48,25 @@ class Command(BaseCommand):
         # print('iter')
         start = random.choice(hours_24)
         # TODO: перевірки по клієнту
-        hour_is_free = advocat.hour_is_free(consult_date, start)
+        hour_is_free = advocat.hour_is_free(day, start)
         # if hour_is_free:
-        if True:
+        if start != hours_24[-1]:
           break
 
       while True:
-        print('iter')
         end = random.choice(hours_24)
         if end > start:
         # TODO: перевірки по клієнту
-        # hour_is_free = advocat.hour_is_free(consult_date, end)
+        # hour_is_free = advocat.hour_is_free(day, end)
         # if hour_is_free and end > start:
           break
-      
-      timerange_is_free = advocat.timerange_is_free(date=consult_date, start=start, end=end)
+
+      timerange_is_free = advocat.timerange_is_free(date=day, start=start, end=end)
       if timerange_is_free:
         consult, created = Consultation.objects.get_or_create(
           advocat   = advocat,
           client    = client,
-          date      = consult_date,
+          date      = day,
           start     = start,
           end       = end,
         )
@@ -75,9 +74,9 @@ class Command(BaseCommand):
         consult.status  = status
         consult.faculty = faculty
         consult.save()
-        print(consult, created)
+        # print(consult, created)
       else:
-        print(f'TIMERANGE {start}:{end} IS NOT FREE')
+        print(f'TIMERANGE {start}:{end} IN DAY {day} IS NOT FREE')
     print('ok')
 
 
