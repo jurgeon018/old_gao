@@ -175,29 +175,28 @@ class User(AbstractUser):
     # TODO: протестити правильність 
     raw_hours = list(range(int(start), int(end)+1))
     for raw_hour in raw_hours:
-      raw_working_hour = raw_hour
-      hour = f'{raw_working_hour}:00'
-      hour = datetime.strptime(hour, "%H:%M")
+      hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")
       hours.append({
         "hour":datetime.strftime(hour, "%H:%M"),
-        "status":self.get_hour_status(date, hour.time())
+        # "status":self.get_hour_status(date, hour.time())
+        'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
       })    
-      if raw_working_hour != raw_hours[-1]:
-        hour = f"{raw_working_hour}:30"
-        hour = datetime.strptime(hour, "%H:%M")
+      if raw_hour != raw_hours[-1]:
+        hour = datetime.strptime(f"{raw_hour}:30", "%H:%M")
         hours.append({
           "hour":datetime.strftime(hour, "%H:%M"),
-          "status":self.get_hour_status(date, hour.time())
+          # "status":self.get_hour_status(date, hour.time())
+          'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
         })      
     return hours
 
-  def get_hour_status(self, date, hour):
-    hour_is_free = self.timerange_is_free(date, hour, hour)
-    if hour_is_free:
-      status = "free"
-    else:
-      status = "busy"
-    return status 
+  # def get_hour_status(self, date, hour):
+  #   hour_is_free = self.timerange_is_free(date, hour, hour)
+  #   if hour_is_free:
+  #     status = "free"
+  #   else:
+  #     status = "busy"
+  #   return status 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -458,11 +457,6 @@ class Consultation(TimestampMixin):
         # Вибрані години співпадають з годинами консультації
         Q(start=start, end=end)
       )
-      print()
-      print("start: ", start)
-      print("end: ", end)
-      print("consultations: ", consultations)
-      print()
       return consultations
 
     @property
