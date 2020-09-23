@@ -56,6 +56,31 @@ def set_advocate_faculties(request):
   return JsonResponse({'OK':'OK'})
 
 
+@api_view(['POST'])
+def add_document(request):
+  # query = request.POST or request.GET
+  query = request.data
+  # print(request.POST)
+  # print(request.GET)
+  # print(query)
+  user = User.objects.get(id=query['user'])
+  documents = []
+  for file in request.FILES.values():
+    document = Document.objects.create(
+      user=user,
+      file=file,
+    )
+    print(document.file.url)
+    documents.append({
+      "id":document.id,
+      # "path":document.file.path,
+      "url":document.file.url,
+    })
+  return JsonResponse({
+    'documents':documents,
+  })
+
+
 def googlemeet(request):
   hangoutLink = generate_hangouts_link(request)
   return JsonResponse({
@@ -138,6 +163,7 @@ class ConsultationListView(generics.ListCreateAPIView):
   def create(self, request, *args, **kwargs):
     response  = {"messages":[]}
     data      = request.data 
+    print("request.data: ", request.data)
     date      = datetime.strptime(data['date'], '%d.%m.%Y')
     start     = datetime.strptime(data['start'], '%H:%M').time()
     end       = datetime.strptime(data['end'], '%H:%M').time()

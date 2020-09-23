@@ -65,19 +65,15 @@ class User(AbstractUser):
     week_days = UserWeekDay.objects.filter(user=self)
     week_day_codes = week_days.values_list('week_day__code', flat=True)
     if str(day.isoweekday()) not in week_day_codes:
-      status = 'rest'
-    elif False:
-      # TODO: ! blocked
-      status = 'blocked'
-    elif False:
-      # TODO: ! free
-      status = 'free'
-    elif False:
-      # TODO: ! partly_busy
-      status = 'partly_busy'
+      return 'rest'
     else:
-      status = 'unknown'
-    return status
+      statuses = [hour['is_free'] for hour in self.get_working_hours_info(day)]
+      if True not in statuses:
+        return 'blocked'
+      elif False not in statuses:
+        return 'free'
+      elif True in statuses and False in statuses:
+        return 'partly_busy'
 
   def get_week_day(self, date):
     """
@@ -152,9 +148,10 @@ class User(AbstractUser):
 
   def get_working_hours_info(self, date):
     """
-    Повертає години з статусами, з робочого діапазону годин 
+    Генерує години з інтервалами з робочого діапазону годин 
     """
     working_hours_range = self.get_working_hours_range(date)
+    print("get_working_hours_range", working_hours_range)
     start = working_hours_range['start']
     end   = working_hours_range['end']
     if not start or not end:
@@ -178,25 +175,15 @@ class User(AbstractUser):
       hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")
       hours.append({
         "hour":datetime.strftime(hour, "%H:%M"),
-        # "status":self.get_hour_status(date, hour.time())
         'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
       })    
       if raw_hour != raw_hours[-1]:
         hour = datetime.strptime(f"{raw_hour}:30", "%H:%M")
         hours.append({
           "hour":datetime.strftime(hour, "%H:%M"),
-          # "status":self.get_hour_status(date, hour.time())
           'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
         })      
     return hours
-
-  # def get_hour_status(self, date, hour):
-  #   hour_is_free = self.timerange_is_free(date, hour, hour)
-  #   if hour_is_free:
-  #     status = "free"
-  #   else:
-  #     status = "busy"
-  #   return status 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -447,7 +434,7 @@ class Consultation(TimestampMixin):
     def get_intersected(cls, consultations, start, end):
       consultations = consultations.filter(
         # Години консультації між вибраними годинами
-        Q(start__lte=start, end__gte=end)|
+        Q(start__lte=start, end__gt=end)|
         # Початок консультації між вибраними годинами
         Q(start__gt=start, start__lt=end)|
         # Закінчення консультації між вибраними годинами
@@ -487,8 +474,7 @@ class Consultation(TimestampMixin):
         consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
         return 
 
-    @property
-    def documents(self):
+    def get_documents(self):
       documents = ConsultationDocument.objects.filter(consultation=self)
       return documents
 

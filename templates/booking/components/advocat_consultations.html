@@ -1,0 +1,111 @@
+<div id="profile_4" class="main_doc_content">
+    <div class="consultation__block">
+    <!-- вивід із адмінки -->
+    {% for consultation in consultations %}
+        <div data-id={{consultation.id}} class="consultation_prof">
+            <div class="absolute_change__block">
+                <div title="Відмінити консультацію" class="cancel_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
+                </div>
+                <div title="Видалити консультацію" class="delete_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                </div>
+            </div>
+            <div class="consultation_section consultation_left">
+                <div class="advocate_photo">
+                    <img src="/static/img/about-us/about-img.png" alt="">
+                </div>
+                <div class="advocate_name main_title main_title_4 color_gold">
+                {% if consultation.client %}
+                    {{ consultation.client.username }}
+                {% endif %}
+                </div>
+                <div class="advocate_subname standart_title standart_title_4 color_black">
+                    Клієнт
+                </div>
+                <div class="advocate_type__block">
+                    <div class="advocate_type_title__block">
+                        <img src="/static/img/profile/2.svg" alt="">
+                        <div class="advocate_type_title main_title main_title_4 color_gold">
+                            Галузь
+                        </div>
+                    </div>
+                        <div class="advocate_type_work standart_title standart_title_4 color_black">
+                            {{ consultation.faculty }}
+                        </div>
+                </div>
+                <div class="advocate_name main_title main_title_4 color_gold">
+                    Статус консультації:
+                </div>
+                <div class="advocate_subname standart_title standart_title_4 color_black">
+                        {% if consultation.status %}
+                            {{ consultation.status }}
+                        {% endif %}
+                </div>
+            </div>
+            <div class="consultation_section consultation_center">
+                    <div class="consultation_title main_title main_title_4 color_green">
+                        Інформація по консультації:
+                    </div>
+                <div class="advocate_user_item__block">
+                    <div class="advocate_user_img">
+                        <img src="/static/img/profile/2.svg" alt="">
+                    </div>
+                    <div class="advocate_user_title standart_title standart_title_4 color_black">
+                        {{ consultation.date|date:"D d.m.Y." }}
+                    </div>
+                </div>
+                <div class="advocate_user_item__block">
+                    <div class="advocate_user_img">
+                        <img src="/static/img/profile/5.svg" alt="">
+                    </div>
+                    <div class="advocate_user_title standart_title standart_title_4 color_black">
+                        <span>з {{ consultation.start }} по {{ consultation.end }}.</span>
+                        <span>
+                            консультація -  
+                            {{ consultation.full_time.hours }} год.
+                            {% if consultation.full_time.minutes %}
+                                {{ consultation.full_time.minutes }} хв. 
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="advocate_user_item__block">
+                    <div class="advocate_user_img">
+                        <img src="/static/img/profile/7.svg" alt="">
+                    </div>
+                    <div class="advocate_user_title main_title main_title_4 color_gold">
+                        {{ consultation.format }}
+                    </div>
+                </div>
+                <div class="advocate_user_item__block">
+                    <div class="advocate_user_img">
+                        <img src="/static/img/profile/8.svg" alt="">
+                    </div>
+                    <div class="advocate_user_title standart_title standart_title_4 color_black">
+                        <span>Вартість консультації:</span>
+                        <span class="color_gold">{{ consultation.price }} грн</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="consultation_section consultation_right">
+                <div class="consultation_title main_title main_title_4 color_green">
+                    Додаткові файли:
+                </div>
+                <div class="consultation_file__block">
+                {% for document in consultation.get_documents %}
+                    <a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
+                        {{ document.file }}
+                    </a>
+                {%empty%}
+                    <div class="none_files__block standart_title standart_title_4 color_black">
+                        немає додаткових файлів
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>

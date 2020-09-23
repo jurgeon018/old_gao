@@ -17,31 +17,31 @@ from datetime import datetime, date, time, timedelta
 
 @login_required
 def cabinet(request):
-    users = User.objects.filter(role=User.CLIENT_ROLE)
-    user = request.user
-    role = user.role
-    faculties = Faculty.objects.all()
-    advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
-    clients  = User.objects.filter(role=User.CLIENT_ROLE)
-    consultations = Consultation.objects.all()
-    now = datetime.now()
-    hours_list = []
-    for hours in range(9, 20):
-        hours_list.append(f'{hours}.00')
-        if hours != 19:
-            hours_list.append(f'{hours}.30')
-    today = datetime.today()
-    dates = []
-    for days in range(0, 10):
-        dates.append(today + timedelta(days=days))
-    if role == User.ADVOCAT_ROLE:
-        consultations = consultations.filter(advocat=user).order_by('date')
-        clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
-    elif role == User.CLIENT_ROLE:
-        consultations = consultations.filter(client=user)
-        advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
-    finished_consultations = consultations.filter(status=Consultation.FINISHED)
-    return render(request, f'booking/cabinet_{role}.html', locals())
+  users = User.objects.filter(role=User.CLIENT_ROLE)
+  user = request.user
+  role = user.role
+  faculties = Faculty.objects.all()
+  advocats = User.objects.filter(role=User.ADVOCAT_ROLE)
+  clients  = User.objects.filter(role=User.CLIENT_ROLE)
+  consultations = Consultation.objects.all()
+  now = datetime.now()
+  hours_list = []
+  for hours in range(9, 20):
+      hours_list.append(f'{hours}.00')
+      if hours != 19:
+          hours_list.append(f'{hours}.30')
+  today = datetime.today()
+  dates = []
+  for days in range(0, 10):
+      dates.append(today + timedelta(days=days))
+  if role == User.ADVOCAT_ROLE:
+      consultations = consultations.filter(advocat=user).order_by('date')
+      clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
+  elif role == User.CLIENT_ROLE:
+      consultations = consultations.filter(client=user)
+      advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
+  finished_consultations = consultations.filter(status=Consultation.FINISHED)
+  return render(request, f'booking/cabinet_{role}.html', locals())
 
 def index(request):
     page, _ = Page.objects.get_or_create(code='index')
@@ -192,6 +192,9 @@ def update_profile(request):
     })
 
 
+from django.contrib.auth import update_session_auth_hash
+
+
 @csrf_exempt 
 def update_password(request):
     query = request.POST or request.GET
@@ -200,19 +203,18 @@ def update_password(request):
     password2     = query.get('password2')
     user = request.user
     if not user.check_password(old_password):
-        print('wrond')
         return JsonResponse({
             'message':'Неправильний пароль',
             'status':'BAD',
         })
     if password1 != password2:
-        print('passw')
         return JsonResponse({
             'message':'Паролі не співпадають',
             'status':'BAD',
         })
     print(password1)
     user.set_password(password1)
+    update_session_auth_hash(request, user)
     user.save()
     return JsonResponse({
         'status':"OK",

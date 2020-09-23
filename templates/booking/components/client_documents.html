@@ -1,0 +1,66 @@
+<div id="tab_22" class="tab-auto-content-prof">
+  <div class="main_user_data">
+    Документи
+    <!-- Угода про подання правової допомоги. Протокол погодження ціни 
+    Процесуальні документи 
+    Документи виготовлені адвокатам 
+    Сканкопії інших документів  -->
+  </div>
+  <div class="main_doc_link__block">
+    <div data-tab='1' class="button_transparent main_doc_link main_doc_link_active">
+    Від авдокатів
+    </div>
+    <div data-tab='2' class="button_transparent main_doc_link">
+    Мої документи
+    </div>
+  </div>
+  <div class="main_doc_content__block">
+    <div id="profile_1" class="main_doc_content main_doc_content_active">
+      <div class="doc-block">
+        {% for document in request.user.documents.all%}
+        <div class="doc-profile">
+          <div class="doc-top">
+              <div class="doc-img-wrap">
+              <img src="/static/img/doc.svg" alt="">
+              <div class="doc-name">
+                  Docum 1
+              </div>
+              </div>
+              <div class="doc__title">
+              {{document.file}}
+              </div>
+          </div>
+          <div class="doc-bot">
+            <div class="doc-btn">
+            <a href="{{document.file.url}}" download>
+                Завантажити
+            </a>
+            </div>
+            {% if document.is_pdf %}
+            <div class="doc-btn">
+            <a href="{% url 'read_document' document.id %}">
+                Переглянути
+            </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div id="profile_2" class="main_doc_content">
+    {% for consultation in user.get_consultations %}
+    <div class="docs__wrap">
+      <div class="docs_title midle_title midle_title_3 color_gold">
+      Консультація {{consultation.id}}
+      </div>
+      {% for document in consultation.get_documents %}
+      <a href="{{ document.file.url }}" class="doc_content standart_title standart_title_4 color_black">
+      {{ document.file.url }}
+      </a>
+      {% endfor %}
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

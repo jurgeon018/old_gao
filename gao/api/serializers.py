@@ -32,23 +32,25 @@ class ConsultationPaymentSerializer(serializers.ModelSerializer):
 
 
 class ConsultationListSerializer(serializers.ModelSerializer):
-    date      = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
-    start     = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
-    end       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
-    created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-    updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-    documents = ConsultationDocumentListSerializer(many=True, read_only=True)
-    payment   = ConsultationPaymentSerializer(many=True, read_only=True)
-    price     = serializers.SerializerMethodField()
-    full_time = serializers.SerializerMethodField()
-    # advocat   = UserDetailSerializer()
-    # client    = UserDetailSerializer()
+    date        = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
+    start       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    end         = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
+    created     = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    updated     = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    documents   = ConsultationDocumentListSerializer(many=True, read_only=True)
+    payment     = ConsultationPaymentSerializer(many=True, read_only=True)
+    price       = serializers.SerializerMethodField()
+    full_time   = serializers.SerializerMethodField()
+    client_name = serializers.SerializerMethodField()
 
     def get_price(self, consultation):
         return consultation.price 
 
     def get_full_time(self, consultation):
         return consultation.full_time 
+
+    def get_client_name(self, consultation):
+        return consultation.client.full_name 
 
     class Meta:
         model = Consultation 
