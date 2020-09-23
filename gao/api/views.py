@@ -143,8 +143,6 @@ class ConsultationListView(generics.ListCreateAPIView):
     end       = datetime.strptime(data['end'], '%H:%M').time()
     advocat   = User.objects.get(id=data['advocat'])
     client    = User.objects.get(id=data['client'])
-    start     = data['start']
-    end       = data['end']
     working_hours_range = advocat.get_working_hours_range(date)
     week_day_start = working_hours_range['start']
     week_day_end   = working_hours_range['end']
@@ -177,6 +175,7 @@ class ConsultationListView(generics.ListCreateAPIView):
       })
       return Response(response)
     response = super().create(request, *args, **kwargs)
+    print(response.data)
     documents = []
     consultation = Consultation.objects.get(id=response.data.get('id'))
     for file in request.FILES:

@@ -41,8 +41,8 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     payment   = ConsultationPaymentSerializer(many=True, read_only=True)
     price     = serializers.SerializerMethodField()
     full_time = serializers.SerializerMethodField()
-    advocat   = UserDetailSerializer()
-    client    = UserDetailSerializer()
+    # advocat   = UserDetailSerializer()
+    # client    = UserDetailSerializer()
 
     def get_price(self, consultation):
         return consultation.price 
@@ -64,8 +64,8 @@ class ConsultationDetailSerializer(serializers.ModelSerializer):
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
     payment   = ConsultationPaymentSerializer(many=True, read_only=True)
     price     = serializers.SerializerMethodField()
-    advocat   = UserDetailSerializer()
-    client    = UserDetailSerializer()
+    # advocat   = UserDetailSerializer()
+    # client    = UserDetailSerializer()
 
     def get_price(self, consultation):
         return consultation.price 
