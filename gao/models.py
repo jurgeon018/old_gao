@@ -119,18 +119,18 @@ class User(AbstractUser):
     if working_day:
       start    = working_day.start
       end      = working_day.end
-      week_day = working_day
+      # week_day = working_day
     elif week_day:
       start    = week_day.start
       end      = week_day.end
-      week_day = week_day
+      # week_day = week_day
     else:
       start    = None
       end      = None
     return {
       'start':start,
       "end":end,
-      "week_day":week_day,
+      # "week_day":week_day,
     }
 
   def get_hours_info(self, date):
@@ -172,35 +172,32 @@ class User(AbstractUser):
       end = int(end) + 1 
     else:
       end = end.split(':')[0]
+    # TODO: протестити правильність
     raw_hours = list(range(int(start), int(end)+1))
-    for raw_working_hour in raw_hours:
+    for raw_hour in raw_hours:
+      raw_working_hour = raw_hour
+      hour = f'{raw_working_hour}:00'
+      hour = datetime.strptime(hour, "%H:%M").time()
       hours.append({
-        "hour":f'{raw_working_hour}:00',
-        "status":self.get_hour_status(date, raw_working_hour)
+        "hour":hour,
+        "status":self.get_hour_status(date, hour)
       })    
       if raw_working_hour != raw_hours[-1]:
+        hour = f"{raw_working_hour}:30"
+        hour = datetime.strptime(hour, "%H:%M").time()
         hours.append({
-          "hour":f"{raw_working_hour}:30",
-          "status":self.get_hour_status(date, raw_working_hour)
+          "hour":hour,
+          "status":self.get_hour_status(date, hour)
         })      
     return hours
 
   def get_hour_status(self, date, hour):
-    if False:
-      # TODO: ! free
+    hour_is_free = self.timerange_is_free(date, hour, hour)
+    if hour_is_free:
       status = "free"
-    elif False:
-      # TODO: ! busy
-      status = "busy"
     else:
-      status = 'unknown'
+      status = "busy"
     return status 
-
-  # def hour_is_free(self, date, hour):
-  #   for working_hour in self.get_working_hours_info(date):
-  #     if hour == working_hour['hour'] and working_hour['status'] == 'free':
-  #       return False 
-  #   return False 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -210,23 +207,18 @@ class User(AbstractUser):
       consultations = consultations.filter(client=self)
     # Обмеження по статичному дню тижня і по динамічному окремому дню
     working_hours_range = self.get_working_hours_range(date)
-    start    = working_hours_range['start']
-    end      = working_hours_range['end']
-    week_day = working_hours_range['week_day']
-    if start and end and week_day:
-      if start < week_day.start or end > week_day.end:
-        print("start < week_day.start: ", start < week_day.start)
-        print("end > week_day.end: ", end > week_day.end)
+    week_day_start    = working_hours_range['start']
+    week_day_end      = working_hours_range['end']
+    if week_day_start and week_day_end:
+      if start < week_day_start or end > week_day_end:
         return False
       else:
         pass
     else:
-      print("start and end and week_day: ", start and end and week_day)
       return False
     # Обмеження по існуючих консультаціях
     consultations = Consultation.get_intersected(consultations, start, end)
     if consultations.exists():
-      print("consultations.exists(): ", consultations.exists())
       return False
     return True
 
@@ -425,7 +417,7 @@ class Consultation(TimestampMixin):
         related_name="client_consultations",
         on_delete=models.SET_NULL, blank=True, null=True,
     )
-
+    
     def clean(self):
       if self.start > self.end:
         raise ValidationError("Година початку мусить бути меншою за годину закінчення")
