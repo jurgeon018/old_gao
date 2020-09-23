@@ -215,14 +215,18 @@ class User(AbstractUser):
     week_day = working_hours_range['week_day']
     if start and end and week_day:
       if start < week_day.start or end > week_day.end:
+        print("start < week_day.start: ", start < week_day.start)
+        print("end > week_day.end: ", end > week_day.end)
         return False
       else:
         pass
     else:
+      print("start and end and week_day: ", start and end and week_day)
       return False
     # Обмеження по існуючих консультаціях
     consultations = Consultation.get_intersected(consultations, start, end)
     if consultations.exists():
+      print("consultations.exists(): ", consultations.exists())
       return False
     return True
 
@@ -287,7 +291,7 @@ class UserWeekDay(models.Model):
       if self.end.minute % 30 !=0:
         raise ValidationError("Година закінчення мусить бути кратною 30хв")
 
-    def save(self):
+    def save(self, *args, **kwargs):
       if self.start > self.end:
         raise ValidationError("Година початку мусить бути меншою за годину закінчення")
       if self.start.minute % 30 !=0:
