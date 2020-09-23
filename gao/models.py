@@ -177,17 +177,17 @@ class User(AbstractUser):
     for raw_hour in raw_hours:
       raw_working_hour = raw_hour
       hour = f'{raw_working_hour}:00'
-      hour = datetime.strptime(hour, "%H:%M").time()
+      hour = datetime.strptime(hour, "%H:%M")
       hours.append({
-        "hour":hour,
-        "status":self.get_hour_status(date, hour)
+        "hour":datetime.strftime(hour, "%H:%M"),
+        "status":self.get_hour_status(date, hour.time())
       })    
       if raw_working_hour != raw_hours[-1]:
         hour = f"{raw_working_hour}:30"
-        hour = datetime.strptime(hour, "%H:%M").time()
+        hour = datetime.strptime(hour, "%H:%M")
         hours.append({
-          "hour":hour,
-          "status":self.get_hour_status(date, hour)
+          "hour":datetime.strftime(hour, "%H:%M"),
+          "status":self.get_hour_status(date, hour.time())
         })      
     return hours
 
