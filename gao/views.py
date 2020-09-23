@@ -27,20 +27,9 @@ def cabinet(request):
     now = datetime.now()
     hours_list = []
     for hours in range(9, 20):
-        # delta = timedelta(hours=hours, minutes=0, seconds=0)
-        # total_seconds = delta.total_seconds()
-        # minutes = int(total_seconds // 60)
-        # seconds = int(total_seconds % 60)
         hours_list.append(f'{hours}.00')
         if hours != 19:
             hours_list.append(f'{hours}.30')
-    # today = datetime.today()
-    # hours_list = user.get_hours_info(today)
-    # while not hours_list:
-    #     today = datetime.today() + timedelta(days=1)
-    #     print(today)
-    #     hours_list = user.get_hours_info(today)
-    # print(hours_list)
     today = datetime.today()
     dates = []
     for days in range(0, 10):
@@ -62,6 +51,35 @@ def index(request):
 def blog(request):
     page, _ = Page.objects.get_or_create(code='blog')
     return render(request, 'blog.html', locals())
+
+from sw_liqpay.utils import get_liqpay_context
+from sw_liqpay.models import LiqpayConfig
+
+
+def payment(request):
+    # TODO: поставити обмеження на створення нової консультації, якщо є неоплачена стара 
+    consultation = Consultation.objects.get(
+        client=request.user,
+        status=Consultation.UNORDERED,
+    )
+    liqpay_params = {
+        'amount': consultation.price,
+        'description': str(consultation.comment),
+        'order_id': order_id,
+        'action': 'pay',
+        'currency': 'UAH',
+        'version': '3',
+        'sandbox': int(LiqpayConfig.get_solo().sandbox_mode), 
+        'server_url': f'/gao/liqpay_callback/', 
+        # 'server_url': f'{Site.objects.get_current()}pay_callback/', 
+    }
+    signature, data = get_liqpay_context(liqpay_params)
+    context = {
+        'signature': signature,
+        'data': data,
+        'callback_url':'/gao/liqpay_callback/',
+    }
+    return render(request, 'payment.html', context)
 
 def post(request, slug):
     post = get_object_or_404(Post, slug=slug)

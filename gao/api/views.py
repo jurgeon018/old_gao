@@ -18,9 +18,9 @@ from datetime import date, datetime, time, timezone, timedelta
 
 @api_view(['GET'])
 def get_days_info(request, type=None):
-  query     = request.query_params#; print("query: ", query)
-  advocat   = User.objects.get(id=query['advocat'])
-  client    = User.objects.get(id=query['client'])
+  query   = request.query_params#; print("query: ", query)
+  advocat = User.objects.get(id=query['advocat'])
+  client  = User.objects.get(id=query['client'])
   # TODO: перевірки по клієнту 
   return Response({
       "days":advocat.get_days_info(int(query['year']), int(query['month'])),
@@ -29,10 +29,10 @@ def get_days_info(request, type=None):
 
 @api_view(['GET'])
 def get_hours_info(request):
-  query     = request.query_params
-  date      = datetime.strptime(query['date'], "%d.%m.%Y")
-  advocat   = User.objects.get(id=query['advocat'])
-  client    = User.objects.get(id=query['client'])
+  query   = request.query_params
+  date    = datetime.strptime(query['date'], "%d.%m.%Y")
+  advocat = User.objects.get(id=query['advocat'])
+  client  = User.objects.get(id=query['client'])
   # TODO: перевірки по клієнту 
   return Response({
       "hours":advocat.get_working_hours_info(date),
@@ -41,9 +41,9 @@ def get_hours_info(request):
 
 @api_view(['GET'])
 def get_working_hours_info(request):
-  query     = request.query_params
-  date      = datetime.strptime(query['date'], "%d.%m.%Y")
-  advocat   = User.objects.get(id=query['advocat'])
+  query   = request.query_params
+  date    = datetime.strptime(query['date'], "%d.%m.%Y")
+  advocat = User.objects.get(id=query['advocat'])
   return Response({
     "hours":advocat.get_hours_info(date),
     "working_hours":advocat.get_working_hours_info(date),
@@ -71,7 +71,7 @@ def googlemeet(request):
   })
 
 
-class UserListView(generics.ListCreateAPIView):
+class UserListView(generics.ListAPIView):
     serializer_class = UserListSerializer
     queryset = User.objects.all()
 
@@ -88,16 +88,36 @@ class UserListView(generics.ListCreateAPIView):
         return queryset
 
 
-class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+class UserDetailView(generics.RetrieveUpdateAPIView):
     serializer_class = UserDetailSerializer
     queryset = User.objects.all()
+
+
+class FacultyListView(generics.ListAPIView):
+    serializer_class = FacultyListSerializer
+    queryset = Faculty.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        request  = self.request 
+        data     = request.query_params
+        advocat  = data.get('advocat')
+        if advocat:
+            ids = User.objects.get(id=advocat).faculties.all().values_list('id', flat=True)
+            queryset = queryset.filter(id__in=ids)
+        return queryset
+
+
+class FacultyDetailView(generics.RetrieveAPIView):
+    serializer_class = FacultyDetailSerializer
+    queryset = Faculty.objects.all()
 
 
 class ConsultationListView(generics.ListCreateAPIView):
   pagination_class = CustomPagination
   serializer_class = ConsultationListSerializer
   queryset = Consultation.objects.all()
-
+  
   def create(self, request, *args, **kwargs):
     response  = {"messages":[]}
     data      = request.data 
@@ -195,57 +215,4 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       return Response(response)
     response = super().update(request, *args, **kwargs)
     return response
-
-
-class ConsultationDocumentListView(generics.ListCreateAPIView):
-    serializer_class = ConsultationDocumentListSerializer
-    queryset = ConsultationDocument.objects.all()
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        request = self.request 
-        data = request.query_params
-        print(data, request)
-        return queryset
-
-
-class ConsultationDocumentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ConsultationDocumentDetailSerializer
-    queryset = ConsultationDocument.objects.all()
-
-
-class ConsultationPaymentListView(generics.ListCreateAPIView):
-    serializer_class = ConsultationPaymentListSerializer
-    queryset = ConsultationPayment.objects.all()
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        request  = self.request 
-        data     = request.query_params
-        return queryset
-
-
-class ConsultationPaymentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ConsultationPaymentDetailSerializer
-    queryset = ConsultationPayment.objects.all()
-
-
-class FacultyListView(generics.ListCreateAPIView):
-    serializer_class = FacultyListSerializer
-    queryset = Faculty.objects.all()
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        request  = self.request 
-        data     = request.query_params
-        advocat  = data.get('advocat')
-        if advocat:
-            ids = User.objects.get(id=advocat).faculties.all().values_list('id', flat=True)
-            queryset = queryset.filter(id__in=ids)
-        return queryset
-
-
-class FacultyDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = FacultyDetailSerializer
-    queryset = Faculty.objects.all()
 

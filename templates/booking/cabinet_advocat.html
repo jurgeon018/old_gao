@@ -415,9 +415,13 @@
 													</div>
 													<div class="advocate_user_title standart_title standart_title_4 color_black">
 														<span>з {{ consultation.start }} по {{ consultation.end }}.</span>
-														<span>консультація -  {{ consultation.full_time }} </span>
-														<!-- <span>з {{ consultation.times.first.time_from }} по {{ consultation.times.first.time_to }}.</span> -->
-														<!-- <span>консультація -  {{ consultation.full_time }} </span> -->
+														<span>
+															консультація -  
+															{{ consultation.full_time.hours }} год.
+															{% if consultation.full_time.minutes %}
+																{{ consultation.full_time.minutes }} хв. 
+															{% endif %}
+														</span>
 													</div>
 												</div>
 												<div class="advocate_user_item__block">
