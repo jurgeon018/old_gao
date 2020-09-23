@@ -615,6 +615,7 @@
         }
     }
     &_prof {
+        position: relative;
         display: flex;
         justify-content: space-between;
         border-radius: 20px;
@@ -622,6 +623,7 @@
         width: 100%;
         margin-bottom: 30px;
         padding: 15px;
+        padding-right: 40px;
 
         .advocate_type__block {
             margin-bottom: 10px;
@@ -1146,9 +1148,18 @@
     transition: all .2s;
     text-align: center;
     cursor: pointer;
-}
-.advocate_slick_date_prof_active {
-    color: #D2A351;
+    
+    &_active {
+        color: #D2A351;
+    } 
+    &_passive {
+        pointer-events: none;
+        background: #000;
+        color: #fff;
+        opacity: 0.3;
+        border-radius: 5px;
+        cursor: default;
+    }
 }
 .slick-arrow {
     display: none !important;
@@ -1443,6 +1454,40 @@
     padding-right: 30px;
 }
 
+.absolute_change__block {
+    position: absolute;
+    display: flex;
+    top: 7px;
+    right: 8px;
+    align-items: center;
+}
+
+.delete_this_consultation {
+    cursor: pointer;
+    margin-left: 5px;
+
+   svg {
+    transition: all .2s;
+    width: 15px;
+    color: #D2A351;
+
+    &:hover {
+        color: #ff0000;
+    }
+   }
+}
+.cancel_this_consultation {
+    cursor: pointer;
+    svg {
+        transition: all .2s;
+        width: 15px;
+        color: #D2A351;
+
+        &:hover {
+            color: #ff0000;
+        }
+    }
+}
 
 
 @media (max-width: 1417px) {
@@ -1474,8 +1519,9 @@
     }
     .consultation_prof {
         flex-direction: column;
-        width: 45%;
-        margin: 20px;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 20px;
     }
     .consultation_section {
         width: 100%;
@@ -1483,6 +1529,7 @@
     .consultation__block {
         display: flex;
         justify-content: center;
+        flex-direction: column;
     }
     .consultation_star__block p {
         margin-bottom: 10px;
