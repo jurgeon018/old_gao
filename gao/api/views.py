@@ -175,7 +175,6 @@ class ConsultationListView(generics.ListCreateAPIView):
       })
       return Response(response)
     response = super().create(request, *args, **kwargs)
-    print(response.data)
     documents = []
     consultation = Consultation.objects.get(id=response.data.get('id'))
     for file in request.FILES:

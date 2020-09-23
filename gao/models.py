@@ -172,7 +172,7 @@ class User(AbstractUser):
       end = int(end) + 1 
     else:
       end = end.split(':')[0]
-    # TODO: протестити правильність
+    # TODO: протестити правильність 
     raw_hours = list(range(int(start), int(end)+1))
     for raw_hour in raw_hours:
       raw_working_hour = raw_hour
@@ -448,7 +448,7 @@ class Consultation(TimestampMixin):
     def get_intersected(cls, consultations, start, end):
       consultations = consultations.filter(
         # Години консультації між вибраними годинами
-        Q(start__lt=start, end__gt=end)|
+        Q(start__lte=start, end__gte=end)|
         # Початок консультації між вибраними годинами
         Q(start__gt=start, start__lt=end)|
         # Закінчення консультації між вибраними годинами
@@ -458,6 +458,11 @@ class Consultation(TimestampMixin):
         # Вибрані години співпадають з годинами консультації
         Q(start=start, end=end)
       )
+      print()
+      print("start: ", start)
+      print("end: ", end)
+      print("consultations: ", consultations)
+      print()
       return consultations
 
     @property
