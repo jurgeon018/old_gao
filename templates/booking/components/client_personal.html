@@ -1,0 +1,51 @@
+<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
+    <div class="tab_left_data">
+      <div class="main_user_data">
+        Особисті дані
+      </div>
+      <div class="user-data-prof">
+        <div class="user-data-type">
+          Логін
+        </div>
+        <div class="user-data-name">
+          {{request.user.username}}
+        </div>
+      </div>
+      <div class="user-data-prof">
+        <div class="user-data-type">
+          Електронна пошта
+        </div>
+        <div class="user-data-name">
+          {{request.user.email}}
+        </div>
+      </div>
+      <div class="user-data-prof">
+        <div class="user-data-type">
+          Номер телефону
+        </div>
+        <div class="user-data-name">
+          {{request.user.phone_number}}
+        </div>
+      </div>
+      <div class="user-data-prof">
+        <div class="user-data-type">
+          Стать 
+        </div>
+        <div class="user-data-name">
+          {{ request.user.sex }}
+        </div>
+      </div>
+      <div class="user-data-prof">
+        <div class="user-data-type">
+          Дата народження
+        </div>
+        <div class="user-data-name">
+          {{ request.user.birth_date }}
+        </div>
+      </div>
+    </div>
+    <!-- <div class="tab_right_data">
+      
+    </div> -->
+</div>
+

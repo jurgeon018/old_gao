@@ -138,6 +138,7 @@ class ConsultationListView(generics.ListCreateAPIView):
   def create(self, request, *args, **kwargs):
     response  = {"messages":[]}
     data      = request.data 
+    print("request.data: ", request.data)
     date      = datetime.strptime(data['date'], '%d.%m.%Y')
     start     = datetime.strptime(data['start'], '%H:%M').time()
     end       = datetime.strptime(data['end'], '%H:%M').time()

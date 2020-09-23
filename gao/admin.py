@@ -185,16 +185,20 @@ class UserWeekDayInline(admin.TabularInline):
     autocomplete_fields = [
         'week_day',
     ]
+class UserWorkingDayInline(admin.TabularInline):
+    model = UserWorkingDay
+    exclude = []
+    extra = 0
+    classes = ['collapse']
+    autocomplete_fields = [
+        # 'week_day',
+    ]
 
 
 @admin.register(UserWeekDay)
 class UserWeekDayAdmin(admin.ModelAdmin):
     pass 
    
-    # search_fields = [
-    #     'week_day__name'
-    # ]
-
 
 @admin.register(WeekDay)
 class WeekDayAdmin(admin.ModelAdmin):
@@ -211,6 +215,7 @@ class WeekDayAdmin(admin.ModelAdmin):
 class CustomUserAdmin(UserAdmin):
     inlines = [
         UserWeekDayInline, 
+        UserWorkingDayInline,
     ]
     fieldsets = (
         (_('Personal info'), {

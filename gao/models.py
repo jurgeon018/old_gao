@@ -148,9 +148,10 @@ class User(AbstractUser):
 
   def get_working_hours_info(self, date):
     """
-    Повертає години з робочого діапазону годин 
+    Генерує години з інтервалами з робочого діапазону годин 
     """
     working_hours_range = self.get_working_hours_range(date)
+    print("get_working_hours_range", working_hours_range)
     start = working_hours_range['start']
     end   = working_hours_range['end']
     if not start or not end:

@@ -1,0 +1,142 @@
+<div id="tab_11" class="tab-auto-content-prof tab-auto-content-prof_active">
+    <div class="user_advocate__wrapper">
+        <div class="main_user_data">
+            Особисті дані
+        </div>
+        <div class="tab_left_data">
+            <label for="file_photo" class="photo_advocate__block">
+                <img src="/static/img/about-us/about-img.png" alt="" class="photo_advocate">
+            </label>
+            <div class="change_photo_in_cabinet">
+                <input class="file_photo" id="file_photo" type="file" name="img" accept="image/jpeg,image/png,image/gif">
+                <label class="label_main_title main_title main_title_4 color_gold" for="file_photo">
+                    змінити фото
+                </label>
+                <div class="photo_answer standart_title standart_title_4 color_black">
+
+                </div>
+            </div>
+            <div class="user-data-prof">
+                <div class="user-data-type">
+                    Ім'я
+                </div>
+                <div class="user-data-name">
+                {% if user.username %}
+                    {{ user.username }}
+                {% endif %}
+                </div>
+            </div>
+            <div class="user-data-prof">
+                <div class="user-data-type">
+                    Електронна пошта
+                </div>
+                <div class="user-data-name">
+                {% if user.email %}
+                    {{ user.email }}
+                {% endif %}
+                </div>
+            </div>
+            <div class="user-data-prof">
+                <div class="user-data-type">
+                    Номер телефону
+                </div>
+                <div class="user-data-name">
+                {% if user.phone_number %}
+                    {{ user.phone_number }}
+                {% endif %}
+                </div>
+            </div>
+            <div class="user-data-prof">
+                <div class="user-data-type">
+                    Стать 
+                </div>
+                <div class="user-data-name">
+                {% if user.sex %}
+                    {{ user.sex }}
+                {% endif %}
+                </div>
+            </div>
+            <div class="user-data-prof">
+                <div class="user-data-type">
+                    Дата народження
+                </div>
+                <div class="user-data-name">
+                {% if user.birth_date %}
+                    {{ user.birth_date }}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="advocate_practise__block">
+            <div class="advocate_practise_name">
+                Практики
+            </div>
+            <div class="advocate_practise_content__block">
+            {% for faculty in user.faculties.all %}
+                <div class="advocate_download_prof">
+                    <div data-id="{{ faculty.id }}" class="advocate_download_name main_title main_title_4 color_gold">
+                        {{ faculty.name }}
+                    </div>
+                    <svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="user-data-prof">
+            <div class="user-data-type">
+            </div>
+            <div class="user-data-name">
+                <div class="step_select">
+                    <div class="step_change_btn step_select_btn">
+                        <div class="step_select_img">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 8819 8819" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Layer_x0020_1">
+                                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <g id="_2353930230192">
+                                    <rect class="step_svg" x="882" y="882" width="3079" height="3146"></rect>
+                                    <rect class="step_svg" x="4859" y="882" width="3079" height="3146"></rect>
+                                    <rect class="step_svg" x="4859" y="4791" width="3079" height="3146"></rect>
+                                    <rect class="step_svg" x="882" y="4791" width="3079" height="3146"></rect>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="step_select_title_btn standart_title standart_title_4 color_black">
+                            Галузь
+                        </div>
+                        <div class="step_select_arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 2117 2117" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path class="arrow_svg" d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step_active_content__block">
+
+                    </div>
+                    <div class="step_hidden_content">
+                    {% for faculty in faculties %}
+                        <div data-title="{{ faculty.name }}" data-id="{{ faculty.id }}" class="step_select_radio standart_title standart_title_2 color_black">
+                            {{ faculty.name }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-data-prof">
+            <div class="user-data-type">
+            </div>
+            <div class="user-data-name">
+                <!-- <div class="button_transparent save_data_practise_btn">
+                    Зберегти
+                </div> -->
+            </div>
+        </div>
+        <div class="acces_practise__block main_title main_title_4 color_green">
+
+        </div>
+    </div>
+</div>
