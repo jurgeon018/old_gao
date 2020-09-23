@@ -172,32 +172,31 @@ class User(AbstractUser):
       end = int(end) + 1 
     else:
       end = end.split(':')[0]
-    # TODO: протестити правильність
+    # TODO: протестити правильність 
     raw_hours = list(range(int(start), int(end)+1))
     for raw_hour in raw_hours:
-      raw_working_hour = raw_hour
-      hour = f'{raw_working_hour}:00'
-      hour = datetime.strptime(hour, "%H:%M")
+      hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")
       hours.append({
         "hour":datetime.strftime(hour, "%H:%M"),
-        "status":self.get_hour_status(date, hour.time())
+        # "status":self.get_hour_status(date, hour.time())
+        'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
       })    
-      if raw_working_hour != raw_hours[-1]:
-        hour = f"{raw_working_hour}:30"
-        hour = datetime.strptime(hour, "%H:%M")
+      if raw_hour != raw_hours[-1]:
+        hour = datetime.strptime(f"{raw_hour}:30", "%H:%M")
         hours.append({
           "hour":datetime.strftime(hour, "%H:%M"),
-          "status":self.get_hour_status(date, hour.time())
+          # "status":self.get_hour_status(date, hour.time())
+          'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
         })      
     return hours
 
-  def get_hour_status(self, date, hour):
-    hour_is_free = self.timerange_is_free(date, hour, hour)
-    if hour_is_free:
-      status = "free"
-    else:
-      status = "busy"
-    return status 
+  # def get_hour_status(self, date, hour):
+  #   hour_is_free = self.timerange_is_free(date, hour, hour)
+  #   if hour_is_free:
+  #     status = "free"
+  #   else:
+  #     status = "busy"
+  #   return status 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -448,7 +447,7 @@ class Consultation(TimestampMixin):
     def get_intersected(cls, consultations, start, end):
       consultations = consultations.filter(
         # Години консультації між вибраними годинами
-        Q(start__lt=start, end__gt=end)|
+        Q(start__lte=start, end__gte=end)|
         # Початок консультації між вибраними годинами
         Q(start__gt=start, start__lt=end)|
         # Закінчення консультації між вибраними годинами

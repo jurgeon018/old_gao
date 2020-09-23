@@ -74,7 +74,6 @@ class Command(BaseCommand):
         consult.status  = status
         consult.faculty = faculty
         consult.save()
-        # print(consult, created)
       else:
         print(f'TIMERANGE {start}:{end} IN DAY {day} IS NOT FREE')
     print('ok')
