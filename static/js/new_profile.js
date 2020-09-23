@@ -7,7 +7,6 @@
 
 
 
-
 if ($('.advocate_calender_container').length == 1) {
     
   
@@ -515,6 +514,23 @@ function generate_interval(start, end) {
 }
 // блочок який лиш для адвокатів закінчується
 
+$('.cancel_this_consultation').on('click', function() {
+    let wrap = $(this).parents('.consultation_prof');
+    let id = $(wrap).attr('data-id');
+    let data = {
+        status: 'DECLINED'
+    }
+        fetch(`/api/consultations/${id}/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+        
+        })       
+});
 
 $('.delete_this_consultation').on('click', user_delete);
    
@@ -523,6 +539,9 @@ function user_delete() {
         src: '#modal_delete_consultation',
         touch: false,
     }); 
+
+    let id = $(this).parents('.consultation_prof').attr('data-id');
+    $('#modal_delete_consultation').attr('data-id', id);
 }
 
 $('.user_cancel').on('click', function() {
@@ -531,32 +550,29 @@ $('.user_cancel').on('click', function() {
     }); 
 });
 $('.user_acceses').on('click', function() {
-    
-    fetch(`/api/project_users/${users_id}/`, {
+    let wrap = $('#tab_33');
+    let click_id = $(this).parents('#modal_delete_consultation').attr('data-id');
+    fetch(`/api/consultations/${click_id}/`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        })
-        .then(data => {
-            return data.json();
-        })
-        .then(data => {
-            // console.log('data: ', data);
-        })
-    let all_users = $('.create_user_section').find('.sub_tab_card__block');
-    console.log('all_users: ', all_users);
+        });
+       
+        let all_users = $(wrap).find('.consultation_prof');
     
-    $.each(all_users,function(index,value){
-          if ($(value).attr('data-user') == users_id) {
-              console.log('$(value): ', $(value));
-            $(value).remove();
-        }
-      });
-    $.fancybox.close({
-        src: '#modal_delete_user',
-    }); 
+        $.each(all_users,function(index,value){
+            console.log('value: ', $(value));
+              if ($(value).attr('data-id') == click_id) {
+                console.log(' $(value): ',  $(value));
+                $(value).remove();
+                
+            }
+          });
+        $.fancybox.close({
+            src: '#modal_delete_user',
+        }); 
 });
 
 

@@ -11,6 +11,20 @@
   .button_transparent:hover {
     background: #D2A351;
     color: #fff; }
+.button_gold {
+  transition: all .2s;
+  border-radius: 20px;
+  font-size: 16px;
+  background: #D2A351;
+  color: #fff;
+  font-weight: 400;
+  border: 1px solid #D2A351;
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer; }
+  .button_gold:hover {
+    background: transparent;
+    color: #D2A351; }
 
 .main_title {
   font-weight: 700;
@@ -1148,6 +1162,16 @@
     .cancel_this_consultation svg:hover {
       color: #ff0000; }
 
+#modal_delete_consultation .no_item {
+  padding-bottom: 20px; }
+#modal_delete_consultation .manager_change {
+  display: flex;
+  justify-content: center; }
+#modal_delete_consultation .button_gold {
+  min-width: 160px; }
+#modal_delete_consultation .user_cancel, #modal_delete_consultation .user_acceses {
+  margin: 0px 10px; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;
@@ -1208,6 +1232,14 @@
 
   .advocate_calender_navigate {
     top: 0px; } }
+@media (max-width: 1068px) {
+  #modal_delete_consultation {
+    padding: 40px !important;
+    width: 60%; }
+
+  .no_item {
+    font-size: 20px;
+    text-align: center; } }
 @media (max-width: 1090px) {
   .tab-auto-content-block {
     width: 100%;
@@ -1219,6 +1251,22 @@
 
   .tab-auto-content-prof_active {
     padding-left: 0; } }
+@media (max-width: 768px) {
+  .manager_change {
+    display: flex;
+    flex-direction: column; }
+
+  #modal_delete_consultation {
+    padding: 20px !important;
+    width: 90%;
+    padding-top: 30px !important; }
+    #modal_delete_consultation .user_cancel, #modal_delete_consultation .user_acceses {
+      margin: 10px 0;
+      width: 100%;
+      min-width: unset; }
+
+  .no_item {
+    margin: 0; } }
 @media (max-width: 725px) {
   .user-data-prof {
     width: 100%;

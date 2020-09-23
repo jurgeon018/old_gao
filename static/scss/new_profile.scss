@@ -16,6 +16,23 @@
                 color: #fff;
             }
         }
+        &_gold {
+            transition: all .2s;
+            border-radius: 20px;
+            font-size: 16px;
+            background: #D2A351;
+            color: #fff;
+            font-weight: 400;
+            border: 1px solid #D2A351;
+            text-align: center;
+            padding: 10px 20px;
+            cursor: pointer;
+
+            &:hover {
+                background: transparent;
+                color: #D2A351;
+            }
+        }
     }
 
 // button ==================================================>
@@ -1489,6 +1506,22 @@
     }
 }
 
+#modal_delete_consultation {
+    .no_item {
+        padding-bottom: 20px;
+    }
+    .manager_change {
+        display: flex;
+        justify-content: center;
+    }
+    .button_gold {
+        min-width: 160px;
+    }
+    .user_cancel, .user_acceses {
+        margin: 0px 10px;
+    }
+}
+
 
 @media (max-width: 1417px) {
     .advocate_calender_info {
@@ -1557,7 +1590,16 @@
         top: 0px;
     }
 }
-
+@media (max-width: 1068px) {
+    #modal_delete_consultation {
+        padding: 40px !important;
+        width: 60%;
+    }
+    .no_item {
+        font-size: 20px;
+        text-align: center;
+    }
+}
 @media (max-width: 1090px) {
     .tab-auto-content-block {
         width: 100%;
@@ -1569,6 +1611,26 @@
     }
     .tab-auto-content-prof_active {
         padding-left: 0;
+    }
+}
+@media (max-width: 768px) {
+    .manager_change {
+        display: flex;
+        flex-direction: column;
+    }
+    #modal_delete_consultation {
+            padding: 20px !important;
+            width: 90%;
+            padding-top: 30px !important;
+
+        .user_cancel, .user_acceses {
+            margin: 10px 0;
+            width: 100%;
+            min-width: unset;
+        } 
+    }
+    .no_item {
+        margin: 0;
     }
 }
 @media (max-width: 725px) {
