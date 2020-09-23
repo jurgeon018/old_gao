@@ -55,6 +55,7 @@ class User(AbstractUser):
 
   def get_day_status(self, day):
     '''
+    Статуси: 
     rest        - зайнятий, без консультацій
     blocked     - зайнятий, з консультаціями 
     free        - вільний, без консультацій
@@ -79,6 +80,12 @@ class User(AbstractUser):
     return status
     
   def get_week_day(self, date):
+    """
+    Получає:
+    date - date-об'єкт
+    Повертає:
+    week_day - статичний день тижня 
+    """
     week_day = UserWeekDay.objects.filter(
       user=self, 
       week_day__code=date.isoweekday(),
@@ -86,6 +93,12 @@ class User(AbstractUser):
     return week_day
   
   def get_working_day(self, date):
+    """
+    Получає:
+    date - date-об'єкт
+    Повертає:
+    working_day - динамічний робочий день тижня 
+    """
     working_day = UserWorkingDay.objects.filter(
       advocat=self, 
       date=date,
@@ -93,6 +106,14 @@ class User(AbstractUser):
     return working_day
 
   def get_working_hours_range(self, date):
+    '''
+    Получає:
+    date - date-об'єкт.
+    Повертає:
+    week_day - день тижня
+    start - початок дня тижня
+    end - закінчення дня тижня
+    '''
     working_day = self.get_working_day(date)
     week_day = self.get_week_day(date)
     if working_day:
@@ -113,6 +134,9 @@ class User(AbstractUser):
     }
 
   def get_hours_info(self, date):
+    """
+    Повертає години які є у консультаціях
+    """
     consultations = Consultation.objects.filter(
       date=date,
       advocat=self,
@@ -127,6 +151,9 @@ class User(AbstractUser):
     return hours
 
   def get_working_hours_info(self, date):
+    """
+    Повертає години з статусами, з робочого діапазону годин 
+    """
     working_hours_range = self.get_working_hours_range(date)
     start = working_hours_range['start']
     end   = working_hours_range['end']
@@ -169,11 +196,11 @@ class User(AbstractUser):
       status = 'unknown'
     return status 
 
-  def hour_is_free(self, date, hour):
-    for working_hour in self.get_working_hours_info(date):
-      if hour == working_hour['hour'] and working_hour['status'] == 'free':
-        return False 
-    return False 
+  # def hour_is_free(self, date, hour):
+  #   for working_hour in self.get_working_hours_info(date):
+  #     if hour == working_hour['hour'] and working_hour['status'] == 'free':
+  #       return False 
+  #   return False 
 
   def timerange_is_free(self, date, start, end):
     consultations = Consultation.objects.filter(date=date)
@@ -189,6 +216,8 @@ class User(AbstractUser):
     if start and end and week_day:
       if start < week_day.start or end > week_day.end:
         return False
+      else:
+        pass
     else:
       return False
     # Обмеження по існуючих консультаціях

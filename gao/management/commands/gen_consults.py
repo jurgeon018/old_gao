@@ -17,7 +17,6 @@ def get_24_hours():
   return hours
 
 
-
 class Command(BaseCommand):
   def handle(self, *args, **kwargs):
     hours_24 = get_24_hours()
@@ -40,17 +39,18 @@ class Command(BaseCommand):
         # print('iter')
         day  = date.today() - timedelta(days=3) + timedelta(days=random.randint(1, 10))
         # TODO: перевірки по клієнту
-        # if advocat.day_is_free(day):
+        # day_is_free = advocat.day_is_free(day)
+        # if day_is_free:
         if True:
           break
 
       while True:
         # print('iter')
         start = random.choice(hours_24)
-        # TODO: перевірки по клієнту
-        hour_is_free = advocat.hour_is_free(day, start)
-        # if hour_is_free:
         if start != hours_24[-1]:
+        # TODO: перевірки по клієнту
+        # hour_is_free = advocat.hour_is_free(day, start)
+        # if hour_is_free:
           break
 
       while True:

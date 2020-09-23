@@ -35,9 +35,9 @@ def get_hours_info(request):
   client  = User.objects.get(id=query['client'])
   # TODO: перевірки по клієнту 
   return Response({
-    "hours-detail":"Години у які вже є консультації",
+    "hours-info":"Години у які вже є консультаціях",
+    "working_hours-info":"Робочі години у адвоката по його графіку",
     "hours":advocat.get_hours_info(date),
-    "working_hours-detail":"Робочі години у адвоката по його графіку",
     "working_hours":advocat.get_working_hours_info(date),
   })
 
