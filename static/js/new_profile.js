@@ -989,9 +989,7 @@ function update_datepicker(disabledDays, reserved_days, busy_days, months) {
             }
         },
     })
-    setTimeout(() => {
-        $('.load_spin').removeClass('load_spin_active');
-    }, 200);
+        $('.load_calender').removeClass('load_calender_active');
 }
     
 
@@ -1135,7 +1133,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             
         },
         onChangeMonth: function(date_month, date_year) {
-            $('.load_spin').addClass('load_spin_active');
+            $('.load_calender').addClass('load_calender_active');
             let date_client = $('.client_info_id').attr('data-client');
             let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
             let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${date_advocat}&client=${date_client}`;

@@ -1551,6 +1551,46 @@
 .advocate_download_name {
     width: calc(100% - 25px);
 }
+.date__block {
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+
+.load_calender {
+    transition: all .2s;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    left: 0;
+    border-radius: 18px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    img {
+        width: 50px;
+        display: block;
+        margin: 0;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &_active {
+        top: 0;
+        opacity: 1;
+        left: 0;
+        z-index: 10000000;
+        background-color: rgba(77,83,89,0.7);
+
+    }
+}
+
+
+
+
 
 
 
