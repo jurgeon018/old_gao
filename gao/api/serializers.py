@@ -40,11 +40,15 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     documents = ConsultationDocumentListSerializer(many=True, read_only=True)
     payment   = ConsultationPaymentSerializer(many=True, read_only=True)
     price     = serializers.SerializerMethodField()
+    full_time = serializers.SerializerMethodField()
     advocat   = UserDetailSerializer()
     client    = UserDetailSerializer()
 
     def get_price(self, consultation):
         return consultation.price 
+
+    def get_full_time(self, consultation):
+        return consultation.full_time 
 
     class Meta:
         model = Consultation 
