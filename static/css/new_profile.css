@@ -694,6 +694,27 @@
     width: 100%; }
   .advocate_calender_info .advocate_subname {
     margin-bottom: 15px; }
+  .advocate_calender_info .advocate_first_info__block {
+    position: relative;
+    transition: all .2s;
+    left: 0;
+    opacity: 1;
+    max-height: 1000px; }
+  .advocate_calender_info .advocate_current_info__block {
+    position: relative;
+    transition: all .2s;
+    left: -100%;
+    opacity: 0;
+    max-height: 1px; }
+  .advocate_calender_info_active .advocate_first_info__block {
+    left: -100%;
+    opacity: 0;
+    max-height: 1px; }
+  .advocate_calender_info_active .advocate_current_info__block {
+    transition: all .2s;
+    left: 0;
+    opacity: 1;
+    max-height: 1000px; }
 .advocate_calender_select {
   margin-bottom: 20px;
   width: 150px; }
