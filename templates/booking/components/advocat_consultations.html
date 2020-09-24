@@ -1,7 +1,7 @@
 <div id="profile_4" class="main_doc_content">
   <div class="consultation__block">
-  <!-- вивід із адмінки -->
-  {% for consultation in consultations %}
+  {% comment %}
+  <!-- {% for consultation in consultations %}
     <div data-id={{consultation.id}} class="consultation_prof">
       <div class="absolute_change__block">
         {% if consultation.can_be_changed and consultation.status != 'DECLINED' and consultation.status != 'FINISHED' %}
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="status_advocate_subname advocate_type_work standart_title standart_title_4 color_black">
-                {{ consultation.faculty }}
+                {{ consultation.faculty.name }}
             </div>
         </div>
         <div class="advocate_name main_title main_title_4 color_gold">
@@ -47,30 +47,30 @@
       </div>
       <div class="consultation_section consultation_center">
         <div class="consultation_title main_title main_title_4 color_green">
-            Інформація по консультації №{{consultation.id}}:
+          Інформація по консультації №{{consultation.id}}:
         </div>
         <div class="advocate_user_item__block">
-            <div class="advocate_user_img">
-                <img src="/static/img/profile/2.svg" alt="">
-            </div>
-            <div class="advocate_user_title standart_title standart_title_4 color_black">
-                {{ consultation.date|date:"D d.m.Y." }}
-            </div>
+          <div class="advocate_user_img">
+              <img src="/static/img/profile/2.svg" alt="">
+          </div>
+          <div class="advocate_user_title standart_title standart_title_4 color_black">
+              {{ consultation.date|date:"D d.m.Y." }}
+          </div>
         </div>
         <div class="advocate_user_item__block">
-            <div class="advocate_user_img">
-                <img src="/static/img/profile/5.svg" alt="">
-            </div>
-            <div class="advocate_user_title standart_title standart_title_4 color_black">
-                <span>з {{ consultation.start }} по {{ consultation.end }}.</span>
-                <span>
-                    консультація -  
-                    {{ consultation.full_time.hours }} год.
-                    {% if consultation.full_time.minutes %}
-                        {{ consultation.full_time.minutes }} хв. 
-                    {% endif %}
-                </span>
-            </div>
+          <div class="advocate_user_img">
+              <img src="/static/img/profile/5.svg" alt="">
+          </div>
+          <div class="advocate_user_title standart_title standart_title_4 color_black">
+            <span>з {{ consultation.start }} по {{ consultation.end }}.</span>
+            <span>
+              консультація -  
+              {{ consultation.full_time.hours }} год.
+              {% if consultation.full_time.minutes %}
+                {{ consultation.full_time.minutes }} хв. 
+              {% endif %}
+            </span>
+          </div>
         </div>
         <div class="advocate_user_item__block">
             <div class="advocate_user_img">
@@ -107,6 +107,10 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+  {% endfor %} -->
+  {% endcomment %}
   </div>
 </div>
+
+
+
