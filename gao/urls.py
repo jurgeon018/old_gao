@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/',           admin.site.urls),
 
     path('api/',             include('gao.api.urls')),
-
+    path('gao_liqpay_callback/', gao_liqpay_callback),
     path('',                 index,    name='index' ),
     path('contacts/',        contacts, name='contacts'),
     path('cabinet/',  cabinet,  name='cabinet'),

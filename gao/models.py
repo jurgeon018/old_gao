@@ -353,147 +353,153 @@ class Faculty(TimestampMixin):
 
 
 class Consultation(TimestampMixin):
-    UNORDERED   = 'UNORDERED'
-    DECLINED    = 'DECLINED'
-    IN_PROGRESS = 'IN_PROGRESS'
-    FINISHED    = 'FINISHED'
-    STATUSES    = (
-      (UNORDERED, "Незавершено"),
-      (DECLINED, "Відмовлено"),
-      (IN_PROGRESS, "В процессі"),
-      (FINISHED, "Завершено"),
-    )
-    SKYPE  = 'SKYPE'
-    VIBER  = 'VIBER'
-    GMEET  = 'GMEET'
-    ZOOM   = 'ZOOM'
-    MOBILE = 'MOBILE'
-    FORMATS = [
-      (SKYPE,  "SKYPE"),
-      (VIBER,  "VIBER"),
-      (GMEET,  "GMEET"),
-      (ZOOM,   "ZOOM"),
-      (MOBILE, "MOBILE"),
-    ]
-    link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
-    format    = models.CharField(
-      verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
-    )
-    status    = models.CharField(
-      verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=UNORDERED, max_length=255,
-    )
-    date      = models.DateField(
-      verbose_name="Дата",
-    )
-    faculty   = models.ForeignKey(
-      verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
-      on_delete=models.SET_NULL, related_name="consulations",
-    )
-    start = models.TimeField(
-      verbose_name="Час початку",
-    )
-    end = models.TimeField(
-      verbose_name="Час завершення",
-    )
-    comment   = models.TextField(
-      verbose_name="Коментар", blank=True, null=True,
-    )
-    mark      = models.SmallIntegerField(
-      verbose_name="Оцінка", blank=True, null=True,
-    )
-    advocat   = models.ForeignKey(
-        verbose_name="Адвокат", to="gao.User", 
-        related_name="advocat_consultations",
-        on_delete=models.CASCADE, blank=False, null=False,
-    )
-    client    = models.ForeignKey(
-        verbose_name="Клієнт", to="gao.User",
-        related_name="client_consultations",
-        on_delete=models.SET_NULL, blank=True, null=True,
-    )
+  statuses = {
+    "UNORDERED":"Незавершено",
+    "DECLINED":"Відмовлено",
+    "IN_PROGRESS":"В процессі",
+    "FINISHED":"Завершено",
+  }
+  UNORDERED   = 'UNORDERED'
+  DECLINED    = 'DECLINED'
+  IN_PROGRESS = 'IN_PROGRESS'
+  FINISHED    = 'FINISHED'
+  STATUSES    = (
+    (UNORDERED, "Незавершено"),
+    (DECLINED, "Відмовлено"),
+    (IN_PROGRESS, "В процессі"),
+    (FINISHED, "Завершено"),
+  )
+  SKYPE  = 'SKYPE'
+  VIBER  = 'VIBER'
+  GMEET  = 'GMEET'
+  ZOOM   = 'ZOOM'
+  MOBILE = 'MOBILE'
+  FORMATS = [
+    (SKYPE,  "SKYPE"),
+    (VIBER,  "VIBER"),
+    (GMEET,  "GMEET"),
+    (ZOOM,   "ZOOM"),
+    (MOBILE, "MOBILE"),
+  ]
+  link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
+  format    = models.CharField(
+    verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
+  )
+  status    = models.CharField(
+    verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=UNORDERED, max_length=255,
+  )
+  date      = models.DateField(
+    verbose_name="Дата",
+  )
+  faculty   = models.ForeignKey(
+    verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
+    on_delete=models.SET_NULL, related_name="consulations",
+  )
+  start = models.TimeField(
+    verbose_name="Час початку",
+  )
+  end = models.TimeField(
+    verbose_name="Час завершення",
+  )
+  comment   = models.TextField(
+    verbose_name="Коментар", blank=True, null=True,
+  )
+  mark      = models.SmallIntegerField(
+    verbose_name="Оцінка", blank=True, null=True,
+  )
+  advocat   = models.ForeignKey(
+      verbose_name="Адвокат", to="gao.User", 
+      related_name="advocat_consultations",
+      on_delete=models.CASCADE, blank=False, null=False,
+  )
+  client    = models.ForeignKey(
+      verbose_name="Клієнт", to="gao.User",
+      related_name="client_consultations",
+      on_delete=models.SET_NULL, blank=True, null=True,
+  )
+  
+  def clean(self):
+    if self.start > self.end:
+      raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+    if self.start.minute % 30 !=0:
+      raise ValidationError("Година початку мусить бути кратною 30хв")
+    if self.end.minute % 30 !=0:
+      raise ValidationError("Година закінчення мусить бути кратною 30хв")
+  
+  def save(self, *args, **kwargs):
+    if self.start > self.end:
+      raise ValidationError("Година початку більша за годину закінчення")
+    if self.start.minute % 30 !=0:
+      raise ValidationError("Година початку мусить бути кратною 30хв")
+    if self.end.minute % 30 !=0:
+      raise ValidationError("Година закінчення мусить бути кратною 30хв") 
     
-    def clean(self):
-      if self.start > self.end:
-        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
-      if self.start.minute % 30 !=0:
-        raise ValidationError("Година початку мусить бути кратною 30хв")
-      if self.end.minute % 30 !=0:
-        raise ValidationError("Година закінчення мусить бути кратною 30хв")
+    consultations = Consultation.objects.filter(
+      advocat=self.advocat,
+      client=self.client,
+      date=self.date,
+    )
+    consultations = Consultation.get_intersected(consultations, self.start, self.end)
+    if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
+      raise Exception('ERROR!!!')
+    super().save()
     
-    def save(self, *args, **kwargs):
-      if self.start > self.end:
-        raise ValidationError("Година початку більша за годину закінчення")
-      if self.start.minute % 30 !=0:
-        raise ValidationError("Година початку мусить бути кратною 30хв")
-      if self.end.minute % 30 !=0:
-        raise ValidationError("Година закінчення мусить бути кратною 30хв") 
-      
-      consultations = Consultation.objects.filter(
-        advocat=self.advocat,
-        client=self.client,
-        date=self.date,
-      )
-      consultations = Consultation.get_intersected(consultations, self.start, self.end)
-      if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
-        raise Exception('ERROR!!!')
-      super().save()
-      
 
-    @classmethod
-    def get_intersected(cls, consultations, start, end):
-      consultations = consultations.filter(
-        # Години консультації між вибраними годинами
-        Q(start__lte=start, end__gt=end)|
-        # Початок консультації між вибраними годинами
-        Q(start__gt=start, start__lt=end)|
-        # Закінчення консультації між вибраними годинами
-        Q(end__gt=start, end__lt=end)|
-        # Вибрані години між годинами консультації
-        Q(start__lt=start, start__gt=end)|
-        # Вибрані години співпадають з годинами консультації
-        Q(start=start, end=end)
-      )
-      consultations = consultations.exclude(status__in=[Consultation.DECLINED, Consultation.FINISHED])
-      return consultations
+  @classmethod
+  def get_intersected(cls, consultations, start, end):
+    consultations = consultations.filter(
+      # Години консультації між вибраними годинами
+      Q(start__lte=start, end__gt=end)|
+      # Початок консультації між вибраними годинами
+      Q(start__gt=start, start__lt=end)|
+      # Закінчення консультації між вибраними годинами
+      Q(end__gt=start, end__lt=end)|
+      # Вибрані години між годинами консультації
+      Q(start__lt=start, start__gt=end)|
+      # Вибрані години співпадають з годинами консультації
+      Q(start=start, end=end)
+    )
+    consultations = consultations.exclude(status__in=[Consultation.DECLINED, Consultation.FINISHED])
+    return consultations
 
-    @property
-    def full_time(self):
-      start   = time.strftime(self.start, "%H:%M:%S")
-      end     = time.strftime(self.end, "%H:%M:%S")
-      tdelta  = datetime.strptime(end, '%H:%M:%S') - datetime.strptime(start, '%H:%M:%S')
-      days    = tdelta.days 
-      seconds = tdelta.seconds 
-      minutes = (seconds//60)%60
-      hours   = seconds // 3600
-      return {
-        "minutes":minutes,
-        "hours":hours,
-      }
+  @property
+  def full_time(self):
+    start   = time.strftime(self.start, "%H:%M:%S")
+    end     = time.strftime(self.end, "%H:%M:%S")
+    tdelta  = datetime.strptime(end, '%H:%M:%S') - datetime.strptime(start, '%H:%M:%S')
+    days    = tdelta.days 
+    seconds = tdelta.seconds 
+    minutes = (seconds//60)%60
+    hours   = seconds // 3600
+    return {
+      "minutes":minutes,
+      "hours":hours,
+    }
 
-    @property
-    def price(self):
-      full_time = self.full_time
-      minutes   = full_time['minutes']
-      hours     = full_time['hours']
-      rate      = self.advocat.rate
-      price     = rate * hours 
-      price     = price + (minutes/60 * rate)
-      return price 
-    
-    def can_be_changed(self):
-      if datetime.today().date() + timedelta(days=3) > self.date:
-        return False 
-      return True
+  @property
+  def price(self):
+    full_time = self.full_time
+    minutes   = full_time['minutes']
+    hours     = full_time['hours']
+    rate      = self.advocat.rate
+    price     = rate * hours 
+    price     = price + (minutes/60 * rate)
+    return price 
+  
+  def can_be_changed(self):
+    if datetime.today().date() + timedelta(days=3) > self.date:
+      return False 
+    return True
 
-    class Meta:
-        verbose_name = 'Консультація'
-        verbose_name_plural = 'Консультації'
+  class Meta:
+      verbose_name = 'Консультація'
+      verbose_name_plural = 'Консультації'
 
-    def __str__(self):
-        res = f'{self.date}, {self.start}-{self.end}, {self.advocat.username}'
-        if self.client:
-          res += f' -> {self.client.username}'
-        return res 
+  def __str__(self):
+      res = f'{self.date}, {self.start}-{self.end}, {self.advocat.username}'
+      if self.client:
+        res += f' -> {self.client.username}'
+      return res 
 
 
 class ConsultationDocument(TimestampMixin):

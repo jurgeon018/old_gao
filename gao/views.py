@@ -52,12 +52,12 @@ def blog(request):
     page, _ = Page.objects.get_or_create(code='blog')
     return render(request, 'blog.html', locals())
 
-from sw_liqpay.utils import get_liqpay_context
+from sw_liqpay.utils import get_liqpay_context, create_liqpay_transaction
 from sw_liqpay.models import LiqpayConfig
 
-
-def payment(request):
-    # TODO: поставити обмеження на створення нової консультації, якщо є неоплачена стара 
+def get_gao_liqpay_context(request):
+    # TODO: а)поставити обмеження на створення нової консультації, якщо є неоплачена стара 
+    # TODO: б)діставати консультацію з сесії 
     consultation = Consultation.objects.get(
         client=request.user,
         status=Consultation.UNORDERED,
@@ -65,21 +65,39 @@ def payment(request):
     liqpay_params = {
         'amount': consultation.price,
         'description': str(consultation.comment),
-        'order_id': order_id,
+        'order_id': consultation.id,
         'action': 'pay',
         'currency': 'UAH',
         'version': '3',
         'sandbox': int(LiqpayConfig.get_solo().sandbox_mode), 
         'server_url': f'/gao/liqpay_callback/',
-        # 'server_url': f'{Site.objects.get_current()}pay_callback/', 
     }
     signature, data = get_liqpay_context(liqpay_params)
     context = {
         'signature': signature,
         'data': data,
-        'callback_url':'/gao/liqpay_callback/',
+        'callback_url':'/gao_liqpay_callback/',
     }
+    return context
+
+def payment(request):
+    context = get_gao_liqpay_context(request)
     return render(request, 'payment.html', context)
+
+def gao_liqpay_callback(request):
+    form          = create_liqpay_transaction(request)
+    transaction   = form.instance 
+    consultation  = Consultation.objects.get(id=transaction.order_id)
+    payment       = ConsultationPayment.objects.create(
+        consultation=consultation,
+        amount=transaction.amount,
+    )
+    print('YES BLYAT!')
+    # TODO: 
+    # send_mail()
+    # consultation.status = Consultation.FINISHED 
+    # consultation.save()
+    return JsonResponse({})
 
 def post(request, slug):
     post = get_object_or_404(Post, slug=slug)

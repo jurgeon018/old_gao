@@ -280,6 +280,33 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = ConsultationDetailSerializer
   queryset = Consultation.objects.all()
 
+  def delete(self, request, *args, **kwargs):
+    consultation = Consultation.objects.get(id=kwargs['pk'])
+    super().delete(request, *args, **kwargs)
+    if consultation.advocat != consultation.client:
+      recipient_list = []
+      recipient_list.append(jurgeon018@gmail.com)
+      if consultation.client:
+        recipient_list.append(consultation.client.email)
+      message = f'''
+      Видалено консультацію №{consultation.id}.
+      Імя: {consultation.client.full_name}
+      Пошта: {consultation.client.email}
+      Дата: {consultation.date}
+      Час: {consultation.start} - {consultation.end}
+      Галузь: {consultation.faculty.name}
+      '''
+      if link:
+        message += f'Посилання: {link}'
+      send_mail(
+        subject=f'Видалено консультацію №{consultation.id}',
+        message=message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=recipient_list,
+        fail_silently=False,
+        # fail_silently=True,
+      )
+
   def update(self, request, *args, **kwargs):
     response  = {"messages":[]}
     data      = request.data 
@@ -303,12 +330,21 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         })
         return Response(response)
     if "mark" in request.data:
-      super().update(request, *args, **kwargs)
-      response['messages'].append({
+      response = super().update(request, *args, **kwargs)
+      response.data['messages'] = []
+      response.data['messages'].append({
         'text':'Консультацію було успішно оцінено',
         'status':'success',
       })
-      return Response(response)
+      subject = f"Консультація №{consultation.id} була оцінена на '{request.data['mark']}' балів."
+      message = f"""
+      Консультація №{consultation.id} була оцінена на '{request.data['mark']}' балів.
+      """
+      recipient_list = []
+      recipient_list.append('jurgeon018@gmail.com')
+      recipient_list.append(consultation.advocat.email)
+      send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
+      return response 
     if 'status' in request.data:
       if request.data['status'] == Consultation.DECLINED and not consultation.can_be_changed():
         response['messages'].append({
@@ -320,10 +356,18 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         response = super().update(request, *args, **kwargs)
         response.data['messages'] = []
         response.data['messages'].append({
-          'text':f"Статус консультації було змінено на {request.data['status']}",
+          'text':f"Статус консультації №{consultation.id} було змінено на {Consultation.statuses[request.data['status']]}",
           'status':'success',
         })
-        return Response(response)
+        subject = f"Статус консультації №{consultation.id} було змінено на {Consultation.statuses[request.data['status']]}"
+        message = f"""
+        Статус консультації №{consultation.id} було змінено на {Consultation.statuses[request.data['status']]}
+        """
+        recipient_list = []
+        recipient_list.append('jurgeon018@gmail.com')
+        recipient_list.append(consultation.advocat.email)
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
+        return response 
     response = super().update(request, *args, **kwargs)
     return response
 
