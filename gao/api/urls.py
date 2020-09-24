@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     
+    path('sendgrid/', sendgrid),
     path('add_document/', add_document),
     path('googlemeet/', googlemeet),
     path("get_days_info/", get_days_info),

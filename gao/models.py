@@ -419,7 +419,7 @@ class Consultation(TimestampMixin):
         raise ValidationError("Година початку мусить бути кратною 30хв")
       if self.end.minute % 30 !=0:
         raise ValidationError("Година закінчення мусить бути кратною 30хв")
-
+    
     def save(self, *args, **kwargs):
       if self.start > self.end:
         raise ValidationError("Година початку більша за годину закінчення")
@@ -427,7 +427,7 @@ class Consultation(TimestampMixin):
         raise ValidationError("Година початку мусить бути кратною 30хв")
       if self.end.minute % 30 !=0:
         raise ValidationError("Година закінчення мусить бути кратною 30хв") 
-
+      
       consultations = Consultation.objects.filter(
         advocat=self.advocat,
         client=self.client,
@@ -437,6 +437,7 @@ class Consultation(TimestampMixin):
       if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
         raise Exception('ERROR!!!')
       super().save()
+      
 
     @classmethod
     def get_intersected(cls, consultations, start, end):
@@ -480,7 +481,6 @@ class Consultation(TimestampMixin):
       return price 
     
     def can_be_changed(self):
-      print(self.id)
       if datetime.today().date() + timedelta(days=3) > self.date:
         return False 
       return True

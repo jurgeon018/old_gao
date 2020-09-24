@@ -103,7 +103,7 @@ EMAIL_HOST = 'mail.galpravgroup.com.ua'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'office@galpravgroup.com.ua'
 EMAIL_HOST_PASSWORD = 'galprav69018'
-
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 LIQPAY_SANDBOX_PRIVATE_KEY = 'SDF'

@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from django.core.mail import send_mail 
+from django.conf import settings 
 
 from rest_framework import generics 
 from rest_framework.response import Response
@@ -14,6 +16,43 @@ import calendar
 import json 
 
 from datetime import date, datetime, time, timezone, timedelta
+
+
+
+def sendgrid(request):
+  import os
+  from sendgrid import SendGridAPIClient
+  from sendgrid.helpers.mail import Mail
+  html_content = '<strong>and easy to do anywhere, even with Python</strong><br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!<br>hello!!!!!!'
+  subject      = 'Sending with Twilio SendGrid is Fun'
+  to_emails    = ['jurgeon018@gmail.com', 'mendela.starway@gmail.com', 'kleikoks.py@gmail.com']
+  message      = Mail(
+      from_email='sendgrid@starwayua.com',
+      to_emails=to_emails,
+      subject=subject,
+      html_content=html_content,
+  )
+  API_KEY = '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'
+  sg = SendGridAPIClient(API_KEY)
+  response = sg.send(message)
+  return JsonResponse({
+    'ok':'ok',
+    'e':'e',
+  })
+
+
+
+
+
+
+
+
+def googlemeet(request):
+  hangoutLink = generate_hangouts_link(request)
+  return JsonResponse({
+    'ok':'ok',
+    "hangoutLink":hangoutLink,
+  })
 
 
 @api_view(['GET'])
@@ -74,14 +113,6 @@ def add_document(request):
     })
   return JsonResponse({
     'documents':documents,
-  })
-
-
-def googlemeet(request):
-  hangoutLink = generate_hangouts_link(request)
-  return JsonResponse({
-    'ok':'ok',
-    "hangoutLink":hangoutLink,
   })
 
 
@@ -159,7 +190,6 @@ class ConsultationListView(generics.ListCreateAPIView):
   def create(self, request, *args, **kwargs):
     response  = {"messages":[]}
     data      = request.data 
-    print("request.data: ", request.data)
     date      = datetime.strptime(data['date'], '%d.%m.%Y')
     start     = datetime.strptime(data['start'], '%H:%M').time()
     end       = datetime.strptime(data['end'], '%H:%M').time()
@@ -190,15 +220,16 @@ class ConsultationListView(generics.ListCreateAPIView):
           },
         ]
       })
-    if not advocat.timerange_is_free(date, start, end) or not client.timerange_is_free(date, start, end):
+    # if not advocat.timerange_is_free(date, start, end) or not client.timerange_is_free(date, start, end):
+    if not advocat.timerange_is_free(date, start, end):
       response['messages'].append({
         'text':'Ця година вже зайнята',
         'status':'bad',
       })
       return Response(response)
     response = super().create(request, *args, **kwargs)
-    documents = []
     consultation = Consultation.objects.get(id=response.data.get('id'))
+    documents = []
     for file in request.FILES:
       document = ConsultationDocument.objects.create(
         consultation=consultation,
@@ -211,11 +242,37 @@ class ConsultationListView(generics.ListCreateAPIView):
       document.save()
       documents.append(document.id)
     response.data['documents'] = documents
+    link = None
     if data.get('format') == 'GMEET':
       link = generate_hangouts_link(request)
       response.data['link'] = link
       consultation.link = link
       consultation.save()
+    # TODO: перенести сповіщення у функцію оплати
+    # TODO: записувати інфу про створену консультацію не в базу, а в сесію, і переносити в базу тільки після оплати 
+    if consultation.advocat != consultation.client:
+      recipient_list = [
+        consultation.advocat.email,
+        'jurgeon018@gmail.com',
+      ]
+      message = f'''
+      Створено консультацію №{consultation.id}.
+      Імя: {consultation.client.full_name}
+      Пошта: {consultation.client.email}
+      Дата: {consultation.date}
+      Час: {consultation.start} - {consultation.end}
+      Галузь: {consultation.faculty.name}
+      '''
+      if link:
+        message += f'Посилання: {link}'
+      send_mail(
+        subject=f'Створено консультацію №{consultation.id}',
+        message=message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=recipient_list,
+        fail_silently=False,
+        # fail_silently=True,
+      )
     return response
 
 
@@ -260,8 +317,9 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         })
         return Response(response)
       else:
-        super().update(request, *args, **kwargs)
-        response['messages'].append({
+        response = super().update(request, *args, **kwargs)
+        response.data['messages'] = []
+        response.data['messages'].append({
           'text':f"Статус консультації було змінено на {request.data['status']}",
           'status':'success',
         })
