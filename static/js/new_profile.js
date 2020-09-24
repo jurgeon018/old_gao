@@ -124,6 +124,7 @@ function create_consultation(wrapper, content) {
       });
         
     $(wrapper)[0].innerHTML = consultation_item;
+    $('.delete_this_consultation').on('click', user_delete);
 }
 
 function gen_consultation(navigation) {
@@ -132,7 +133,7 @@ function gen_consultation(navigation) {
     } else if (navigation == 'prev') {
         page--;
     }
-    fetch(`/api/consultations/?page_number=${page}&page_size=20`, {
+    fetch(`/api/consultations/?page_number=${page}&page_size=6`, {
         method: "GET",
       })
       .then((data) => {
@@ -140,7 +141,11 @@ function gen_consultation(navigation) {
       })
       .then((body) => {
           console.log('body: ', body);
-          create_consultation('.consultation__block', body.results);
+          if (body.results.length == 0) {
+            $('.consultation__block').text('консультацій ще немає');
+          } else {
+            create_consultation('.consultation__block', body.results);
+          }
       });
 }
 
