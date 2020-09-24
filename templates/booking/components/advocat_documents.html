@@ -22,16 +22,16 @@
           {% for document in user.get_documents %}
           <div class="doc-profile">
               <div class="doc-top">
-                  <div class="doc-img-wrap">
-                      <img src="/static/img/doc.svg" alt="">
-                      <div class="doc-name">
-                          <!-- Docum 1 -->
-                          {{document.file}}
-                      </div>
-                  </div>
-                  <div class="doc__title">
+                <div class="doc-img-wrap">
+                  <img src="/static/img/doc.svg" alt="">
+                  <div class="doc-name">
+                      <!-- Docum 1 -->
                       {{document.file}}
                   </div>
+                </div>
+                <div class="doc__title">
+                  {{document.file}}
+                </div>
               </div>
               <div class="doc-bot">
                   <div class="doc-btn">
