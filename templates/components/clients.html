@@ -10,25 +10,27 @@
         </div>
         <div class="client-block">
             {%for slider in sliders%}
-            {% for client in slider.clients.all%}
+            {% for client in slider.clients.all %}
             <div class="client_prof">
                 <div class="client_header__wrap">
                     <div class="client_img">
-                        <img data-src="/media/client-2.png" alt="1">
+                        <img data-src="{{client.image.url}}" alt="{{client.alt}}">
                     </div>
                     <div class="client_title__block">
                         <div class="client_title">
                             {{client.title}}
                         </div>
                         <a href="galpravgroup.com.ua" class="client_subtitle">
-                            galpravgroup.com.ua
+                            {{client.site}}
                          </a>
                     </div>
                 </div>
                 <div class="client_content">
+                    {{client.body}}
                     Компанія є найбільшим виробником цукру в Західній Україні, що входить до міжнародної групи компаній Pfeifer&Langen – провідного 
                     виробника цукру на теренах Євросоюзу.
                 </div>
+                {% if client.body2 %}
                 <div class="client_btn">
                     Більше
                 </div>
@@ -36,9 +38,11 @@
                     Закрити
                 </div>
                 <div class="client_hidden_content">
+                    {{client.bod2}}
                     Компанія спеціалізується на переробці цукрового буряка, виробництві цукру-піску, меляси та жому. 
                     Виробничі  потужності підприємства розміщені у Львівській та Тернопільській областях.
                 </div>
+                {% endif %}
             </div>
             {%endfor%}
             {%endfor%}

@@ -70,7 +70,7 @@ def payment(request):
         'currency': 'UAH',
         'version': '3',
         'sandbox': int(LiqpayConfig.get_solo().sandbox_mode), 
-        'server_url': f'/gao/liqpay_callback/', 
+        'server_url': f'/gao/liqpay_callback/',
         # 'server_url': f'{Site.objects.get_current()}pay_callback/', 
     }
     signature, data = get_liqpay_context(liqpay_params)
@@ -167,9 +167,15 @@ def read_document(request, id):
     from django.http import FileResponse
     # path = os.path.join(settings.STATICFILES_DIRS[0], 'pdf', 'oferta.pdf')
     path = document.file.path
-    if document.is_pdf():
-        print(path)
+    # if document.is_pdf:
+    if document.is_pdf:
         response = FileResponse(open(path, 'rb'), content_type='application/pdf')
+    elif document.is_jpg:
+        response = FileResponse(open(path, 'rb'), content_type='image/jpg')
+    elif document.is_jpeg:
+        response = FileResponse(open(path, 'rb'), content_type='image/jpeg')
+    elif document.is_png:
+        response = FileResponse(open(path, 'rb'), content_type='image/png')
     else:
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
         response['Content-Disposition'] = 'attachment; filename=download.docx'
@@ -272,28 +278,15 @@ def custom_login(request):
         return response
 
     user = authenticate(username=user.username, password=password)
-
-    # if user is not None:
-    #     if user.is_active:
-    #         login(request, user)
-    #         return JsonResponse('fine')
-    #     else:
-    #         return JsonResponse('inactive')
-    # else:
-    #     return JsonResponse('bad')
-
     login(request, user)
-
     message = 'Ви увійшли'
     print(message)
-    # if request.is_ajax():
-    if True:
-        response = JsonResponse({
-            'status':'OK',
-            'message':message,
-            'is_authenticated':request.user.is_authenticated,
-            'url':reverse('cabinet'),
-        })
+    response = JsonResponse({
+        'status':'OK',
+        'message':message,
+        'is_authenticated':request.user.is_authenticated,
+        'url':reverse('cabinet'),
+    })
     messages.success(request, message)
     return response
 

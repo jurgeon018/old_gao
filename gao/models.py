@@ -137,6 +137,9 @@ class User(AbstractUser):
       date=date,
       advocat=self,
     )
+    consultations = consultations.exclude(
+      status__in=[Consultation.DECLINED, Consultation.FINISHED],
+    )
     hours = []
     for consultation in consultations:
       hours.append({
@@ -215,8 +218,13 @@ class User(AbstractUser):
       consultations =  Consultation.objects.filter(client=self)
     return consultations
 
-  def get_client_consultations(self):
-    return Consultation.objects.filter(client=self)
+  def get_consulation_documents(self):
+    documents = ConsultationDocument.objects.filter(author=self)
+    return documents
+
+  def get_documents(self):
+    documents = Document.objects.filter(user=self)
+    return documents
 
   def __str__(self):
     return f"{self.first_name} {self.last_name} ({self.username}, {self.phone_number}, {self.email})"
@@ -444,6 +452,7 @@ class Consultation(TimestampMixin):
         # Вибрані години співпадають з годинами консультації
         Q(start=start, end=end)
       )
+      consultations = consultations.exclude(status__in=[Consultation.DECLINED, Consultation.FINISHED])
       return consultations
 
     @property
@@ -469,14 +478,14 @@ class Consultation(TimestampMixin):
       price     = rate * hours 
       price     = price + (minutes/60 * rate)
       return price 
-
-    def get_files_by_user(self):
-        consultations = Consultation.objects.filter(client=self.client, advocat=self.advocat)
-        return 
-
-    def get_documents(self):
-      documents = ConsultationDocument.objects.filter(consultation=self)
-      return documents
+    
+    def less_than_3_days(self):
+      '''
+      Якщо datetime.today() < self.date 
+      '''
+      if datetime.today() + timedelta(days=3) < self.date:
+        return True
+      return False 
 
     class Meta:
         verbose_name = 'Консультація'
@@ -502,8 +511,8 @@ class ConsultationDocument(TimestampMixin):
         return f'{self.consultation}'
 
     class Meta:
-        verbose_name = "Документ до консультації"    
-        verbose_name_plural = "Документи до консультацій"    
+        verbose_name = "Документ до консультації"
+        verbose_name_plural = "Документи до консультацій"
 
 
 class ConsultationPayment(TimestampMixin):
@@ -551,6 +560,8 @@ class Team(models.Model):
 class Client(models.Model):
     title = models.CharField(verbose_name="Назва", max_length=255, blank=True, null=True)
     body  = models.TextField(verbose_name="Опис", blank=True, null=True)
+    body2 = models.TextField(verbose_name="Додатковий Опис", blank=True, null=True)
+    link  = models.CharField(verbose_name="Посилання на сайт", blank=True, null=True, max_length=255)
     image = models.ImageField(verbose_name="Зображення", blank=True, null=True)
     alt   = models.CharField(verbose_name="alt", max_length=255, blank=True, null=True)
 
@@ -575,29 +586,42 @@ class Slider(models.Model):
 
 
 class Contact(models.Model):
-    name  = models.TextField(verbose_name='Імя', blank=True, null=True)
-    email = models.TextField(verbose_name='Емайл', blank=True, null=True)
-    phone = models.TextField(verbose_name='Телефон', blank=True, null=True)
+  name  = models.TextField(verbose_name='Імя', blank=True, null=True)
+  email = models.TextField(verbose_name='Емайл', blank=True, null=True)
+  phone = models.TextField(verbose_name='Телефон', blank=True, null=True)
 
-    def __str__(self):
-        return f"{self.name}, {self.email}, {self.phone}"
+  def __str__(self):
+      return f"{self.name}, {self.email}, {self.phone}"
 
-    class Meta:
-        verbose_name='Контакт'
-        verbose_name_plural='Контакти'
+  class Meta:
+      verbose_name='Контакт'
+      verbose_name_plural='Контакти'
 
 
 class Document(models.Model):
-    user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to="gao.User", blank=True, null=True)
-    file = models.FileField(verbose_name='Файл')
+  user = models.ForeignKey(verbose_name='Користувач', related_name='documents', on_delete=models.SET_NULL, to="gao.User", blank=True, null=True)
+  file = models.FileField(verbose_name='Файл')
+  
+  def __str__(self):
+      return f'{self.user}: {self.file}'
+
+  @property
+  def is_pdf(self):
+    return self.file.path.split('.')[-1] == 'pdf'
     
-    def __str__(self):
-        return f'{self.user}: {self.file}'
-    
-    def document_is_pdf(self):
-        return self.file.path.split('.')[-1] == '.pdf'
-    
-    class Meta:
-        verbose_name = 'Документ'
-        verbose_name_plural = 'Документ'
+  @property
+  def is_jpg(self):
+    return self.file.path.split('.')[-1] == 'jpg'
+
+  @property
+  def is_jpeg(self):
+    return self.file.path.split('.')[-1] == 'jpeg'
+
+  @property
+  def is_png(self):
+    return self.file.path.split('.')[-1] == 'png'
+
+  class Meta:
+    verbose_name = 'Документ користувача'
+    verbose_name_plural = 'Документи користувачів'
 

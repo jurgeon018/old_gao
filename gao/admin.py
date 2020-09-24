@@ -31,6 +31,9 @@ class ConsultationDocumentInline(admin.StackedInline):
     extra = 0
     model = ConsultationDocument
     classes = ['collapse']
+    autocomplete_fields = [
+        'consultation',
+    ]
 
 
 @admin.register(Consultation)
@@ -159,7 +162,7 @@ class SliderAdmin(admin.ModelAdmin):
         'slider',
     ]
     inlines = [
-        SliderInline
+        SliderInline,
     ]
 
 
@@ -185,6 +188,8 @@ class UserWeekDayInline(admin.TabularInline):
     autocomplete_fields = [
         'week_day',
     ]
+
+
 class UserWorkingDayInline(admin.TabularInline):
     model = UserWorkingDay
     exclude = []
@@ -216,6 +221,8 @@ class CustomUserAdmin(UserAdmin):
     inlines = [
         UserWeekDayInline, 
         UserWorkingDayInline,
+        DocumentInline,
+        ConsultationDocumentInline,
     ]
     fieldsets = (
         (_('Personal info'), {
