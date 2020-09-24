@@ -58,11 +58,7 @@ def set_advocate_faculties(request):
 
 @api_view(['POST'])
 def add_document(request):
-  # query = request.POST or request.GET
   query = request.data
-  # print(request.POST)
-  # print(request.GET)
-  # print(query)
   user = User.objects.get(id=query['user'])
   documents = []
   for file in request.FILES.values():
@@ -252,6 +248,13 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       super().update(request, *args, **kwargs)
       response['messages'].append({
         'text':'Консультацію було успішно оцінено',
+        'status':'success',
+      })
+      return Response(response)
+    if 'status' in request.data:
+      super().update(request, *args, **kwargs)
+      response['messages'].append({
+        'text':f"Статус консультації було змінено на {request.data['status']}",
         'status':'success',
       })
       return Response(response)

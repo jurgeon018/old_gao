@@ -26,7 +26,7 @@
                       <img src="/static/img/doc.svg" alt="">
                       <div class="doc-name">
                           <!-- Docum 1 -->
-                          {{document}}
+                          {{document.file}}
                       </div>
                   </div>
                   <div class="doc__title">
@@ -39,7 +39,7 @@
                           Завантажити
                       </a>
                   </div>
-                  {% if document.is_pdf %}
+                  {% if document.is_pdf or document.is_jpg or document.is_jpeg or document.is_png %}
                   <div class="doc-btn">
                       <a href="{% url 'read_document' document.id %}">
                           Переглянути
