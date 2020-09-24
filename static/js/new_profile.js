@@ -18,11 +18,17 @@ if ($('.advocate_calender_container').length == 1) {
     });
 
     $('.status_select').on('select2:select', function (e) {
-        var data = e.params.data.id;
+        var data = {
+            status: e.params.data.id,
+        };
 
         fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
         method: 'PATCH',
         body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
         })
         .then(data => {
             return data.json();
@@ -148,6 +154,7 @@ function generate_interval(start, end) {
             current_transition: current_task_width,
             left: item_left,
             info: consultation.hours[i],
+            quantity: width_item,
         }
         if (check_active == true) {
             $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
@@ -165,11 +172,10 @@ function generate_interval(start, end) {
         $(advocate_calender_task).css('width', `${(content.current_width * content.current_transition) - 2}%`);
         advocate_calender_task.classList.add('advocate_calender_task');
         advocate_calender_task.setAttribute(`data-id`, content.info.consultation_id);
-    
 
         advocate_calender_item_prof.appendChild(advocate_calender_task);
     
-        for (let i = 0; i < 11; i++) {
+        for (let i = 0; i < content.quantity; i++) {
             let adv_cal_item = document.createElement('div');
             adv_cal_item.classList.add('adv_cal_item');
         
@@ -184,6 +190,7 @@ function generate_interval(start, end) {
         $(advocate_calender_task).on('click', function() {
             $('.advocate_calender_task').removeClass('advocate_calender_task_active');
             $(this).addClass('advocate_calender_task_active');
+            $('.advocate_calender_info').addClass('advocate_calender_info_active');
 
 
             let wrap = $(this).parents('.advocate_calender_item_prof');
@@ -206,7 +213,7 @@ function generate_interval(start, end) {
                     // зміна айді консультації
                     $('.advocate_calender_info').attr('data-id', fetch_id);
                     // зміна імені
-                    $(table_task).find('.advocate_info_name').text(body.username);
+                    $(table_task).find('.advocate_info_name').text(body.client_name);
                         
                     // зміна типу юзера
                     // $(table_task).find('.advocate_info_subname').text(body.type_user);
@@ -275,8 +282,6 @@ function generate_interval(start, end) {
    
    
    function create_all_calender(check_calender) {
-    
-   
 
     let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
     let id_advocat = $('.advocat_info_id').attr('data-advocat');
@@ -486,10 +491,12 @@ function generate_interval(start, end) {
                 $(value).css('top', '-1000px');
                 $(value).css('max-height', '0px');
             }, 200);
-            setTimeout(() => {
-                create_all_calender(true);
-            }, 400);
+           
         });
+        setTimeout(() => {
+            console.log(1);
+            create_all_calender(true);
+        }, 400);
 
     });
 
@@ -931,7 +938,7 @@ $('.docs_title_btn').on('click', function() {
 });
 
 if ($('.advocate_user_input__block').length >= 1) {
-    var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        var datepicker = $('#datapicker_user').datepicker().data('datepicker');
         datepicker.destroy();
         var weekenddDays = [0, 6];
         var reserve = ["20-August-2020", "21-August-2020"];
@@ -1054,80 +1061,11 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             $('.advocate_select_date').find('.step_select').addClass('step_select_active');
             $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
     
-            let test_json = [
-                {
-                    hours: 540,
-                    reserve: false,
-                },
-                {
-                    hours: 570,
-                    reserve: true,
-                },
-                {
-                    hours: 600,
-                    reserve: false,
-                },
-                {
-                    hours: 630,
-                    reserve: false,
-                },
-                {
-                    hours: 660,
-                    reserve: false,
-                },
-                {
-                    hours: 690,
-                    reserve: false,
-                },
-                {
-                    hours: 720,
-                    reserve: false,
-                },
-                {
-                    hours: 750,
-                    reserve: false,
-                },
-            ]
 
-            let client;
-            let advocate;
-            let current_date;
+
             
-            if ($('.reserve_hidden_content').length >= 1) {
-                current_date = $('.datapicker_user').val();
-                client = $('.advocat_info_id').attr('data-advocat');
-                advocate = $('.advocat_info_id').attr('data-advocat');
-            } else {
-                current_date = replasor_text();
-                client = $('.client_info_id').attr('data-client');
-                advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
-            }
-            fetch(`/api/get_hours_info/?date=${current_date}&advocat=${advocate}&client=${client}`, {
-                method: "GET",
-              })
-              .then((data) => {
-                return data.json();
-              })
-              .then((body) => {
-                  console.log('body: ', body);
-                  $('.step_date__wrap').children().remove();
-
-                  $.each(body.working_hours, function(index, value) {
-                      let delete_space = value.hour.replace(/\s+/g, '');
-                      let words = delete_space.split(':');
-                      let date = new Date(0, 0, 0, words[0], words[1], 0);
-                      let current_clock_json = {
-                         hours: date.getHours() * 60 + date.getMinutes(),
-                         is_free: value.is_free
-                      }
-                    //   if (current_clock_json.hours <= 360) {
-                    //     //   в цей час потрібно спати, а не працювати
-                    //   } else {
-                        $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
-                    //   }
-                        
-                  });
-              });    
+            create_clockwork_items();
+            
 
          
             
@@ -1180,7 +1118,47 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
         
      });
 }
+function create_clockwork_items() {
+    let client;
+    let advocate;
+    let current_date;
+    
+    if ($('.reserve_hidden_content').length >= 1) {
+        current_date = $('.datapicker_user').val();
+        client = $('.advocat_info_id').attr('data-advocat');
+        advocate = $('.advocat_info_id').attr('data-advocat');
+    } else {
+        current_date = replasor_text();
+        client = $('.client_info_id').attr('data-client');
+        advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+    }
+    fetch(`/api/get_hours_info/?date=${current_date}&advocat=${advocate}&client=${client}`, {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          console.log('body: ', body);
+          $('.step_date__wrap').children().remove();
 
+          $.each(body.working_hours, function(index, value) {
+              let delete_space = value.hour.replace(/\s+/g, '');
+              let words = delete_space.split(':');
+              let date = new Date(0, 0, 0, words[0], words[1], 0);
+              let current_clock_json = {
+                 hours: date.getHours() * 60 + date.getMinutes(),
+                 is_free: value.is_free
+              }
+            //   if (current_clock_json.hours <= 360) {
+            //     //   в цей час потрібно спати, а не працювати
+            //   } else {
+                $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
+            //   }
+                
+          });
+      });   
+    }
  
 function replasor_text() {
     let client_date = $('.advocate_user_date').text();
@@ -1481,9 +1459,10 @@ function fetch_order(content) {
         return data.json();
     })
     .then(data => {
-       
+        alert(data.messages[0].text);
+
+
         if ($('.reserve_hidden_content').length >= 1) {
-            console.log(12312332);
             create_all_calender(true);
         }
     })
@@ -1627,7 +1606,7 @@ $('.save_reserve_date_btn').on('click', function() {
             }
               append_form_data(object);
               fetch_order(object);
-              
+              create_clockwork_items();
           })
 
         function append_form_data(all_order_vars) {
