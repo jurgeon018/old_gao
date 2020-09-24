@@ -353,76 +353,76 @@ class Faculty(TimestampMixin):
 
 
 class Consultation(TimestampMixin):
-    UNORDERED   = 'UNORDERED'
-    DECLINED    = 'DECLINED'
-    IN_PROGRESS = 'IN_PROGRESS'
-    FINISHED    = 'FINISHED'
-    STATUSES    = (
-      (UNORDERED, "Незавершено"),
-      (DECLINED, "Відмовлено"),
-      (IN_PROGRESS, "В процессі"),
-      (FINISHED, "Завершено"),
-    )
-    SKYPE  = 'SKYPE'
-    VIBER  = 'VIBER'
-    GMEET  = 'GMEET'
-    ZOOM   = 'ZOOM'
-    MOBILE = 'MOBILE'
-    OFFICE = 'OFFICE'
-    FORMATS = [
-      (SKYPE,  "SKYPE"),
-      (VIBER,  "VIBER"),
-      (GMEET,  "GMEET"),
-      (ZOOM,   "ZOOM"),
-      (MOBILE, "MOBILE"),
-      (OFFICE, 'OFFICE'),
+  UNORDERED   = 'UNORDERED'
+  DECLINED    = 'DECLINED'
+  IN_PROGRESS = 'IN_PROGRESS'
+  FINISHED    = 'FINISHED'
+  STATUSES    = (
+    (UNORDERED, "Незавершено"),
+    (DECLINED, "Відмовлено"),
+    (IN_PROGRESS, "В процессі"),
+    (FINISHED, "Завершено"),
+  )
+  SKYPE  = 'SKYPE'
+  VIBER  = 'VIBER'
+  GMEET  = 'GMEET'
+  ZOOM   = 'ZOOM'
+  MOBILE = 'MOBILE'
+  OFFICE = 'OFFICE'
+  FORMATS = [
+    (SKYPE,  "SKYPE"),
+    (VIBER,  "VIBER"),
+    (GMEET,  "GMEET"),
+    (ZOOM,   "ZOOM"),
+    (MOBILE, "MOBILE"),
+    (OFFICE, 'OFFICE'),
 
-    ]
-    link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
-    format    = models.CharField(
-      verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
-    )
-    status    = models.CharField(
-      verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=UNORDERED, max_length=255,
-    )
-    date      = models.DateField(
-      verbose_name="Дата",
-    )
-    faculty   = models.ForeignKey(
-      verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
-      on_delete=models.SET_NULL, related_name="consulations",
-    )
-    start = models.TimeField(
-      verbose_name="Час початку",
-    )
-    end = models.TimeField(
-      verbose_name="Час завершення",
-    )
-    comment   = models.TextField(
-      verbose_name="Коментар", blank=True, null=True,
-    )
-    mark      = models.SmallIntegerField(
-      verbose_name="Оцінка", blank=True, null=True,
-    )
-    advocat   = models.ForeignKey(
-        verbose_name="Адвокат", to="gao.User", 
-        related_name="advocat_consultations",
-        on_delete=models.CASCADE, blank=False, null=False,
-    )
-    client    = models.ForeignKey(
-        verbose_name="Клієнт", to="gao.User",
-        related_name="client_consultations",
-        on_delete=models.SET_NULL, blank=True, null=True,
-    )
-    
-    def clean(self):
-      if self.start > self.end:
-        raise ValidationError("Година початку мусить бути меншою за годину закінчення")
-      if self.start.minute % 30 !=0:
-        raise ValidationError("Година початку мусить бути кратною 30хв")
-      if self.end.minute % 30 !=0:
-        raise ValidationError("Година закінчення мусить бути кратною 30хв")
-    
+  ]
+  link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
+  format    = models.CharField(
+    verbose_name="Формат", null=False, blank=False, choices=FORMATS, default=SKYPE, max_length=255,
+  )
+  status    = models.CharField(
+    verbose_name="Статус", null=False, blank=False, choices=STATUSES, default=UNORDERED, max_length=255,
+  )
+  date      = models.DateField(
+    verbose_name="Дата",
+  )
+  faculty   = models.ForeignKey(
+    verbose_name="Галузь права", to="gao.Faculty", blank=True, null=True, 
+    on_delete=models.SET_NULL, related_name="consulations",
+  )
+  start = models.TimeField(
+    verbose_name="Час початку",
+  )
+  end = models.TimeField(
+    verbose_name="Час завершення",
+  )
+  comment   = models.TextField(
+    verbose_name="Коментар", blank=True, null=True,
+  )
+  mark      = models.SmallIntegerField(
+    verbose_name="Оцінка", blank=True, null=True,
+  )
+  advocat   = models.ForeignKey(
+      verbose_name="Адвокат", to="gao.User", 
+      related_name="advocat_consultations",
+      on_delete=models.CASCADE, blank=False, null=False,
+  )
+  client    = models.ForeignKey(
+      verbose_name="Клієнт", to="gao.User",
+      related_name="client_consultations",
+      on_delete=models.SET_NULL, blank=True, null=True,
+  )
+  
+  def clean(self):
+    if self.start > self.end:
+      raise ValidationError("Година початку мусить бути меншою за годину закінчення")
+    if self.start.minute % 30 !=0:
+      raise ValidationError("Година початку мусить бути кратною 30хв")
+    if self.end.minute % 30 !=0:
+      raise ValidationError("Година закінчення мусить бути кратною 30хв")
+  def save(self, *args, **kwargs):
     consultations = Consultation.objects.filter(
       advocat=self.advocat,
       client=self.client,
@@ -432,7 +432,7 @@ class Consultation(TimestampMixin):
     if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
       raise Exception('ERROR!!!')
     super().save()
-    
+  
 
   @classmethod
   def get_intersected(cls, consultations, start, end):

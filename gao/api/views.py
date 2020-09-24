@@ -282,10 +282,11 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
 
   def delete(self, request, *args, **kwargs):
     consultation = Consultation.objects.get(id=kwargs['pk'])
-    super().delete(request, *args, **kwargs)
+    
+    response = super().delete(request, *args, **kwargs)
     if consultation.advocat != consultation.client:
       recipient_list = []
-      recipient_list.append(jurgeon018@gmail.com)
+      recipient_list.append("jurgeon018@gmail.com")
       if consultation.client:
         recipient_list.append(consultation.client.email)
       message = f'''
@@ -296,8 +297,7 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       Час: {consultation.start} - {consultation.end}
       Галузь: {consultation.faculty.name}
       '''
-      if link:
-        message += f'Посилання: {link}'
+      
       send_mail(
         subject=f'Видалено консультацію №{consultation.id}',
         message=message,
@@ -306,6 +306,7 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         fail_silently=False,
         # fail_silently=True,
       )
+    return response
 
   def update(self, request, *args, **kwargs):
     response  = {"messages":[]}
