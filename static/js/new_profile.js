@@ -1203,11 +1203,25 @@ $('.data_step_select_btn').on('click', function() {
 // додавання файлів адвокатом
 $('.advocate_doc_add_btn').on('change', function() {
     let file_create = $('#advocate_doc_add_btn')[0];
+    let Formdata = new FormData();
     let files = file_create.files;
-    
-    $.each(files, function(index, value ){
-        $('.doc-block')[0].appendChild(create_advocate_files(value));
+    Formdata.append(`user`, $('.advocat_info_id').attr('data-advocat'));
+
+    $.each(files, function(i, file){
+        Formdata.append(`file[${i}]`, file);
+        $('.doc-block')[0].appendChild(create_advocate_files(file));
     });
+
+    fetch('/api/add_document/', {
+        method: 'POST',
+        body: Formdata,
+    })
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+     
+    })
 });
 
 
@@ -1431,8 +1445,8 @@ function create_obgect_order() {
         practise: $('.pract_step_select').find('.step_active_content').attr('data-id'),
         advocate: $('.advoc_step_select').find('.step_active_content').attr('data-id'),
         date: $('.advocate_user_date').attr('data-date'),
-        clock_first: $('.clock_manager_first').text().replace('.', ':'),
-        clock_last: $('.clock_manager_second').text().replace('.', ':'),
+        clock_first: $('.clock_manager_first').attr('data-result').replace('.', ':'),
+        clock_last: $('.clock_manager_second').attr('data-result').replace('.', ':'),
         url: $('.user_order_of_advocate').attr('action'),
         csrftoken: $('.hidden_wrap_inp').find('input').val(),
         file_array: $('.new_advocate_download_prof').find('input')
@@ -1474,8 +1488,6 @@ function fetch_order(content) {
         }
     })
 }
-
-
 function check_user_valid() {
     let all_check_items = $('.step_select');
     let all_count = $('.step_select').length;
@@ -1497,7 +1509,6 @@ function check_user_valid() {
         }
     });
 }
-
 
 $('.step_date_prof').on('click', add_clockwork);
 
@@ -1669,8 +1680,10 @@ $('.step_access_btn').on('click', function() {
             
             let result_clock = find_order_clock();
             
-            $('.clock_manager_first').text(result_clock.first);
-            $('.clock_manager_second').text(result_clock.second);
+            $('.clock_manager_first').text(`з ${result_clock.first}`);
+            $('.clock_manager_first').attr(`data-result`, result_clock.first);
+            $('.clock_manager_second').text(`по ${result_clock.second}`);
+            $('.clock_manager_second').attr(`data-result`, result_clock.second);
             $('.all_price_consultation').text(sum);
             // counter_num('.all_price_consultation', 1000, sum);
             check_user_valid();
