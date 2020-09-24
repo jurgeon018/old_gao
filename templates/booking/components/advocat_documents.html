@@ -34,17 +34,13 @@
                 </div>
               </div>
               <div class="doc-bot">
-                  <div class="doc-btn">
-                      <a href="{{document.file.url}}" download>
+                <a href="{{document.file.url}}" download class="doc-btn">
                           Завантажити
-                      </a>
-                  </div>
+                </a>
                   {% if document.is_pdf or document.is_jpg or document.is_jpeg or document.is_png %}
-                  <div class="doc-btn">
-                      <a href="{% url 'read_document' document.id %}">
+                <a target="_blank" href="{% url 'read_document' document.id %}" class="doc-btn">
                           Переглянути
-                      </a>
-                  </div>
+                </a>
                   {% endif %}
               </div>
           </div>

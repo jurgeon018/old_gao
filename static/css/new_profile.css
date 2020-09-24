@@ -1406,6 +1406,19 @@
 
   .step_date__block {
     width: 160px; } }
+@media (max-width: 484px) {
+  .doc-profile {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #EBECEC !important;
+    padding: 0; }
+
+  .doc-top {
+    flex-direction: column;
+    min-height: unset; }
+
+  .doc-block {
+    flex-direction: column; } }
 @media (max-width: 464px) {
   .reserve_hidden_content .reserve_clock__block {
     flex-direction: column; }
