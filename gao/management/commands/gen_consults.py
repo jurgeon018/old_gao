@@ -32,8 +32,8 @@ class Command(BaseCommand):
       advocat       = random.choice(advocats)
       faculty       = random.choice(faculties)
       client        = random.choice(clients)
-      format        = random.choice(formats)[0]
-      status        = random.choice(statuses)[0]
+      # format        = random.choice(formats)[0]
+      # status        = random.choice(statuses)[0]
 
       while True:
         # print('iter')
@@ -70,8 +70,8 @@ class Command(BaseCommand):
           start     = start,
           end       = end,
         )
-        consult.format  = format
-        consult.status  = status
+        # consult.format  = format
+        # consult.status  = status
         consult.faculty = faculty
         consult.save()
       else:
