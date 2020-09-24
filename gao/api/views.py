@@ -230,7 +230,7 @@ class ConsultationListView(generics.ListCreateAPIView):
     response = super().create(request, *args, **kwargs)
     consultation = Consultation.objects.get(id=response.data.get('id'))
     documents = []
-    for file in request.FILES:
+    for file in request.FILES.values():
       document = ConsultationDocument.objects.create(
         consultation=consultation,
         file=file,

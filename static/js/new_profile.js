@@ -1,9 +1,19 @@
 
+    let page = 0;
 
 
 
-let page = 0;
-gen_consultation('next');
+
+
+
+
+$('.consultation_link').on('click', function() {
+    page = 0;
+    gen_consultation('next');
+})
+
+
+
 function create_consultation(wrapper, content) {
     let consultation_item = "";
     $.each(content, function(index, value) {
@@ -15,14 +25,18 @@ function create_consultation(wrapper, content) {
         }
 
 
-        let doc__block;
+        let doc__block = ``;
 
         if (value.documents.length >= 1) {
-            doc__block = `
-            <a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
-                {{ document.file }}
-            </a>
-            ` 
+            $.each(value.documents, function(index, doc) {
+                console.log('doc: ', doc);
+                doc__block += `
+                <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
+                    document_${doc.id}
+                </a>
+                ` 
+            });
+            
         } else {
             doc__block = `
             <div class="none_files__block standart_title standart_title_4 color_black">
@@ -133,7 +147,7 @@ function gen_consultation(navigation) {
     } else if (navigation == 'prev') {
         page--;
     }
-    fetch(`/api/consultations/?page_number=${page}&page_size=6`, {
+    fetch(`/api/consultations/?page_number=${page}&page_size=5`, {
         method: "GET",
       })
       .then((data) => {
