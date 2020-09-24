@@ -32,6 +32,7 @@ class ConsultationPaymentSerializer(serializers.ModelSerializer):
 
 
 class ConsultationListSerializer(serializers.ModelSerializer):
+    
     date        = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y',])
     start       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
     end         = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
@@ -42,6 +43,8 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     price       = serializers.SerializerMethodField()
     full_time   = serializers.SerializerMethodField()
     client_name = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
+    faculty_name = serializers.SerializerMethodField()
 
     def get_price(self, consultation):
         return consultation.price 
@@ -51,6 +54,13 @@ class ConsultationListSerializer(serializers.ModelSerializer):
 
     def get_client_name(self, consultation):
         return consultation.client.full_name 
+
+    def get_faculty_name(self, consultation):
+        return consultation.faculty.name 
+
+    def get_image(self, consultation):
+        if consultation.client and consultation.client.image:
+            return consultation.client.image.url 
 
     class Meta:
         model = Consultation 
@@ -68,9 +78,22 @@ class ConsultationDetailSerializer(serializers.ModelSerializer):
     price     = serializers.SerializerMethodField()
     # advocat   = UserDetailSerializer()
     # client    = UserDetailSerializer()
+    client_name = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
+    faculty_name = serializers.SerializerMethodField()
+
+    def get_client_name(self, consultation):
+        return consultation.client.full_name 
 
     def get_price(self, consultation):
         return consultation.price 
+
+    def get_image(self, consultation):
+        if consultation.client and consultation.client.image:
+            return consultation.client.image.url 
+
+    def get_faculty_name(self, consultation):
+        return consultation.faculty.name 
 
     class Meta:
         model = Consultation 
