@@ -26,11 +26,18 @@ from .resources import *
 from .models import *
 
 
-
 class ConsultationDocumentInline(admin.StackedInline):
     extra = 0
     model = ConsultationDocument
     classes = ['collapse']
+    autocomplete_fields = [
+        'consultation',
+    ]
+
+class ConsultationPaymentInline(admin.StackedInline):
+    extra = 0
+    model = ConsultationPayment
+    # classes = ['collapse']
     autocomplete_fields = [
         'consultation',
     ]
@@ -65,6 +72,7 @@ class ConsultationAdmin(ImportExportModelAdmin):
     resource_class = ConsultationResource
     inlines = [
         ConsultationDocumentInline,
+        ConsultationPaymentInline,
     ]
     
 

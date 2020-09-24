@@ -423,80 +423,72 @@ class Consultation(TimestampMixin):
       if self.end.minute % 30 !=0:
         raise ValidationError("Година закінчення мусить бути кратною 30хв")
     
-    def save(self, *args, **kwargs):
-      if self.start > self.end:
-        raise ValidationError("Година початку більша за годину закінчення")
-      if self.start.minute % 30 !=0:
-        raise ValidationError("Година початку мусить бути кратною 30хв")
-      if self.end.minute % 30 !=0:
-        raise ValidationError("Година закінчення мусить бути кратною 30хв") 
-      
-      consultations = Consultation.objects.filter(
-        advocat=self.advocat,
-        client=self.client,
-        date=self.date,
-      )
-      consultations = Consultation.get_intersected(consultations, self.start, self.end)
-      if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
-        raise Exception('ERROR!!!')
-      super().save()
-      
-
-    @classmethod
-    def get_intersected(cls, consultations, start, end):
-      consultations = consultations.filter(
-        # Години консультації між вибраними годинами
-        Q(start__lte=start, end__gt=end)|
-        # Початок консультації між вибраними годинами
-        Q(start__gt=start, start__lt=end)|
-        # Закінчення консультації між вибраними годинами
-        Q(end__gt=start, end__lt=end)|
-        # Вибрані години між годинами консультації
-        Q(start__lt=start, start__gt=end)|
-        # Вибрані години співпадають з годинами консультації
-        Q(start=start, end=end)
-      )
-      consultations = consultations.exclude(status__in=[Consultation.DECLINED, Consultation.FINISHED])
-      return consultations
-
-    @property
-    def full_time(self):
-      start   = time.strftime(self.start, "%H:%M:%S")
-      end     = time.strftime(self.end, "%H:%M:%S")
-      tdelta  = datetime.strptime(end, '%H:%M:%S') - datetime.strptime(start, '%H:%M:%S')
-      days    = tdelta.days 
-      seconds = tdelta.seconds 
-      minutes = (seconds//60)%60
-      hours   = seconds // 3600
-      return {
-        "minutes":minutes,
-        "hours":hours,
-      }
-
-    @property
-    def price(self):
-      full_time = self.full_time
-      minutes   = full_time['minutes']
-      hours     = full_time['hours']
-      rate      = self.advocat.rate
-      price     = rate * hours 
-      price     = price + (minutes/60 * rate)
-      return price 
+    consultations = Consultation.objects.filter(
+      advocat=self.advocat,
+      client=self.client,
+      date=self.date,
+    )
+    consultations = Consultation.get_intersected(consultations, self.start, self.end)
+    if consultations.exists() and consultations.count() == 1 and consultations.first() != self:
+      raise Exception('ERROR!!!')
+    super().save()
     
-    def can_be_changed(self):
-      if datetime.today().date() + timedelta(days=3) > self.date:
-        return False 
-      return True
 
-    class Meta:
-        verbose_name = 'Консультація'
-        verbose_name_plural = 'Консультації'
+  @classmethod
+  def get_intersected(cls, consultations, start, end):
+    consultations = consultations.filter(
+      # Години консультації між вибраними годинами
+      Q(start__lte=start, end__gt=end)|
+      # Початок консультації між вибраними годинами
+      Q(start__gt=start, start__lt=end)|
+      # Закінчення консультації між вибраними годинами
+      Q(end__gt=start, end__lt=end)|
+      # Вибрані години між годинами консультації
+      Q(start__lt=start, start__gt=end)|
+      # Вибрані години співпадають з годинами консультації
+      Q(start=start, end=end)
+    )
+    consultations = consultations.exclude(status__in=[Consultation.DECLINED, Consultation.FINISHED])
+    return consultations
 
-    def __str__(self):
-        res = f'{self.date}, {self.start}-{self.end}, {self.advocat.username}'
-        if self.client:
-          res += f' -> {self.client.username}'
-        return res 
+  @property
+  def full_time(self):
+    start   = time.strftime(self.start, "%H:%M:%S")
+    end     = time.strftime(self.end, "%H:%M:%S")
+    tdelta  = datetime.strptime(end, '%H:%M:%S') - datetime.strptime(start, '%H:%M:%S')
+    days    = tdelta.days 
+    seconds = tdelta.seconds 
+    minutes = (seconds//60)%60
+    hours   = seconds // 3600
+    return {
+      "minutes":minutes,
+      "hours":hours,
+    }
+
+  @property
+  def price(self):
+    full_time = self.full_time
+    minutes   = full_time['minutes']
+    hours     = full_time['hours']
+    rate      = self.advocat.rate
+    price     = rate * hours 
+    price     = price + (minutes/60 * rate)
+    return price 
+  
+  def can_be_changed(self):
+    if datetime.today().date() + timedelta(days=3) > self.date:
+      return False 
+    return True
+
+  class Meta:
+      verbose_name = 'Консультація'
+      verbose_name_plural = 'Консультації'
+
+  def __str__(self):
+      res = f'{self.date}, {self.start}-{self.end}, {self.advocat.username}'
+      if self.client:
+        res += f' -> {self.client.username}'
+      return res 
 
 
 class ConsultationDocument(TimestampMixin):
