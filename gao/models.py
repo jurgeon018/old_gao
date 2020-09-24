@@ -433,7 +433,6 @@ class Consultation(TimestampMixin):
       raise Exception('ERROR!!!')
     super().save()
   
-
   @classmethod
   def get_intersected(cls, consultations, start, end):
     consultations = consultations.filter(
