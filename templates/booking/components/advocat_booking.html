@@ -1,4 +1,8 @@
 <div id="profile_3" class="advocate_calender_container main_doc_content main_doc_content_active">
+
+
+
+    <!-- Оранжевий квадрат -->
     <div class="advocate_calender_info" data-id="введи сюди айді консультації">
         <div class="advocate_info_name advocate_name main_title main_title_4 color_gold">
             Боровець Микола
@@ -27,13 +31,21 @@
         </div>
         <div class="advocate_calender_select">
             <select style="width: 100%;" class="status_select" name="status">
-                <option class="advocate_subname standart_title standart_title_4 color_black" value="1">Завершено</option>
-                <option class="advocate_subname standart_title standart_title_4 color_black" selected='selected' value="2">В очікуванні</option>
-                <option class="advocate_subname standart_title standart_title_4 color_black" value="3">Переглянуто</option>
+                <option class="advocate_subname standart_title standart_title_4 color_black"  value="UNORDERED">
+                    Незавершено
+                </option>
+                <option class="advocate_subname standart_title standart_title_4 color_black" selected='selected' value="DECLINED">
+                    Відмовлено
+                </option>
+                <option class="advocate_subname standart_title standart_title_4 color_black" value="IN_PROGRESS">
+                    В процессі
+                </option>
+                <option class="advocate_subname standart_title standart_title_4 color_black" value="FINISHED">
+                    Завершено
+                </option>
             </select>
         </div>
         <div class="consultation_section consultation_center">
-            
             <div class="advocate_user_item__block">
                 <div class="advocate_user_img">
                     <img src="/static/img/profile/2.svg" alt="">
@@ -88,6 +100,11 @@
             </div>
         </div>
     </div>
+    <!-- ! Оранжевий квадрат -->
+
+
+
+
     <div class="advocate_calender__block">
         <div class="advocate_calender_navigate">
             <div class="advocate_calender_arrow advocate_calender_arrow_1">
@@ -113,14 +130,14 @@
         </div>
         <div class="advocate_slick_date__block">	
             {% for date in dates %}
-            <div data-day_id='1' data-date='{{date|date:"d.m.Y"}}' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
+            <div data-day_id='{{forloop.counter}}' data-date='{{date|date:"d.m.Y"}}' class="advocate_slick_date_prof standart_title standart_title_4 color_black {% if date == today %} advocate_slick_date_prof_active {% endif %}">
                 {{date|date:"d.m.Y"}}
                 <!-- {{date}} -->
             </div>
             {% endfor %}
         </div>
         <div class="scroll_calender__wrapper">
-                <!-- сюда треба вставити змінну з вибраним інтервалом TODO -->
+                <!-- TODO сюда треба вставити змінну з вибраним інтервалом -->
             <div data-interval='30' class="all_calender__wrapper">
                 <div class="advocate_calender_time__block">
                     <!-- {% for hour in hours_list %}

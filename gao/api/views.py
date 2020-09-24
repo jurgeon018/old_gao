@@ -231,6 +231,7 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
     end       = data.get('end')
     advocat   = data.get('advocat')
     client    = data.get('client')
+    consultation = Consultation.objects.get(id=kwargs['pk'])
     if date and start and end:
       date      = datetime.strptime(date, '%d.%m.%Y')
       start     = datetime.strptime(start, '%H:%M').time()
@@ -252,12 +253,19 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       })
       return Response(response)
     if 'status' in request.data:
-      super().update(request, *args, **kwargs)
-      response['messages'].append({
-        'text':f"Статус консультації було змінено на {request.data['status']}",
-        'status':'success',
-      })
-      return Response(response)
+      if request.data['status'] == Consultation.DECLINED and not consultation.can_be_changed():
+        response['messages'].append({
+          'text':f"Ви не можете відміняти консультацію менш ніж за 3 дня до початку",
+          'status':'bad',
+        })
+        return Response(response)
+      else:
+        super().update(request, *args, **kwargs)
+        response['messages'].append({
+          'text':f"Статус консультації було змінено на {request.data['status']}",
+          'status':'success',
+        })
+        return Response(response)
     response = super().update(request, *args, **kwargs)
     return response
 

@@ -357,7 +357,7 @@ class Consultation(TimestampMixin):
     DECLINED    = 'DECLINED'
     IN_PROGRESS = 'IN_PROGRESS'
     FINISHED    = 'FINISHED'
-    STATUSES = (
+    STATUSES    = (
       (UNORDERED, "Незавершено"),
       (DECLINED, "Відмовлено"),
       (IN_PROGRESS, "В процессі"),
@@ -479,13 +479,11 @@ class Consultation(TimestampMixin):
       price     = price + (minutes/60 * rate)
       return price 
     
-    def less_than_3_days(self):
-      '''
-      Якщо datetime.today() < self.date 
-      '''
-      if datetime.today() + timedelta(days=3) < self.date:
-        return True
-      return False 
+    def can_be_changed(self):
+      print(self.id)
+      if datetime.today().date() + timedelta(days=3) > self.date:
+        return False 
+      return True
 
     class Meta:
         verbose_name = 'Консультація'
@@ -528,8 +526,6 @@ class ConsultationPayment(TimestampMixin):
         verbose_name = "Оплата до консультації"    
         verbose_name_plural = "Оплати до консультацій"    
 
-
-# old models from november 2019
 
 
 class Team(models.Model):
