@@ -1252,6 +1252,30 @@
     z-index: 10000000;
     background-color: rgba(77, 83, 89, 0.7); }
 
+.datepicker {
+  position: relative; }
+  .datepicker .load_calender {
+    border-radius: 3px !important; }
+
+.advocate_user_input__block {
+  position: relative;
+  overflow: hidden; }
+
+.advocate_calender_message_for_advocate {
+  transition: all .4s;
+  position: relative;
+  right: -100%;
+  opacity: 0;
+  font-weight: 700;
+  font-size: 20px;
+  color: #D2A351;
+  line-height: 1.5;
+  text-align: center;
+  padding: 20px 0px; }
+  .advocate_calender_message_for_advocate_active {
+    right: 0;
+    opacity: 1; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;

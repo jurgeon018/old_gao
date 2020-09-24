@@ -1614,9 +1614,34 @@
 
     }
 }
+.datepicker {
+    position: relative;
+    .load_calender {
+        border-radius: 3px !important;
+    }
+}
 
+.advocate_user_input__block {
+    position: relative;
+    overflow: hidden;
+}
+.advocate_calender_message_for_advocate {
+    transition: all .4s;
+    position: relative;
+    right: -100%;
+    opacity: 0;
+    font-weight: 700;
+    font-size: 20px;
+    color: #D2A351;
+    line-height: 1.5;
+    text-align: center;
+    padding: 20px 0px;
 
-
+    &_active {
+        right: 0;
+        opacity: 1;
+    }
+}
 
 
 

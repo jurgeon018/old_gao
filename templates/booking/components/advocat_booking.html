@@ -74,11 +74,14 @@
                 <div class="advocate_user_img">
                     <img src="/static/img/profile/5.svg" alt="">
                 </div>
+
             <div class="advocate_calender_select">
                 <select style="width: 100%;" class="communicate_select" name="status">
-                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="1">Skype</option>
-                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" selected='selected' value="2">GoogleMeet</option>
-                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="3">Paint</option>
+                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="SKYPE" selected='selected'>SKYPE</option>
+                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="VIBER" >VIBER</option>
+                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="GMEET" >GMEET</option>
+                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="ZOOM" >ZOOM</option>
+                <option class="advocate_subname advocate_user_title main_title main_title_4 color_gold" value="OFFICE" >OFFICE</option>
                 </select>
             </div>
             </div>
@@ -104,6 +107,9 @@
                 <a href="#" class="consultation_file standart_title standart_title_4 color_black">
                     Заява3.pdf
                 </a>
+            </div>
+            <div class="consultation_comment__block standart_title standart_title_4 color_black">
+                
             </div>
         </div>
        </div>
@@ -186,7 +192,9 @@
                 <!-- // тут генерується календар -->
             </div>
         </div>
-        
+        <div class="advocate_calender_message_for_advocate">
+            На данний день консультацій не заплановано
+        </div>
         <div class="reserve_btn button_transparent">
             Забронювати
         </div>
@@ -201,7 +209,8 @@
                     </div>
                 </div>
                 <div class="reserve_contents advocate_user_input__block">
-                    <input type="text" id="datapicker_user" class="datapicker_user">
+                   
+                    <input type="text" id="datapicker_user" autocomplete="off" class="datapicker_user">
                 </div>
             </div>
             <div class="reserve_clock__block">

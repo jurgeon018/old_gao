@@ -368,12 +368,15 @@ class Consultation(TimestampMixin):
     GMEET  = 'GMEET'
     ZOOM   = 'ZOOM'
     MOBILE = 'MOBILE'
+    OFFICE = 'OFFICE'
     FORMATS = [
       (SKYPE,  "SKYPE"),
       (VIBER,  "VIBER"),
       (GMEET,  "GMEET"),
       (ZOOM,   "ZOOM"),
       (MOBILE, "MOBILE"),
+      (OFFICE, 'OFFICE'),
+
     ]
     link      = models.CharField(verbose_name="Ссилка на гуглмітінг", blank=True, null=True, max_length=255)
     format    = models.CharField(

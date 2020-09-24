@@ -2,9 +2,147 @@
 
 
 
+let page = 0;
+gen_consultation('next');
+function create_consultation(wrapper, content) {
+    let consultation_item = "";
+    $.each(content, function(index, value) {
+        let current_src;
+        if (value.image == null) {
+            current_src = `/static/img/about-us/about-img.png`;
+        } else {
+            current_src = value.image;
+        }
 
 
+        let doc__block;
 
+        if (value.documents.length >= 1) {
+            doc__block = `
+            <a href="{{ document.file.url }}" class="consultation_file standart_title standart_title_4 color_black">
+                {{ document.file }}
+            </a>
+            ` 
+        } else {
+            doc__block = `
+            <div class="none_files__block standart_title standart_title_4 color_black">
+              немає додаткових файлів
+            </div>
+            ` 
+        }
+
+
+        consultation_item += `
+        <div data-id="${value.id}" class="consultation_prof">
+      <div class="absolute_change__block">
+        <div title="Видалити консультацію" class="delete_this_consultation">
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+        </div>
+      </div>
+      <div class="consultation_section consultation_left">
+        <div class="advocate_photo">
+            <img src="${current_src}" alt="">
+        </div>
+        <div class="advocate_name main_title main_title_4 color_gold">
+            ${value.client_name}
+        </div>
+        <div class="advocate_subname standart_title standart_title_4 color_black">
+            Клієнт
+        </div>
+        <div class="advocate_type__block">
+            <div class="advocate_type_title__block">
+                <img src="/static/img/profile/2.svg" alt="">
+                <div class="advocate_type_title main_title main_title_4 color_gold">
+                    Галузь
+                </div>
+            </div>
+            <div class="status_advocate_subname advocate_type_work standart_title standart_title_4 color_black">
+                ${value.faculty_name}
+            </div>
+        </div>
+        <div class="advocate_name main_title main_title_4 color_gold">
+            Статус консультації:
+        </div>
+        <div class="advocate_subname standart_title standart_title_4 color_black">
+              ${value.status}
+        </div>
+      </div>
+      <div class="consultation_section consultation_center">
+        <div class="consultation_title main_title main_title_4 color_green">
+            Інформація по консультації ${value.id}:
+        </div>
+        <div class="advocate_user_item__block">
+            <div class="advocate_user_img">
+                <img src="/static/img/profile/2.svg" alt="">
+            </div>
+            <div class="advocate_user_title standart_title standart_title_4 color_black">
+                ${value.date}
+            </div>
+        </div>
+        <div class="advocate_user_item__block">
+            <div class="advocate_user_img">
+                <img src="/static/img/profile/5.svg" alt="">
+            </div>
+            <div class="advocate_user_title standart_title standart_title_4 color_black">
+                <span>з ${value.start} по ${value.end}.</span>
+                <span>
+                    консультація -  
+                    ${value.full_time.hours} год
+                    ${value.full_time.minutes} хв
+                </span>
+            </div>
+        </div>
+        <div class="advocate_user_item__block">
+            <div class="advocate_user_img">
+                <img src="/static/img/profile/7.svg" alt="">
+            </div>
+            <div class="advocate_user_title main_title main_title_4 color_gold">
+                ${value.format}
+            </div>
+        </div>
+        <div class="advocate_user_item__block">
+            <div class="advocate_user_img">
+                <img src="/static/img/profile/8.svg" alt="">
+            </div>
+            <div class="advocate_user_title standart_title standart_title_4 color_black">
+                <span>Вартість консультації:</span>
+                <span class="color_gold">${value.price} грн</span>
+            </div>
+        </div>
+      </div>
+      <div class="consultation_section consultation_right">
+        <div class="consultation_title main_title main_title_4 color_green">
+            Додаткові файли:
+        </div>
+        <div class="consultation_file__block">
+            ${doc__block}
+        </div>
+      </div>
+    </div>
+          
+        `;
+      });
+        
+    $(wrapper)[0].innerHTML = consultation_item;
+}
+
+function gen_consultation(navigation) {
+    if (navigation == 'next') {
+        page++;
+    } else if (navigation == 'prev') {
+        page--;
+    }
+    fetch(`/api/consultations/?page_number=${page}&page_size=20`, {
+        method: "GET",
+      })
+      .then((data) => {
+        return data.json();
+      })
+      .then((body) => {
+          console.log('body: ', body);
+          create_consultation('.consultation__block', body.results);
+      });
+}
 
 
 if ($('.advocate_calender_container').length == 1) {
@@ -110,7 +248,7 @@ function generate_interval(start, end) {
 
    function create_calender(consultation) {
     let width_item = consultation.working_hours.length;
-    console.log('width_item: ', width_item);
+    
     $('.advocate_calender_item__block').children().remove();
 
     let left_position = 100 / width_item;
@@ -162,7 +300,7 @@ function generate_interval(start, end) {
     }
 
     function create_row_item(content) {
-        console.log('content: ', content);
+        
         let advocate_calender_item_prof = document.createElement('div');
         advocate_calender_item_prof.classList.add('advocate_calender_item_prof');
         advocate_calender_item_prof.setAttribute(`data-clockwork`, content.info.start.replace(':', '.'));
@@ -209,7 +347,7 @@ function generate_interval(start, end) {
                 return data.json();
               })
               .then((body) => {
-                  console.log('body: ', body);
+                  
                     // зміна айді консультації
                     $('.advocate_calender_info').attr('data-id', fetch_id);
                     // зміна імені
@@ -228,8 +366,9 @@ function generate_interval(start, end) {
                     });
 
                     // зміна статуса
-                    $('.status_select').val(body.status);
-                    $('.status_select').trigger('change');
+                            $('.status_select').val(body.status);
+                            $('.status_select').trigger('change');
+                   
 
                     // зміна дати
                     $(table_task).find('.advocate_data_user_title').text(body.date);
@@ -245,7 +384,7 @@ function generate_interval(start, end) {
                     $('.communicate_select').trigger('change');
 
                     // зміна ціни
-                    $(table_task).find('.advocate_price_span').text(body.price);
+                    $(table_task).find('.advocate_price_span').text(`${body.price} грн`);
 
                     // зміна файлів
                     $('.info_consultation_file__block').children().remove();
@@ -257,6 +396,10 @@ function generate_interval(start, end) {
 
                         $('.info_consultation_file__block')[0].appendChild(consultation_file);
                     });
+                    // додавання коменту
+                    if (body.comment != null) {
+                        $('.consultation_comment__block').text(`Коментар: ${body.comment}`);
+                    }
               });   
             
                        
@@ -293,154 +436,28 @@ function generate_interval(start, end) {
         return data.json();
       })
       .then((body) => {
-          console.log('body: ', body);
-          if (check_calender == true) {
-            $('.all_calender__wrapper').css('opacity', '0');
-
-            setTimeout(() => {
-                $('.advocate_calender_time__block').children().remove();
-
-                  create_time_item(body.working_hours);
-            }, 200);
+         
+          if (body.hours.length == 0) {
+              $('.advocate_calender_message_for_advocate').addClass('advocate_calender_message_for_advocate_active');
+          } else {
+              $('.advocate_calender_message_for_advocate').removeClass('advocate_calender_message_for_advocate_active');
+            if (check_calender == true) {
+                $('.all_calender__wrapper').css('opacity', '0');
+    
+                setTimeout(() => {
+                    $('.advocate_calender_time__block').children().remove();
+    
+                      create_time_item(body.working_hours);
+                }, 200);
+              }
           }
 
           setTimeout(() => {
             $('.all_calender__wrapper').css('opacity', '1');
           
-            let test_json = [{
-              transition: 1,
-              clockwork: '9.00',
-              name: 'test_client1',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'Skype',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          }, 
-          {
-              transition: 1,
-              clockwork: '10.00',
-              name: 'test_client2',
-              type_user: 'адвокат',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'Завершено',
-              date: 'Середа. 15.08.2020.',
-              communication: 'GoogleMeet',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          },
-          {
-              transition: 2,
-              clockwork: '11.00',
-              name: 'test_client3',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'Skype',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          },
-          {
-              transition: 1,
-              clockwork: '13.00',
-              name: 'test_client4',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'GoogleMeet',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          },
-          {
-              transition: 3,
-              clockwork: '14.00',
-              name: 'test_client5',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'Skype',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          },
-          {
-              transition: 1,
-              clockwork: '17.00',
-              name: 'test_client6',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'Paint',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-          },
-          {
-              transition: 2,
-              clockwork: '18.00',
-              name: 'test_client7',
-              type_user: 'клієнт',
-              branch: ['Судова галузь', 'Податкова галузь'],
-              status: 'В очікуванні',
-              date: 'Середа. 15.08.2020.',
-              communication: 'Skype',
-              price: '1000 грн',
-              files: [{
-                  file_name: 'file1',
-                  file_url: '/media/test_url/file1.pdf'
-              },
-              {
-                  file_name: 'file2',
-                  file_url: '/media/test_url/file2.pdf'
-              }]
-            }];
+            console.log('body: ', body);
               create_calender(body);
+              
           }, 420);
       });  
     
@@ -494,7 +511,7 @@ function generate_interval(start, end) {
            
         });
         setTimeout(() => {
-            console.log(1);
+            
             create_all_calender(true);
         }, 400);
 
@@ -564,13 +581,14 @@ function get_fetch_for_active_practise() {
 
 
 $('.file_photo').on('change', function() {
-    let id = $('.advocat_info_id').attr('data-advocat');
+    let info = return_info_users();
     let Formdata = new FormData();
     let fileData = this.files[0];
-    console.log('fileData: ', fileData);
+    
+    
     Formdata.append(`image`, fileData);
    
-        fetch(`/api/users/${id}/`, {
+        fetch(`/api/users/${info.result_client}/`, {
         method: 'PATCH',
         body: Formdata,
         })
@@ -658,9 +676,9 @@ $('.user_acceses').on('click', function() {
         let all_users = $(wrap).find('.consultation_prof');
     
         $.each(all_users,function(index,value){
-            console.log('value: ', $(value));
+            
               if ($(value).attr('data-id') == click_id) {
-                console.log(' $(value): ',  $(value));
+                
                 $(value).remove();
                 
             }
@@ -721,7 +739,7 @@ function remove_active_block(wrap) {
     $(parents).find('.step_active_content').text('');      
 }
 function generate_practise(id) {
-    console.log('id: ', id);
+    
     let url;
     if (id == undefined) {
         url = '/api/faculties/'
@@ -757,8 +775,8 @@ function generate_advocate(id) {
             return data.json();
           })
           .then((body) => {
-              console.log('body: ', body);
-              console.log('body.length: ', body.length);
+              
+              
               if (body.length == 0) {
                 $('.hidden_message').text('По данній галузі адвокатів не знайдено');
               }
@@ -766,7 +784,8 @@ function generate_advocate(id) {
               $.each(body, function(index, value) {
                 new_body.push({
                     id: value.id,
-                    name: value.username
+                    name: value.username,
+                    image: value.image
                 })
               });
               create_all_doc_for_client('.client_select_step_hidden_content', new_body);
@@ -790,9 +809,16 @@ function create_all_doc_for_client(wrap, json) {
 }
 
 function create_doc(content) {
+    let current_src;
+    if (content.image == null) {
+        current_src = `/static/img/about-us/about-img.png`;
+    } else {
+        current_src = content.image;
+    }
     let doc_item = document.createElement('div');
     doc_item.setAttribute(`data-title`, content.name);
     doc_item.setAttribute(`data-id`, content.id);
+    doc_item.setAttribute(`data-image`, current_src);
     doc_item.classList.add('step_select_text', 'standart_title', 'standart_title_2', 'color_black');
     doc_item.textContent = content.name;
 
@@ -804,6 +830,7 @@ function create_doc(content) {
 function click_select_item() {
     let wrap = $(this).parents('.step_select');
     let data = $(this).attr('data-title');
+    let image_url = $(this).attr('data-image');
     let data_id = $(this).attr('data-id');
     $(wrap).find('.step_select_text').removeClass('step_select_text_active');
     $(this).addClass('step_select_text_active');
@@ -813,7 +840,7 @@ function click_select_item() {
 
 
     let checker = $(this).parents()[0];
-    console.log('checker: ', checker);
+    
     // практики
     if ($(checker).hasClass('practise_step_hidden_content')) {
         $('.pract_step_select').find('.step_active_content').attr('data-id', $(this).attr('data-id'));
@@ -850,6 +877,7 @@ function click_select_item() {
 
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+        $('.advocate_photo').find('img').attr('src', image_url);
 
         
     }
@@ -866,7 +894,7 @@ function fetch_get_data_user_calender(content) {
         return data.json();
       })
       .then((body) => {
-          console.log('body: ', body);
+          
         let datepicker = $('#datapicker_user').datepicker().data('datepicker');
         let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
         let weekenddDays = [0, 6];
@@ -938,17 +966,45 @@ $('.docs_title_btn').on('click', function() {
 });
 
 if ($('.advocate_user_input__block').length >= 1) {
-        var datepicker = $('#datapicker_user').datepicker().data('datepicker');
-        datepicker.destroy();
-        var weekenddDays = [0, 6];
-        var reserve = ["20-August-2020", "21-August-2020"];
-        var busy = ["25-August-2020", "27-August-2020"];
-        var months_items = ['january','feburary','March','April','May','June','July','August','September','October','November','December'];
-        create_client_calender(weekenddDays, reserve, busy, months_items);
+        // var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+        // datepicker.destroy();
+        // var weekenddDays = [0, 6];
+        // var reserve = ["20-August-2020", "21-August-2020"];
+        // var busy = ["25-August-2020", "27-August-2020"];
+        // var months_items = ['january','feburary','March','April','May','June','July','August','September','October','November','December'];
+        // create_client_calender(weekenddDays, reserve, busy, months_items);
+
+
+        let date_js = new Date();
+        let date_month = date_js.getMonth() + 1;
+        let date_year = date_js.getFullYear();
+        let date_client = $('.advocat_info_id').attr('data-advocat');
+        let date_advocat = date_client;
+        
+        let advocat_days_json = {
+            year: date_year,
+            month: date_month,
+            advocat: date_advocat,
+            client: date_client,
+        }
+        fetch_get_data_user_calender(advocat_days_json);
+       
+}
+
+function create_load_item() {
+    let load_div = document.createElement('div');
+    load_div.classList.add('load_calender');
+
+    let load_img = document.createElement('img');
+    load_img.setAttribute(`src`, `/static/img/712.svg`);
+
+    load_div.appendChild(load_img);
+
+    return load_div;
 }
 
 function create_clockwork_client(content) {
-    console.log('content: ', content);
+    
     let step_date_prof = document.createElement('div');
 
     if (content.is_free == true) {
@@ -996,6 +1052,7 @@ function update_datepicker(disabledDays, reserved_days, busy_days, months) {
             }
         },
     })
+    
         $('.load_calender').removeClass('load_calender_active');
 }
     
@@ -1011,8 +1068,6 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             var myDate = ((date.getDate()<10)?'0':'')+date.getDate()+'-'+months[date.getMonth()]+'-'+date.getFullYear();
             
              if (reserved_days.indexOf(myDate)>-1) {
-                 
-                 
                return {
                 classes: 'disable_day',
                 disabled: true
@@ -1072,53 +1127,58 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
         },
         onChangeMonth: function(date_month, date_year) {
             $('.load_calender').addClass('load_calender_active');
-            let date_client = $('.client_info_id').attr('data-client');
-            let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
-            let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${date_advocat}&client=${date_client}`;
-            fetch(url, {
-              method: "GET",
-            })
-            .then((data) => {
-              return data.json();
-            })
-            .then((body) => {
-              let datepicker = $('#datapicker_user').datepicker().data('datepicker');
-              let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
-              let weekenddDays = [0, 6];
-              // reserve - повністю зайнятий
-              let reserve = [];
-              
-              
-              // busy - напів зайнятий
-              let busy = [];
-              
-              
-              // статуси 
-              // blocked - зайнятий 
-              // rest - зайнятий
-              // partly_busy - напів зайнятий
-              // free - вільний
-              // unknows - вільний
-      
-              $.each(body.days, function(index, value) {
-                  if (value.status == 'blocked' || value.status == 'rest') {
-                      reserve.push(value.day);
-                      
-                  } else 
-                  if (value.status == 'partly_busy') {
-                      busy.push(value.day);
-                  }
-              });
 
-              update_datepicker(weekenddDays, reserve, busy, months_items);
-            });
-
-            
+                let date_client = $('.client_info_id').attr('data-client');
+                let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+                let info = return_info_users();
+                
+                let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${info.result_advocate}&client=${info.result_client}`;
+                fetch(url, {
+                  method: "GET",
+                })
+                .then((data) => {
+                  return data.json();
+                })
+                .then((body) => {
+                  let datepicker = $('#datapicker_user').datepicker().data('datepicker');
+                  let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
+                  let weekenddDays = [0, 6];
+                  // reserve - повністю зайнятий
+                  let reserve = [];
+                  
+                  
+                  // busy - напів зайнятий
+                  let busy = [];
+                  
+                  
+                  // статуси 
+                  // blocked - зайнятий 
+                  // rest - зайнятий
+                  // partly_busy - напів зайнятий
+                  // free - вільний
+                  // unknows - вільний
+          
+                  $.each(body.days, function(index, value) {
+                      if (value.status == 'blocked' || value.status == 'rest') {
+                          reserve.push(value.day);
+                          
+                      } else 
+                      if (value.status == 'partly_busy') {
+                          busy.push(value.day);
+                      }
+                  });
+    
+                  update_datepicker(weekenddDays, reserve, busy, months_items);
+                });
         },
-        
      });
+
+     setTimeout(() => {
+        $('.datepicker')[0].appendChild(create_load_item());
+    }, 1000);
 }
-function create_clockwork_items() {
+
+function return_info_users() {
     let client;
     let advocate;
     let current_date;
@@ -1132,14 +1192,23 @@ function create_clockwork_items() {
         client = $('.client_info_id').attr('data-client');
         advocate = $('.advoc_step_select').find('.step_active_content').attr('data-id');
     }
-    fetch(`/api/get_hours_info/?date=${current_date}&advocat=${advocate}&client=${client}`, {
+    let result = {
+        result_client: client,
+        result_advocate: advocate,
+        result_current_date: current_date,
+    }
+    return result;
+}
+function create_clockwork_items() {
+    let info = return_info_users();
+    fetch(`/api/get_hours_info/?date=${info.result_current_date}&advocat=${info.result_advocate}&client=${info.result_client}`, {
         method: "GET",
       })
       .then((data) => {
         return data.json();
       })
       .then((body) => {
-          console.log('body: ', body);
+          
           $('.step_date__wrap').children().remove();
 
           $.each(body.working_hours, function(index, value) {
@@ -1183,7 +1252,8 @@ $('.advocate_doc_add_btn').on('change', function() {
     let file_create = $('#advocate_doc_add_btn')[0];
     let Formdata = new FormData();
     let files = file_create.files;
-    Formdata.append(`user`, $('.advocat_info_id').attr('data-advocat'));
+    let info = return_info_users();
+    Formdata.append(`user`, info.result_client);
 
     $.each(files, function(i, file){
         Formdata.append(`file[${i}]`, file);
@@ -1279,12 +1349,12 @@ $('.pseudo_btn').click(function(e) {
 $('.input_user_file').on('change', function() {
     
     // let fileData = this.files;
-    // console.log('fileData: ', fileData);
+    // 
 
     // let Formdata = new FormData();
     // jQuery.each(fileData, function(i, file) {
     //     Formdata.append(`document[${i}]`, file);
-    //     console.log('Formdata: ', Formdata.getAll(`document[${i}]`));
+    //     
     // });
     // formData.delete(name) – удаляет поле с заданным именем name,
 
@@ -1316,7 +1386,7 @@ $('.input_user_file').on('change', function() {
 
 
 let create_client_files = (content) => {
-    console.log('content: ', content);
+    
     let advocate_download_prof = document.createElement('div');
         advocate_download_prof.classList.add('advocate_download_prof', 'new_advocate_download_prof');
 
@@ -1367,7 +1437,7 @@ $('.step_change_btn').on('click', function() {
 });
 
 $(".main_doc_link").on("click", function(){
-    console.log(123);
+    
     let wrap = $(this).parents('.tab-auto-content-prof');
     $(wrap).find(".main_doc_link").removeClass("main_doc_link_active");
      $(this).addClass("main_doc_link_active");
@@ -1412,7 +1482,7 @@ $('.submit_user_order').on('click', function() {
     let all_order_vars = create_obgect_order();
     append_form_data(all_order_vars);
     fetch_order(all_order_vars);
-   
+    
 });
 
 function create_obgect_order() {
@@ -1459,12 +1529,14 @@ function fetch_order(content) {
         return data.json();
     })
     .then(data => {
-        alert(data.messages[0].text);
-
-
         if ($('.reserve_hidden_content').length >= 1) {
             create_all_calender(true);
+        } else {
+            let redirect = $('.submit_user_order').attr('data-redirect');
+            window.location = redirect;
         }
+
+        alert(data.messages[0].text);
     })
 }
 function check_user_valid() {
@@ -1480,7 +1552,7 @@ function check_user_valid() {
             return false;
         }
         if (counter == all_count) {
-            console.log("все ок");
+            
             $('.sumbit_content_error').text('');
             $('.submit_wrapper').removeClass('submit_wrapper_error');
         } else {
@@ -1571,7 +1643,7 @@ function add_clockwork() {
 
 $('.save_reserve_date_btn').on('click', function() {
     let date_value = $('.datapicker_user').val();
-    console.log('date_value: ', date_value);
+    
     let first_clock = $('.first_advocate_user_clock').attr('data-clock');
     let second_clock = $('.second_advocate_user_clock').attr('data-clock');
 
@@ -1603,6 +1675,7 @@ $('.save_reserve_date_btn').on('click', function() {
                 url: '/api/consultations/',
                 csrftoken: $('.hidden_wrap_inp').find('input').val(),
                 comment: $('.advocate_user_comment__block').find('textarea').val()
+                
             }
               append_form_data(object);
               fetch_order(object);
@@ -1622,6 +1695,9 @@ $('.save_reserve_date_btn').on('click', function() {
             all_order_vars.Formdata.append(`start`, all_order_vars.clock_first);
             all_order_vars.Formdata.append(`end`, all_order_vars.clock_last);
             all_order_vars.Formdata.append(`csrftoken`, all_order_vars.csrftoken);
+            if (all_order_vars.comment != undefined) {
+                all_order_vars.Formdata.append(`comment`, all_order_vars.comment);
+            }
         }
     }
 })
