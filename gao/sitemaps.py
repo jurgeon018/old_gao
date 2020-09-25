@@ -5,16 +5,31 @@ from .models import *
 
 
 class TeamSitemap(Sitemap):
+    changefreq = 'weekly' 
+    protocol = 'https'
+    priority = 1
+
     def items(self):
         return Team.objects.all()
+
+    def lastmod(self, obj):
+        return obj.updated
+
 
 
 # class PostSitemap(Sitemap):
 #     def items(self):
 #         return Post.objects.all()
 
+    # def lastmod(self, obj):
+    #     return obj.updated
+
 
 class StaticViewSitemap(Sitemap):
+    changefreq = 'weekly' 
+    protocol = 'https'
+    priority = 1
+
     def items(self):
         return [
             "index",

@@ -25,7 +25,7 @@ urlpatterns = [
     path('robots.txt/',        TemplateView.as_view(template_name="robots.txt"), name='robots'),
     path('sitemap.xml/',       sitemap, {'sitemaps':sitemaps}),
     path('tinymce/', include('tinymce.urls')),
-    path('admin/',           admin.site.urls),
+    # path('admin/',           admin.site.urls),
 
     path('api/',             include('gao.api.urls')),
     path('gao_liqpay_callback/', gao_liqpay_callback),

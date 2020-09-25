@@ -83,7 +83,7 @@ class Command(BaseCommand):
 consult_date  = datetime.now() + timedelta(days=random.randint(1, 20))
 
 # Переводить з об'єкта в строку
-consult_date  = consult_date.strftime("%d/%m/%Y %H:%M")
+consult_date  = consult_date.strftime("%d/%m/%Y, %H:%M")
 
 # Переводить з строки в об'єкт
 consult_date  = datetime.strptime(consult_date, "%d/%m/%Y %H:%M")
@@ -96,5 +96,5 @@ consult_date  = "11.12.2020 14:30"
 consult_date  = datetime.strptime(consult_date, "%d/%m/%Y %H:%M")
 
 # Переводить з об'єкта в строку
-consult_date  = consult_date.strftime("%d/%m/%Y %H:%M")
+consult_date  = consult_date.strftime("%d/%m/%Y, %H:%M")
 """

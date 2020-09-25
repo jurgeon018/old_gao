@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from .serializers import * 
 from .paginators import * 
 from ..calendar import generate_hangouts_link
+from ..models import *
 
 import calendar
 import json 

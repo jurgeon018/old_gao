@@ -1,53 +1,64 @@
 from import_export.resources import ModelResource 
-from import_export.widgets import DateTimeWidget, TimeWidget
-from import_export.fields import Field 
-
-
 from .models import * 
 
- 
+
+class TeamResource(ModelResource):
+    class Meta:
+        model = Team 
+        exclude = []
+
+
+class ClientResource(ModelResource):
+    class Meta:
+        model = Client 
+        exclude = []
+
+
+
+class SliderResource(ModelResource):
+    class Meta:
+        model = Slider 
+        exclude = []
+
+
+class ContactResource(ModelResource):
+    class Meta:
+        model = Contact 
+        exclude = []
+
+
+class DocumentResource(ModelResource):
+    class Meta:
+        model = Document 
+        exclude = []
+
+
+class DocumentResource(ModelResource):
+    class Meta:
+        model = Document 
+        exclude = []
+
+
 class ConsultationResource(ModelResource):
     class Meta:
-        model = Consultation
-        exclude = ['created','updated',]
-
-
-class FacultyResource(ModelResource):
-    class Meta:
-        model = Faculty
-        exclude = ['created','updated',]
+        model = Consultation 
+        exclude = []
 
 
 class ConsultationDocumentResource(ModelResource):
     class Meta:
-        model = ConsultationDocument
-        exclude = ['created','updated',]
+        model = ConsultationDocument 
+        exclude = []
 
 
 class ConsultationPaymentResource(ModelResource):
     class Meta:
-        model = ConsultationPayment
-        exclude = ['created','updated',]
-
-
-class WeekDayResource(ModelResource):
-    class Meta:
-        model = WeekDay
+        model = ConsultationPayment 
         exclude = []
 
 
-class UserWeekDayResource(ModelResource):
-    start = Field(
-        attribute='start', 
-        column_name='start', 
-        widget=TimeWidget('%H:%M'),
-    ) 
-    end = Field(
-        attribute='end', 
-        column_name='end', 
-        widget=TimeWidget('%H:%M'),
-    ) 
+class FacultyResource(ModelResource):
     class Meta:
-        model = UserWeekDay
+        model = Faculty 
         exclude = []
 
