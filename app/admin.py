@@ -1,9 +1,29 @@
+from django.contrib.sites.models import Site
 from django.contrib import admin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.redirects.models import Redirect
+from django.utils.translation import gettext, gettext_lazy as _
+
+
+
 from .models import *
 from pages.models import * 
 from pages.admin import * 
-from django.contrib.redirects.models import Redirect
-from django.contrib.sites.models import Site
+
+
+from import_export.admin import ImportExportModelAdmin
+
+
+
+
+User = get_user_model()
+
+
+class DocumentInline(admin.TabularInline):
+    model = Document 
+    extra = 0 
+    classes = ['collapse',]
 
 
 
@@ -25,7 +45,7 @@ class SliderInline(admin.StackedInline):
     extra = 0
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
         'title', 
@@ -124,20 +144,6 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 
-
-from django.contrib import admin 
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import gettext, gettext_lazy as _
-
-
-User = get_user_model()
-
-
-class DocumentInline(admin.TabularInline):
-    model = Document 
-    extra = 0 
-    classes = ['collapse',]
 
 class DocumentAdmin(admin.ModelAdmin):
     pass 

@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'custom_auth',
     'pages',
     'tinymce',
+    'import_export',
 ]
 
 MIDDLEWARE = [

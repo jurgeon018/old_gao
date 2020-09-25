@@ -80,7 +80,7 @@ profile-header
       {% if member.phone2 %}
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-2.png" alt="">
-        <a href="tel:{{member.phone}}" class="geo-text">
+        <a href="tel:{{member.phone2}}" class="geo-text">
           {{member.phone2}}
           <!-- 050 432 19 97 -->
         </a>
@@ -90,7 +90,7 @@ profile-header
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-3.png" alt="">
         
-          <a class="geo-text" href="mailto:pupkini@gao.com.ua">
+          <a class="geo-text" href="mailto:{{member.email}}">
             {{member.email}}
           </a>
         
