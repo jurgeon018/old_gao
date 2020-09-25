@@ -62,3 +62,18 @@ class FacultyResource(ModelResource):
         model = Faculty 
         exclude = []
 
+
+class WeekDayResource(ModelResource):
+    class Meta:
+        model = WeekDay 
+        exclude = []
+
+
+class UserWeekDayResource(ModelResource):
+    class Meta:
+        model = UserWeekDay 
+        exclude = []
+
+
+
+

@@ -110,3 +110,8 @@ class FacultyDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty 
         exclude = []
+        
+class ConsultationDocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConsultationDocument
+        exclude = []
