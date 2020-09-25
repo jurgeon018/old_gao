@@ -21,7 +21,7 @@ function check_type_cons(props) {
 $('.consultation_link').on('click', function() {
     let type = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
-    let current_status = check_type_cons(wrapper_block);
+    let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
     page = 0;
     if (type == 'client') {
@@ -567,19 +567,26 @@ function generate_interval(start, end) {
                     // зміна ціни
                     $(table_task).find('.advocate_price_span').text(`${body.price} грн`);
 
-                    // зміна файлів
+                    // зміна файлів (клієнт)
                     $('.info_consultation_file__block').children().remove();
-                    $.each(body.documents, function(index, sub_value) {
-                        let consultation_file = document.createElement('a');
-                        consultation_file.classList.add('consultation_file', 'standart_title', 'standart_title_4', 'color_black');
-                        consultation_file.textContent = sub_value.file_name;
-                        consultation_file.setAttribute(`href`, sub_value.file_url);
-
-                        // $('.info_consultation_file__block')[0].appendChild(consultation_file);
+                    $.each(body.client_documents, function(index, sub_value) {
+                        let json_file = {
+                            file_name: sub_value.file.split('/')[2],
+                            file_href: sub_value.file
+                        }
+                        $('.info_consultation_file__block')[0].appendChild(create_simple_files(json_file));
+                    });
+                    // зміна файлів (адвокат)
+                    $('.consultation_place').children().remove();
+                    $.each(body.advocat_documents, function(index, sub_value) {
+                        let json_file = {
+                            file_name: sub_value.file.split('/')[2],
+                            file_href: sub_value.file
+                        }
                         $('.consultation_place')[0].appendChild(create_simple_files(json_file));
                     });
                     // додавання коменту
-                    if (body.comment != null) {
+                    if (body.comment != '') {
                         $('.consultation_comment__block').text(`Коментар: ${body.comment}`);
                     }
               });   
@@ -1445,21 +1452,20 @@ $('.consultation_advocate_doc_btn').on('change', function() {
 });
 
 let create_simple_files = (content) => {
-    console.log('content: ', content);
     let doc_profile = document.createElement('a');
         doc_profile.classList.add('doc-profile');
-        doc_img.setAttribute(`href`, content.file_href);
+        doc_profile.setAttribute(`href`, content.file_href);
+        doc_profile.setAttribute(`target`, '_blank');
 
 
-    let doc_img = document.createElement('img');
-    doc_img.classList.add('doc-img');
-    doc_img.setAttribute(`src`, '/static/img/doc.svg');
+    // let doc_img = document.createElement('img');
+    // doc_img.classList.add('doc-img');
+    // doc_img.setAttribute(`src`, '/static/img/doc.svg');
 
     let doc__title = document.createElement('div');
     doc__title.classList.add('doc__title');
     doc__title.textContent = content.file_name;
 
-    doc_profile.appendChild(doc_img);
     doc_profile.appendChild(doc__title);
 
     return doc_profile;

@@ -971,19 +971,17 @@
   display: flex;
   align-items: center; }
 
-.consultation_place {
-  padding-top: 15px; }
-  .consultation_place .doc-profile {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    padding: 10px 0px; }
-  .consultation_place .doc-img {
-    width: 30px;
-    margin-right: 10px; }
-  .consultation_place .doc__title {
-    width: calc(100% - 40px); }
+.consultation_place .doc-profile, .info_consultation_file__block .doc-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0px; }
+.consultation_place .doc-img, .info_consultation_file__block .doc-img {
+  width: 30px;
+  margin-right: 10px; }
+.consultation_place .doc__title, .info_consultation_file__block .doc__title {
+  width: 100%; }
 
 .advocate_doc_add_label {
   cursor: pointer; }
@@ -1484,6 +1482,12 @@
 .consultation_prof {
   transition: all .3s;
   left: -100vw; }
+
+.consultation_place_scroll, .info_consultation_scroll {
+  overflow-y: auto;
+  max-height: 200px;
+  /* padding-top: 20px; */
+  margin-top: 20px; }
 
 @media (max-width: 1417px) {
   .advocate_calender_info {
