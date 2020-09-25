@@ -173,6 +173,8 @@ class ConsultationListView(generics.ListCreateAPIView):
       dates      = query.get('dates') 
       statuses   = query.get('statuses') 
       formats    = query.get('formats')
+      print(type(statuses))
+      print(statuses)
       if date_from:
         queryset = queryset.filter(date_from=date_from)
       if date_to:

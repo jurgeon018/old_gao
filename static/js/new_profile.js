@@ -5,18 +5,94 @@
 
 
 
-
+function check_type_cons(props) {
+    let current_status;
+    // поточні
+    if (props == '#profile_4') {
+        current_status = ["IN_PROGRESS","UNORDERED"]
+    } 
+    // архівні
+    else if (props == '#profile_5') {
+        current_status = ["FINISHED","DECLINED"]
+    } 
+    return current_status;
+}
 
 $('.consultation_link').on('click', function() {
+    let type = $(this).attr('data-type');
+    let wrapper_block = `#${$(this).attr('data-consultation')}`;
+    let current_status = check_type_cons(wrapper_block);
+
     page = 0;
-    gen_consultation('next');
+    if (type == 'client') {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'next',
+            click_link: true,
+            advocat: false,
+            status: current_status
+        });
+    } else {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'next',
+            click_link: true,
+            advocat: true,
+            status: current_status
+        });
+    }
 })
 
+$('.btn_cons_prev').on('click', function() {
+    let type = $(this).attr('data-type');
+    let wrapper_block = `#${$(this).attr('data-consultation')}`;
+    let current_status = check_type_cons(wrapper_block);
 
+    if (type == 'client') {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'prev',
+            click_link: false,
+            advocat: false,
+            status: current_status
+        });
+    } else {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'prev',
+            click_link: false,
+            advocat: true,
+            status: current_status
+        });
+    }
+})
+$('.btn_cons_next').on('click', function() {
+    let type = $(this).attr('data-type');
+    let wrapper_block = `#${$(this).attr('data-consultation')}`;
+    let current_status = check_type_cons(wrapper_block);
 
-function create_consultation(wrapper, content) {
+    if (type == 'client') {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'next',
+            click_link: false,
+            advocat: false,
+            status: current_status
+        });
+    } else {
+        gen_consultation({
+            wrapper: wrapper_block,
+            navigate: 'next',
+            click_link: false,
+            advocat: true,
+            status: current_status
+        });
+    }
+})
+
+function create_consultation(props) {
     let consultation_item = "";
-    $.each(content, function(index, value) {
+    $.each(props.results, function(index, value) {
         let current_src;
         if (value.image == null) {
             current_src = `/static/img/about-us/about-img.png`;
@@ -26,17 +102,14 @@ function create_consultation(wrapper, content) {
 
 
         let doc__block = ``;
-
         if (value.documents.length >= 1) {
             $.each(value.documents, function(index, doc) {
-                console.log('doc: ', doc);
                 doc__block += `
                 <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
                     document_${doc.id}
                 </a>
                 ` 
             });
-            
         } else {
             doc__block = `
             <div class="none_files__block standart_title standart_title_4 color_black">
@@ -45,13 +118,29 @@ function create_consultation(wrapper, content) {
             ` 
         }
 
+        let option__block = ``;
+        if (props.advocat == true) {
+                option__block == `
+                <div title="Відмінити консультацію" class="cancel_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
+                </div>
+                <div title="Видалити консультацію" class="delete_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                </div>
+                ` 
+        } else if (props.advocat == false) {
+            option__block = `
+                <div title="Відмінити консультацію" class="cancel_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
+                </div>
+            ` 
+        }
+
 
         consultation_item += `
         <div data-id="${value.id}" class="consultation_prof">
       <div class="absolute_change__block">
-        <div title="Видалити консультацію" class="delete_this_consultation">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
-        </div>
+            ${option__block}
       </div>
       <div class="consultation_section consultation_left">
         <div class="advocate_photo">
@@ -137,17 +226,65 @@ function create_consultation(wrapper, content) {
         `;
       });
         
-    $(wrapper)[0].innerHTML = consultation_item;
+    $(props.container)[0].innerHTML = consultation_item;
+    let current_height_block = find_current_height(props.container);
+    $('.cancel_this_consultation').on('click', function() {
+        let wrap = $(this).parents('.consultation_prof');
+        let id = $(wrap).attr('data-id');
+        let data_json = {
+            status: 'DECLINED'
+        }
+            fetch(`/api/consultations/${id}/`, {
+            method: 'PATCH',
+            body: JSON.stringify(data_json),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                $(wrap).find('.status_advocate_subname').text(data_json.status);
+            })       
+    });
     $('.delete_this_consultation').on('click', user_delete);
 }
 
-function gen_consultation(navigation) {
-    if (navigation == 'next') {
+function start_animation_consultation(wrap) {
+    let consultations = $(wrap).find('.consultation_prof');
+         $(consultations).css('left', '0px');
+}
+function end_animation_consultation(wrap) {
+    let consultations = $(wrap).find('.consultation_prof');
+        $(consultations).css('left', '-100vw');
+}
+function find_current_height(props) {
+    let first_item = $(props).find('.consultation_prof').first();
+    let last_item = $(props).find('.consultation_prof').last();
+    let position_first_item = $(first_item).offset().top;
+    let position_last_item = $(last_item).offset().top;
+    let optional_item_height = $(last_item).height();
+    let result = (position_last_item - position_first_item) + optional_item_height + 50;
+    console.log('result: ', result);
+    return result;
+}
+
+function gen_consultation(props) {
+    let wrap = $(props.wrapper);
+    let container = $(wrap).find('.consultation__block');
+    
+    
+    let next_btn = $(wrap).find('.btn_cons_next');
+    let prev_btn = $(wrap).find('.btn_cons_prev');
+    if (props.navigate == 'next') {
         page++;
-    } else if (navigation == 'prev') {
+    } else if (props.navigate == 'prev') {
         page--;
     }
-    fetch(`/api/consultations/?page_number=${page}&page_size=5`, {
+    fetch(`/api/consultations/?page_number=${page}&page_size=5&statuses='${props.status}'
+    `, {
         method: "GET",
       })
       .then((data) => {
@@ -155,10 +292,35 @@ function gen_consultation(navigation) {
       })
       .then((body) => {
           console.log('body: ', body);
+          if (body.next == null) {
+              $(next_btn).addClass('btn_cons_passive');
+          } else {
+            $(next_btn).removeClass('btn_cons_passive');
+          }
+          if (body.previous == null) {
+            $(prev_btn).addClass('btn_cons_passive');
+          } else {
+            $(prev_btn).removeClass('btn_cons_passive');
+          }
           if (body.results.length == 0) {
             $('.consultation__block').text('консультацій ще немає');
           } else {
-            create_consultation('.consultation__block', body.results);
+
+            let option_create = {
+                'container': container,
+                'results': body.results,
+                'advocat': props.advocat
+            }
+            if (props.click_link == true) {
+                create_consultation(option_create);
+                start_animation_consultation(props.wrapper);
+            } else {
+                end_animation_consultation(props.wrapper);
+                setTimeout(() => {
+                    create_consultation(option_create);
+                    start_animation_consultation(props.wrapper);
+                }, 1000);
+            }
           }
       });
 }
@@ -474,7 +636,7 @@ function generate_interval(start, end) {
           setTimeout(() => {
             $('.all_calender__wrapper').css('opacity', '1');
           
-            console.log('body: ', body);
+            
               create_calender(body);
               
           }, 420);
@@ -618,27 +780,7 @@ $('.file_photo').on('change', function() {
           $('.photo_advocate').attr('src', data.image)
         })
 });
-$('.cancel_this_consultation').on('click', function() {
-    let wrap = $(this).parents('.consultation_prof');
-    let id = $(wrap).attr('data-id');
-    let data_json = {
-        status: 'DECLINED'
-    }
-        fetch(`/api/consultations/${id}/`, {
-        method: 'PATCH',
-        body: JSON.stringify(data_json),
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        })
-        .then(data => {
-            return data.json();
-        })
-        .then(data => {
-            $('.status_advocate_subname').text(data_json.status);
-        })       
-});
+
 
 $('.check_star_btn').on('click', function() {
     let wrap = $(this).parents('.consultation_prof');

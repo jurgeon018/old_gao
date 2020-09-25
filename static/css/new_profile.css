@@ -1276,6 +1276,182 @@
     right: 0;
     opacity: 1; }
 
+.consultation_pagination__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px; }
+  .consultation_pagination__block .button_gold {
+    transition: all .2s;
+    width: 110px;
+    margin: 0px 10px; }
+
+.btn_cons_passive {
+  pointer-events: none;
+  opacity: 0;
+  background: #d2a35182; }
+
+.scroll_consultation__block {
+  overflow-y: auto;
+  height: 900px; }
+
+.main_doc_link {
+  min-width: 170px; }
+
+.consultation_prof:nth-child(1) {
+  animation-delay: 0.53s; }
+
+.consultation_prof:nth-child(2) {
+  animation-delay: 1.06s; }
+
+.consultation_prof:nth-child(3) {
+  animation-delay: 1.59s; }
+
+.consultation_prof:nth-child(4) {
+  animation-delay: 2.12s; }
+
+.consultation_prof:nth-child(5) {
+  animation-delay: 2.65s; }
+
+.consultation_prof:nth-child(6) {
+  animation-delay: 3.18s; }
+
+.consultation_prof:nth-child(7) {
+  animation-delay: 3.71s; }
+
+.consultation_prof:nth-child(8) {
+  animation-delay: 4.24s; }
+
+.consultation_prof:nth-child(9) {
+  animation-delay: 4.77s; }
+
+.consultation_prof:nth-child(10) {
+  animation-delay: 5.3s; }
+
+.consultation_prof:nth-child(11) {
+  animation-delay: 5.83s; }
+
+.consultation_prof:nth-child(12) {
+  animation-delay: 6.36s; }
+
+.consultation_prof:nth-child(13) {
+  animation-delay: 6.89s; }
+
+.consultation_prof:nth-child(14) {
+  animation-delay: 7.42s; }
+
+.consultation_prof:nth-child(15) {
+  animation-delay: 7.95s; }
+
+.consultation_prof:nth-child(16) {
+  animation-delay: 8.48s; }
+
+.consultation_prof:nth-child(17) {
+  animation-delay: 9.01s; }
+
+.consultation_prof:nth-child(18) {
+  animation-delay: 9.54s; }
+
+.consultation_prof:nth-child(19) {
+  animation-delay: 10.07s; }
+
+.consultation_prof:nth-child(20) {
+  animation-delay: 10.6s; }
+
+.consultation_prof:nth-child(21) {
+  animation-delay: 11.13s; }
+
+.consultation_prof:nth-child(22) {
+  animation-delay: 11.66s; }
+
+.consultation_prof:nth-child(23) {
+  animation-delay: 12.19s; }
+
+.consultation_prof:nth-child(24) {
+  animation-delay: 12.72s; }
+
+.consultation_prof:nth-child(25) {
+  animation-delay: 13.25s; }
+
+.consultation_prof:nth-child(26) {
+  animation-delay: 13.78s; }
+
+.consultation_prof:nth-child(27) {
+  animation-delay: 14.31s; }
+
+.consultation_prof:nth-child(28) {
+  animation-delay: 14.84s; }
+
+.consultation_prof:nth-child(29) {
+  animation-delay: 15.37s; }
+
+.consultation_prof:nth-child(30) {
+  animation-delay: 15.9s; }
+
+.consultation_prof:nth-child(31) {
+  animation-delay: 16.43s; }
+
+.consultation_prof:nth-child(32) {
+  animation-delay: 16.96s; }
+
+.consultation_prof:nth-child(33) {
+  animation-delay: 17.49s; }
+
+.consultation_prof:nth-child(34) {
+  animation-delay: 18.02s; }
+
+.consultation_prof:nth-child(35) {
+  animation-delay: 18.55s; }
+
+.consultation_prof:nth-child(36) {
+  animation-delay: 19.08s; }
+
+.consultation_prof:nth-child(37) {
+  animation-delay: 19.61s; }
+
+.consultation_prof:nth-child(38) {
+  animation-delay: 20.14s; }
+
+.consultation_prof:nth-child(39) {
+  animation-delay: 20.67s; }
+
+.consultation_prof:nth-child(40) {
+  animation-delay: 21.2s; }
+
+.consultation_prof:nth-child(41) {
+  animation-delay: 21.73s; }
+
+.consultation_prof:nth-child(42) {
+  animation-delay: 22.26s; }
+
+.consultation_prof:nth-child(43) {
+  animation-delay: 22.79s; }
+
+.consultation_prof:nth-child(44) {
+  animation-delay: 23.32s; }
+
+.consultation_prof:nth-child(45) {
+  animation-delay: 23.85s; }
+
+.consultation_prof:nth-child(46) {
+  animation-delay: 24.38s; }
+
+.consultation_prof:nth-child(47) {
+  animation-delay: 24.91s; }
+
+.consultation_prof:nth-child(48) {
+  animation-delay: 25.44s; }
+
+.consultation_prof:nth-child(49) {
+  animation-delay: 25.97s; }
+
+.consultation_prof:nth-child(50) {
+  animation-delay: 26.5s; }
+
+.consultation_prof {
+  transition: all .3s;
+  left: -100vw; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;

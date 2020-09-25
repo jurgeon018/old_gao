@@ -1643,12 +1643,45 @@
     }
 }
 
+.consultation_pagination__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    .button_gold {
+        transition: all .2s;
+        width: 110px;
+        margin: 0px 10px;
+    }
+}
+
+.btn_cons_passive {
+    pointer-events: none;
+    opacity: 0;
+    background: #d2a35182;
+}
+.scroll_consultation__block {
+    overflow-y: auto;
+    height: 900px;
+}
+
+.main_doc_link {
+    min-width: 170px;
+}
 
 
-
-
-
-
+@for $i from 1 through 50 {
+    .consultation_prof {
+      &:nth-child(#{$i}) {
+        // Delay the animation. Delay increases as items loop.
+        animation-delay: $i * (0.53s);
+      }
+    }
+  }
+  .consultation_prof {
+    transition: all .3s;
+    left: -100vw;
+}
 
 
 
