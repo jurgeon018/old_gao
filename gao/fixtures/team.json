@@ -112,7 +112,7 @@
         }
       },
       {
-        "model": "app.Team", "pk": 8, "fields": {
+        "model": "gao.Team", "pk": 8, "fields": {
           "meta_title":"Крет Олег",
           "meta_descr":"Крет Олег",
           "alt":"Крет Олег",

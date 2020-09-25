@@ -26,13 +26,9 @@ INSTALLED_APPS = [
     'sw_blog',
     
     'tinymce',
-<<<<<<< HEAD:project/settings.py
-=======
     'rest_framework',
->>>>>>> c728cc7f8af7d462cbfda67c2b17863242fb1bbe:core/settings.py
     'import_export',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
