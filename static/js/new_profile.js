@@ -46,7 +46,7 @@ $('.consultation_link').on('click', function() {
 $('.btn_cons_prev').on('click', function() {
     let type = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
-    let current_status = check_type_cons(wrapper_block);
+    let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
     if (type == 'client') {
         gen_consultation({
@@ -69,7 +69,7 @@ $('.btn_cons_prev').on('click', function() {
 $('.btn_cons_next').on('click', function() {
     let type = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
-    let current_status = check_type_cons(wrapper_block);
+    let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
     if (type == 'client') {
         gen_consultation({
@@ -100,27 +100,49 @@ function create_consultation(props) {
             current_src = value.image;
         }
 
-
-        let doc__block = ``;
-        if (value.documents.length >= 1) {
-            $.each(value.documents, function(index, doc) {
-                doc__block += `
+        // перевірка файлів адвоката
+        let advocat_doc__block = ``;
+        if (value.advocat_documents.length >= 1) {
+            
+            $.each(value.advocat_documents, function(index, doc) {
+                advocat_doc__block += `
                 <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
-                    document_${doc.id}
+                    document_${doc.file.split('/')[2]}
                 </a>
                 ` 
             });
         } else {
-            doc__block = `
+            advocat_doc__block = `
             <div class="none_files__block standart_title standart_title_4 color_black">
               немає додаткових файлів
             </div>
             ` 
         }
+        console.log('advocat_doc__block: ', advocat_doc__block);
+
+         // перевірка файлів клієнта
+         let client_doc__block = ``;
+         if (value.client_documents.length >= 1) {
+             $.each(value.advocat_documents, function(index, doc) {
+                 client_doc__block += `
+                 <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
+                     document_${doc.file.split('/')[2]}
+                 </a>
+                 ` 
+             });
+         } else {
+             client_doc__block = `
+             <div class="none_files__block standart_title standart_title_4 color_black">
+               немає додаткових файлів
+             </div>
+             ` 
+         }
+
+         console.log('client_doc__block: ', client_doc__block);
 
         let option__block = ``;
         if (props.advocat == true) {
-                option__block == `
+                option__block = `
                 <div title="Відмінити консультацію" class="cancel_this_consultation">
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
                 </div>
@@ -159,14 +181,14 @@ function create_consultation(props) {
                     Галузь
                 </div>
             </div>
-            <div class="status_advocate_subname advocate_type_work standart_title standart_title_4 color_black">
+            <div class="advocate_type_work standart_title standart_title_4 color_black">
                 ${value.faculty_name}
             </div>
         </div>
         <div class="advocate_name main_title main_title_4 color_gold">
             Статус консультації:
         </div>
-        <div class="advocate_subname standart_title standart_title_4 color_black">
+        <div class="status_advocate_subname advocate_subname standart_title standart_title_4 color_black">
               ${value.status}
         </div>
       </div>
@@ -215,10 +237,20 @@ function create_consultation(props) {
       </div>
       <div class="consultation_section consultation_right">
         <div class="consultation_title main_title main_title_4 color_green">
-            Додаткові файли:
+            Файли адвоката
         </div>
-        <div class="consultation_file__block">
-            ${doc__block}
+        <div class="consultation_place_scroll">
+            <div class="consultation_file__block consultation_place">
+                ${advocat_doc__block}
+            </div>
+        </div>
+        <div class="consultation_title main_title main_title_4 color_green">
+            Файли клієнта
+        </div>
+        <div class="info_consultation_scroll">
+            <div class="consultation_file__block">
+               ${client_doc__block}
+            </div>
         </div>
       </div>
     </div>
@@ -568,22 +600,22 @@ function generate_interval(start, end) {
                     $(table_task).find('.advocate_price_span').text(`${body.price} грн`);
 
                     // зміна файлів (клієнт)
-                    $('.info_consultation_file__block').children().remove();
+                    $('.calender_consultation_file__block').children().remove();
                     $.each(body.client_documents, function(index, sub_value) {
                         let json_file = {
                             file_name: sub_value.file.split('/')[2],
                             file_href: sub_value.file
                         }
-                        $('.info_consultation_file__block')[0].appendChild(create_simple_files(json_file));
+                        $('.calender_consultation_file__block')[0].appendChild(create_simple_files(json_file));
                     });
                     // зміна файлів (адвокат)
-                    $('.consultation_place').children().remove();
+                    $('.calender_consultation_place').children().remove();
                     $.each(body.advocat_documents, function(index, sub_value) {
                         let json_file = {
                             file_name: sub_value.file.split('/')[2],
                             file_href: sub_value.file
                         }
-                        $('.consultation_place')[0].appendChild(create_simple_files(json_file));
+                        $('.calender_consultation_place')[0].appendChild(create_simple_files(json_file));
                     });
                     // додавання коменту
                     if (body.comment != '') {
