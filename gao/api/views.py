@@ -161,13 +161,13 @@ class FacultyDetailView(generics.RetrieveAPIView):
 
 class ConsultationDocumentListView(generics.ListCreateAPIView):
   pagination_class = CustomPagination
-  serializer_class = ConsultationListSerializer
-  queryset = Consultation.objects.all()
+  serializer_class = ConsultationDocumentSerializer
+  queryset = ConsultationDocument.objects.all()
 
 
 class ConsultationDocumentDetailView(generics.RetrieveAPIView):
-  serializer_class = ConsultationListSerializer
-  queryset = Consultation.objects.all()
+  serializer_class = ConsultationDocumentSerializer
+  queryset = ConsultationDocument.objects.all()
 
 
 class ConsultationListView(generics.ListCreateAPIView):
