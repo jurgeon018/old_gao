@@ -283,7 +283,7 @@ function gen_consultation(props) {
     } else if (props.navigate == 'prev') {
         page--;
     }
-    fetch(`/api/consultations/?page_number=${page}&page_size=5&statuses='${props.status}'
+    fetch(`/api/consultations/?page_number=${page}&page_size=5&statuses=${props.status}
     `, {
         method: "GET",
       })
