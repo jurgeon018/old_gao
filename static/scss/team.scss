@@ -1,7 +1,7 @@
 .team {
 	position: relative;
-	padding-bottom: 20px;
-	
+	padding: 100px 0px;
+	padding-top: 160px;
 	background: linear-gradient(39deg, #030A00, #112804);
                  
 
@@ -17,7 +17,10 @@
 		
 
 
-
+#main__title-team {
+	margin-top: 0;
+    margin-bottom: 40px;
+}
 	
 			
 		
@@ -49,6 +52,7 @@
 .team-wrap {
 	width: 70%;
 	margin: 0 auto;
+    margin-top: -170px;
 
 
 	img {
@@ -110,8 +114,7 @@
 	}
 }
 @media (max-width: 1193px) {
-	margin-left: 10px;
-	font-size: 13px;
+	
 }
 @media (max-width: 1113px) {
 	.team-name-prof {

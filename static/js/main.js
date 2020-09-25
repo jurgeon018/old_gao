@@ -26,20 +26,23 @@ $(document).ready(function() {
   });
 
 
+  $(".scroll_all").on('click', function () {
+    var elementClick = $(this).attr("href");
+    var destination = $(elementClick).offset().top - 100;
+    $('html, body').animate({ scrollTop: destination }, 600);
+    return false;
+  });
 
 
-
-    $("#team__link").on('click', function () {
+    $("#team__link").on('click', function (e) {
         if (window.location.pathname.split('/')[1] !== "") {
                               localStorage.team_swipe = 1;
                            window.location.pathname = "/";
                            console.log('hello');
         } else {
             var elementClick = $(this).attr("href");
-            console.log(elementClick);
-            var destination = $(elementClick).offset().top;
+            var destination = $(elementClick).offset().top - 90;
             $('html, body').animate({ scrollTop: destination }, 600);
-            return false;
         }
         
     });
@@ -51,10 +54,8 @@ $(document).ready(function() {
                            console.log('hello');
         } else {
             var elementClick = $(this).attr("href");
-            console.log(elementClick);
-            var destination = $(elementClick).offset().top;
+            var destination = $(elementClick).offset().top - 90;
             $('html, body').animate({ scrollTop: destination }, 600);
-            return false;
         }
         
     });
@@ -81,11 +82,11 @@ $(document).ready(function() {
                                window.location.pathname = "/";
                                console.log('hello');
             } else {
-                var elementClick = $(this).attr("href");
-                console.log(elementClick);
-                var destination = $(elementClick).offset().top;
-                $('html, body').animate({ scrollTop: destination }, 600);
-                return false;
+                // var elementClick = $(this).attr("href");
+                // console.log(elementClick);
+                // var destination = $(elementClick).offset().top;
+                // $('html, body').animate({ scrollTop: destination }, 600);
+                // return false;
             }
             
         });
@@ -96,11 +97,11 @@ $(document).ready(function() {
                                window.location.pathname = "/";
                                console.log('hello');
             } else {
-                var elementClick = $(this).attr("href");
-                console.log(elementClick);
-                var destination = $(elementClick).offset().top;
-                $('html, body').animate({ scrollTop: destination }, 600);
-                return false;
+                // var elementClick = $(this).attr("href");
+                // console.log(elementClick);
+                // var destination = $(elementClick).offset().top;
+                // $('html, body').animate({ scrollTop: destination }, 600);
+                // return false;
             }
             
         });
@@ -263,38 +264,79 @@ $('#team__link').on("click", function() {
 
 
    
-    var logoSlick = $('.sliderLogo').slick({
-        nextArrow: document.querySelector('#my-arrow-next'),
-        prevArrow: document.querySelector('#my-arrow-prev'),
-        dots: false,
-        swipe: false,
-        fade: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        pauseOnHover: false,
+    // var logoSlick = $('.sliderLogo').slick({
+    //     nextArrow: document.querySelector('#my-arrow-next'),
+    //     prevArrow: document.querySelector('#my-arrow-prev'),
+    //     dots: false,
+    //     swipe: false,
+    //     fade: true,
+    //     autoplay: true,
+    //     autoplaySpeed: 5000,
+    //     pauseOnHover: false,
+    // });
+    $('.client_btn').on('click', function() {
+        $(this).parents('.client_prof').addClass('client_prof_active');
     });
-
+    $('.client_close_btn').on('click', function() {
+        $(this).parents('.client_prof').removeClass('client_prof_active');
+    });
    
     var mainSlick = $('.sliderS').slick({
+       
+        swipe: false,
+        autoplay: true,
+        speed: 1000,
+        autoplaySpeed: 4000,
+        infinite: false,
+        slidesToShow: 2,
+        slidesToScroll: 1,
         nextArrow: document.querySelector('#my-arrow-next'),
         prevArrow: document.querySelector('#my-arrow-prev'),
-        dots: false,
-        swipe: false,
-        fade: true,
-         autoplay: true,
-        speed: 100
+        cssEase: 'ease-in-out',
+       
 
+    });
+    
+    $('.slide-left').find('.slide-prof').css('opacity', '0');
+    setTimeout(() => {
+        $('.slide-left').find('.slide-prof').css('opacity', '1');
 
+        $('.slide-left').find('.slide-prof').css('align-items', 'flex-end');
+        $('.slide-left').find('.slide-prof').find('.sub-text').css('text-align', 'right');
+        $('.slide-left').find('.slick-current').css('align-items', 'flex-start');
+        $('.slide-left').find('.slick-current').find('.sub-text').css('text-align', 'left');
+    }, 500);
+    setTimeout(() => {
+        $('.slide-left').find('.slide-prof').css('opacity', '1');
+    }, 1000);
+
+    $('.sliderS').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+
+            $('.slide-left').find('.slide-prof').css('opacity', '0');
+        setTimeout(() => {
+            $('.slide-left').find('.slide-prof').css('opacity', '1');
+
+            $('.slide-left').find('.slide-prof').css('align-items', 'flex-end');
+            $('.slide-left').find('.slide-prof').find('.sub-text').css('text-align', 'right');
+            $('.slide-left').find('.slick-current').css('align-items', 'flex-start');
+            $('.slide-left').find('.slick-current').find('.sub-text').css('text-align', 'left');
+        }, 500);
+        setTimeout(() => {
+            $('.slide-left').find('.slide-prof').css('opacity', '1');
+
+        }, 1000);
+        
     });
 
 
     $('.my-1').on('click', function() {
+        mainSlick.slick('slickPrev');
 
-        mainSlick.slick('slickNext');
     });
     $('.my-2').on('click', function() {
+        mainSlick.slick('slickNext');
 
-        mainSlick.slick('slickPrev');
+
     });
 
 
@@ -319,9 +361,10 @@ $('#team__link').on("click", function() {
 
 
 
+    // $("#phone").mask("+38 (099) 99 - 99 - 999");
+    $('#phone').mask("+38(099) 99 99 999");
 
-
-    $("#phone").mask("+38 (099) 99 - 99 - 999");
+    $(".reserve_input_date").mask("99_99_2099");
 
 
 

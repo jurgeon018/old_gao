@@ -4,8 +4,50 @@
         <div id="main__title-client" class="main__title">
             НАШІ КЛІЄНТИ
         </div>
-
+        <div class="main_subtitle_client">
+            Ми щасливі від того, що були та залишаємось корисними для наших клієнтів, 
+            щиро радіємо за їх професійний ріст та горді співпрацею з ними!
+        </div>
         <div class="client-block">
+            {%for slider in sliders%}
+            {% for client in slider.clients.all %}
+            <div class="client_prof">
+                <div class="client_header__wrap">
+                    <div class="client_img">
+                        <img data-src="{{client.image.url}}" alt="{{client.alt}}">
+                    </div>
+                    <div class="client_title__block">
+                        <div class="client_title">
+                            {{client.title}}
+                        </div>
+                        <a href="galpravgroup.com.ua" class="client_subtitle">
+                            {{client.site}}
+                         </a>
+                    </div>
+                </div>
+                <div class="client_content">
+                    {{client.body}}
+                    Компанія є найбільшим виробником цукру в Західній Україні, що входить до міжнародної групи компаній Pfeifer&Langen – провідного 
+                    виробника цукру на теренах Євросоюзу.
+                </div>
+                {% if client.body2 %}
+                <div class="client_btn">
+                    Більше
+                </div>
+                <div class="client_close_btn">
+                    Закрити
+                </div>
+                <div class="client_hidden_content">
+                    {{client.bod2}}
+                    Компанія спеціалізується на переробці цукрового буряка, виробництві цукру-піску, меляси та жому. 
+                    Виробничі  потужності підприємства розміщені у Львівській та Тернопільській областях.
+                </div>
+                {% endif %}
+            </div>
+            {%endfor%}
+            {%endfor%}
+        </div>
+        <!-- <div class="client-block">
             {% for slider in sliders %}
             <div class="sliderLogo">
                 {% if not forloop.counter|divisibleby:"2" == 0%}
@@ -47,8 +89,9 @@
 
             </div>
             {% endfor %}
-        </div>
-        <div class="link__index">
+        </div> -->
+
+        <!-- <div class="link__index">
         <a href="#main-header">
             <div class="elips">
 
@@ -79,7 +122,7 @@
 
             </div>
         </a>
-        </div>
+        </div> -->
         <div id="test-fix-blog"></div>
     </div>
 </section>

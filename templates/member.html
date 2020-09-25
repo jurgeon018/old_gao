@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
+  
 {% block header_class %}
 profile-header
 {% endblock header_class %}
+{% block without_header %}
+
+<section class="abzac">
+  <div class="container">
+    <div class="about-main__text about__subtitles">
+        Ми - команда досвідчених юристів. Ми завжди рухаємося вперед у ногу з часом. 
+        Наш  «колективний розум»  працює виключно на позитивний результат усі 24 години на добу. 
+        Ми працьовиті та завзяті, ті, хто завжди впевнений у своїх діях. 
+        Однак,  основною нашою рисою є те, що ми вміємо приймати правильні рішення, 
+        щоб досягти для Вас бажаного результату.
+    </div> 
+  </div>
+</section>
+{% endblock without_header %}
+
 {% block content %}
-
 {% include 'includes/form.html' %}
-
-<div class="about-main__text about__subtitles">
-  <p>
-    Ми - команда досвідчених юристів. Ми завжди рухаємося вперед у ногу з часом. 
-    Наш  «колективний розум»  працює виключно на позитивний результат усі 24 години на добу. 
-    Ми працьовиті та завзяті, ті, хто завжди впевнений у своїх діях. 
-    Однак,  основною нашою рисою є те, що ми вміємо приймати правильні рішення, 
-    щоб досягти для Вас бажаного результату.
-  </p>
-
-</div> 
 
 <div class="about-prof-wrap">
 
@@ -70,6 +74,7 @@ profile-header
       {% if member.phone %}
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-2.png" alt="">
+<<<<<<< HEAD
         <a href="tel:{{member.phone}}" class="geo-text">
           {{member.phone}}
           <!-- 050 374 83 90 -->
@@ -87,6 +92,26 @@ profile-header
       </div>
       {% endif %}
       {% if member.email %}
+=======
+        <div class="mobile__block">
+          <a href="tel:{{member.phone}}" class="geo-text">
+            {{member.phone}}
+            <!-- 050 374 83 90 -->
+            <!-- 097 786 39 19 -->
+          </a>
+          {% if member.phone2 %}
+            <a href="tel:{{member.phone2}}" class="geo-text">
+              {{member.phone2}}
+              <!-- 050 432 19 97 -->
+            </a>
+          {% endif %}
+        </div>
+       
+      </div>
+      {% endif %}
+     
+      
+>>>>>>> c728cc7f8af7d462cbfda67c2b17863242fb1bbe
       <div class="geo-block">
         <img src="/static/img/about-pg/about-icon-3.png" alt="">
         
