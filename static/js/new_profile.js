@@ -1408,6 +1408,57 @@ $('.data_step_select_btn').on('click', function() {
 
     $(this).toggleClass('visible');
 })
+
+
+// додавання файлів адвокатом для клієнта в його консультацію
+$('.consultation_advocate_doc_btn').on('change', function() {
+    let file_create = $('#consultation_advocate_doc_btn')[0];
+    let Formdata = new FormData();
+    let files = file_create.files;
+    let id_sonsultation = $(this).parents('.advocate_calender_info_active').attr('data-id');
+    let info = return_info_users();
+    Formdata.append(`author`, info.result_client);
+    Formdata.append(`consultation`, id_sonsultation);
+
+    $.each(files, function(i, file){
+        Formdata.append(`file[${i}]`, file);
+        $('.consultation_place')[0].appendChild(create_simple_files(file));
+    });
+
+    fetch('/api/consultation_documents/', {
+        method: 'POST',
+        body: Formdata,
+    })
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+     
+    })
+});
+
+let create_simple_files = (content) => {
+    let doc_profile = document.createElement('div');
+        doc_profile.classList.add('doc-profile');
+
+    let doc_img_wrap = document.createElement('div');
+    doc_img_wrap.classList.add('doc-img-wrap');
+
+    let doc_img = document.createElement('img');
+    doc_img.classList.add('doc-img');
+    doc_img.setAttribute(`src`, '/static/img/doc.svg');
+
+    let doc__title = document.createElement('div');
+    doc__title.classList.add('doc__title');
+    doc__title.textContent = content.name;
+
+    doc_profile.appendChild(doc_img_wrap);
+    doc_img_wrap.appendChild(doc_img);
+    doc_profile.appendChild(doc__title);
+
+    return doc_profile;
+}
+
 // додавання файлів адвокатом
 $('.advocate_doc_add_btn').on('change', function() {
     let file_create = $('#advocate_doc_add_btn')[0];
@@ -1432,6 +1483,8 @@ $('.advocate_doc_add_btn').on('change', function() {
      
     })
 });
+
+
 
 
 let create_advocate_files = (content) => {

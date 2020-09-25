@@ -952,6 +952,25 @@
   .advocate_calender_arrow_2 {
     transform: rotate(-90deg); }
 
+.consultation_advocate_doc__block {
+  position: relative;
+  padding-bottom: 20px; }
+  .consultation_advocate_doc__block .main_title {
+    line-height: 1.3;
+    padding-bottom: 20px; }
+.consultation_advocate_doc_label {
+  cursor: pointer; }
+.consultation_advocate_doc_btn {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center; }
+
 .advocate_doc_add_label {
   cursor: pointer; }
 .advocate_doc_add_btn {
