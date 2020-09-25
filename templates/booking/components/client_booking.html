@@ -1,9 +1,12 @@
 <div id="profile_3" class="main_doc_content main_doc_content_active">
+  {% if unordered_consultation %}
+    У вас є неоплачена консультація. 
+    <a href="{% url 'payment' %}" style="color:blue;">Перейдіть</a> на сторінку оплати, щоб оплатити її, 
+    або 
+    <a data-href="/api/consultations/{{unordered_consultation}}/" data-method="DELETE" style="color:red;">видаліть</a> 
+    її. 
+  {% else %}
   <form action="/api/consultations/" class="new_form user_order_of_advocate">
-
-
-
-
     <!-- Крок 1 -->
     <div class="step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
@@ -424,4 +427,5 @@
 
 
   </form>
+  {% endif %}
 </div>
