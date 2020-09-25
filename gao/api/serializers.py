@@ -38,13 +38,34 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     end         = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
     created     = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     updated     = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-    documents   = ConsultationDocumentListSerializer(many=True, read_only=True)
+    # documents   = ConsultationDocumentListSerializer(many=True, read_only=True)
     payment     = ConsultationPaymentSerializer(many=True, read_only=True)
     price       = serializers.SerializerMethodField()
     full_time   = serializers.SerializerMethodField()
     client_name = serializers.SerializerMethodField()
     image = serializers.SerializerMethodField()
     faculty_name = serializers.SerializerMethodField()
+    advocat_documents = serializers.SerializerMethodField()
+
+    def get_advocat_documents(self, consultation):
+        advocat_documents = []
+        for document in ConsultationDocument.objects.filter(author__role=User.ADVOCAT_ROLE):
+            advocat_documents.append({
+                "id":document.id,
+                "file":document.file.url,
+            })
+        return advocat_documents
+
+    client_documents = serializers.SerializerMethodField()
+
+    def get_client_documents(self, consultation):
+        client_documents = []
+        for document in ConsultationDocument.objects.filter(author__role=User.CLIENT_ROLE):
+            client_documents.append({
+                "id":document.id,
+                "file":document.file.url,
+            })
+        return client_documents
 
     def get_price(self, consultation):
         return consultation.price 
@@ -110,8 +131,9 @@ class FacultyDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty 
         exclude = []
-        
+
 class ConsultationDocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationDocument
         exclude = []
+
