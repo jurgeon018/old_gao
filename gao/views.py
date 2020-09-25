@@ -38,13 +38,13 @@ def cabinet(request):
   for days in range(0, 10):
       dates.append(today + timedelta(days=days))
   if role == User.ADVOCAT_ROLE:
-      consultations = consultations.filter(advocat=user).order_by('date')
-      clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
+    consultations = consultations.filter(advocat=user).order_by('date')
+    clients = User.objects.filter(id__in=consultations.values_list('client__id', flat=True))
   elif role == User.CLIENT_ROLE:
-      consultations = consultations.filter(client=user)
-      advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
+    consultations = consultations.filter(client=user)
+    advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
+    unordered_consultation = consultations.get(status=Consultation.UNORDERED)
   finished_consultations = consultations.filter(status=Consultation.FINISHED)
-  unordered_consultation = consultations.get(status=Consultation.UNORDERED)
   return render(request, f'booking/cabinet_{role}.html', locals())
 
 def index(request):
