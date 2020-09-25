@@ -398,7 +398,9 @@ if ($('.advocate_calender_container').length == 1) {
     });
 
     $('.communicate_select').on('select2:select', function (e) {
-        var data = e.params.data.id;
+        var data = {
+            format: e.params.data.id
+        };
 
         fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
         method: 'PATCH',
