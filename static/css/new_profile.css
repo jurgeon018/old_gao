@@ -971,6 +971,20 @@
   display: flex;
   align-items: center; }
 
+.consultation_place {
+  padding-top: 15px; }
+  .consultation_place .doc-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0px; }
+  .consultation_place .doc-img {
+    width: 30px;
+    margin-right: 10px; }
+  .consultation_place .doc__title {
+    width: calc(100% - 40px); }
+
 .advocate_doc_add_label {
   cursor: pointer; }
 .advocate_doc_add_btn {
@@ -1526,6 +1540,14 @@
   .consultation_star__block p {
     margin-bottom: 10px; } }
 @media (max-width: 1170px) {
+  .main_doc_link__block {
+    flex-direction: column; }
+    .main_doc_link__block .main_doc_link {
+      min-width: unset;
+      max-width: 200px;
+      margin: 0;
+      margin-bottom: 10px; }
+
   #tab_33 {
     padding-left: 15px;
     padding-right: 15px; }

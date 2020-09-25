@@ -575,7 +575,8 @@ function generate_interval(start, end) {
                         consultation_file.textContent = sub_value.file_name;
                         consultation_file.setAttribute(`href`, sub_value.file_url);
 
-                        $('.info_consultation_file__block')[0].appendChild(consultation_file);
+                        // $('.info_consultation_file__block')[0].appendChild(consultation_file);
+                        $('.consultation_place')[0].appendChild(create_simple_files(json_file));
                     });
                     // додавання коменту
                     if (body.comment != null) {
@@ -1421,28 +1422,34 @@ $('.consultation_advocate_doc_btn').on('change', function() {
     Formdata.append(`consultation`, id_sonsultation);
 
     $.each(files, function(i, file){
-        Formdata.append(`file[${i}]`, file);
-        $('.consultation_place')[0].appendChild(create_simple_files(file));
+        Formdata.append(`file`, file);
+        let json_file = {
+            file_name: file.name,
+            file_href: '#'
+        }
+        $('.consultation_place')[0].appendChild(create_simple_files(json_file));
+
+        fetch('/api/consultation_documents/', {
+            method: 'POST',
+            body: Formdata,
+        })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+         
+        })
     });
 
-    fetch('/api/consultation_documents/', {
-        method: 'POST',
-        body: Formdata,
-    })
-    .then(data => {
-        return data.json();
-    })
-    .then(data => {
-     
-    })
+   
 });
 
 let create_simple_files = (content) => {
-    let doc_profile = document.createElement('div');
+    console.log('content: ', content);
+    let doc_profile = document.createElement('a');
         doc_profile.classList.add('doc-profile');
+        doc_img.setAttribute(`href`, content.file_href);
 
-    let doc_img_wrap = document.createElement('div');
-    doc_img_wrap.classList.add('doc-img-wrap');
 
     let doc_img = document.createElement('img');
     doc_img.classList.add('doc-img');
@@ -1450,10 +1457,9 @@ let create_simple_files = (content) => {
 
     let doc__title = document.createElement('div');
     doc__title.classList.add('doc__title');
-    doc__title.textContent = content.name;
+    doc__title.textContent = content.file_name;
 
-    doc_profile.appendChild(doc_img_wrap);
-    doc_img_wrap.appendChild(doc_img);
+    doc_profile.appendChild(doc_img);
     doc_profile.appendChild(doc__title);
 
     return doc_profile;

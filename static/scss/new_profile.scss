@@ -1261,6 +1261,24 @@
         align-items: center;
     }
 }
+.consultation_place {
+    padding-top: 15px;
+
+    .doc-profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0px;
+    }
+    .doc-img {
+        width: 30px;
+        margin-right: 10px;
+    }
+    .doc__title {
+        width: calc(100% - 40px);
+    }
+}
 .advocate_doc_add {
     &__block {
        
@@ -1781,6 +1799,21 @@
 }
 
 @media (max-width: 1170px) {
+    .main_doc_link__block {
+        flex-direction: column;
+
+        .main_doc_link {
+            min-width: unset;
+            max-width: 200px;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+    }
+
+
+
+
+
     #tab_33 {
         padding-left: 15px;
         padding-right: 15px;
