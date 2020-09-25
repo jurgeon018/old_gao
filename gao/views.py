@@ -43,10 +43,12 @@ def cabinet(request):
   elif role == User.CLIENT_ROLE:
     consultations = consultations.filter(client=user)
     advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
-    try:
-      unordered_consultation = consultations.get(status=Consultation.UNORDERED)
-    except Consultation.DoesNotExists():
-      unordered_consultation = None
+    unordered_consultation = consultations.filter(status=Consultation.UNORDERED).first()
+    print(unordered_consultation)
+    # try:
+    #   unordered_consultation = consultations.get(status=Consultation.UNORDERED)
+    # except Consultation.DoesNotExists():
+    #   unordered_consultation = None
   finished_consultations = consultations.filter(status=Consultation.FINISHED)
   return render(request, f'booking/cabinet_{role}.html', locals())
 
