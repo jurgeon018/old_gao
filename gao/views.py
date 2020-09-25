@@ -44,7 +44,7 @@ def cabinet(request):
       consultations = consultations.filter(client=user)
       advocats = User.objects.filter(id__in=consultations.values_list('advocat__id', flat=True))
   finished_consultations = consultations.filter(status=Consultation.FINISHED)
-  unordered_consultations = consultations.filter(status=Consultation.UNORDERED)
+  unordered_consultation = consultations.get(status=Consultation.UNORDERED)
   return render(request, f'booking/cabinet_{role}.html', locals())
 
 def index(request):
