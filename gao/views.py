@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 from box.core.sw_content.models import * 
 
+from sw_liqpay.utils import get_liqpay_context, create_liqpay_transaction
+from sw_liqpay.models import LiqpayConfig
+
 from sw_blog.models import Post 
 
 from .models import *
@@ -52,9 +55,6 @@ def blog(request):
     page, _ = Page.objects.get_or_create(code='blog')
     return render(request, 'blog.html', locals())
 
-from sw_liqpay.utils import get_liqpay_context, create_liqpay_transaction
-from sw_liqpay.models import LiqpayConfig
-
 def get_gao_liqpay_context(request):
     # TODO: а)поставити обмеження на створення нової консультації, якщо є неоплачена стара 
     # TODO: б)діставати консультацію з сесії 
@@ -70,7 +70,7 @@ def get_gao_liqpay_context(request):
         'currency': 'UAH',
         'version': '3',
         'sandbox': int(LiqpayConfig.get_solo().sandbox_mode), 
-        'server_url': f'/gao/liqpay_callback/',
+        'server_url': f'/gao_liqpay_callback/',
     }
     signature, data = get_liqpay_context(liqpay_params)
     context = {

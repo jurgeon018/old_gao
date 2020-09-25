@@ -50,7 +50,7 @@ class ConsultationListSerializer(serializers.ModelSerializer):
     def get_advocat_documents(self, consultation):
         advocat_documents = []
         for document in ConsultationDocument.objects.filter(author__role=User.ADVOCAT_ROLE):
-            client_documents.append({
+            advocat_documents.append({
                 "id":document.id,
                 "file":document.file.url,
             })
@@ -66,7 +66,6 @@ class ConsultationListSerializer(serializers.ModelSerializer):
                 "file":document.file.url,
             })
         return client_documents
-
 
     def get_price(self, consultation):
         return consultation.price 
