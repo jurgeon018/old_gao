@@ -612,6 +612,7 @@
 .sumbit_content_error {
     text-align: center;
     margin-top: 15px;
+    color: #ff0000 !important;
 }
 
 
@@ -736,6 +737,7 @@
 }
 .datepicker--cell {
     transition: all .2s;
+    border-radius: 50% !important;
 }
 .datepicker-inline .datepicker {
     border-radius: 20px;
@@ -1277,6 +1279,12 @@
         width: 100%;
     }
 }
+#change_status_in_consultation {
+    .kab__title {
+        font-size: 15px;
+        padding: 20px;
+    }
+}
 .advocate_doc_add {
     &__block {
        
@@ -1502,7 +1510,7 @@
 }
 
 .hidden_message {
-    color: #727271;
+    color: #ff0000;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.5;
@@ -1513,7 +1521,7 @@
 
 
 .error_reserve {
-    color: red;
+    color: ff0000;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.5;
@@ -1656,7 +1664,7 @@
 .datepicker {
     position: relative;
     .load_calender {
-        border-radius: 3px !important;
+        border-radius: 20px !important;
     }
 }
 
@@ -1716,10 +1724,14 @@
         animation-delay: $i * (0.53s);
       }
     }
-  }
+}
   .consultation_prof {
     transition: all .3s;
     left: -100vw;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 
@@ -1729,6 +1741,46 @@
     /* padding-top: 20px; */
     margin-top: 20px;
 }
+.consult_borg {
+    font-weight: 700;
+    font-size: 20px;
+    color: #D2A351;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+
+
+
+
+// 1 - крок з вибором адвоката
+// 2 - крок з вибором дати та часу
+// 3 - крок з вибором часу
+// 4 - крок для всього іншого що внизу
+
+.step {
+    &_1, &_2, &_3, &_4 {
+        transition: all .2s;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    &_passive {
+        opacity: 0.3;
+        pointer-events: none;
+        cursor: default;
+    }
+   
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

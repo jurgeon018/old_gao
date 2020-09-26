@@ -454,7 +454,8 @@
 
 .sumbit_content_error {
   text-align: center;
-  margin-top: 15px; }
+  margin-top: 15px;
+  color: #ff0000 !important; }
 
 .consultation_title {
   margin-bottom: 20px; }
@@ -541,7 +542,8 @@
     margin-top: 20px; }
 
 .datepicker--cell {
-  transition: all .2s; }
+  transition: all .2s;
+  border-radius: 50% !important; }
 
 .datepicker-inline .datepicker {
   border-radius: 20px;
@@ -983,6 +985,10 @@
 .consultation_place .doc__title, .info_consultation_file__block .doc__title {
   width: 100%; }
 
+#change_status_in_consultation .kab__title {
+  font-size: 15px;
+  padding: 20px; }
+
 .advocate_doc_add_label {
   cursor: pointer; }
 .advocate_doc_add_btn {
@@ -1158,7 +1164,7 @@
     height: auto; }
 
 .hidden_message {
-  color: #727271;
+  color: #ff0000;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
@@ -1166,7 +1172,7 @@
   padding-bottom: 10px; }
 
 .error_reserve {
-  color: red;
+  color: ff0000;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
@@ -1286,7 +1292,7 @@
 .datepicker {
   position: relative; }
   .datepicker .load_calender {
-    border-radius: 3px !important; }
+    border-radius: 20px !important; }
 
 .advocate_user_input__block {
   position: relative;
@@ -1482,12 +1488,30 @@
 .consultation_prof {
   transition: all .3s;
   left: -100vw; }
+  .consultation_prof:last-child {
+    margin-bottom: 0; }
 
 .consultation_place_scroll, .info_consultation_scroll {
   overflow-y: auto;
   max-height: 200px;
   /* padding-top: 20px; */
   margin-top: 20px; }
+
+.consult_borg {
+  font-weight: 700;
+  font-size: 20px;
+  color: #D2A351;
+  margin-bottom: 20px;
+  line-height: 1.4; }
+
+.step_1, .step_2, .step_3, .step_4 {
+  transition: all .2s;
+  opacity: 1;
+  pointer-events: auto; }
+.step_passive {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: default; }
 
 @media (max-width: 1417px) {
   .advocate_calender_info {

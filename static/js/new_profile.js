@@ -1,8 +1,54 @@
 
     let page = 0;
 
+    hide_step([1,2,3,4]);
 
 
+
+
+
+    // 1 - крок з вибором адвоката
+    // 2 - крок з вибором дати та часу
+    // 3 - крок з вибором часу
+    // 4 - крок для всього іншого що внизу
+    
+
+    function hide_step(steps) {
+        $.each(steps, function(index, value) {
+            let step = `.step_${value}`;
+            console.log('step: ', step);
+            $(step).addClass('step_passive');
+        });
+    }
+    function show_step(steps) {
+        $.each(steps, function(index, value) {
+            let step = `.step_${value}`;
+            $(step).removeClass('step_passive');
+        });
+    }
+
+
+
+
+
+
+$('.delete_user_first_consultation').on('click', function() {
+    let url = $(this).attr('data-href');
+
+    fetch(url , {
+    method: 'DELETE',
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    }) 
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+        console.log('data: ', data);
+    });
+});
 
 
 function check_type_cons(props) {
@@ -19,18 +65,19 @@ function check_type_cons(props) {
 }
 
 $('.consultation_link').on('click', function() {
-    let type = $(this).attr('data-type');
+    let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
     page = 0;
-    if (type == 'client') {
+    if (type_item == 'client') {
         gen_consultation({
             wrapper: wrapper_block,
             navigate: 'next',
             click_link: true,
             advocat: false,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     } else {
         gen_consultation({
@@ -38,23 +85,25 @@ $('.consultation_link').on('click', function() {
             navigate: 'next',
             click_link: true,
             advocat: true,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     }
 })
 
 $('.btn_cons_prev').on('click', function() {
-    let type = $(this).attr('data-type');
+    let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
-    if (type == 'client') {
+    if (type_item == 'client') {
         gen_consultation({
             wrapper: wrapper_block,
             navigate: 'prev',
             click_link: false,
             advocat: false,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     } else {
         gen_consultation({
@@ -62,22 +111,24 @@ $('.btn_cons_prev').on('click', function() {
             navigate: 'prev',
             click_link: false,
             advocat: true,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     }
 })
 $('.btn_cons_next').on('click', function() {
-    let type = $(this).attr('data-type');
+    let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
 
-    if (type == 'client') {
+    if (type_item == 'client') {
         gen_consultation({
             wrapper: wrapper_block,
             navigate: 'next',
             click_link: false,
             advocat: false,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     } else {
         gen_consultation({
@@ -85,7 +136,8 @@ $('.btn_cons_next').on('click', function() {
             navigate: 'next',
             click_link: false,
             advocat: true,
-            status: current_status
+            status: current_status,
+            type: type_item
         });
     }
 })
@@ -106,7 +158,7 @@ function create_consultation(props) {
             
             $.each(value.advocat_documents, function(index, doc) {
                 advocat_doc__block += `
-                <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
+                <a href="${doc.file}" target='_blank' class="consultation_file standart_title standart_title_4 color_black">
                     document_${doc.file.split('/')[2]}
                 </a>
                 ` 
@@ -125,7 +177,7 @@ function create_consultation(props) {
          if (value.client_documents.length >= 1) {
              $.each(value.advocat_documents, function(index, doc) {
                  client_doc__block += `
-                 <a href="${doc.file}" class="consultation_file standart_title standart_title_4 color_black">
+                 <a href="${doc.file}" target='_blank' class="consultation_file standart_title standart_title_4 color_black">
                      document_${doc.file.split('/')[2]}
                  </a>
                  ` 
@@ -141,7 +193,7 @@ function create_consultation(props) {
          console.log('client_doc__block: ', client_doc__block);
 
         let option__block = ``;
-        if (props.advocat == true) {
+        if (props.advocat == true && props.wrap != '#profile_5') {
                 option__block = `
                 <div title="Відмінити консультацію" class="cancel_this_consultation">
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
@@ -150,12 +202,21 @@ function create_consultation(props) {
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
                 </div>
                 ` 
-        } else if (props.advocat == false) {
+        } else if (props.advocat == true && props.wrap == '#profile_5') {
+                option__block = `
+                <div title="Видалити консультацію" class="delete_this_consultation">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                </div>
+                ` 
+        } 
+        else if (props.advocat == false && props.wrap != '#profile_5') {
             option__block = `
                 <div title="Відмінити консультацію" class="cancel_this_consultation">
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
                 </div>
             ` 
+        } else if (props.advocat == false && props.wrap == '#profile_5') {
+            option__block = `` 
         }
 
 
@@ -279,6 +340,7 @@ function create_consultation(props) {
             })
             .then(data => {
                 $(wrap).find('.status_advocate_subname').text(data_json.status);
+                generete_modal_text('Консультацію успішно відмінено');
             })       
     });
     $('.delete_this_consultation').on('click', user_delete);
@@ -334,6 +396,11 @@ function gen_consultation(props) {
           } else {
             $(prev_btn).removeClass('btn_cons_passive');
           }
+          if (body.next == null && body.previous == null) {
+              $('.consultation_pagination__block').css('display', 'none');
+          } else {
+            $('.consultation_pagination__block').css('display', 'flex');
+          }
           if (body.results.length == 0) {
             $('.consultation__block').text('консультацій ще немає');
           } else {
@@ -341,7 +408,9 @@ function gen_consultation(props) {
             let option_create = {
                 'container': container,
                 'results': body.results,
-                'advocat': props.advocat
+                'advocat': props.advocat,
+                'type': props.type,
+                'wrap': props.wrapper
             }
             if (props.click_link == true) {
                 create_consultation(option_create);
@@ -369,10 +438,11 @@ if ($('.advocate_calender_container').length == 1) {
     });
 
     $('.status_select').on('select2:select', function (e) {
+        $('.load_spin').addClass('load_spin_active');
+        // імя - e.params.data.text.replace(/\s/g, '') 
         var data = {
             status: e.params.data.id,
         };
-
         fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
         method: 'PATCH',
         body: JSON.stringify(data),
@@ -385,7 +455,32 @@ if ($('.advocate_calender_container').length == 1) {
             return data.json();
         })
         .then(data => {
-        
+            $('.load_spin').removeClass('load_spin_active');
+            generete_modal_text(data.messages[0].text);
+           
+
+            if (data.messages[0].status == 'bad') {
+                var data = {
+                    status: "UNORDERED",
+                };
+                fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
+                method: 'PATCH',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                })
+                .then(data => {
+                    return data.json();
+                })
+                .then(data => {
+                    console.log('data: ', data);
+                    $('.status_select').val('UNORDERED');
+                    $('.status_select').trigger('change');
+                });
+            }
+            
         })
     });
 
@@ -889,9 +984,23 @@ $('.user_acceses').on('click', function() {
         $.fancybox.close({
             src: '#modal_delete_user',
         }); 
+        generete_modal_text('Консультацію успішно видалено');
 });
 
 
+
+function generete_modal_text(text) {
+    $.fancybox.open({
+        src: '#change_status_in_consultation',
+        touch: false,
+    }); 
+    setTimeout(() => {
+        $.fancybox.close({
+            src: '#change_status_in_consultation',
+        }); 
+    }, 2000);
+    $('.change_status_in_consultation_text').text(text);
+}
 
 
 let test_practise = [
@@ -966,7 +1075,7 @@ function generate_advocate(id) {
     if (id == undefined) {
         // url = '/api/users/?role=advocat';
 
-        $('.hidden_message').text('Оберіть галузь');
+        $('.hidden_message').text('');
     } else {
         $('.hidden_message').text('');
         url = `/api/users/?faculty_ids=[${id}]`;
@@ -978,9 +1087,10 @@ function generate_advocate(id) {
             return data.json();
           })
           .then((body) => {
-              
-              
+                hide_step([1,2,3,4]);
+                show_step([1]);
               if (body.length == 0) {
+                hide_step([1]);
                 $('.hidden_message').text('По данній галузі адвокатів не знайдено');
               }
               let new_body = [];
@@ -1056,6 +1166,7 @@ function click_select_item() {
         datepicker.destroy();
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+        
     }
     // адвокати
     else if ($(checker).hasClass('client_select_step_hidden_content')) {
@@ -1082,7 +1193,7 @@ function click_select_item() {
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
         $('.advocate_photo').find('img').attr('src', image_url);
 
-        
+        show_step([2]);
     }
 
 
@@ -1411,7 +1522,9 @@ function create_clockwork_items() {
         return data.json();
       })
       .then((body) => {
-          
+          if ($('.step_3').length >= 1) {
+            show_step([3]);
+          }
           $('.step_date__wrap').children().remove();
 
           $.each(body.working_hours, function(index, value) {
@@ -1738,7 +1851,7 @@ $('.submit_wrapper').on('click', function() {
     check_user_valid();
 })
 $('.submit_user_order').on('click', function() {
-
+    $('.load_spin').addClass('load_spin_active');
     let all_order_vars = create_obgect_order();
     append_form_data(all_order_vars);
     fetch_order(all_order_vars);
@@ -1789,9 +1902,11 @@ function fetch_order(content) {
         return data.json();
     })
     .then(data => {
+        
         if ($('.reserve_hidden_content').length >= 1) {
             create_all_calender(true);
         } else {
+            $('.load_spin').removeClass('load_spin_active');
             let redirect = $('.submit_user_order').attr('data-redirect');
             window.location = redirect;
         }
@@ -1979,7 +2094,7 @@ $('.step_access_btn').on('click', function() {
             $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
             check_user_valid();
             $('.all_price_consultation').text(0);
-    
+            hide_step([4]);
         } else {
             $('.step_access').css('border', '1px solid #D2A351');
     
@@ -2002,6 +2117,7 @@ $('.step_access_btn').on('click', function() {
             $('.all_price_consultation').text(sum);
             // counter_num('.all_price_consultation', 1000, sum);
             check_user_valid();
+            show_step([4]);
         }
     }
 })

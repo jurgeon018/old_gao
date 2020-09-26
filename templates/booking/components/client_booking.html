@@ -1,10 +1,12 @@
 <div id="profile_3" class="main_doc_content main_doc_content_active">
   {% if unordered_consultation %}
-    У вас є неоплачена консультація. 
-    <a href="{% url 'payment' %}" style="color:blue;">Перейдіть</a> на сторінку оплати, щоб оплатити її, 
-    або 
-    <a data-href="/api/consultations/{{unordered_consultation}}/" data-method="DELETE" style="color:red;">видаліть</a> 
-    її. 
+   <div class="consult_borg">
+      У вас є неоплачена консультація. 
+      <a href="{% url 'payment' %}" style="color:#054C23;">Перейдіть</a> на сторінку оплати, щоб оплатити її, 
+      або 
+      <a class="delete_user_first_consultation" data-href="/api/consultations/{{unordered_consultation}}/" data-method="DELETE" style="color:red;">видаліть</a> 
+      її. 
+   </div>
   {% else %}
   <form action="/api/consultations/" class="new_form user_order_of_advocate">
     <!-- Крок 1 -->
@@ -58,7 +60,7 @@
           <!-- тут генеруються практики -->
         </div>
       </div>
-      <div data-error='виберіть адвоката' class="advoc_step_select step_select">
+      <div data-error='виберіть адвоката' class="step_1 advoc_step_select step_select">
         <div class="step_select_title standart_title standart_title_4 color_black">
           виберіть адвоката
         </div>
@@ -105,7 +107,7 @@
 
 
     <!-- Крок 2 -->
-    <div class="step_title standart_title standart_title_4 color_black">
+    <div class="step_2 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 2.
       </span> 
@@ -117,7 +119,7 @@
       консультації:  Skype, Viber, Google.meet, Zoom, Мобільний дзвінок.
     </div>
     <!-- Вибір адвоката -->
-    <div class="advocate_select_profile__block">
+    <div class="step_2 advocate_select_profile__block">
       <div class="advocate_select_profile">
         <div class="advocate_photo">
           <img src="/static/img/about-us/about-img.png" alt="">
@@ -275,7 +277,7 @@
           <div id="datapicker_user" class="datapicker_user"></div>
         </div>
       </div>
-      <div class="advocate_select_time">
+      <div class="advocate_select_time step_3">
         <div data-error='виберіть час' class="date_btn__block step_select">
           <div class="step_select_title standart_title standart_title_4 color_black">
             виберіть час
@@ -356,14 +358,14 @@
 
 
     <!-- Крок 3 -->
-    <div class="step_title standart_title standart_title_4 color_black">
+    <div class="step_4 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 3.
       </span> 
       Для завершення бронювання внесіть опалту:
     </div>
     <!-- Оплата -->
-    <div class="advocate_payment__block">
+    <div class="step_4 advocate_payment__block">
       <!-- <div class="advocate_payment_prof">
         <div class="advocate_payment_title main_title main_title_4 color_gold">
           Варіант 1
@@ -387,14 +389,14 @@
 
 
     <!-- Крок 4 -->
-    <div class="step_title standart_title standart_title_4 color_black">
+    <div class="step_4 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 4.
       </span> 
       Якщо для Вашої консультації є певні необхідні документи чи файли можете їх прикріпити для більш детального розгляду та ознайомлення адвокату
     </div>
     <!-- Загрузка файлів -->
-    <div class="advocate_download__block">
+    <div class="step_4 advocate_download__block">
       <!-- <div class="advocate_download_prof">
         <div class="advocate_download_name main_title main_title_4 color_gold">
           Заява1.pdf
@@ -404,7 +406,7 @@
         </span>
       </div> -->
     </div>
-    <div class="input_file__block">
+    <div class="step_4 input_file__block">
       <div class="pseudo_btn button_transparent">
         обзор
       </div>
@@ -415,7 +417,7 @@
 
 
     <!-- Підтвердити -->
-    <div class="submit_wrapper submit_wrapper_error">
+    <div class="step_4 submit_wrapper submit_wrapper_error">
       <div data-redirect='/payment/' class="submit_user_order button_transparent" class="">
         Підтвердити
       </div>
