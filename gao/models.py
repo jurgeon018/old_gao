@@ -151,7 +151,7 @@ class User(AbstractUser):
 
   def get_working_hours_info(self, date):
     """
-    Генерує години з інтервалами з робочого діапазону годин 
+    Генерує години з інтервалами з робочого діапазону годин
     """
     working_hours_range = self.get_working_hours_range(date)
     # print("get_working_hours_range", working_hours_range)
@@ -173,14 +173,14 @@ class User(AbstractUser):
       end = int(end) + 1 
     else:
       end = end.split(':')[0]
-    # TODO: протестити правильність 
+    # TODO: протестити правильність
     raw_hours = list(range(int(start), int(end)+1))
     for raw_hour in raw_hours:
       hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")
       hours.append({
         "hour":datetime.strftime(hour, "%H:%M"),
         'is_free':self.timerange_is_free(date, hour.time(), hour.time()),
-      })    
+      })
       if raw_hour != raw_hours[-1]:
         hour = datetime.strptime(f"{raw_hour}:30", "%H:%M")
         hours.append({
