@@ -261,8 +261,11 @@
   overflow: hidden;
   margin-right: 50px; }
   .step_select_arrow svg {
+    transition: all .2s;
     width: 10px;
     height: 10px; }
+  .step_select_open .step_select_arrow svg {
+    transform: rotate(180deg); }
   .step_select_title_btn {
     margin-left: 15px;
     margin-right: 20px; }
@@ -491,7 +494,11 @@
   margin-bottom: 15px;
   cursor: pointer; }
   .step_date_prof:hover {
-    background: #d2a351c4 !important; }
+    background: #d2a351c4 !important;
+    color: #fff; }
+  .step_date_prof_is_hover {
+    background: #d2a351c4 !important;
+    color: #fff; }
   .step_date_prof_active {
     background: #D2A351;
     color: #fff; }
@@ -1512,6 +1519,12 @@
   opacity: 0.3;
   pointer-events: none;
   cursor: default; }
+
+.load_message__block {
+  color: #D2A351;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5; }
 
 @media (max-width: 1417px) {
   .advocate_calender_info {

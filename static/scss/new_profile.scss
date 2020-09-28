@@ -334,12 +334,20 @@
     margin-right: 50px;
     &_arrow {
         svg {
+            transition: all .2s;
             width: 10px;
             height: 10px;
         }
       
         &_2 {
            
+        }
+    }
+    &_open {
+        .step_select_arrow {
+            svg {
+                transform: rotate(180deg);
+            }
         }
     }
     &_title_btn {
@@ -664,6 +672,12 @@
         cursor: pointer;
         &:hover {
             background: #d2a351c4 !important;
+            color: #fff;
+
+        }
+        &_is_hover {
+            background: #d2a351c4 !important;
+            color: #fff;
         }
         &_active {
             background: #D2A351;
@@ -672,6 +686,7 @@
                 background: #D2A351 !important;
             }
         }
+       
         &_passive {
             background: #d2a35140;
             pointer-events: none;
@@ -1772,7 +1787,12 @@
    
 }
 
-
+.load_message__block {
+    color: #D2A351;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
 
 
 

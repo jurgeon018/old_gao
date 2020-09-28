@@ -1,7 +1,7 @@
 
     let page = 0;
 
-    hide_step([1,2,3,4]);
+    hide_step([1,2,4]);
 
 
 
@@ -1150,7 +1150,7 @@ function click_select_item() {
     $(wrap).find('.step_active_content').text(data);
     $(wrap).addClass('step_select_active');
     $(wrap).find('.step_hidden_content').removeClass('step_hidden_content_active');
-
+    $(wrap).removeClass('step_select_open');
 
     let checker = $(this).parents()[0];
     
@@ -1200,6 +1200,10 @@ function click_select_item() {
 };
 
 function fetch_get_data_user_calender(content) {
+    if ($('.advocate_select_date').length >= 1) {
+        $('.advocate_select_date').css('opacity', '0.3');
+        $('.load_message__block').text('Календар загружається...');
+    }
     let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
       fetch(url, {
         method: "GET",
@@ -1236,6 +1240,11 @@ function fetch_get_data_user_calender(content) {
        
         datepicker.destroy();
         create_client_calender(weekenddDays, reserve, busy, months_items);
+
+        if ($('.advocate_select_date').length >= 1) {
+            $('.advocate_select_date').css('opacity', '1');
+            $('.load_message__block').text('');
+        }
       }); 
 }
 
@@ -1318,8 +1327,8 @@ function create_load_item() {
 }
 
 function create_clockwork_client(content) {
-    
     let step_date_prof = document.createElement('div');
+    step_date_prof.setAttribute(`data-index`, content.is_index);
 
     if (content.is_free == true) {
         step_date_prof.classList.add('step_date_prof', 'button_transparent');
@@ -1330,7 +1339,7 @@ function create_clockwork_client(content) {
     step_date_prof.textContent = transform_clock(content.hours);
 
     $(step_date_prof).on('click', add_clockwork);
-
+    $(step_date_prof).on('mouseover', hover_clock);
     return step_date_prof;
 }
 
@@ -1533,7 +1542,8 @@ function create_clockwork_items() {
               let date = new Date(0, 0, 0, words[0], words[1], 0);
               let current_clock_json = {
                  hours: date.getHours() * 60 + date.getMinutes(),
-                 is_free: value.is_free
+                 is_free: value.is_free,
+                 is_index: index,
               }
             //   if (current_clock_json.hours <= 360) {
             //     //   в цей час потрібно спати, а не працювати
@@ -1797,7 +1807,7 @@ $('.set-wrap').on('click', function() {
 $('.step_change_btn').on('click', function() {
     let wrap = $(this).parents('.step_select');
     $(wrap).find('.step_hidden_content').toggleClass('step_hidden_content_active');
-
+    $(wrap).toggleClass('step_select_open');
     let current_practise = $('.advocate_practise_content__block').find('.advocate_download_prof');
     let all_practise = $('.step_hidden_content').find('.step_select_radio');
         $.each(all_practise, function(index, all_value) {
@@ -1939,82 +1949,110 @@ function check_user_valid() {
 $('.step_date_prof').on('click', add_clockwork);
 
 function add_clockwork() {
-    let all_clockwork = $('.step_date_prof');
-    let current_index;
-    let before_index;
-    let after_index;
-    let check_active;
-    if ($(this).hasClass('step_date_prof_active')) {
-        check_active = true;
-    } else {
-        check_active = false;
-    }
+    let prepare_second_click = $('.second_mark').attr('data-index');
+    
     $(this).toggleClass('step_date_prof_active');
-    let active_clockwork = $('.step_date_prof_active');
 
-    if (active_clockwork.length == 1) {
-        current_index = Number($(this).index());
-        before_index = current_index - 1;
-        after_index = current_index + 1;
-    } else if (active_clockwork.length >= 2) {
-        current_index = undefined;
-        before_index = $(active_clockwork).first().index() - 1;
-        after_index = $(active_clockwork).last().index() + 1;
-    }
-    if ($(this).index() != before_index && $(this).index() != after_index && check_active == true) {
-        $('.step_date_prof').removeClass('step_date_prof_active');
-    } else {
+    // якщо перед кліком не було активної години то додає якір для початкової години
+    if ($('.step_date_prof_active').length == 1) {
+        $(this).addClass('first_mark');
+    } else if ($('.step_date_prof_active').length == 2) {
+        let all_clockwork = $('.step_date_prof');
+        $(this).addClass('second_mark');
+        let first_index = Number($('.first_mark').attr('data-index'));
+        let second_index = Number($('.second_mark').attr('data-index'));
+        let current_index = Number($(this).attr('data-index'));
 
-    }
-    
 
-    
-
-    if ($(this).hasClass('step_date_prof_passive')) {
-
-    } else {
-       
+            
         $.each(all_clockwork, function(index, value) {
-            if ($(value).hasClass('step_date_prof_passive') || $(value).hasClass('step_date_prof_active')) {
-                $(value).removeClass('step_date_prof_blocked');
-            } else {
-                $(value).addClass('step_date_prof_blocked');
+            if (index > first_index && index < second_index || index < first_index && index > second_index) {
+                
+                $(value).addClass('step_date_prof_active');
+
+
+                if ($(value).hasClass('step_date_prof_passive')) {
+                    $('.step_date_prof').removeClass('first_mark');
+                    $('.step_date_prof').removeClass('second_mark');
+                    $('.step_date_prof').removeClass('step_date_prof_active');
+                    generete_modal_text('Між цими годинами вже є зайнята година адвоката, будь ласка оберіть інший період');
+                    return false;
+                }
             }
+            
         });
 
-        if ($('.step_date_prof').hasClass('step_date_prof_passive') || $('.step_date_prof').hasClass('step_date_prof_active')) {
-            
-        } else {
-            $('.step_date_prof').addClass('step_date_prof_blocked');
-        }
-
-        if (all_clockwork[before_index] != undefined) {
-            $(all_clockwork[before_index]).removeClass('step_date_prof_blocked');
-        }
-        if (all_clockwork[after_index] != undefined) {
-            $(all_clockwork[after_index]).removeClass('step_date_prof_blocked');
-        }
-        if (all_clockwork[current_index] != undefined) {
-            $(all_clockwork[current_index]).removeClass('step_date_prof_blocked');
-        }
-            
-
-            
         
-
       
         
+        console.log('prepare_second_click: ', prepare_second_click);
+        if (prepare_second_click != undefined) {
+            console.log('tuta');
+        }
+          // перевірка чи юзер клікнув на середню активну годину
+          if (first_index < second_index && prepare_second_click != undefined) {
+              console.log(1);
+            if (current_index == first_index + 1) {
+                $('.step_date_prof').removeClass('first_mark');
+                $('.step_date_prof').removeClass('second_mark');
+                $('.step_date_prof').removeClass('step_date_prof_active');
+                $(this).addClass('step_date_prof_active');
+                $(this).addClass('first_mark');
+                return false;
+            } 
+            } else if (first_index > second_index && prepare_second_click != undefined) {
+              console.log(2);
 
-        let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
-        let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
-        $('.step_access').text(transform_clock(current_clock * attr));
-    }
+                if (current_index == first_index - 1) {
+                    $('.step_date_prof').removeClass('first_mark');
+                    $('.step_date_prof').removeClass('second_mark');
+                    $('.step_date_prof').removeClass('step_date_prof_active');
+                    $(this).addClass('step_date_prof_active');
+                    $(this).addClass('first_mark');
+                    return false;
+                }  
+            } 
 
-    if ($('.step_date_prof_active').length == 0) {
-        $('.step_date_prof').removeClass('step_date_prof_blocked');
-    }
+       
+
+
+
+
+
+    } else if ($('.step_date_prof_active').length == 0 || $('.step_date_prof_active').length >= 3) {
+        $('.step_date_prof').removeClass('first_mark');
+        $('.step_date_prof').removeClass('second_mark');
+        $('.step_date_prof').removeClass('step_date_prof_active');
+        $(this).addClass('step_date_prof_active');
+        $(this).addClass('first_mark');
+    } 
+
+
+    let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
+    let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
+    $('.step_access').text(transform_clock(current_clock * attr));
 }
 
+
+
+
+function hover_clock() {
+    if ($('.first_mark').length == 1 && $('.second_mark').length == 0) {
+        let all_clockwork = $('.step_date_prof');
+        let mark_index = Number($('.first_mark').attr('data-index'));
+        let this_index = Number($(this).attr('data-index'));
+        
+        $.each(all_clockwork, function(index, value) {
+            
+            if (index < this_index && index > mark_index || index > this_index && index < mark_index) {
+                $(value).addClass('step_date_prof_is_hover');
+            } else {
+                $(value).removeClass('step_date_prof_is_hover');
+            }
+        });
+        
+    }
+}
 
 $('.save_reserve_date_btn').on('click', function() {
     let date_value = $('.datapicker_user').val();
