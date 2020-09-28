@@ -94,9 +94,8 @@ def gao_liqpay_callback(request):
         consultation=consultation,
         amount=transaction.amount,
     )
-    print('YES BLYAT!')
     # send_mail()
-    consultation.status = Consultation.FINISHED 
+    consultation.status = Consultation.IN_PROGRESS 
     consultation.save()
     return JsonResponse({})
 

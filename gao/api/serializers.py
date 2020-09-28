@@ -38,7 +38,7 @@ class ConsultationSerializer(serializers.ModelSerializer):
     end       = serializers.TimeField(format="%H:%M", input_formats=['%H:%M',])
     created   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     updated   = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-    payment   = ConsultationPaymentSerializer(many=True, read_only=True)
+    payment   = ConsultationPaymentSerializer(read_only=True)
     price     = serializers.SerializerMethodField()
     client_name = serializers.SerializerMethodField()
     image = serializers.SerializerMethodField()
