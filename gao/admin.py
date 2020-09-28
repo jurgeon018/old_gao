@@ -94,10 +94,6 @@ class FacultyAdmin(ImportExportModelAdmin):
     ]
 
 
-class GaoSliderInline(admin.StackedInline):
-    model = GaoSlider.clients.through
-    extra = 0
-
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = (
@@ -141,36 +137,6 @@ class ClientAdmin(admin.ModelAdmin):
     ]
     list_display_links = [
         'id',
-    ]
-    inlines = [
-        GaoSliderInline
-    ]
-
-
-class GaoSliderAdmin(admin.ModelAdmin):
-    def has_delete_permission(self, request, obj=None):
-        return False
-    def has_add_permission(self, request):
-        count = GaoSlider.objects.all().count()
-        if count < 4:
-          return True
-        return False 
-
-    list_display = (
-        'id',
-        'slider', 
-    )
-    list_display_links = [
-        'id',
-    ]
-    readonly_fields = [
-        'slider',
-    ]
-    fields = [
-        'slider',
-    ]
-    inlines = [
-        GaoSliderInline,
     ]
 
 
@@ -337,6 +303,5 @@ class PostAdmin(ImportExportModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Team, TeamAdmin)
-admin.site.register(GaoSlider, GaoSliderAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Document, DocumentAdmin)

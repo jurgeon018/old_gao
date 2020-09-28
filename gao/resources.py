@@ -14,13 +14,6 @@ class ClientResource(ModelResource):
         exclude = []
 
 
-
-class GaoSliderResource(ModelResource):
-    class Meta:
-        model = GaoSlider 
-        exclude = []
-
-
 class ContactResource(ModelResource):
     class Meta:
         model = Contact 
