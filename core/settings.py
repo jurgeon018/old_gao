@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'gao',
 
     'sw_liqpay',
-    'sw_blog',
     
     'tinymce',
     'rest_framework',

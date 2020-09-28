@@ -11,8 +11,6 @@ from box.core.sw_content.models import *
 from sw_liqpay.utils import get_liqpay_context, create_liqpay_transaction
 from sw_liqpay.models import LiqpayConfig
 
-from sw_blog.models import Post 
-
 from .models import *
 
 from datetime import datetime, date, time, timedelta 

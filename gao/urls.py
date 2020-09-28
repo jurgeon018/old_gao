@@ -8,7 +8,6 @@ from django.contrib.sitemaps.views import sitemap
 from .views import *
 from .sitemaps import *
 
-from sw_blog.sitemaps import PostSitemap
 
 from filebrowser.sites import site 
 

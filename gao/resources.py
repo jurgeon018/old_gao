@@ -75,5 +75,16 @@ class UserWeekDayResource(ModelResource):
         exclude = []
 
 
+from django.contrib.auth import get_user_model 
+
+class UserResource(ModelResource):
+    class Meta:
+        model = get_user_model()
+        exclude = []
+
+class PostResource(ModelResource):
+    class Meta:
+        model = Post 
+        exclude = []
 
 

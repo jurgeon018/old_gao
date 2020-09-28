@@ -318,6 +318,23 @@ class WorkingDayAdmin(admin.ModelAdmin):
 		exclude = []
 
 
+class PostAdmin(ImportExportModelAdmin):
+    resource_class = PostResource 
+    list_display = (
+        'id',
+        'title', 
+        'slug',
+        'image',
+        'author',
+    )
+
+    prepopulated_fields = {
+        'slug':('title',)
+    }
+    list_display_links =list_display
+
+
+admin.site.register(Post, PostAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(GaoSlider, GaoSliderAdmin)

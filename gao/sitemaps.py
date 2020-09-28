@@ -17,12 +17,12 @@ class TeamSitemap(Sitemap):
 
 
 
-# class PostSitemap(Sitemap):
-#     def items(self):
-#         return Post.objects.all()
+class PostSitemap(Sitemap):
+    def items(self):
+        return Post.objects.all()
 
-    # def lastmod(self, obj):
-    #     return obj.updated
+    def lastmod(self, obj):
+        return obj.updated
 
 
 class StaticViewSitemap(Sitemap):

@@ -621,3 +621,27 @@ class Document(models.Model):
     verbose_name = 'Документ користувача'
     verbose_name_plural = 'Документи користувачів'
 
+
+from tinymce.models import HTMLField
+
+class Post(models.Model):
+    meta_title = models.CharField(verbose_name="Мета-заголовок", max_length=255, blank=True, null=True) 
+    meta_descr = models.TextField(verbose_name="Мета-опис", blank=True, null=True)
+    alt        = models.CharField(verbose_name="Альт", max_length=255, blank=True, null=True)
+    title      = models.CharField(verbose_name='Заголовок',max_length=255, blank=True, null=True)
+    slug       = models.SlugField(verbose_name='Посилання', max_length=255, unique=True)
+    body       = HTMLField(verbose_name='текст', blank=True, null=True)
+    image      = models.ImageField(verbose_name='зображення', blank=True, null=True)
+    updated    = models.DateTimeField(verbose_name="Оновлено", auto_now_add=False, auto_now=True, blank=True, null=True)
+    created    = models.DateTimeField(verbose_name="Створено", default=timezone.now)
+    author     = models.ForeignKey(to='Team', related_name="posts", blank=True, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name='Публікація'
+        verbose_name_plural='Публікації в блозі'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("post", kwargs={"slug": self.slug})

@@ -50,7 +50,7 @@
     }
   },
   {
-    "model": "gao.slider",
+    "model": "gao.GaoSlider",
     "pk": 1,
     "fields": {
       "slider": "1",
@@ -58,7 +58,7 @@
     }
   },
   {
-    "model": "gao.slider",
+    "model": "gao.GaoSlider",
     "pk": 2,
     "fields": {
       "slider": "2",
@@ -66,7 +66,7 @@
     }
   },
   {
-    "model": "gao.slider",
+    "model": "gao.GaoSlider",
     "pk": 3,
     "fields": {
       "slider": "3",
@@ -74,7 +74,7 @@
     }
   },
   {
-    "model": "gao.slider",
+    "model": "gao.GaoSlider",
     "pk": 4,
     "fields": {
       "slider": "4",

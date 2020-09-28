@@ -9,7 +9,7 @@ practise-header
     <div class="top_post_content">
         <div class="post_data__block">
             <div class="post_data">
-                07.06.2020
+                {{post.created}}
             </div>
             <div class="post_soc">
                 <a class="anim_soc" target="_blank" href="https://facebook.com/advocategpg/">
@@ -34,10 +34,10 @@ practise-header
         </div>
         <div class="pref_content">
             <div class="pref_title">
-                Далеко-далеко за словесными горами в стране гласных
+                {{post.title}}
             </div>
             <div class="pref_txt">
-                Далеко-далеко за словесными горами в стране гласных, и согласных живут рыбные тексты. Обеспечивает продолжил это переписывается реторический подзаголовок всемогущая сбить бросил правилами живет своих строчка последний большого текстов, ручеек заманивший необходимыми безопасную своего скатился буквенных за несколько его. Парадигматическая первую имени решила, буквенных жизни страну журчит? Над заголовок свою, текстов путь журчит продолжил ведущими рыбными даже, назад пустился города подзаголовок одна букв большой пунктуация ее текст рот запятых рукописи, семь рукопись ручеек? Однажды, снова. Запятых над даже оксмокс ручеек деревни но залетают курсивных реторический lorem, проектах даль безорфографичный это? Вскоре дороге текст строчка злых, решила одна пор, предупредила меня пустился путь однажды.
+                {{post.body|safe}}
             </div>
         </div>
     </div>
@@ -49,19 +49,23 @@ practise-header
             <img src="/static/img/about-us/about-icon-1.png" alt="">
         </div>
         <div class="post_user_name">
-            Боровець Микола
+            {{post.author.full_name}}
         </div>
         <div class="user_prof">
             автор, адвокат
         </div>
     </div>
     <div class="about__subtitles">
-        {{post.body|safe}}
+        <!-- {{post.body|safe}} -->
     </div>
 </div>
-<div class="last_data__block">
+<!-- <div class="last_data__block">
     Опубліковано: 3 липня 2020 р. Стаття 1. <br>
     Автор: Боровець Микола
+</div> -->
+<div class="last_data__block">
+    Опубліковано: {{post.created}} Стаття {{post.id}}. <br>
+    Автор: {{post.author.full_name}}
 </div>
 
 
