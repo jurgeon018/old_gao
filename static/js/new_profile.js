@@ -16,7 +16,7 @@
     function hide_step(steps) {
         $.each(steps, function(index, value) {
             let step = `.step_${value}`;
-            console.log('step: ', step);
+            
             $(step).addClass('step_passive');
         });
     }
@@ -46,7 +46,7 @@ $('.delete_user_first_consultation').on('click', function() {
         return data.json();
     })
     .then(data => {
-        console.log('data: ', data);
+        location.href = '/';
     });
 });
 
@@ -170,7 +170,7 @@ function create_consultation(props) {
             </div>
             ` 
         }
-        console.log('advocat_doc__block: ', advocat_doc__block);
+        
 
          // перевірка файлів клієнта
          let client_doc__block = ``;
@@ -190,7 +190,7 @@ function create_consultation(props) {
              ` 
          }
 
-         console.log('client_doc__block: ', client_doc__block);
+         
 
         let option__block = ``;
         if (props.advocat == true && props.wrap != '#profile_5') {
@@ -361,7 +361,7 @@ function find_current_height(props) {
     let position_last_item = $(last_item).offset().top;
     let optional_item_height = $(last_item).height();
     let result = (position_last_item - position_first_item) + optional_item_height + 50;
-    console.log('result: ', result);
+    
     return result;
 }
 
@@ -385,7 +385,7 @@ function gen_consultation(props) {
         return data.json();
       })
       .then((body) => {
-          console.log('body: ', body);
+          
           if (body.next == null) {
               $(next_btn).addClass('btn_cons_passive');
           } else {
@@ -461,7 +461,7 @@ if ($('.advocate_calender_container').length == 1) {
 
             if (data.messages[0].status == 'bad') {
                 var data = {
-                    status: "UNORDERED",
+                    status: "IN_PROGRESS",
                 };
                 fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
                 method: 'PATCH',
@@ -475,8 +475,8 @@ if ($('.advocate_calender_container').length == 1) {
                     return data.json();
                 })
                 .then(data => {
-                    console.log('data: ', data);
-                    $('.status_select').val('UNORDERED');
+                    
+                    $('.status_select').val('IN_PROGRESS');
                     $('.status_select').trigger('change');
                 });
             }
@@ -1200,10 +1200,8 @@ function click_select_item() {
 };
 
 function fetch_get_data_user_calender(content) {
-    if ($('.advocate_select_date').length >= 1) {
         $('.advocate_select_date').css('opacity', '0.3');
         $('.load_message__block').text('Календар загружається...');
-    }
     let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
       fetch(url, {
         method: "GET",
@@ -1241,10 +1239,16 @@ function fetch_get_data_user_calender(content) {
         datepicker.destroy();
         create_client_calender(weekenddDays, reserve, busy, months_items);
 
-        if ($('.advocate_select_date').length >= 1) {
+        
             $('.advocate_select_date').css('opacity', '1');
             $('.load_message__block').text('');
-        }
+
+            if ($('.reserve_date__block').length >= 1) {
+                $('.load_message__block').css('background', 'transparent');
+                $('.load_message__block').css('opacity', '0');
+                $('.load_message__block').css('z-index', '-1');
+            }
+        
       }); 
 }
 
@@ -1441,12 +1445,15 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
     
 
 
-            
+            if ($('.reserve_clock__block').length >= 1) {
+                $('.reserve_clock__block').addClass('reserve_clock__block_active');
+                $('.first_advocate_user_clock').text('0');
+                $('.first_advocate_user_clock').attr('data-clock', '0');
+                $('.second_advocate_user_clock').text('0');
+                $('.second_advocate_user_clock').attr('data-clock', '0');
+            }  
             create_clockwork_items();
-            
-
-         
-            
+                     
         },
         onChangeMonth: function(date_month, date_year) {
             $('.load_calender').addClass('load_calender_active');
@@ -1500,6 +1507,17 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
         $('.datepicker')[0].appendChild(create_load_item());
     }, 1000);
 }
+
+
+$(document).mouseup(function (e){ // событие клика по веб-документу
+    
+    var div = $(".advocate_step_hidden_content"); // тут указываем ID элемента
+    if (!div.is(e.target) // если клик был не по нашему блоку
+        && div.has(e.target).length === 0) { // и не по его дочерним элементам
+            
+        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active') // скрываем его
+    }
+});
 
 function return_info_users() {
     let client;
@@ -1921,7 +1939,7 @@ function fetch_order(content) {
             window.location = redirect;
         }
 
-        alert(data.messages[0].text);
+        generete_modal_text(data.messages[0].text);
     })
 }
 function check_user_valid() {
@@ -1974,7 +1992,6 @@ function add_clockwork() {
                     $('.step_date_prof').removeClass('second_mark');
                     $('.step_date_prof').removeClass('step_date_prof_active');
                     generete_modal_text('Між цими годинами вже є зайнята година адвоката, будь ласка оберіть інший період');
-                    return false;
                 }
             }
         });
@@ -1982,15 +1999,14 @@ function add_clockwork() {
        
           // перевірка чи юзер клікнув на середню активну годину
           if (first_index < second_index && prepare_second_click != undefined) {
-            if (current_index == first_index + 1) {
-                $('.step_date_prof').removeClass('first_mark');
-                $('.step_date_prof').removeClass('second_mark');
-                $('.step_date_prof').removeClass('step_date_prof_active');
-                $('.step_date_prof').removeClass('step_date_prof_is_hover');
-                $(this).addClass('step_date_prof_active');
-                $(this).addClass('first_mark');
-                return false;
-            } 
+                if (current_index == first_index + 1) {
+                    $('.step_date_prof').removeClass('first_mark');
+                    $('.step_date_prof').removeClass('second_mark');
+                    $('.step_date_prof').removeClass('step_date_prof_active');
+                    $('.step_date_prof').removeClass('step_date_prof_is_hover');
+                    $(this).addClass('step_date_prof_active');
+                    $(this).addClass('first_mark');
+                } 
             } else if (first_index > second_index && prepare_second_click != undefined) {
                 if (current_index == first_index - 1) {
                     $('.step_date_prof').removeClass('first_mark');
@@ -1999,7 +2015,6 @@ function add_clockwork() {
                     $('.step_date_prof').removeClass('step_date_prof_is_hover');
                     $(this).addClass('step_date_prof_active');
                     $(this).addClass('first_mark');
-                    return false;
                 }  
             } 
 
@@ -2020,6 +2035,7 @@ function add_clockwork() {
     let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
     $('.step_access').text(transform_clock(current_clock * attr));
 
+    
     if ($('.step_date_prof_active').length == 0) {
         cancel_clock();
     } else if ($('.step_date_prof_active').length >= 1) {
@@ -2036,10 +2052,10 @@ function accept_clock() {
         $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
         $('.second_advocate_user_clock').text(result_clock.second);
         $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
-        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+        
     } else {
         let current_clock = transform_minute(Number($('.step_access').text()));
-        console.log('current_clock: ', current_clock);
+        
         // if (current_clock == 0) {
         //     $('.step_access').css('border', '1px solid red');
         //     $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
@@ -2048,13 +2064,9 @@ function accept_clock() {
         //     hide_step([4]);
         // } else {
             let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
-            console.log('current_cost: ', current_cost);
             let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
-            console.log('duration: ', duration);
             let current_sum = current_cost / duration;
-            console.log('current_sum: ', current_sum);
             let sum = current_sum * current_clock;
-            console.log('sum: ', sum);
     
             $('.advocate_select_time').find('.step_select').addClass('step_select_active');
             $('.current_clock_num').text(transform_clock(current_clock));
@@ -2077,7 +2089,7 @@ function cancel_clock() {
     if ($('.reserve_hidden_content').length >= 1) {
         $('.first_advocate_user_clock').text('');
         $('.second_advocate_user_clock').text('');
-        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+        
     } else {
             $('.step_access').css('border', '1px solid #D2A351');
             $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
@@ -2237,7 +2249,7 @@ function find_order_clock() {
     }
     result.first = first_clock;
     result.second = second_clock;
-    console.log('result: ', result);
+    
     return result;  
     
 }

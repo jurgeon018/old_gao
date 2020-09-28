@@ -37,7 +37,7 @@
               <!-- <option class="advocate_subname standart_title standart_title_4 color_black"  value="UNORDERED">
                   Незавершено
               </option> -->
-              <option class="advocate_subname standart_title standart_title_4 color_black" selected='selected' value="DECLINED">
+              <option class="advocate_subname standart_title standart_title_4 color_black" value="DECLINED">
                   Відмовлено
               </option>
               <option class="advocate_subname standart_title standart_title_4 color_black" value="IN_PROGRESS">
@@ -200,6 +200,9 @@
     </div>
     <form action="/test/" class="reserve_hidden_content">
       <div class="reserve_date__block">
+        <div class="load_message__block">
+            <!-- тут генерується сповіщення загрузки календарика -->
+          </div>
           <div class="reserve_infos advocate_user_item__block">
               <div class="advocate_user_img">
                   <img src="/static/img/profile/2.svg" alt="">
@@ -213,6 +216,7 @@
               <input type="text" id="datapicker_user" autocomplete="off" class="datapicker_user">
           </div>
       </div>
+     
       <div class="reserve_clock__block">
           <div class="reserve_infos advocate_user_item__block">
               <div class="advocate_user_img">

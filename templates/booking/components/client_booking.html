@@ -4,7 +4,7 @@
       У вас є неоплачена консультація. 
       <a href="{% url 'payment' %}" style="color:#054C23;">Перейдіть</a> на сторінку оплати, щоб оплатити її, 
       або 
-      <a class="delete_user_first_consultation" data-href="/api/consultations/{{unordered_consultation}}/" data-method="DELETE" style="color:red;">видаліть</a> 
+      <a class="delete_user_first_consultation" data-href="/api/consultations/{{unordered_consultation.id}}/" data-method="DELETE" style="color:red;">видаліть</a> 
       її. 
    </div>
   {% else %}

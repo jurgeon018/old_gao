@@ -46,6 +46,11 @@ class ConsultationSerializer(serializers.ModelSerializer):
     advocat_documents = serializers.SerializerMethodField()
     client_documents = serializers.SerializerMethodField()
     full_time   = serializers.SerializerMethodField()
+    can_be_changed   = serializers.SerializerMethodField()
+
+    def get_can_be_changed(self, consultation):
+        return consultation.can_be_changed()
+        
 
     def get_client_name(self, consultation):
         return consultation.client.full_name 
