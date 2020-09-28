@@ -1,0 +1,8 @@
+sudo ln -s /home/jurgeon/projects/gao/test/config_test/gao_test.service            /etc/systemd/system/
+sudo ln -s /home/jurgeon/projects/gao/test/config_test/gao_test                    /etc/nginx/sites-enabled/
+
+sudo systemctl daemon-reload
+
+sudo certbot --nginx -d test.galpravgroup.com.ua
+sudo certbot renew --dry-run
+

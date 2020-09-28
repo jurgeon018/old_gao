@@ -107,20 +107,20 @@
 	 align-items: center;
 	 margin: 0 !important;
 
-
 	 .green__name {
-		 width: 60%;
+		 width: 100%;
 		 margin: 0 auto;
 		 margin-bottom: 15px;
 		 margin-top: 20px;
 	 }
 	 .gold-text {
-		width: 60%;
+		width: 100%;
+		max-width: 100%;
 		margin: 0 auto;
 	 }
 	 	.geo-block {
 			max-width: unset;
-			width: 60%;
+			width: 100%;
 			margin: 0 auto;
 			margin-top: 15px;	
 		}

@@ -1433,7 +1433,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             }
             $('.advocate_user_date').text(current_data);
             $('.advocate_user_date').attr('data-date', formattedDate);
-            $('.step_access').text('');
+            $('.step_access').text('0');
             $('.current_clock_num').text(0);
             $('.all_price_consultation').text(0);
             $('.advocate_select_date').find('.step_select').addClass('step_select_active');
@@ -1950,27 +1950,25 @@ $('.step_date_prof').on('click', add_clockwork);
 
 function add_clockwork() {
     let prepare_second_click = $('.second_mark').attr('data-index');
-    
     $(this).toggleClass('step_date_prof_active');
 
     // якщо перед кліком не було активної години то додає якір для початкової години
     if ($('.step_date_prof_active').length == 1) {
+        $('.step_date_prof').removeClass('first_mark');
+        $('.step_date_prof').removeClass('second_mark');
+        $('.step_date_prof').removeClass('step_date_prof_is_hover');
         $(this).addClass('first_mark');
+        
     } else if ($('.step_date_prof_active').length == 2) {
         let all_clockwork = $('.step_date_prof');
         $(this).addClass('second_mark');
         let first_index = Number($('.first_mark').attr('data-index'));
         let second_index = Number($('.second_mark').attr('data-index'));
         let current_index = Number($(this).attr('data-index'));
-
-
             
         $.each(all_clockwork, function(index, value) {
             if (index > first_index && index < second_index || index < first_index && index > second_index) {
-                
                 $(value).addClass('step_date_prof_active');
-
-
                 if ($(value).hasClass('step_date_prof_passive')) {
                     $('.step_date_prof').removeClass('first_mark');
                     $('.step_date_prof').removeClass('second_mark');
@@ -1979,61 +1977,118 @@ function add_clockwork() {
                     return false;
                 }
             }
-            
         });
-
         
-      
-        
-        console.log('prepare_second_click: ', prepare_second_click);
-        if (prepare_second_click != undefined) {
-            console.log('tuta');
-        }
+       
           // перевірка чи юзер клікнув на середню активну годину
           if (first_index < second_index && prepare_second_click != undefined) {
-              console.log(1);
             if (current_index == first_index + 1) {
                 $('.step_date_prof').removeClass('first_mark');
                 $('.step_date_prof').removeClass('second_mark');
                 $('.step_date_prof').removeClass('step_date_prof_active');
+                $('.step_date_prof').removeClass('step_date_prof_is_hover');
                 $(this).addClass('step_date_prof_active');
                 $(this).addClass('first_mark');
                 return false;
             } 
             } else if (first_index > second_index && prepare_second_click != undefined) {
-              console.log(2);
-
                 if (current_index == first_index - 1) {
                     $('.step_date_prof').removeClass('first_mark');
                     $('.step_date_prof').removeClass('second_mark');
                     $('.step_date_prof').removeClass('step_date_prof_active');
+                    $('.step_date_prof').removeClass('step_date_prof_is_hover');
                     $(this).addClass('step_date_prof_active');
                     $(this).addClass('first_mark');
                     return false;
                 }  
             } 
 
-       
-
-
-
-
+            
 
     } else if ($('.step_date_prof_active').length == 0 || $('.step_date_prof_active').length >= 3) {
         $('.step_date_prof').removeClass('first_mark');
         $('.step_date_prof').removeClass('second_mark');
         $('.step_date_prof').removeClass('step_date_prof_active');
+        $('.step_date_prof').removeClass('step_date_prof_is_hover');
         $(this).addClass('step_date_prof_active');
         $(this).addClass('first_mark');
+        
     } 
 
 
     let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
     let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
     $('.step_access').text(transform_clock(current_clock * attr));
+
+    if ($('.step_date_prof_active').length == 0) {
+        cancel_clock();
+    } else if ($('.step_date_prof_active').length >= 1) {
+        accept_clock();
+    }
 }
 
 
+function accept_clock() {
+      // якщо все ок проводить обрахунки
+      if ($('.reserve_hidden_content').length >= 1) {
+        let result_clock = find_order_clock();
+        $('.first_advocate_user_clock').text(result_clock.first);
+        $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
+        $('.second_advocate_user_clock').text(result_clock.second);
+        $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
+        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+    } else {
+        let current_clock = transform_minute(Number($('.step_access').text()));
+        console.log('current_clock: ', current_clock);
+        // if (current_clock == 0) {
+        //     $('.step_access').css('border', '1px solid red');
+        //     $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+        //     check_user_valid();
+        //     $('.all_price_consultation').text(0);
+        //     hide_step([4]);
+        // } else {
+            let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
+            console.log('current_cost: ', current_cost);
+            let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
+            console.log('duration: ', duration);
+            let current_sum = current_cost / duration;
+            console.log('current_sum: ', current_sum);
+            let sum = current_sum * current_clock;
+            console.log('sum: ', sum);
+    
+            $('.advocate_select_time').find('.step_select').addClass('step_select_active');
+            $('.current_clock_num').text(transform_clock(current_clock));
+            $('.all_price_consultation').attr('data-price', sum);
+            
+            let result_clock = find_order_clock();
+            
+            $('.clock_manager_first').text(`з ${result_clock.first}`);
+            $('.clock_manager_first').attr(`data-result`, result_clock.first);
+            $('.clock_manager_second').text(`по ${result_clock.second}`);
+            $('.clock_manager_second').attr(`data-result`, result_clock.second);
+            $('.all_price_consultation').text(sum);
+            // counter_num('.all_price_consultation', 1000, sum);
+            check_user_valid();
+            show_step([4]);
+        // }
+    }
+}
+function cancel_clock() {
+    if ($('.reserve_hidden_content').length >= 1) {
+        $('.first_advocate_user_clock').text('');
+        $('.second_advocate_user_clock').text('');
+        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+    } else {
+            $('.step_access').css('border', '1px solid #D2A351');
+            $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+            $('.current_clock_num').text('0');
+            $('.clock_manager_first').text(``);
+            $('.clock_manager_second').text(``);
+            $('.all_price_consultation').text(0);
+            check_user_valid();
+            hide_step([4]);
+    } 
+}
 
 
 function hover_clock() {
@@ -2115,49 +2170,49 @@ $('.save_reserve_date_btn').on('click', function() {
     }
 })
 $('.step_access_btn').on('click', function() {
-    if ($(this).hasClass('step_advocate_btn')) {
+    // if ($(this).hasClass('step_advocate_btn')) {
         
-            let result_clock = find_order_clock();
+    //         let result_clock = find_order_clock();
             
-            $('.first_advocate_user_clock').text(result_clock.first);
-            $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
-            $('.second_advocate_user_clock').text(result_clock.second);
-            $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
+    //         $('.first_advocate_user_clock').text(result_clock.first);
+    //         $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
+    //         $('.second_advocate_user_clock').text(result_clock.second);
+    //         $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
 
-        $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
-    } else {
-        let current_clock = transform_minute(Number($('.step_access').text()));
-        if (current_clock == 0) {
-            $('.step_access').css('border', '1px solid red');
-            $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
-            check_user_valid();
-            $('.all_price_consultation').text(0);
-            hide_step([4]);
-        } else {
-            $('.step_access').css('border', '1px solid #D2A351');
+    //     $('.advocate_step_hidden_content').removeClass('step_hidden_content_active');
+    // } else {
+    //     let current_clock = transform_minute(Number($('.step_access').text()));
+    //     if (current_clock == 0) {
+    //         $('.step_access').css('border', '1px solid red');
+    //         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+    //         check_user_valid();
+    //         $('.all_price_consultation').text(0);
+    //         hide_step([4]);
+    //     } else {
+    //         $('.step_access').css('border', '1px solid #D2A351');
     
-            let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
-            let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
+    //         let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
+    //         let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
     
-            let current_sum = current_cost / duration;
-            let sum = current_sum * current_clock;
+    //         let current_sum = current_cost / duration;
+    //         let sum = current_sum * current_clock;
     
-            $('.advocate_select_time').find('.step_select').addClass('step_select_active');
-            $('.current_clock_num').text(transform_clock(current_clock));
-            $('.all_price_consultation').attr('data-price', sum);
+    //         $('.advocate_select_time').find('.step_select').addClass('step_select_active');
+    //         $('.current_clock_num').text(transform_clock(current_clock));
+    //         $('.all_price_consultation').attr('data-price', sum);
             
-            let result_clock = find_order_clock();
+    //         let result_clock = find_order_clock();
             
-            $('.clock_manager_first').text(`з ${result_clock.first}`);
-            $('.clock_manager_first').attr(`data-result`, result_clock.first);
-            $('.clock_manager_second').text(`по ${result_clock.second}`);
-            $('.clock_manager_second').attr(`data-result`, result_clock.second);
-            $('.all_price_consultation').text(sum);
-            // counter_num('.all_price_consultation', 1000, sum);
-            check_user_valid();
-            show_step([4]);
-        }
-    }
+    //         $('.clock_manager_first').text(`з ${result_clock.first}`);
+    //         $('.clock_manager_first').attr(`data-result`, result_clock.first);
+    //         $('.clock_manager_second').text(`по ${result_clock.second}`);
+    //         $('.clock_manager_second').attr(`data-result`, result_clock.second);
+    //         $('.all_price_consultation').text(sum);
+    //         // counter_num('.all_price_consultation', 1000, sum);
+    //         check_user_valid();
+    //         show_step([4]);
+    //     }
+    // }
 })
 
 
@@ -2182,7 +2237,9 @@ function find_order_clock() {
     }
     result.first = first_clock;
     result.second = second_clock;
+    console.log('result: ', result);
     return result;  
+    
 }
 
 
