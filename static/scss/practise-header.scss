@@ -194,7 +194,9 @@
 	width: 60%;
 	height: 600px;
 	position: relative;
-	
+	float: left;
+	margin: 0px 20px 20px 0px;
+
 	img {
 		position: absolute;
 		width: 100%;
@@ -202,6 +204,12 @@
 		object-fit: cover;
 	}
 }
+.pref_title__block {
+	.pref_txt {
+		padding-left: 200px;
+	}
+}
+
 .post_user_name {
 	font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -266,6 +274,34 @@
 		left: 0;
 	}
 }
+.pref_title__block {
+	position: relative;
+}
+
+.main_post__block {
+	position: absolute;
+    top: 650px;
+    left: 0px;
+    height: 100%;
+}
+.pref_content {
+    width: 100%;
+    padding-left: 0;
+}
+.user_adder {
+	width: fit-content;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -335,6 +371,20 @@
 	}
 	.header-pract {
 		margin-bottom: 30px;
+	}
+}
+@media (max-width: 629px) {
+	.pref_title__block .pref_txt {
+		padding-left: 0;
+	}
+	.main_post__block {
+		position: relative;
+		top: 0;
+		left: 0px;
+		height: 100%;
+	}
+	.last_data__block {
+		padding-top: 0;
 	}
 }
 @media (max-width: 518px) {
