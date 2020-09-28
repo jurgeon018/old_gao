@@ -1560,6 +1560,9 @@
     align-items: center;
     border-radius: 20px; }
 
+.select2-container--default .select2-results__option[aria-disabled=true] {
+  opacity: 0.5; }
+
 @media (max-width: 1417px) {
   .advocate_calender_info {
     width: 300px;
