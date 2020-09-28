@@ -23,7 +23,7 @@
               <div class="doc-img-wrap">
               <img src="/static/img/doc.svg" alt="">
               <div class="doc-name">
-                  Docum 1
+                  Docum {{document.id}}
               </div>
               </div>
               <div class="doc__title">
@@ -45,6 +45,8 @@
             {% endif %}
           </div>
         </div>
+        {% empty %}
+        <span class="doc_content standart_title standart_title_4 color_black">Немає документів</span>
         {% endfor %}
       </div>
       <!-- <div class="advocate_doc_add_btn__block">
@@ -64,9 +66,13 @@
       <a href="{{ document.file.url }}" class="doc_content standart_title standart_title_4 color_black">
       {{ document.file.url }}
       </a>
+      {% empty %}
+      <span class="doc_content standart_title standart_title_4 color_black">Немає документів</span>
       {% endfor %}
     </div>
     </div>
+    {% empty %}
+    <span class="doc_content standart_title standart_title_4 color_black">Немає консультацій</span>
     {% endfor %}
   </div>
 </div>

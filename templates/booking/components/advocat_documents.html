@@ -19,32 +19,34 @@
     <!-- мої документи -->
     <div id="profile_1" class="main_doc_content main_doc_content_active">
       <div class="doc-block">
-          {% for document in user.get_documents %}
-          <div class="doc-profile">
-              <div class="doc-top">
-                <div class="doc-img-wrap">
-                  <img src="/static/img/doc.svg" alt="">
-                  <div class="doc-name">
-                      Docum {{document.id}}
-                      <!-- {{document.file}} -->
-                  </div>
-                </div>
-                <div class="doc__title">
-                  {{document.file}}
-                </div>
+        {% for document in user.get_documents %}
+        <div class="doc-profile">
+          <div class="doc-top">
+            <div class="doc-img-wrap">
+              <img src="/static/img/doc.svg" alt="">
+              <div class="doc-name">
+                  Docum {{document.id}}
+                  <!-- {{document.file}} -->
               </div>
-              <div class="doc-bot">
-                <a href="{{document.file.url}}" download class="doc-btn">
-                          Завантажити
-                </a>
-                  {% if document.is_pdf or document.is_jpg or document.is_jpeg or document.is_png %}
-                <a target="_blank" href="{% url 'read_document' document.id %}" class="doc-btn">
-                          Переглянути
-                </a>
-                  {% endif %}
-              </div>
+            </div>
+            <div class="doc__title">
+              {{document.file}}
+            </div>
           </div>
-          {% endfor %}
+          <div class="doc-bot">
+            <a href="{{document.file.url}}" download class="doc-btn">
+              Завантажити
+            </a>
+              {% if document.is_pdf or document.is_jpg or document.is_jpeg or document.is_png %}
+            <a target="_blank" href="{% url 'read_document' document.id %}" class="doc-btn">
+              Переглянути
+            </a>
+              {% endif %}
+          </div>
+        </div>
+        {% empty %}
+        <span class="doc_content standart_title standart_title_4 color_black">Немає документів</span>
+        {% endfor %}
       </div>
       <div class="advocate_doc_add_btn__block">
           <label class="advocate_doc_add_label button_transparent" for="advocate_doc_add_btn">
@@ -65,8 +67,8 @@
           viewBox="0 0 2117 2117"
           xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Layer_x0020_1">
-                  <metadata id="CorelCorpID_0Corel-Layer"/>
-                  <path fill='#D2A351' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+                <metadata id="CorelCorpID_0Corel-Layer"/>
+                <path fill='#D2A351' d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
               </g>
           </svg>
           <span class="docs_client_name">
@@ -88,9 +90,13 @@
             {% endfor %}
           </div>
         </div>
+      {% empty %}
+      <span class="doc_content standart_title standart_title_4 color_black">Немає консультацій</span>
       {% endfor %}
       </div>
       {% endif %}
+    {% empty %}
+    <span class="doc_content standart_title standart_title_4 color_black">Немає клієнтів</span>
     {% endfor %}
     </div>
   </div>
