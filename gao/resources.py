@@ -15,9 +15,9 @@ class ClientResource(ModelResource):
 
 
 
-class SliderResource(ModelResource):
+class GaoSliderResource(ModelResource):
     class Meta:
-        model = Slider 
+        model = GaoSlider 
         exclude = []
 
 

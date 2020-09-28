@@ -94,8 +94,8 @@ class FacultyAdmin(ImportExportModelAdmin):
     ]
 
 
-class SliderInline(admin.StackedInline):
-    model = Slider.clients.through
+class GaoSliderInline(admin.StackedInline):
+    model = GaoSlider.clients.through
     extra = 0
 
 
@@ -143,15 +143,15 @@ class ClientAdmin(admin.ModelAdmin):
         'id',
     ]
     inlines = [
-        SliderInline
+        GaoSliderInline
     ]
 
 
-class SliderAdmin(admin.ModelAdmin):
+class GaoSliderAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
     def has_add_permission(self, request):
-        count = Slider.objects.all().count()
+        count = GaoSlider.objects.all().count()
         if count < 4:
           return True
         return False 
@@ -170,7 +170,7 @@ class SliderAdmin(admin.ModelAdmin):
         'slider',
     ]
     inlines = [
-        SliderInline,
+        GaoSliderInline,
     ]
 
 
@@ -320,6 +320,6 @@ class WorkingDayAdmin(admin.ModelAdmin):
 
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Team, TeamAdmin)
-admin.site.register(Slider, SliderAdmin)
+admin.site.register(GaoSlider, GaoSliderAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Document, DocumentAdmin)

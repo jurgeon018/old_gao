@@ -569,7 +569,7 @@ class Client(models.Model):
         return self.title
 
 
-class Slider(models.Model):
+class GaoSlider(models.Model):
     slider = models.CharField(verbose_name="Номер слайдера", max_length=255)
     clients = models.ManyToManyField(verbose_name="Клієнти", to="Client", related_name="sliders", blank=True, null=True)
 
