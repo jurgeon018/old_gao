@@ -6,14 +6,13 @@
         {% for post in posts%}
         <div data-counter='{{forloop.counter}}' class="slide-prof">
             <div class="gold-name">
-                <!-- Автор: {{post.author}} -->
+                Автор: {{post.author.full_name}}
             </div>
-            <!-- <div class="white-text">
-                {{post.title|truncatechars:55}}
-            </div> -->
+            <div class="white-text">
+                {{post.title|truncatechars:35}}
+            </div>
             <div class="sub-text">
                 {{post.body|striptags|safe|truncatechars:55}}
-                <!-- {{post.title|truncatechars:55}} -->
             </div>
             <a class="slider_btn" href="{% url 'post' slug=post.slug%}">
                 Читати

@@ -9,8 +9,7 @@
             щиро радіємо за їх професійний ріст та горді співпрацею з ними!
         </div>
         <div class="client-block">
-            {%for slider in sliders%}
-            {% for client in slider.clients.all %}
+            {% for client in clients %}
             <div class="client_prof">
                 <div class="client_header__wrap">
                     <div class="client_img">
@@ -27,8 +26,6 @@
                 </div>
                 <div class="client_content">
                     {{client.body}}
-                    Компанія є найбільшим виробником цукру в Західній Україні, що входить до міжнародної групи компаній Pfeifer&Langen – провідного 
-                    виробника цукру на теренах Євросоюзу.
                 </div>
                 {% if client.body2 %}
                 <div class="client_btn">
@@ -38,91 +35,12 @@
                     Закрити
                 </div>
                 <div class="client_hidden_content">
-                    {{client.bod2}}
-                    Компанія спеціалізується на переробці цукрового буряка, виробництві цукру-піску, меляси та жому. 
-                    Виробничі  потужності підприємства розміщені у Львівській та Тернопільській областях.
+                    {{client.body2}}
                 </div>
                 {% endif %}
             </div>
             {%endfor%}
-            {%endfor%}
         </div>
-        <!-- <div class="client-block">
-            {% for slider in sliders %}
-            <div class="sliderLogo">
-                {% if not forloop.counter|divisibleby:"2" == 0%}
-                    {% for client in slider.clients.all %}
-                    <div class="slide-prof">
-                        <div class="client-profile client-profile-left">
-                            <img data-src="{{client.image.url}}" alt="{{client.alt}}">
-                            <div class="client-text">
-                                <div class="green-name">
-                                    {{client.title}}
-                                    <div class="line-client"></div>
-                                </div>
-                                <div class="sub-work">
-                                    {{client.body}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                {% if forloop.counter|divisibleby:"2" == 0%}
-                    {% for client in slider.clients.all %}
-                    <div class="slide-prof">
-                        <div class="client-profile client-profile-right">
-                            <img data-src="{{client.image.url}}" alt="{{client.alt}}">
-                            <div class="client-text">
-                                <div class="green-name">
-                                    {{client.title}}
-                                    <div class="line-client"></div>
-                                </div>
-                                <div class="sub-work">
-                                    {{client.body}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% endif %}
-
-            </div>
-            {% endfor %}
-        </div> -->
-
-        <!-- <div class="link__index">
-        <a href="#main-header">
-            <div class="elips">
-
-            </div>
-        </a>
-        <a href="#main__title-1">
-            <div class="elips">
-
-            </div>
-        </a>
-        <a href="#main__title-work">
-            <div class="elips">
-
-            </div>
-        </a>
-        <a href="#main__title-client">
-            <div class="elips elips_active">
-
-            </div>
-        </a>
-        <a href="#main__title-team">
-            <div class="elips">
-
-            </div>
-        </a>
-        <a href="#main__title-practise">
-            <div class="elips">
-
-            </div>
-        </a>
-        </div> -->
         <div id="test-fix-blog"></div>
     </div>
 </section>
