@@ -528,7 +528,6 @@ class ConsultationPayment(TimestampMixin):
         verbose_name_plural = "Оплати до консультацій"    
 
 
-
 class Team(models.Model):
     meta_title  = models.CharField(max_length=255, blank=True, null=True) 
     meta_descr  = models.TextField(blank=True, null=True)

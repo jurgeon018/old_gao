@@ -1,0 +1,4 @@
+id,password,last_login,is_superuser,groups,user_permissions,username,first_name,last_name,email,is_staff,is_active,date_joined,phone_number
+1,pbkdf2_sha256$180000$QLUi56Rocohb$KgWUXTslb/JGN0mGd6dPdOLapIASz+ZxSAcBEktDH3o=,2020-09-28 11:48:58,1,,,admin,User test,,test@test.com,1,1,2020-03-27 13:20:45,+38011111111
+3,pbkdf2_sha256$180000$QEwgP2IRYqm2$tMClD1Uf2trKIifKGFP1UcpA+Qzc/1xyezauC4gzntk=,,0,,,admin1,,,,0,1,2020-04-29 06:57:05,
+4,pbkdf2_sha256$180000$bP5FjqIuuJQv$kWxuw4c/PbMH1aiuw5V5+6FaLRI1DPshqt6yJNG6lgs=,2020-06-09 12:28:23,0,,,kryganovych,Крижанович,,m.b@galpravgrup.com.ua,0,1,2020-06-09 10:18:29,0977863919
