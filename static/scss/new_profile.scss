@@ -711,11 +711,11 @@
 }
 .svg_bg {
     transition: all .2s;
-    fill: #FEFEFE;
+    fill: #054C23;
 }
 .svg_step {
     transition: all .2s;
-    fill: #D2A351;
+    fill: #fff;
 }
 .step_access {
     border: 1px solid #D2A351;
@@ -1783,6 +1783,12 @@
         opacity: 0.3;
         pointer-events: none;
         cursor: default;
+        
+        * {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none; 
+        }
     }
    
 }
@@ -1794,7 +1800,11 @@
     line-height: 1.5;
 }
 
-
+.load_spin {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;  
+}
 
 
 
