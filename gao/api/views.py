@@ -19,7 +19,6 @@ import json
 from datetime import date, datetime, time, timezone, timedelta
 
 
-
 def sendgrid(request):
   import os
   from sendgrid import SendGridAPIClient
@@ -40,12 +39,6 @@ def sendgrid(request):
     'ok':'ok',
     'e':'e',
   })
-
-
-
-
-
-
 
 
 def googlemeet(request):
@@ -172,7 +165,7 @@ class ConsultationDocumentDetailView(generics.RetrieveAPIView):
 
 class ConsultationListView(generics.ListCreateAPIView):
   pagination_class = CustomPagination
-  serializer_class = ConsultationListSerializer
+  serializer_class = ConsultationSerializer
   queryset = Consultation.objects.all()
 
   def get_queryset(self):
@@ -289,7 +282,7 @@ class ConsultationListView(generics.ListCreateAPIView):
 
 
 class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
-  serializer_class = ConsultationDetailSerializer
+  serializer_class = ConsultationSerializer
   queryset = Consultation.objects.all()
 
   def delete(self, request, *args, **kwargs):

@@ -154,11 +154,12 @@ class User(AbstractUser):
     Генерує години з інтервалами з робочого діапазону годин 
     """
     working_hours_range = self.get_working_hours_range(date)
-    print("get_working_hours_range", working_hours_range)
+    # print("get_working_hours_range", working_hours_range)
     start = working_hours_range['start']
     end   = working_hours_range['end']
     if not start or not end:
       return []
+    # TODO: протестити правильність 
     hours = []
     start = time.strftime(start, '%H:%M')
     end   = time.strftime(end, '%H:%M')
