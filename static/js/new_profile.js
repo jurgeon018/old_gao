@@ -457,7 +457,6 @@ if ($('.advocate_calender_container').length == 1) {
         .then(data => {
             $('.load_spin').removeClass('load_spin_active');
             generete_modal_text(data.messages[0].text);
-           
 
             if (data.messages[0].status == 'bad') {
                 var data = {
