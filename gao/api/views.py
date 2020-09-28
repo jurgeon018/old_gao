@@ -270,14 +270,14 @@ class ConsultationListView(generics.ListCreateAPIView):
       '''
       if link:
         message += f'Посилання: {link}'
-      send_mail(
-        subject=f'Створено консультацію №{consultation.id}',
-        message=message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=recipient_list,
-        fail_silently=False,
-        # fail_silently=True,
-      )
+      # send_mail(
+      #   subject=f'Створено консультацію №{consultation.id}',
+      #   message=message,
+      #   from_email=settings.DEFAULT_FROM_EMAIL,
+      #   recipient_list=recipient_list,
+      #   fail_silently=False,
+      #   # fail_silently=True,
+      # )
     return response
 
 
@@ -302,15 +302,14 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       Час: {consultation.start} - {consultation.end}
       Галузь: {consultation.faculty.name}
       '''
-      
-      send_mail(
-        subject=f'Видалено консультацію №{consultation.id}',
-        message=message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=recipient_list,
-        fail_silently=False,
-        # fail_silently=True,
-      )
+      # send_mail(
+      #   subject=f'Видалено консультацію №{consultation.id}',
+      #   message=message,
+      #   from_email=settings.DEFAULT_FROM_EMAIL,
+      #   recipient_list=recipient_list,
+      #   fail_silently=False,
+      #   # fail_silently=True,
+      # )
     return response
 
   def update(self, request, *args, **kwargs):
@@ -349,7 +348,7 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
       recipient_list = []
       recipient_list.append('jurgeon018@gmail.com')
       recipient_list.append(consultation.advocat.email)
-      send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
+      # send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
       return response 
     if 'status' in request.data:
       if request.data['status'] == Consultation.DECLINED and not consultation.can_be_changed():
@@ -372,7 +371,7 @@ class ConsultationDetailView(generics.RetrieveUpdateDestroyAPIView):
         recipient_list = []
         recipient_list.append('jurgeon018@gmail.com')
         recipient_list.append(consultation.advocat.email)
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
+        # send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, False)
         return response 
     response = super().update(request, *args, **kwargs)
     return response

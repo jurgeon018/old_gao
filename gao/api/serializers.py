@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from ..models import * 
 
+
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
@@ -29,7 +30,6 @@ class ConsultationPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationPayment 
         exclude = []
-
 
 
 class ConsultationSerializer(serializers.ModelSerializer):
