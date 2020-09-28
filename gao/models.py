@@ -159,7 +159,6 @@ class User(AbstractUser):
     end   = working_hours_range['end']
     if not start or not end:
       return []
-    # TODO: протестити правильність 
     hours = []
     start = time.strftime(start, '%H:%M')
     end   = time.strftime(end, '%H:%M')
@@ -173,7 +172,6 @@ class User(AbstractUser):
       end = int(end) + 1 
     else:
       end = end.split(':')[0]
-    # TODO: протестити правильність
     raw_hours = list(range(int(start), int(end)+1))
     for raw_hour in raw_hours:
       hour = datetime.strptime(f'{raw_hour}:00', "%H:%M")

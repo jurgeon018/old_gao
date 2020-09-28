@@ -60,8 +60,6 @@ def blog(request):
     return render(request, 'blog.html', locals())
 
 def get_gao_liqpay_context(request):
-    # TODO: а)поставити обмеження на створення нової консультації, якщо є неоплачена стара 
-    # TODO: б)діставати консультацію з сесії 
     consultation = Consultation.objects.get(
         client=request.user,
         status=Consultation.UNORDERED,
@@ -97,10 +95,9 @@ def gao_liqpay_callback(request):
         amount=transaction.amount,
     )
     print('YES BLYAT!')
-    # TODO: 
     # send_mail()
-    # consultation.status = Consultation.FINISHED 
-    # consultation.save()
+    consultation.status = Consultation.FINISHED 
+    consultation.save()
     return JsonResponse({})
 
 def post(request, slug):

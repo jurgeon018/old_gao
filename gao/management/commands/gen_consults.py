@@ -38,7 +38,6 @@ class Command(BaseCommand):
       while True:
         # print('iter')
         day  = date.today() - timedelta(days=3) + timedelta(days=random.randint(1, 10))
-        # TODO: перевірки по клієнту
         # day_is_free = advocat.day_is_free(day)
         # if day_is_free:
         if True:
@@ -48,7 +47,6 @@ class Command(BaseCommand):
         # print('iter')
         start = random.choice(hours_24)
         if start != hours_24[-1]:
-        # TODO: перевірки по клієнту
         # hour_is_free = advocat.hour_is_free(day, start)
         # if hour_is_free:
           break
@@ -56,7 +54,6 @@ class Command(BaseCommand):
       while True:
         end = random.choice(hours_24)
         if end > start:
-        # TODO: перевірки по клієнту
         # hour_is_free = advocat.hour_is_free(day, end)
         # if hour_is_free and end > start:
           break
