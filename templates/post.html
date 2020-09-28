@@ -11,7 +11,7 @@ practise-header
             <div class="post_data">
                 {{post.created}}
             </div>
-            <div class="post_soc">
+            <!-- <div class="post_soc">
                 <a class="anim_soc" target="_blank" href="https://facebook.com/advocategpg/">
                     <div class="soc-footer">
                         <img src="/static/img/socc.svg" alt="">
@@ -22,7 +22,7 @@ practise-header
                        <img src="/static/img/9.svg" alt="">
                     </div>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="post_data_title green__title add__title">
             {{post.title}}
@@ -30,7 +30,7 @@ practise-header
     </div>
     <div class="pref_title__block">
         <div class="pref_title_img">
-            <img src="/media/8.png" alt="">
+            <img src="{{post.image.url}}" alt="{{post.alt}}">
         </div>
         <div class="pref_content">
             <div class="pref_title">
