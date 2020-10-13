@@ -1,9 +1,26 @@
+from django.contrib.sites.models import Site
 from django.contrib import admin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.redirects.models import Redirect
+from django.utils.translation import gettext, gettext_lazy as _
+
 from .models import *
 from pages.models import * 
 from pages.admin import * 
-from django.contrib.redirects.models import Redirect
-from django.contrib.sites.models import Site
+
+from import_export.admin import ImportExportModelAdmin
+
+
+
+
+User = get_user_model()
+
+
+class DocumentInline(admin.TabularInline):
+    model = Document 
+    extra = 0 
+    classes = ['collapse',]
 
 
 
@@ -20,12 +37,15 @@ class PostInline(admin.StackedInline):
     model = Post 
     extra = 0
 
+
 class SliderInline(admin.StackedInline):
     model = Slider.clients.through
     extra = 0
 
+from .resources import * 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImportExportModelAdmin):
+    resource_class = PostResource 
     list_display = (
         'id',
         'title', 
@@ -40,7 +60,8 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links =list_display
 
 
-class TeamAdmin(admin.ModelAdmin):
+class TeamAdmin(ImportExportModelAdmin):
+    resource_class = TeamResource 
     list_display = (
         'id',
         'full_name',
@@ -71,7 +92,8 @@ class TeamAdmin(admin.ModelAdmin):
     ]
 
 
-class ClientAdmin(admin.ModelAdmin):
+class ClientAdmin(ImportExportModelAdmin):
+    resource_class = ClientResource 
     list_display = (
         'id',
         'title', 
@@ -91,8 +113,8 @@ class ClientAdmin(admin.ModelAdmin):
     ]
 
 
-
-class SliderAdmin(admin.ModelAdmin):
+class SliderAdmin(ImportExportModelAdmin):
+    resource_class = SliderResource 
     def has_delete_permission(self, request, obj=None):
         return False
     def has_add_permission(self, request):
@@ -118,38 +140,23 @@ class SliderAdmin(admin.ModelAdmin):
         SliderInline
     ]
 
-class ContactAdmin(admin.ModelAdmin):
-    pass 
+
+class ContactAdmin(ImportExportModelAdmin):
+    resource_class = ContactResource 
 
 
+class DocumentAdmin(ImportExportModelAdmin):
+    resource_class = DocumentResource 
 
 
-
-from django.contrib import admin 
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import gettext, gettext_lazy as _
-
-
-User = get_user_model()
-
-
-class DocumentInline(admin.TabularInline):
-    model = Document 
-    extra = 0 
-    classes = ['collapse',]
-
-class DocumentAdmin(admin.ModelAdmin):
-    pass 
-
-
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin, ImportExportModelAdmin):
+    resource_class = UserResource
     inlines = [
         # ProfileInline,
         # OrderInline,
         DocumentInline
     ]
-
+    
     fieldsets = (
         (_('Personal info'), {
             'fields': (
