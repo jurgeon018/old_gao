@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load gao %}
+{% block head_static%}
+{% include 'includes/head_static.html' %}
+<link  href="/static/css/datepicker.css" rel="stylesheet">
+<link  href="/static/css/slick.min.css" rel="stylesheet">
+<link  href="/static/css/select2.min.css" rel="stylesheet">
+<link  href="/static/css/new_profile.css" rel="stylesheet">
+{% endblock head_static %}
+{% block content %}
+{% include "booking/includes/modals.html" %}
+{% include 'includes/form.html' %}
+<header class="kabinet">
+		<div class="kab__title-wrap">
+			<div class="kab__title">
+				Мій кабінет
+			</div>
+			<div class="set-wrap">
+				<img src="/static/img/profile/settings.svg" class="set-img" alt="">
+			</div>
+		</div>
+		<div data-advocat='{{request.user.id}}' class="advocat_info_id user_name midle_title midle_title_3 color_gold">
+			{{ request.user.full_name }}
+		</div>
+		<div class="user_type standart_title standart_title_4 color_black">
+      {{request.user.role}}
+		</div>
+		<div class="all-tab-wrap">
+			<div class="auto-tab-link-block">
+				<div data-tab="tab_33" class="button_transparent main_tab__link">
+					Мої консультації
+				</div>
+				<div data-tab="tab_11" class="button_transparent main_tab__link main_tab__link_active">
+					Особисті дані
+				</div>
+				<div data-tab="tab_22" class="button_transparent main_tab__link">
+					Документи
+				</div>
+				<a class="button_transparent main_tab__link" href="{% url 'custom_logout' %}">
+					Вихід
+				</a>
+			</div>
+			<div class="tab-auto-content-block">
+				{% include "booking/components/advocat_tab1.html" %}
+				{% include "booking/components/advocat_personal.html" %}
+				{% include "booking/components/advocat_documents.html" %}
+			</div>
+				</div>
+			</div>
+		</div>
+    {% include 'booking/includes/consult_btn.html' %}
+</header>
+{% endblock content%}
+{% block footer_static%}
+{% include 'includes/footer_static.html' %}
+<script defer src="/static/js/datepicker.js" type="text/javascript"></script>
+<script defer src="/static/js/slick.min.js" type="text/javascript"></script>
+<script defer src="/static/js/select2.full.min.js" type="text/javascript"></script>
+<script defer src="/static/js/new_profile.js" type="text/javascript"></script>
+{% endblock footer_static%}

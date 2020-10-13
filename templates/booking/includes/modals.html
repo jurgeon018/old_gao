@@ -1,0 +1,136 @@
+<form action='' class="cmxform" id="modal_delete_consultation" style="display:none;">
+    <div class="none_item__wrap">
+        <div class="no_item kab__title">
+            Ви дійсно хочете видалити цю консультацію?
+        </div>
+        <div class="manager_change">
+            <div class="btn_style user_cancel button_transparent">
+                Я ще подумаю
+            </div>
+            <div class="btn_style user_acceses button_gold">
+                Так
+            </div>
+        </div>
+    </div>						
+</form>
+<form action='' class="cmxform" id="change_status_in_consultation" style="display:none;">
+    <div class="none_item__wrap">
+        <div class="no_item kab__title change_status_in_consultation_text">
+            <!-- тут генерується повідомлення -->
+        </div>
+    </div>						
+</form>
+<form method="POST" action="" class="cmxform" id="modal-change_settings" style="display:none;">
+    <div class="change_title">
+        Редагувати:
+    </div>
+    <div class="change__block">
+        <div class="usualy_tab__link set-prof button_transparent" data-src='#modal-form_settings'>
+            особисті дані
+        </div>
+        <div class="usualy_tab__link set-prof button_transparent" data-src='#modal-form_relog'>
+            пароль
+        </div>
+    </div>
+</form>
+
+<form action="{% url 'update_profile' %}" class="cmxform" id="modal-form_settings" style="display:none;">
+
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="name">Ваше і'мя</label class="label__style">
+        <input name="first_name" type="text" value="{{request.user.first_name}}" required>
+    </div>
+
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="email">Email</label>
+        <input name="email" type="text" value="{{request.user.email}}" required>
+    </div>
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="phone">Ваш телефон</label>
+        <input name="phone_number" type="text" value="{{request.user.phone}}" maxlength="13" required>
+    </div>
+    <div class="error_block_false">
+        
+    </div>
+    
+        <input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+    <!-- <div class="no_pass">
+        {% trans 'Забули пароль?'
+    </div> -->
+</form>
+<form action="{% url 'update_password' %}" class="cmxform" id="modal-form_relog" style="display:none;">
+    
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="pas">Ваш пароль</label class="label__style">
+        <input name="old_password" type="text" required>
+    </div>
+
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="pas1">Новий пароль</label>
+        <input name="password1" type="password" required>
+    </div>
+    <div class="inp-vak-wrap">
+        <label class="label__style" for="pas2">Підтвердіть новий пароль</label>
+        <input name="password2" type="password" maxlength="13" required>
+    </div>
+    <div class="error_block_false">
+        
+    </div>
+    
+        <input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+    <!-- <div class="no_pass">
+        {% trans 'Забули пароль?'
+    </div> -->
+</form>
+
+
+
+
+<form action="{% url 'update_profile' %}" class="cmxform" id="modal-form_settings" style="display:none;">
+
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="name">Ваше і'мя</label class="label__style">
+      <input name="first_name" type="text" value="{{request.user.first_name}}" required>
+    </div>
+
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="email">Email</label>
+      <input name="email" type="text" value="{{request.user.email}}" required>
+    </div>
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="phone">Ваш телефон</label>
+      <input name="phone_number" type="text" value="{{request.user.phone}}" maxlength="13" required>
+    </div>
+    <div class="error_block_false">
+      
+    </div>
+    
+      <input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+    <!-- <div class="no_pass">
+      {% trans 'Забули пароль?'
+    </div> -->
+  </form>
+  <form action="{% url 'update_password' %}" class="cmxform" id="modal-form_relog" style="display:none;">
+    
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="pas">Ваш пароль</label class="label__style">
+      <input name="old_password" type="text" required>
+    </div>
+  
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="pas1">Новий пароль</label>
+      <input name="password1" type="password" required>
+    </div>
+    <div class="inp-vak-wrap">
+      <label class="label__style" for="pas2">Підтвердіть новий пароль</label>
+      <input name="password2" type="password" maxlength="13" required>
+    </div>
+    <div class="error_block_false">
+      
+    </div>
+    
+      <input class="submit_vak hvr-wobble-horizontal" type="submit" value="зберегти зміни">
+    <!-- <div class="no_pass">
+      {% trans 'Забули пароль?'
+    </div> -->
+  </form>

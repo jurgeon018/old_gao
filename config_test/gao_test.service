@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI Emperor service
+
+[Service]
+ExecStartPre=/bin/bash -c 'mkdir -p /home/jurgeon/projects/gao/test/config_test; chown jurgeon:www-data /home/jurgeon/projects/gao/test/config_test'
+ExecStart=/usr/local/bin/uwsgi --emperor /home/jurgeon/projects/gao/test/config_test 
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target 
+
+

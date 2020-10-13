@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block content%}
-{% include 'includes/form.html' %}
-
-<div class="about-page-top-block">
-          <div class="svg-pract-page">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+{% block without_header%}
+<section class="background_section">
+  <div class="container">
+    <div class="about-page-top-block">
+      <div class="svg-pract-page">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
 viewBox="0 0 177 177"
 xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
@@ -141,22 +141,29 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 </g>
 <path class="fil7" d="M138 59c0,-1 0,-2 0,-2 0,-1 0,-2 0,-3l0 -1 31 0c1,0 2,0 3,-1 1,-1 1,-2 1,-4 0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-34 0 0 -1c-1,0 -1,-1 -1,-1 -1,-1 -1,-1 -2,-1l0 -1 0 -1c-1,-2 -1,-5 -2,-7 0,-2 -1,-5 -3,-7l-1 -2 43 0c1,0 2,-1 3,-1 1,-1 1,-2 1,-4 0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-54 0 0 -1c-3,-1 -6,-2 -9,-3 -3,-1 -6,-1 -10,-1 -3,0 -6,0 -10,1 -3,1 -6,2 -8,3l-1 1 -64 0 0 -6c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -4,-1l0 0c-1,0 -2,0 -3,1 -1,1 -1,2 -1,3l0 151c0,1 0,2 1,3 1,1 2,1 3,1l0 0c2,0 3,0 4,-1 0,-1 1,-2 1,-3l0 -16 16 0 0 10c0,1 1,3 1,3 1,1 2,2 4,2l15 0 0 11c0,1 0,2 1,3 1,1 2,1 3,1l86 0c2,0 3,0 4,-1 0,-1 1,-2 1,-3l0 -11 15 0c1,0 2,-1 3,-2 1,0 2,-2 2,-3l0 -10 5 0c1,0 2,0 3,-1 1,-1 1,-2 1,-3 0,-2 0,-3 -1,-4 -1,0 -2,-1 -3,-1l-5 0 0 -1c0,-4 -1,-7 -3,-10 -1,-2 -3,-5 -6,-7l-2 -3 16 0c1,0 2,0 3,-1 1,-1 1,-2 1,-3 0,-2 0,-3 -1,-4 -1,-1 -2,-1 -3,-1 -9,0 -24,-1 -33,0l0 0c-3,-1 -5,-2 -8,-3 -3,-2 -6,-2 -7,-3l-1 0 0 0c-3,0 -4,-3 -4,-5 -1,-2 0,-4 0,-4l0 -1 -1 -1 1 0c0,-1 1,-1 1,-2 1,0 1,-1 1,-1l1 -1 50 0c1,0 2,0 3,-1 1,-1 1,-2 1,-4 0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-48 0 7 -3c2,-1 4,-2 6,-5 1,-2 3,-4 4,-7zm-16 -18l0 2c0,2 1,3 1,4 1,0 2,1 3,1l1 0c0,0 0,1 1,1 0,0 0,1 0,1 1,1 1,2 1,3 0,1 0,2 0,3 -1,2 -1,3 -2,4 -1,2 -3,2 -3,2l-1 0 0 0c-1,0 -2,0 -3,1 -1,0 -2,1 -2,2 -2,6 -5,12 -10,16 -3,4 -7,6 -12,6 -4,0 -8,-2 -12,-6 -4,-4 -7,-10 -9,-16 -1,-1 -1,-1 -2,-2 -1,0 -2,-1 -2,-1 -1,0 -1,0 -2,0l0 0 0 0c-1,0 -2,0 -3,-2 -1,-1 -2,-2 -2,-4 0,-1 0,-2 0,-3 0,-1 0,-2 0,-3 0,0 1,-1 1,-1 0,0 1,-1 1,-1l0 0c1,0 3,-1 3,-1 1,-1 1,-2 1,-4l0 -2c0,-7 3,-13 7,-16 5,-5 12,-7 19,-7 7,0 14,2 19,7 5,3 7,9 7,16l0 0zm-8 66c-2,3 -4,6 -7,8 -3,2 -7,3 -11,3 -3,0 -7,-1 -10,-3 -3,-2 -6,-5 -7,-8l0 -1 1 0c1,-2 2,-3 3,-4 2,-2 2,-4 3,-6l0 -2 2 1c1,0 2,1 4,1 1,0 3,1 4,1 2,0 3,-1 5,-1 1,0 3,-1 4,-1l2 -1 0 2c0,2 1,4 2,6 1,1 3,2 4,4l1 0 0 1zm-58 -3l-43 0 0 -21 61 0 0 1c1,0 1,1 2,1 0,1 0,1 1,2l0 0 0 1 0 1c0,0 1,3 0,6 -1,1 -2,3 -4,3l0 0 -1 0c-1,1 -4,1 -8,3 -2,1 -5,2 -7,3l-1 0 0 0zm-1 -50c0,1 0,2 0,3 0,0 0,1 0,2 1,3 2,5 4,7 2,3 4,4 6,5l7 3 -59 0 0 -21 42 0 0 1zm10 -29c-1,2 -2,5 -3,7 0,2 -1,5 -1,7l0 1 0 1c-1,0 -1,0 -2,1 0,0 -1,1 -1,1l-1 1 -44 0 0 -21 54 0 -2 2zm-51 88l26 0 -2 3c-3,2 -5,5 -6,7 -2,3 -3,6 -3,10l0 1 -16 0 0 -21 1 0zm120 51l-76 0 0 -21 77 0 0 21 -1 0zm19 -16l-9 0 0 -9c0,-2 -1,-3 -1,-4 -1,0 -2,-1 -4,-1l-86 0c-1,0 -2,1 -3,1 -1,1 -1,2 -1,4l0 9 -11 0 0 -15c0,-5 4,-9 8,-13 7,-4 15,-8 23,-11l1 0 0 1c2,5 6,9 10,13 5,3 11,5 16,5 6,0 12,-2 16,-5 5,-4 9,-8 11,-13l0 -1 1 0c7,3 16,7 22,11 5,4 8,8 8,13l0 15 -1 0z"/>
 </g>
-</svg>
-          </div>
-          <div class="about__title-wrap">
-            <div class="green__title">
-              ПРАКТИКА  КРИМІНАЛЬНО-ПРАВОВОГО ЗАХИСТУ
-            </div>
-            <div class="about-line about-line-fix">
-            
-            </div>
-            <div class="about__subtitles">
-            Якщо у Вас, Ваших рідних або знайомих виникли проблеми із законом (у тому числі затримання, обшук, виклик на допит) дуже важливо 
-            якнайшвидше отримати допомогу професійного адвоката. Своєчасне звернення до адвоката вже на початковому етапі допоможе 
-            уникнути ускладнень, сприятиме швидкому позитивному вирішенню проблеми.
-            </div>
+        </svg>
+      </div>
+      <div class="about__title-wrap">
+        <div class="green__title">
+          Практика кримінально-правового захисту
         </div>
+        <div class="about-line about-line-fix">
+        
+        </div>
+        <div class="about__subtitles">
+        Якщо у Вас, Ваших рідних або знайомих виникли проблеми із законом (у тому числі затримання, обшук, виклик на допит) дуже важливо 
+        якнайшвидше отримати допомогу професійного адвоката. Своєчасне звернення до адвоката вже на початковому етапі допоможе 
+        уникнути ускладнень, сприятиме швидкому позитивному вирішенню проблеми.
+        </div>
+    </div>
 </div>
+  </div>
+</section>
+{% endblock without_header %}
+{% block content%}
+{% include 'includes/form.html' %}
+
+
 
 <div class="bottom-wrap">
   <div class="about__subtitles about__subtitles-first">Ми маємо практику захисту обвинувачуваних, підозрюваних, а також підсудних. 
@@ -180,33 +187,33 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
   </div>
   <div class="inform-pract-block">
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Адвокатське розслідування
+        <b>+ </b> Адвокатське розслідування
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Представництво та захист інтересів під час допиту особи в якості свідка
+        <b>+ </b> Представництво та захист інтересів під час допиту особи в якості свідка
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Представництво інтересів потерпілого
+        <b>+ </b> Представництво інтересів потерпілого
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Захист підозрюваного на досудовому слідстві
+        <b>+ </b> Захист підозрюваного на досудовому слідстві
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Захист обвинуваченого, потерпілого в суді
+        <b>+ </b> Захист обвинуваченого, потерпілого в суді
       </div>
     </div>
     

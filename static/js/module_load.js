@@ -10,10 +10,9 @@ var test = function (){
 	  	    $('.link-fanc').fancybox({
 	          touch: false
 	      });
-	  	    $('.log-prof').fancybox({
+	  	    $('.log-prof_modal').fancybox({
 	  	    	touch: false,
 	  	    	scrolling: 'hidden',
-	  	    
 	  	    });
 	  	    $('.set-prof').fancybox({
 	  	    	touch: false,

@@ -23,20 +23,17 @@ body {
 	// font-family: 'OpenSans-Regular', sans-serif;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
-	
 }
 *,
 *:after,
 *:before {
-	box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 .container {
-	max-width: 85%;
+	max-width: 90%;
 	margin: 0 auto;
 	border: 1px solid transparent;
-	
-
-
 }
 a {
 	text-decoration: none;
@@ -50,9 +47,7 @@ img {
 .slide-prof.slick-slide {
 	transition: opacity 500ms ease 0s !important;
 }
-
 @charset "UTF-8";
-
 /*!
  * animate.css -https://daneden.github.io/animate.css/
  * Version - 3.7.2
@@ -60,7 +55,6 @@ img {
  *
  * Copyright (c) 2019 Daniel Eden
  */
-
 
 @-webkit-keyframes slideInLeft {
   from {

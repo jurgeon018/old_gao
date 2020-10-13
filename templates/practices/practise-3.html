@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}
-{% include 'includes/form.html' %}
-
-<div class="about-page-top-block">
-          <div class="svg-pract-page">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+{% block without_header%}
+<section class="background_section">
+  <div class="container">
+    <div class="about-page-top-block">
+      <div class="svg-pract-page">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="177px" height="177px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
 viewBox="0 0 177 177"
 xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
@@ -140,22 +140,29 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <path class="fil7" d="M74 129c-2,-1 -2,-3 -3,-4 0,-1 0,-3 0,-4 1,-1 2,-1 3,-1 0,1 1,1 1,2 0,1 0,3 0,4 0,0 0,1 1,2 0,1 0,2 1,3 1,2 2,2 4,2 0,0 0,0 1,0 1,0 3,-2 3,-3 0,-1 1,-2 1,-3 0,-1 1,-3 1,-4 0,1 0,1 0,2 0,1 0,1 1,2 0,3 2,5 5,5l0 0c1,0 3,-1 4,-1l4 -3 -3 -5 -4 3 -1 0c0,0 0,0 0,0 0,-1 0,-1 0,-2 0,-1 0,-2 -1,-3 0,-2 -3,-4 -6,-4 -1,0 -2,1 -3,3 -1,1 -2,2 -2,4 0,-1 0,-2 0,-3 -1,-3 -3,-5 -6,-6 -3,-1 -6,0 -8,3 -2,2 -2,5 -1,8 0,3 1,5 3,7l5 -4z"/>
 </g>
 </g>
-</svg>
-          </div>
-          <div class="about__title-wrap">
-            <div class="green__title">
-              ДОГОВІРНА ТА ПРЕТЕНЗІЙНА ПРАКТИКА
-            </div>
-            <div class="about-line about-line-fix">
-            
-            </div>
-            <div class="about__subtitles">
-            Прибуткова підприємницька та господарська діяльність залежать від юридично грамотного прописання умов договору 
-            між його сторонами. АО «Галицька правнича група» надає правову підтримку чи то на стадії погодження умов 
-            договору чи при розірванні договору.
-            </div>
+        </svg>
+      </div>
+      <div class="about__title-wrap">
+        <div class="green__title">
+          Договірна та претензійна практика
         </div>
+        <div class="about-line about-line-fix">
+        
+        </div>
+        <div class="about__subtitles">
+        Прибуткова підприємницька та господарська діяльність залежать від юридично грамотного прописання умов договору 
+        між його сторонами. АО «Галицька правнича група» надає правову підтримку чи то на стадії погодження умов 
+        договору чи при розірванні договору.
+        </div>
+    </div>
 </div>
+  </div>
+</section>
+{% endblock without_header %}
+{% block content %}
+{% include 'includes/form.html' %}
+
+
 
 <div class="bottom-wrap">
   <div class="about__subtitles about__subtitles-first">Наші юристи оформлять угоду будь якої складності, максимально захистивши Ваші інтереси. 
@@ -181,9 +188,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
   </div>
   <div class="inform-pract-block">
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Підготовка проектів цивільно-правових та господарсько-правових договорів (купівлі-продажу, міни, поставки, дарування, 
+        <b>+ </b> Підготовка проектів цивільно-правових та господарсько-правових договорів (купівлі-продажу, міни, поставки, дарування, 
         найму, оренди (суборенди), лізингу, надання послуг, підряду, перевезення, позики, позички, зберігання, страхування, 
         комісії, доручення, кредитних договорів, ліцензійних договорів, договорів застави (іпотеки), поруки, довірчого управління, 
         про розподіл майна, встановлення аліментів, шлюбних, спадкових, факторингу, спільної діяльності, зовнішньоекономічних, 
@@ -191,22 +198,22 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Переддоговірна правова оцінка юридичних документів якими обмінюються сторони перед укладенням договору;
+        <b>+ </b> Переддоговірна правова оцінка юридичних документів якими обмінюються сторони перед укладенням договору;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Представництво клієнта у переговорах у процесі погодження умов договору та при його укладенні, в тому числі тих, 
+        <b>+ </b> Представництво клієнта у переговорах у процесі погодження умов договору та при його укладенні, в тому числі тих, 
         що вимагають нотаріального посвідчення, державної реєстрації;
       </div>
     </div>
     <div class="sub-title-pract">
-      <img src="../../static/img/ptichka.png" alt="">
+      <!-- <img src="../../static/img/ptichka.png" alt=""> -->
       <div class="about__subtitles">
-        Підготовка інших юридичних документів, що забезпечують ведення бізнесу, та іншої діяльності суб'єкта господарювання: <br>
+        <b>+ </b> Підготовка інших юридичних документів, що забезпечують ведення бізнесу, та іншої діяльності суб'єкта господарювання: <br>
         <span class="pad">ділове листування (листи, повідомлення, претензії, відповіді тощо); </span> <br>
         <span class="pad">досудове врегулювання спірних питань, що виникають із договірних відносин. </span>
       </div>

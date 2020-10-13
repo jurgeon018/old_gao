@@ -1,0 +1,24 @@
+<div id="tab_33" class="tab-auto-content-prof">
+  <div class="main_user_data">
+      Мої консультації
+      <!-- Угода про подання правової допомоги. Протокол погодження ціни 
+      Процесуальні документи 
+      Документи виготовлені адвокатам 
+      Сканкопії інших документів  -->
+  </div>
+  <div class="main_doc_link__block">
+    <div data-tab='3' class="button_transparent main_doc_link main_doc_link_active">
+        Бронювання
+    </div>
+    <div data-tab='4' data-type='advocat' data-consultation='profile_4' class="consultation_link button_transparent main_doc_link">
+        Мої консультації
+    </div>
+    <div data-tab='5' data-type='advocat' data-consultation='profile_5' class="consultation_link button_transparent main_doc_link">
+        Архів
+    </div>
+  </div>
+  <div class="main_doc_content__block">
+    {% include "booking/components/advocat_booking.html" %}
+    {% include "booking/components/advocat_consultations.html" %}
+  </div>
+</div>

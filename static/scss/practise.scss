@@ -10,35 +10,77 @@
 	width: 150px;
 	height: 150px;
 	margin: 0 auto;
+	position: relative;
+
+	svg {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		object-fit: contain;
+	}
+}
+.pract-icon {
+	transition: all .2s; 
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+
+	img {
+		transition: all .2s; 
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+.svg-pract {
+	svg {
+		transition: all .2s;
+	}
 }
 .pract-prof {
 	overflow: hidden;
-	max-width: 370px;
-	height: 485px;
-	min-height: 463px;
-	width: 34%;
+	max-width: unset;
+	height: fit-content;
+    min-height: unset;
+    width: 315px;
 	border-radius: 15px;
-	-webkit-box-shadow: 0px 0px 34px -5px rgba(196,190,196,1);
-	-moz-box-shadow: 0px 0px 34px -5px rgba(196,190,196,1);
-	box-shadow: 0px 0px 34px -5px rgba(196,190,196,1);
+	border: 1px solid #72727163;
 	text-align: center;
-	padding: 55px;
-	
-	margin-top: 40px;
-	margin-left: 30px;
-	
+	padding: 20px;
+	padding-bottom: 30px;
+	margin: 20px;
 	
 	.btn-read {
 		color: #D2A351;
 		margin: 0 auto;
 		margin-top: 20px;
 	}
-
+	.green-practise {
+		min-height: 45px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	
-
+	a {
+		display: block;
+	}
 	&:hover {
 		.pract-icon {
-			transform: scale(2);
+			img {
+				transform: scale(1.2);
+			}
+			.svg-pract {
+				svg {
+					transform: scale(1.2);
+				}
+				
+			}
 		}
 		.btn-read {
 			background-color: #D2A351;
@@ -55,17 +97,14 @@
 			stroke-width: 2px !important;
 		}
 	}
+
+	.gold-practise {
+		min-height: 75px;
+	}
 }
 .pract-fix {
 	&:hover {
-		.pract-icon {
-			transform: scale(1.2);
-			
-	
-		}
-		.pract-icon-1 {
-			transform: translateY(-14px);
-		}
+		
 		.btn-read {
 			background-color: #D2A351;
 			color: #fff;
@@ -81,12 +120,16 @@
 	
 
 }
+
 .circle-delete {
 	transition: opacity .4s;
 }
 .pract-icon-1 {
 	transition: transform .2s;
 	min-height: 138px;
+}
+.circle-delete_fix {
+	stroke-width: 1 !important;
 }
 .green-practise {
 	font-family: 'Roboto Slab', serif;
@@ -119,12 +162,10 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: 0 auto;
-	max-width: 1599px;
-	margin-top: 80px;
+	margin-top: 30px;
 	margin-bottom: 80px;
 }
 .pract-prof-center {
-	margin-top: 110px;
 }
 .main__title-fix {
 	margin-top: 116px !important;
@@ -132,37 +173,59 @@
 .pract-fix {
 	padding: 15px !important;
 	    text-align: left !important;
-
 	    .green-practise {
 	    	margin-top: 0;
 	    }
-
 	    img {
-			margin-top: 25px;
 			width: 100%;
 			object-fit: cover;
 	    }
 }
-@media (max-width: 1413px) {
-	.pract-prof {
-		max-width: 329px;
+.background_section {
+	background: #F5F5F5;
+	.about-page-top-block {
+		padding-top: 130px;
+		border-bottom: unset;
 	}
+	.green__title {
+		text-transform: unset;
+	}
+	.about-line {
+		display: none;
+	}
+}
+.about__subtitles {
+	font-weight: 400 !important;
+	line-height: 1.5;
+}
+@media (max-width: 1590px) {
+	.pract-prof {
+		margin: 10px;
+		width: 260px;
+
+	}
+	.pract-fix {
+		padding: 10px !important;
+	}
+	.pract-icon {
+		height: 155px;
+	}	
+}
+
+@media (max-width: 1430px) {
+	.gold-practise {
+		min-height: 100px;
+	}
+	.practise-block {
+		margin-bottom: 0;
+	}
+
 }
 @media (max-width: 1268px) {
-	.pract-prof-center {
-		margin-top: 40px;
-	}
-	.pract-prof {
-	    max-width: 380px;
-	    width: 50%;
-	}
+
 }
 @media (max-width: 723px) {
-	.pract-prof {
-		padding: 19px;
-		height: 451px;
-		    min-height: 440px;
-	}
+	
 }
 @media (max-width: 661px) {
 	.practise-block {
@@ -170,25 +233,29 @@
 	}
 }
 @media (max-width: 618px) {
+
 	.pract-prof {
-	    width: 60%;
+		width: 100%;
+		max-width: 320px;
 	}
+	.gold-practise {
+		min-height: 75px;
+	}
+	.pract-icon {
+		height: auto;
+	}
+	
 }
-@media (max-width: 479px) {
-	.pract-prof {
-	    width: 80%;
+@media (max-width: 400px) {
+	.pract-icon {
+		height: 200px;
 	}
 }
 @media (max-width: 371px) {
 	.pract-fix {
 		min-height: 445px !important;
 	}
-	.pract-prof {
-	    width: 89%;
-	    margin-left: 0;
-	    height: 403px;
-	        min-height: 405px;
-	}
+	
 	.pract-prof .btn-read {
 		margin-top: 8px;
 	}
