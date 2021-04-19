@@ -1574,6 +1574,79 @@
     right: 8px;
     align-items: center;
 }
+.delete_user_first_consultation {
+    cursor: pointer;
+}
+.hint_form {
+    padding-left: 44px;
+    padding-top: 5px;
+}
+.custom_checkbox {
+    transition: all .2s;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D2A351;
+    margin-right: 20px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        transition: all .2s;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        background: transparent;
+        border: 1px solid #D2A351;
+        transform: translate(-50%, -50%);
+    }
+    &__block {
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        margin: 35px 0px;
+    }
+    &_text {
+        cursor: pointer;
+        max-width: calc(590px - 40px);
+        width: 100%;
+    }
+}
+.custom_pdf__block {
+    margin-top: 30px;
+}
+#modal-form_documents {
+    .btn-read {
+        transition: all .2s;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    &.active {
+        .btn-read {
+            pointer-events: auto;
+            opacity: 1;
+        }
+        .custom_checkbox {
+            border: 2px solid #D2A351;
+
+            &:after {
+                width: 50%;
+                height: 50%;
+                background: #D2A351;
+            }
+
+        }
+    }
+}
+
+.custom_pdf_document {
+    cursor: pointer;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #D2A351;
+    font-weight: 700 !important;
+}
 
 .delete_this_consultation {
     cursor: pointer;

@@ -1,54 +1,40 @@
 .practise {
-  position: relative;
-}
+  position: relative; }
 
 .svg-pract {
   fill: #D2A351;
   width: 150px;
   height: 150px;
   margin: 0 auto;
-  position: relative;
-}
-
-.svg-pract svg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
+  position: relative; }
+  .svg-pract svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: contain; }
 
 .pract-icon {
-  -webkit-transition: all .2s;
   transition: all .2s;
   width: 100%;
   height: 180px;
   overflow: hidden;
-  position: relative;
-}
-
-.pract-icon img {
-  -webkit-transition: all .2s;
-  transition: all .2s;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+  position: relative; }
+  .pract-icon img {
+    transition: all .2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
 
 .svg-pract svg {
-  -webkit-transition: all .2s;
-  transition: all .2s;
-}
+  transition: all .2s; }
 
 .pract-prof {
   overflow: hidden;
   max-width: unset;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   min-height: unset;
   width: 315px;
@@ -57,90 +43,50 @@
   text-align: center;
   padding: 20px;
   padding-bottom: 30px;
-  margin: 20px;
-}
-
-.pract-prof .btn-read {
-  color: #D2A351;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-
-.pract-prof .green-practise {
-  min-height: 45px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.pract-prof a {
-  display: block;
-}
-
-.pract-prof:hover .pract-icon img {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.pract-prof:hover .pract-icon .svg-pract svg {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.pract-prof:hover .btn-read {
-  background-color: #D2A351;
-  color: #fff;
-}
-
-.pract-prof:hover .sub-practise {
-  opacity: 0;
-}
-
-.pract-prof:hover .circle-delete {
-  opacity: 0;
-  stroke-width: 2px !important;
-}
-
-.pract-prof .gold-practise {
-  min-height: 75px;
-}
+  margin: 20px; }
+  .pract-prof .btn-read {
+    color: #D2A351;
+    margin: 0 auto;
+    margin-top: 20px; }
+  .pract-prof .green-practise {
+    min-height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .pract-prof a {
+    display: block; }
+  .pract-prof:hover .pract-icon img {
+    transform: scale(1.2); }
+  .pract-prof:hover .pract-icon .svg-pract svg {
+    transform: scale(1.2); }
+  .pract-prof:hover .btn-read {
+    background-color: #D2A351;
+    color: #fff; }
+  .pract-prof:hover .sub-practise {
+    opacity: 0; }
+  .pract-prof:hover .circle-delete {
+    opacity: 0;
+    stroke-width: 2px !important; }
+  .pract-prof .gold-practise {
+    min-height: 75px; }
 
 .pract-fix:hover .btn-read {
   background-color: #D2A351;
-  color: #fff;
-}
+  color: #fff; }
 
 .pract-icon {
   margin-top: 15px;
-  -webkit-transition: -webkit-transform .2s;
-  transition: -webkit-transform .2s;
-  transition: transform .2s;
-  transition: transform .2s, -webkit-transform .2s;
-}
+  transition: transform .2s; }
 
 .circle-delete {
-  -webkit-transition: opacity .4s;
-  transition: opacity .4s;
-}
+  transition: opacity .4s; }
 
 .pract-icon-1 {
-  -webkit-transition: -webkit-transform .2s;
-  transition: -webkit-transform .2s;
   transition: transform .2s;
-  transition: transform .2s, -webkit-transform .2s;
-  min-height: 138px;
-}
+  min-height: 138px; }
 
 .circle-delete_fix {
-  stroke-width: 1 !important;
-}
+  stroke-width: 1 !important; }
 
 .green-practise {
   font-family: 'Roboto Slab', serif;
@@ -149,141 +95,99 @@
   line-height: 1.3;
   margin-bottom: 15px;
   margin-top: 60px;
-  margin-top: 29px;
-}
+  margin-top: 29px; }
 
 .sub-practise {
   font-family: 'Montserrat', sans-serif;
   color: #727271;
   line-height: 1.5;
-  -webkit-transition: opacity .2s;
-  transition: opacity .2s;
-}
+  transition: opacity .2s; }
 
 .simple-text {
   font-family: 'Montserrat', sans-serif;
   color: #727271;
-  line-height: 1.3;
-}
+  line-height: 1.3; }
 
 .gold-practise {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   line-height: 1.5;
-  color: #D2A351;
-}
+  color: #D2A351; }
 
 .practise-block {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 80px;
-}
+  margin-bottom: 80px; }
 
 .main__title-fix {
-  margin-top: 116px !important;
-}
+  margin-top: 116px !important; }
 
 .pract-fix {
   padding: 15px !important;
-  text-align: left !important;
-}
-
-.pract-fix .green-practise {
-  margin-top: 0;
-}
-
-.pract-fix img {
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
+  text-align: left !important; }
+  .pract-fix .green-practise {
+    margin-top: 0; }
+  .pract-fix img {
+    width: 100%;
+    object-fit: cover; }
 
 .background_section {
-  background: #F5F5F5;
-}
-
-.background_section .about-page-top-block {
-  padding-top: 130px;
-  border-bottom: unset;
-}
-
-.background_section .green__title {
-  text-transform: unset;
-}
-
-.background_section .about-line {
-  display: none;
-}
+  background: #F5F5F5; }
+  .background_section .about-page-top-block {
+    padding-top: 130px;
+    border-bottom: unset; }
+  .background_section .green__title {
+    text-transform: unset; }
+  .background_section .about-line {
+    display: none; }
 
 .about__subtitles {
   font-weight: 400 !important;
-  line-height: 1.5;
-}
+  line-height: 1.5; }
 
 @media (max-width: 1590px) {
   .pract-prof {
     margin: 10px;
-    width: 260px;
-  }
-  .pract-fix {
-    padding: 10px !important;
-  }
-  .pract-icon {
-    height: 155px;
-  }
-}
+    width: 260px; }
 
+  .pract-fix {
+    padding: 10px !important; }
+
+  .pract-icon {
+    height: 155px; } }
 @media (max-width: 1430px) {
   .gold-practise {
-    min-height: 100px;
-  }
-  .practise-block {
-    margin-bottom: 0;
-  }
-}
+    min-height: 100px; }
 
+  .practise-block {
+    margin-bottom: 0; } }
 @media (max-width: 661px) {
   .practise-block {
-    margin-top: 10px;
-  }
-}
-
+    margin-top: 10px; } }
 @media (max-width: 618px) {
   .pract-prof {
     width: 100%;
-    max-width: 320px;
-  }
-  .gold-practise {
-    min-height: 75px;
-  }
-  .pract-icon {
-    height: auto;
-  }
-}
+    max-width: 320px; }
 
+  .gold-practise {
+    min-height: 75px; }
+
+  .pract-icon {
+    height: auto; } }
 @media (max-width: 400px) {
   .pract-icon {
-    height: 200px;
-  }
-}
-
+    height: 200px; } }
 @media (max-width: 371px) {
   .pract-fix {
-    min-height: 445px !important;
-  }
+    min-height: 445px !important; }
+
   .pract-prof .btn-read {
-    margin-top: 8px;
-  }
+    margin-top: 8px; }
+
   .green-practise {
-    margin-top: 0px;
-  }
-}
+    margin-top: 0px; } }
+
 /*# sourceMappingURL=practise.css.map */

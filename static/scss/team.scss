@@ -1,7 +1,7 @@
 .team {
 	position: relative;
-	padding: 100px 0px;
 	padding-top: 160px;
+	padding-bottom: 80px;
 	background: linear-gradient(39deg, #030A00, #112804);
                  
 
@@ -13,6 +13,12 @@
 	}
 	.btn-gold {
 		    margin-bottom: 68px;
+	}
+
+
+	&_section_btn {
+		margin: 0 auto;
+		margin-top: 50px;
 	}
 		
 

@@ -1,53 +1,55 @@
 
-    let page = 0;
+let page = 0;
 
-    hide_step([1,2,4]);
-
-
-
-
-
-    // 1 - крок з вибором адвоката
-    // 2 - крок з вибором дати та часу
-    // 3 - крок з вибором часу
-    // 4 - крок для всього іншого що внизу
-    
-
-    function hide_step(steps) {
-        $.each(steps, function(index, value) {
-            let step = `.step_${value}`;
-            
-            $(step).addClass('step_passive');
-        });
-    }
-    function show_step(steps) {
-        $.each(steps, function(index, value) {
-            let step = `.step_${value}`;
-            $(step).removeClass('step_passive');
-        });
-    }
+hide_step([1, 2, 4]);
 
 
 
 
 
+// 1 - крок з вибором адвоката
+// 2 - крок з вибором дати та часу
+// 3 - крок з вибором часу
+// 4 - крок для всього іншого що внизу
 
-$('.delete_user_first_consultation').on('click', function() {
+
+function hide_step(steps) {
+    $.each(steps, function (index, value) {
+        let step = `.step_${value}`;
+
+        $(step).addClass('step_passive');
+    });
+}
+function show_step(steps) {
+    $.each(steps, function (index, value) {
+        let step = `.step_${value}`;
+        $(step).removeClass('step_passive');
+    });
+}
+
+
+
+
+
+
+$('.delete_user_first_consultation').on('click', function () {
     let url = $(this).attr('data-href');
 
-    fetch(url , {
-    method: 'DELETE',
-    headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    },
-    }) 
-    .then(data => {
-        return data.json();
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
     })
-    .then(data => {
-        location.href = '/';
-    });
+        .then(data => {
+            if (data.ok == true) {
+                location.href = '/cabinet/';
+            }
+        })
+        .catch(error => {
+            console.log('error: ', error);
+        });
 });
 
 
@@ -55,16 +57,16 @@ function check_type_cons(props) {
     let current_status;
     // поточні
     if (props == '#profile_4') {
-        current_status = ["IN_PROGRESS","UNORDERED"]
-    } 
+        current_status = ["IN_PROGRESS", "UNORDERED"]
+    }
     // архівні
     else if (props == '#profile_5') {
-        current_status = ["FINISHED","DECLINED"]
-    } 
+        current_status = ["FINISHED", "DECLINED"]
+    }
     return current_status;
 }
 
-$('.consultation_link').on('click', function() {
+$('.consultation_link').on('click', function () {
     let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
@@ -91,7 +93,7 @@ $('.consultation_link').on('click', function() {
     }
 })
 
-$('.btn_cons_prev').on('click', function() {
+$('.btn_cons_prev').on('click', function () {
     let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
@@ -116,7 +118,7 @@ $('.btn_cons_prev').on('click', function() {
         });
     }
 })
-$('.btn_cons_next').on('click', function() {
+$('.btn_cons_next').on('click', function () {
     let type_item = $(this).attr('data-type');
     let wrapper_block = `#${$(this).attr('data-consultation')}`;
     let current_status = JSON.stringify(check_type_cons(wrapper_block));
@@ -145,7 +147,7 @@ $('.btn_cons_next').on('click', function() {
 function create_consultation(props) {
     console.log('create_consultation: ', props);
     let consultation_item = "";
-    $.each(props.results, function(index, value) {
+    $.each(props.results, function (index, value) {
         let current_src;
         if (value.image == null) {
             current_src = `/static/img/about-us/about-img.png`;
@@ -156,45 +158,45 @@ function create_consultation(props) {
         // перевірка файлів адвоката
         let advocat_doc__block = ``;
         if (value.advocat_documents.length >= 1) {
-            
-            $.each(value.advocat_documents, function(index, doc) {
+
+            $.each(value.advocat_documents, function (index, doc) {
                 advocat_doc__block += `
                 <a href="${doc.file}" target='_blank' class="consultation_file standart_title standart_title_4 color_black">
                     document_${doc.file.split('/')[2]}
                 </a>
-                ` 
+                `
             });
         } else {
             advocat_doc__block = `
             <div class="none_files__block standart_title standart_title_4 color_black">
               немає додаткових файлів
             </div>
-            ` 
+            `
         }
-        
 
-         // перевірка файлів клієнта
-         let client_doc__block = ``;
-         if (value.client_documents.length >= 1) {
-             $.each(value.advocat_documents, function(index, doc) {
-                 client_doc__block += `
+
+        // перевірка файлів клієнта
+        let client_doc__block = ``;
+        if (value.client_documents.length >= 1) {
+            $.each(value.advocat_documents, function (index, doc) {
+                client_doc__block += `
                  <a href="${doc.file}" target='_blank' class="consultation_file standart_title standart_title_4 color_black">
                      document_${doc.file.split('/')[2]}
                  </a>
-                 ` 
-             });
-         } else {
-             client_doc__block = `
+                 `
+            });
+        } else {
+            client_doc__block = `
              <div class="none_files__block standart_title standart_title_4 color_black">
                немає додаткових файлів
              </div>
-             ` 
-         }
+             `
+        }
 
-         
+
 
         let option__block = ``;
-         if (value.can_be_changed == true) {
+        if (value.can_be_changed == true) {
             if (props.advocat == true && props.wrap != '#profile_5') {
                 option__block = `
                 <div title="Відмінити консультацію" class="cancel_this_consultation">
@@ -203,24 +205,24 @@ function create_consultation(props) {
                 <div title="Видалити консультацію" class="delete_this_consultation">
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
                 </div>
-                ` 
+                `
             } else if (props.advocat == true && props.wrap == '#profile_5') {
-                    option__block = `
+                option__block = `
                     <div title="Видалити консультацію" class="delete_this_consultation">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
                     </div>
-                    ` 
-            } 
+                    `
+            }
             else if (props.advocat == false && props.wrap != '#profile_5') {
                 option__block = `
                     <div title="Відмінити консультацію" class="cancel_this_consultation">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" class="svg-inline--fa fa-ban fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg>
                     </div>
-                ` 
+                `
             } else if (props.advocat == false && props.wrap == '#profile_5') {
-                option__block = `` 
-            } 
-         }
+                option__block = ``
+            }
+        }
 
 
         consultation_item += `
@@ -320,42 +322,43 @@ function create_consultation(props) {
     </div>
           
         `;
-      });
-        
+    });
+
     $(props.container)[0].innerHTML = consultation_item;
     let current_height_block = find_current_height(props.container);
-    $('.cancel_this_consultation').on('click', function() {
+    $('.cancel_this_consultation').on('click', function () {
         let wrap = $(this).parents('.consultation_prof');
         let id = $(wrap).attr('data-id');
         let data_json = {
             status: 'DECLINED'
         }
-            fetch(`/api/consultations/${id}/`, {
+        fetch(`/api/consultations/${id}/`, {
             method: 'PATCH',
             body: JSON.stringify(data_json),
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            })
+        })
             .then(data => {
                 return data.json();
             })
             .then(data => {
                 $(wrap).find('.status_advocate_subname').text(data_json.status);
+                $(wrap).remove();
                 generete_modal_text('Консультацію успішно відмінено');
-            })       
+            })
     });
     $('.delete_this_consultation').on('click', user_delete);
 }
 
 function start_animation_consultation(wrap) {
     let consultations = $(wrap).find('.consultation_prof');
-         $(consultations).css('left', '0px');
+    $(consultations).css('left', '0px');
 }
 function end_animation_consultation(wrap) {
     let consultations = $(wrap).find('.consultation_prof');
-        $(consultations).css('left', '-100vw');
+    $(consultations).css('left', '-100vw');
 }
 function find_current_height(props) {
     let first_item = $(props).find('.consultation_prof').first();
@@ -364,15 +367,15 @@ function find_current_height(props) {
     let position_last_item = $(last_item).offset().top;
     let optional_item_height = $(last_item).height();
     let result = (position_last_item - position_first_item) + optional_item_height + 50;
-    
+
     return result;
 }
 
 function gen_consultation(props) {
     let wrap = $(props.wrapper);
     let container = $(wrap).find('.consultation__block');
-    
-    
+
+
     let next_btn = $(wrap).find('.btn_cons_next');
     let prev_btn = $(wrap).find('.btn_cons_prev');
     if (props.navigate == 'next') {
@@ -383,56 +386,56 @@ function gen_consultation(props) {
     fetch(`/api/consultations/?page_number=${page}&page_size=5&statuses=${props.status}
     `, {
         method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-          
-          if (body.next == null) {
-              $(next_btn).addClass('btn_cons_passive');
-          } else {
-            $(next_btn).removeClass('btn_cons_passive');
-          }
-          if (body.previous == null) {
-            $(prev_btn).addClass('btn_cons_passive');
-          } else {
-            $(prev_btn).removeClass('btn_cons_passive');
-          }
-          if (body.next == null && body.previous == null) {
-              $('.consultation_pagination__block').css('display', 'none');
-          } else {
-            $('.consultation_pagination__block').css('display', 'flex');
-          }
-          if (body.results.length == 0) {
-            $('.consultation__block').text('консультацій ще немає');
-          } else {
+    })
+        .then((data) => {
+            return data.json();
+        })
+        .then((body) => {
 
-            let option_create = {
-                'container': container,
-                'results': body.results,
-                'advocat': props.advocat,
-                'type': props.type,
-                'wrap': props.wrapper
-            }
-            if (props.click_link == true) {
-                create_consultation(option_create);
-                start_animation_consultation(props.wrapper);
+            if (body.next == null) {
+                $(next_btn).addClass('btn_cons_passive');
             } else {
-                end_animation_consultation(props.wrapper);
-                setTimeout(() => {
+                $(next_btn).removeClass('btn_cons_passive');
+            }
+            if (body.previous == null) {
+                $(prev_btn).addClass('btn_cons_passive');
+            } else {
+                $(prev_btn).removeClass('btn_cons_passive');
+            }
+            if (body.next == null && body.previous == null) {
+                $('.consultation_pagination__block').css('display', 'none');
+            } else {
+                $('.consultation_pagination__block').css('display', 'flex');
+            }
+            if (body.results.length == 0) {
+                $('.consultation__block').text('консультацій ще немає');
+            } else {
+
+                let option_create = {
+                    'container': container,
+                    'results': body.results,
+                    'advocat': props.advocat,
+                    'type': props.type,
+                    'wrap': props.wrapper
+                }
+                if (props.click_link == true) {
                     create_consultation(option_create);
                     start_animation_consultation(props.wrapper);
-                }, 1000);
+                } else {
+                    end_animation_consultation(props.wrapper);
+                    setTimeout(() => {
+                        create_consultation(option_create);
+                        start_animation_consultation(props.wrapper);
+                    }, 1000);
+                }
             }
-          }
-      });
+        });
 }
 
 
 if ($('.advocate_calender_container').length == 1) {
-    
-  
+
+
     $('.status_select').select2({
         minimumResultsForSearch: Infinity,
         selectOnClose: true,
@@ -447,60 +450,60 @@ if ($('.advocate_calender_container').length == 1) {
             status: e.params.data.id,
         };
         fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
         })
-        .then(data => {
-            return data.json();
-        })
-        .then(data => {
-            $('.load_spin').removeClass('load_spin_active');
-            if (e.params.data.id == 'UNORDERED') {
-                generete_modal_text('Статус консультації було змінено на "незавершено"');
-            } else if (e.params.data.id == 'DECLINED') {
-                if (data.can_be_changed == true) {
-                    generete_modal_text('Статус консультації було змінено на "відмовлено"');
-                } else {
-                    generete_modal_text('Ви не можете відминити консультацію менш ніж за 3 дня');
-                }
-                
-            } else if (e.params.data.id == 'IN_PROGRESS') {
-                generete_modal_text('Статус консультації було змінено на "в процесі"');
-            } else if (e.params.data.id == 'FINISHED') {
-                generete_modal_text('Статус консультації було змінено на "завершено"');
-            }
-            
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                $('.load_spin').removeClass('load_spin_active');
+                if (e.params.data.id == 'UNORDERED') {
+                    generete_modal_text('Статус консультації було змінено на "незавершено"');
+                } else if (e.params.data.id == 'DECLINED') {
+                    if (data.can_be_changed == true) {
+                        generete_modal_text('Статус консультації було змінено на "відмовлено"');
+                    } else {
+                        generete_modal_text('Ви не можете відминити консультацію менш ніж за 3 дня');
+                    }
 
-            if (data.messages[0].status == 'bad') {
-                var data = {
-                    status: "IN_PROGRESS",
-                };
-                fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
-                method: 'PATCH',
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                })
-                .then(data => {
-                    return data.json();
-                })
-                .then(data => {
-                    
-                    $('.status_select').val('IN_PROGRESS');
-                    $('.status_select').trigger('change');
-                });
-            }
-            
-        })
+                } else if (e.params.data.id == 'IN_PROGRESS') {
+                    generete_modal_text('Статус консультації було змінено на "в процесі"');
+                } else if (e.params.data.id == 'FINISHED') {
+                    generete_modal_text('Статус консультації було змінено на "завершено"');
+                }
+
+
+                if (data.messages[0].status == 'bad') {
+                    var data = {
+                        status: "IN_PROGRESS",
+                    };
+                    fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
+                        method: 'PATCH',
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                    })
+                        .then(data => {
+                            return data.json();
+                        })
+                        .then(data => {
+
+                            $('.status_select').val('IN_PROGRESS');
+                            $('.status_select').trigger('change');
+                        });
+                }
+
+            })
     });
 
-    
+
     $('.communicate_select').select2({
         minimumResultsForSearch: Infinity,
         selectOnClose: true,
@@ -514,23 +517,23 @@ if ($('.advocate_calender_container').length == 1) {
         };
 
         fetch(`/api/consultations/${$('.advocate_calender_info').attr('data-id')}/`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
         })
-        .then(data => {
-            return data.json();
-        })
-        .then(data => {
-        
-        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+
+            })
     });
 
 
-    
+
     $('.advocate_slick_date__block').slick({
         dots: false,
         infinite: false,
@@ -548,209 +551,209 @@ if ($('.advocate_calender_container').length == 1) {
         //     }
         //   }
         // ]
-      });
-      $('.advocate_calender_arrow_1').click(function () {
+    });
+    $('.advocate_calender_arrow_1').click(function () {
         $(".advocate_slick_date__block").slick('slickPrev');
-      });
-      $('.advocate_calender_arrow_2').click(function () {
+    });
+    $('.advocate_calender_arrow_2').click(function () {
         $(".advocate_slick_date__block").slick('slickNext');
-      });
+    });
 
 
-     
-// якась робота з датами, просто не лізь сюди
-function generate_interval(start, end) {
-    let dates_start = start.split(':');
-    let dates_end = end.split(':');
-    let date_start = new Date(2020, 09, 22, dates_start[0], dates_start[1], 05);
-    let date_end = new Date(2020, 09, 22, dates_end[0], dates_end[1], 05);
-    let diff = date_end.getTime() - date_start.getTime();
-    let curent_min = diff / (1000 * 60);
-    let interval = Number($('.all_calender__wrapper').attr('data-interval'));
-    let result = curent_min / interval
-    return result;
-}
+
+    // якась робота з датами, просто не лізь сюди
+    function generate_interval(start, end) {
+        let dates_start = start.split(':');
+        let dates_end = end.split(':');
+        let date_start = new Date(2020, 09, 22, dates_start[0], dates_start[1], 05);
+        let date_end = new Date(2020, 09, 22, dates_end[0], dates_end[1], 05);
+        let diff = date_end.getTime() - date_start.getTime();
+        let curent_min = diff / (1000 * 60);
+        let interval = Number($('.all_calender__wrapper').attr('data-interval'));
+        let result = curent_min / interval
+        return result;
+    }
 
     create_all_calender(true);
 
-       
-           
-
-   function create_calender(consultation) {
-    let width_item = consultation.working_hours.length;
-    
-    $('.advocate_calender_item__block').children().remove();
-
-    let left_position = 100 / width_item;
-    // let current_slides = $('.advocate_calender_time__block').find('.slick-active');
-    let all_clock_calender = $('.adv_cal_time');
-    
-    let grid_counter = Number(consultation.hours.length);
-
-    let current_task_width = 0;
-    for (let i = 0; i < grid_counter ; i++) {
-        let current_margin;
-        let item_left;
-        let check_active;
-        let current_time = [];
-        
-        $.each(consultation.hours, function(index, value) {
-            let current_clockworks = value.start.replace(':', '.');
-            
-            if (index == i) {
-                $.each(all_clock_calender, function(index, sub_value) {
-                    if ($(sub_value).attr('data-clock') == current_clockworks) {
-                        current_time.push(current_clockworks);
-                        current_margin = index;
-                    } else {
-
-                    }
-                });
-                item_left = (left_position * current_margin);
-
-                
-                current_task_width = generate_interval(value.start, value.end);
-            }
-        });
-        if (current_time.length == 0) {
-            check_active = false;
-        } else {
-            check_active = true;
-        }
-        let test_json = {
-            current_width: left_position,
-            current_transition: current_task_width,
-            left: item_left,
-            info: consultation.hours[i],
-            quantity: width_item,
-        }
-        if (check_active == true) {
-            $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
-        }
-    }
-
-    function create_row_item(content) {
-        
-        let advocate_calender_item_prof = document.createElement('div');
-        advocate_calender_item_prof.classList.add('advocate_calender_item_prof');
-        advocate_calender_item_prof.setAttribute(`data-clockwork`, content.info.start.replace(':', '.'));
-    
-        let advocate_calender_task = document.createElement('div');
-        $(advocate_calender_task).css('left', `${content.left}%`);
-        $(advocate_calender_task).css('width', `${(content.current_width * content.current_transition) - 2}%`);
-        advocate_calender_task.classList.add('advocate_calender_task');
-        advocate_calender_task.setAttribute(`data-id`, content.info.consultation_id);
-
-        advocate_calender_item_prof.appendChild(advocate_calender_task);
-    
-        for (let i = 0; i < content.quantity; i++) {
-            let adv_cal_item = document.createElement('div');
-            adv_cal_item.classList.add('adv_cal_item');
-        
-            let grid_inner = document.createElement('div');
-            grid_inner.classList.add('grid_inner');
-    
-            advocate_calender_item_prof.appendChild(adv_cal_item);
-            adv_cal_item.appendChild(grid_inner);
-        }
-    
-
-        $(advocate_calender_task).on('click', function() {
-            $('.advocate_calender_task').removeClass('advocate_calender_task_active');
-            $(this).addClass('advocate_calender_task_active');
-            $('.advocate_calender_info').addClass('advocate_calender_info_active');
 
 
-            let wrap = $(this).parents('.advocate_calender_item_prof');
-            let table_task = $('.advocate_calender_info');
-            let id = Number($(wrap).attr('data-clockwork'));
-            let fetch_id = $(this).attr('data-id');
-            $(table_task).css('left', '-100%');
-            setTimeout(() => {
-            $(table_task).css('left', '0');
 
+    function create_calender(consultation) {
+        let width_item = consultation.working_hours.length;
 
-            fetch(`/api/consultations/${fetch_id}/`, {
-                method: "GET",
-              })
-              .then((data) => {
-                return data.json();
-              })
-              .then((body) => {
-                  console.log('body: ', body);
-                  
-                    // зміна айді консультації
-                    $('.advocate_calender_info').attr('data-id', fetch_id);
-                    // зміна імені
-                    $(table_task).find('.advocate_info_name').text(body.client_name);
-                        
-                    // зміна типу юзера
-                    // $(table_task).find('.advocate_info_subname').text(body.type_user);
+        $('.advocate_calender_item__block').children().remove();
 
-                    // зміна галузей
-                    $('.branch__wrap').children().remove();
-                    $.each(body.faculties, function(index, sub_value) {
-                        let branch_item = document.createElement('div');
-                        branch_item.classList.add('advocate_type_work', 'standart_title', 'standart_title_4', 'color_black');
-                        branch_item.textContent = sub_value;
-                        $('.branch__wrap')[0].appendChild(branch_item);
+        let left_position = 100 / width_item;
+        // let current_slides = $('.advocate_calender_time__block').find('.slick-active');
+        let all_clock_calender = $('.adv_cal_time');
+
+        let grid_counter = Number(consultation.hours.length);
+
+        let current_task_width = 0;
+        for (let i = 0; i < grid_counter; i++) {
+            let current_margin;
+            let item_left;
+            let check_active;
+            let current_time = [];
+
+            $.each(consultation.hours, function (index, value) {
+                let current_clockworks = value.start.replace(':', '.');
+
+                if (index == i) {
+                    $.each(all_clock_calender, function (index, sub_value) {
+                        if ($(sub_value).attr('data-clock') == current_clockworks) {
+                            current_time.push(current_clockworks);
+                            current_margin = index;
+                        } else {
+
+                        }
                     });
+                    item_left = (left_position * current_margin);
 
-                    // зміна статуса
+
+                    current_task_width = generate_interval(value.start, value.end);
+                }
+            });
+            if (current_time.length == 0) {
+                check_active = false;
+            } else {
+                check_active = true;
+            }
+            let test_json = {
+                current_width: left_position,
+                current_transition: current_task_width,
+                left: item_left,
+                info: consultation.hours[i],
+                quantity: width_item,
+            }
+            if (check_active == true) {
+                $('.advocate_calender_item__block')[0].appendChild(create_row_item(test_json));
+            }
+        }
+
+        function create_row_item(content) {
+
+            let advocate_calender_item_prof = document.createElement('div');
+            advocate_calender_item_prof.classList.add('advocate_calender_item_prof');
+            advocate_calender_item_prof.setAttribute(`data-clockwork`, content.info.start.replace(':', '.'));
+
+            let advocate_calender_task = document.createElement('div');
+            $(advocate_calender_task).css('left', `${content.left}%`);
+            $(advocate_calender_task).css('width', `${(content.current_width * content.current_transition) - 2}%`);
+            advocate_calender_task.classList.add('advocate_calender_task');
+            advocate_calender_task.setAttribute(`data-id`, content.info.consultation_id);
+
+            advocate_calender_item_prof.appendChild(advocate_calender_task);
+
+            for (let i = 0; i < content.quantity; i++) {
+                let adv_cal_item = document.createElement('div');
+                adv_cal_item.classList.add('adv_cal_item');
+
+                let grid_inner = document.createElement('div');
+                grid_inner.classList.add('grid_inner');
+
+                advocate_calender_item_prof.appendChild(adv_cal_item);
+                adv_cal_item.appendChild(grid_inner);
+            }
+
+
+            $(advocate_calender_task).on('click', function () {
+                $('.advocate_calender_task').removeClass('advocate_calender_task_active');
+                $(this).addClass('advocate_calender_task_active');
+                $('.advocate_calender_info').addClass('advocate_calender_info_active');
+
+
+                let wrap = $(this).parents('.advocate_calender_item_prof');
+                let table_task = $('.advocate_calender_info');
+                let id = Number($(wrap).attr('data-clockwork'));
+                let fetch_id = $(this).attr('data-id');
+                $(table_task).css('left', '-100%');
+                setTimeout(() => {
+                    $(table_task).css('left', '0');
+
+
+                    fetch(`/api/consultations/${fetch_id}/`, {
+                        method: "GET",
+                    })
+                        .then((data) => {
+                            return data.json();
+                        })
+                        .then((body) => {
+                            console.log('body: ', body);
+
+                            // зміна айді консультації
+                            $('.advocate_calender_info').attr('data-id', fetch_id);
+                            // зміна імені
+                            $(table_task).find('.advocate_info_name').text(body.client_name);
+
+                            // зміна типу юзера
+                            // $(table_task).find('.advocate_info_subname').text(body.type_user);
+
+                            // зміна галузей
+                            $('.branch__wrap').children().remove();
+                            $.each(body.faculties, function (index, sub_value) {
+                                let branch_item = document.createElement('div');
+                                branch_item.classList.add('advocate_type_work', 'standart_title', 'standart_title_4', 'color_black');
+                                branch_item.textContent = sub_value;
+                                $('.branch__wrap')[0].appendChild(branch_item);
+                            });
+
+                            // зміна статуса
                             $('.status_select').val(body.status);
                             $('.status_select').trigger('change');
-                   
 
-                    // зміна дати
-                    $(table_task).find('.advocate_data_user_title').text(body.date);
-                    
-                    // зміна часу
-                    $(table_task).find('.user_date_span').text(`з ${body.start} по ${body.end}.`);
-                    
-                    // зміна тривалості
-                    $(table_task).find('.user_transition_span').text(`консультація -  ${generate_interval(body.start, body.end)} год.`);
 
-                    // зміна комунікації
-                    $('.communicate_select').val(body.format);
-                    $('.communicate_select').trigger('change');
+                            // зміна дати
+                            $(table_task).find('.advocate_data_user_title').text(body.date);
 
-                    // зміна ціни
-                    $(table_task).find('.advocate_price_span').text(`${body.price} грн`);
+                            // зміна часу
+                            $(table_task).find('.user_date_span').text(`з ${body.start} по ${body.end}.`);
 
-                    // зміна файлів (клієнт)
-                    $('.calender_consultation_file__block').children().remove();
-                    $.each(body.client_documents, function(index, sub_value) {
-                        let json_file = {
-                            file_name: sub_value.file.split('/')[2],
-                            file_href: sub_value.file
-                        }
-                        $('.calender_consultation_file__block')[0].appendChild(create_simple_files(json_file));
-                    });
-                    // зміна файлів (адвокат)
-                    $('.calender_consultation_place').children().remove();
-                    $.each(body.advocat_documents, function(index, sub_value) {
-                        let json_file = {
-                            file_name: sub_value.file.split('/')[2],
-                            file_href: sub_value.file
-                        }
-                        $('.calender_consultation_place')[0].appendChild(create_simple_files(json_file));
-                    });
-                    // додавання коменту
-                    if (body.comment != '') {
-                        $('.consultation_comment__block').text(`Коментар: ${body.comment}`);
-                    }
-              });   
-            
-                       
-            }, 200);
-        })
-    
-        return advocate_calender_item_prof;
-    }
+                            // зміна тривалості
+                            $(table_task).find('.user_transition_span').text(`консультація -  ${generate_interval(body.start, body.end)} год.`);
 
-    let new_prof = $('.advocate_calender_item__block').find('.advocate_calender_item_prof');
+                            // зміна комунікації
+                            $('.communicate_select').val(body.format);
+                            $('.communicate_select').trigger('change');
 
-        $.each(new_prof, function(index, value) {
+                            // зміна ціни
+                            $(table_task).find('.advocate_price_span').text(`${body.price} грн`);
+
+                            // зміна файлів (клієнт)
+                            $('.calender_consultation_file__block').children().remove();
+                            $.each(body.client_documents, function (index, sub_value) {
+                                let json_file = {
+                                    file_name: sub_value.file.split('/')[2],
+                                    file_href: sub_value.file
+                                }
+                                $('.calender_consultation_file__block')[0].appendChild(create_simple_files(json_file));
+                            });
+                            // зміна файлів (адвокат)
+                            $('.calender_consultation_place').children().remove();
+                            $.each(body.advocat_documents, function (index, sub_value) {
+                                let json_file = {
+                                    file_name: sub_value.file.split('/')[2],
+                                    file_href: sub_value.file
+                                }
+                                $('.calender_consultation_place')[0].appendChild(create_simple_files(json_file));
+                            });
+                            // додавання коменту
+                            if (body.comment != '') {
+                                $('.consultation_comment__block').text(`Коментар: ${body.comment}`);
+                            }
+                        });
+
+
+                }, 200);
+            })
+
+            return advocate_calender_item_prof;
+        }
+
+        let new_prof = $('.advocate_calender_item__block').find('.advocate_calender_item_prof');
+
+        $.each(new_prof, function (index, value) {
             setTimeout(() => {
                 $(value).css('top', '0px');
                 $(value).css('max-height', '1000px');
@@ -758,58 +761,58 @@ function generate_interval(start, end) {
 
             }, 200);
         });
-   }
+    }
 
 
-   
-   
-   function create_all_calender(check_calender) {
 
-    let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
-    let id_advocat = $('.advocat_info_id').attr('data-advocat');
 
-      fetch(`/api/get_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
-        method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-         
-          if (body.hours.length == 0) {
-              $('.advocate_calender_message_for_advocate').addClass('advocate_calender_message_for_advocate_active');
-          } else {
-              $('.advocate_calender_message_for_advocate').removeClass('advocate_calender_message_for_advocate_active');
-            if (check_calender == true) {
-                $('.all_calender__wrapper').css('opacity', '0');
-    
+    function create_all_calender(check_calender) {
+
+        let date_advocat = $('.advocate_slick_date_prof_active').attr('data-date');
+        let id_advocat = $('.advocat_info_id').attr('data-advocat');
+
+        fetch(`/api/get_hours_info/?date=${date_advocat}&advocat=${id_advocat}`, {
+            method: "GET",
+        })
+            .then((data) => {
+                return data.json();
+            })
+            .then((body) => {
+
+                if (body.hours.length == 0) {
+                    $('.advocate_calender_message_for_advocate').addClass('advocate_calender_message_for_advocate_active');
+                } else {
+                    $('.advocate_calender_message_for_advocate').removeClass('advocate_calender_message_for_advocate_active');
+                    if (check_calender == true) {
+                        $('.all_calender__wrapper').css('opacity', '0');
+
+                        setTimeout(() => {
+                            $('.advocate_calender_time__block').children().remove();
+
+                            create_time_item(body.working_hours);
+                        }, 200);
+                    }
+                }
+
                 setTimeout(() => {
-                    $('.advocate_calender_time__block').children().remove();
-    
-                      create_time_item(body.working_hours);
-                }, 200);
-              }
-          }
+                    $('.all_calender__wrapper').css('opacity', '1');
 
-          setTimeout(() => {
-            $('.all_calender__wrapper').css('opacity', '1');
-          
-            
-              create_calender(body);
-              
-          }, 420);
-      });  
-    
 
-    function create_time_item(content) {
-        $('.advocate_calender_time__block').css('grid-template-columns', `repeat(${content.length}, 1fr)`);
-        $('.all_calender__wrapper').css('width', `${content.length * 50}px`);
-        $('.advocate_calender_item__block').css('width', `${content.length * 50}px`);
+                    create_calender(body);
 
-        let product_item = "";
-        $.each(content, function(index, value) {
-            let new_clock = value.hour.replace(':', '.');
-            product_item += `
+                }, 420);
+            });
+
+
+        function create_time_item(content) {
+            $('.advocate_calender_time__block').css('grid-template-columns', `repeat(${content.length}, 1fr)`);
+            $('.all_calender__wrapper').css('width', `${content.length * 50}px`);
+            $('.advocate_calender_item__block').css('width', `${content.length * 50}px`);
+
+            let product_item = "";
+            $.each(content, function (index, value) {
+                let new_clock = value.hour.replace(':', '.');
+                product_item += `
             <div data-clock='${new_clock}' class="adv_cal_time">
                 <div class="grid_inner">
                     <div class="grid_content">
@@ -819,12 +822,12 @@ function generate_interval(start, end) {
             </div>
               
             `;
-          });
-            
-        $(".advocate_calender_time__block")[0].innerHTML = product_item;
-    }
+            });
 
-    // let new_prof = $('.adv_cal_time');
+            $(".advocate_calender_time__block")[0].innerHTML = product_item;
+        }
+
+        // let new_prof = $('.adv_cal_time');
 
         // $.each(new_prof, function(index, value) {
         //     setTimeout(() => {
@@ -832,35 +835,35 @@ function generate_interval(start, end) {
         //         $(value).css('max-height', '1000px');
         //     }, 200);
         // });
-      
-    
-   }
 
-    $('.advocate_slick_date_prof').on('click', function() {
+
+    }
+
+    $('.advocate_slick_date_prof').on('click', function () {
         $('.advocate_slick_date_prof').removeClass('advocate_slick_date_prof_active');
         $(this).addClass('advocate_slick_date_prof_active');
 
         let old_prof = $('.advocate_calender_item__block').find('.advocate_calender_item_prof');
 
-        $.each(old_prof, function(index, value) {
+        $.each(old_prof, function (index, value) {
             setTimeout(() => {
                 $(value).css('top', '-1000px');
                 $(value).css('max-height', '0px');
             }, 200);
-           
+
         });
         setTimeout(() => {
-            
+
             create_all_calender(true);
         }, 400);
 
     });
 
-    $('.advocate_time_arrow').on('click', function() {
+    $('.advocate_time_arrow').on('click', function () {
 
         let old_prof = $('.advocate_calender_item__block').find('.advocate_calender_item_prof');
 
-        $.each(old_prof, function(index, value) {
+        $.each(old_prof, function (index, value) {
             setTimeout(() => {
                 $(value).css('top', '-1000px');
                 $(value).css('max-height', '0px');
@@ -874,7 +877,7 @@ function generate_interval(start, end) {
 
 
 
-    
+
 
 }
 // блочок який лиш для адвокатів закінчується
@@ -882,8 +885,8 @@ function generate_interval(start, end) {
 
 
 
-$('.save_data_practise_btn').on('click', function() {
-    
+$('.save_data_practise_btn').on('click', function () {
+
 });
 
 function get_fetch_for_active_practise() {
@@ -892,9 +895,9 @@ function get_fetch_for_active_practise() {
     let active_practise = $(wrap).find('.advocate_download_prof');
     let array_practise = [];
 
-    $.each(active_practise, function(index, value) {
+    $.each(active_practise, function (index, value) {
         let id = $(value).find('.advocate_download_name').attr('data-id');
-       array_practise.push(id);
+        array_practise.push(id);
     });
 
     let json = {
@@ -902,7 +905,7 @@ function get_fetch_for_active_practise() {
         faculty_ids: array_practise
     }
 
-     fetch('/api/set_advocate_faculties/', {
+    fetch('/api/set_advocate_faculties/', {
         method: 'POST',
         body: JSON.stringify(json),
         headers: {
@@ -910,102 +913,100 @@ function get_fetch_for_active_practise() {
             "Accept": "application/json"
         },
     })
-    .then(data => {
-        return data.json();
-    })
-    .then(data => {
-       
-    })
-}
-
-
-$('.file_photo').on('change', function() {
-    let info = return_info_users();
-    let Formdata = new FormData();
-    let fileData = this.files[0];
-    
-    
-    Formdata.append(`image`, fileData);
-   
-        fetch(`/api/users/${info.result_client}/`, {
-        method: 'PATCH',
-        body: Formdata,
-        })
         .then(data => {
             return data.json();
         })
         .then(data => {
-          $('.photo_advocate').attr('src', data.image)
+
+        })
+}
+
+
+$('.file_photo').on('change', function () {
+    let info = return_info_users();
+    let Formdata = new FormData();
+    let fileData = this.files[0];
+
+
+    Formdata.append(`image`, fileData);
+
+    fetch(`/api/users/${info.result_client}/`, {
+        method: 'PATCH',
+        body: Formdata,
+    })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+            $('.photo_advocate').attr('src', data.image)
         })
 });
 
 
-$('.check_star_btn').on('click', function() {
+$('.check_star_btn').on('click', function () {
     let wrap = $(this).parents('.consultation_prof');
     let consultation_id = $(wrap).attr('data-id');
     let star_value = Number($(this).attr('data-value'));
     let data_json = {
         mark: star_value
     }
-    
-        fetch(`/api/consultations/${consultation_id}/`, {
+
+    fetch(`/api/consultations/${consultation_id}/`, {
         method: 'PATCH',
         body: JSON.stringify(data_json),
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        })
+    })
         .then(data => {
             return data.json();
         })
         .then(data => {
-        
+
         })
 });
 
 $('.delete_this_consultation').on('click', user_delete);
-   
+
 function user_delete() {
     $.fancybox.open({
         src: '#modal_delete_consultation',
         touch: false,
-    }); 
+    });
 
     let id = $(this).parents('.consultation_prof').attr('data-id');
     $('#modal_delete_consultation').attr('data-id', id);
 }
 
-$('.user_cancel').on('click', function() {
+$('.user_cancel').on('click', function () {
     $.fancybox.close({
         src: '#modal_delete_consultation',
-    }); 
+    });
 });
-$('.user_acceses').on('click', function() {
+$('.user_acceses').on('click', function () {
     let wrap = $('#tab_33');
     let click_id = $(this).parents('#modal_delete_consultation').attr('data-id');
+    console.log('click_id: ', click_id);
     fetch(`/api/consultations/${click_id}/`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        });
-       
-        let all_users = $(wrap).find('.consultation_prof');
-    
-        $.each(all_users,function(index,value){
-            
-              if ($(value).attr('data-id') == click_id) {
-                
-                $(value).remove();
-                
-            }
-          });
-        $.fancybox.close({
-            src: '#modal_delete_user',
-        }); 
-        generete_modal_text('Консультацію успішно видалено');
+    });
+
+    let all_users = $(wrap).find('.consultation_prof');
+
+    $.each(all_users, function (index, value) {
+        if ($(value).attr('data-id') == click_id) {
+            $(value).remove();
+        }
+    });
+    $.fancybox.close({
+        src: '#modal_delete_user',
+    });
+    generete_modal_text('Консультацію успішно видалено');
 });
 
 
@@ -1014,11 +1015,11 @@ function generete_modal_text(text) {
     $.fancybox.open({
         src: '#change_status_in_consultation',
         touch: false,
-    }); 
+    });
     setTimeout(() => {
         $.fancybox.close({
             src: '#change_status_in_consultation',
-        }); 
+        });
     }, 2000);
     $('.change_status_in_consultation_text').text(text);
 }
@@ -1069,10 +1070,10 @@ let test_advocate = [
 function remove_active_block(wrap) {
     let parents = $(wrap);
     $(parents).removeClass('step_select_active');
-    $(parents).find('.step_active_content').text('');      
+    $(parents).find('.step_active_content').text('');
 }
 function generate_practise(id) {
-    
+
     let url;
     if (id == undefined) {
         url = '/api/faculties/'
@@ -1081,15 +1082,15 @@ function generate_practise(id) {
     }
     fetch(url, {
         method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-          create_all_doc_for_client('.practise_step_hidden_content', body);
-      });    
-      
-        remove_active_block('.pract_step_select');
+    })
+        .then((data) => {
+            return data.json();
+        })
+        .then((body) => {
+            create_all_doc_for_client('.practise_step_hidden_content', body);
+        });
+
+    remove_active_block('.pract_step_select');
 }
 function generate_advocate(id) {
     let url;
@@ -1103,41 +1104,41 @@ function generate_advocate(id) {
 
         fetch(url, {
             method: "GET",
-          })
-          .then((data) => {
-            return data.json();
-          })
-          .then((body) => {
-                hide_step([1,2,3,4]);
+        })
+            .then((data) => {
+                return data.json();
+            })
+            .then((body) => {
+                hide_step([1, 2, 3, 4]);
                 show_step([1]);
-              if (body.length == 0) {
-                hide_step([1]);
-                $('.hidden_message').text('По данній галузі адвокатів не знайдено');
-              }
-              let new_body = [];
-              $.each(body, function(index, value) {
-                new_body.push({
-                    id: value.id,
-                    name: value.username,
-                    image: value.image
-                })
-              });
-              create_all_doc_for_client('.client_select_step_hidden_content', new_body);
-              
-              remove_active_block('.advoc_step_select');
-          });     
+                if (body.length == 0) {
+                    hide_step([1]);
+                    $('.hidden_message').text('По данній галузі адвокатів не знайдено');
+                }
+                let new_body = [];
+                $.each(body, function (index, value) {
+                    new_body.push({
+                        id: value.id,
+                        name: value.username,
+                        image: value.image
+                    })
+                });
+                create_all_doc_for_client('.client_select_step_hidden_content', new_body);
+
+                remove_active_block('.advoc_step_select');
+            });
     }
-    
+
 }
 if ($('.practise_step_hidden_content').length >= 1) {
     generate_practise();
     generate_advocate();
 }
 
-   
+
 function create_all_doc_for_client(wrap, json) {
     $(wrap).children().remove();
-    $.each(json, function(index, value) {
+    $.each(json, function (index, value) {
         $(wrap)[0].appendChild(create_doc(value));
     });
 }
@@ -1174,7 +1175,7 @@ function click_select_item() {
     $(wrap).removeClass('step_select_open');
 
     let checker = $(this).parents()[0];
-    
+
     // практики
     if ($(checker).hasClass('practise_step_hidden_content')) {
         $('.pract_step_select').find('.step_active_content').attr('data-id', $(this).attr('data-id'));
@@ -1187,7 +1188,7 @@ function click_select_item() {
         datepicker.destroy();
         $('.advocate_select_date').find('.step_select').removeClass('step_select_active');
         $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
-        
+
     }
     // адвокати
     else if ($(checker).hasClass('client_select_step_hidden_content')) {
@@ -1198,7 +1199,7 @@ function click_select_item() {
         let date_year = date_js.getFullYear();
         let date_client = $('.client_info_id').attr('data-client');
         let date_advocat = data_id;
-        
+
         let advocat_days_json = {
             year: date_year,
             month: date_month,
@@ -1221,46 +1222,46 @@ function click_select_item() {
 };
 
 function fetch_get_data_user_calender(content) {
-        $('.advocate_select_date').css('opacity', '0.3');
-        $('.load_message__block').text('Календар загружається...');
+    $('.advocate_select_date').css('opacity', '0.3');
+    $('.load_message__block').text('Календар загружається...');
     let url = `/api/get_days_info/?year=${content.year}&month=${content.month}&advocat=${content.advocat}&client=${content.client}`;
-      fetch(url, {
+    fetch(url, {
         method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-          
-        let datepicker = $('#datapicker_user').datepicker().data('datepicker');
-        let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
-        let weekenddDays = [0, 6];
-        // reserve - повністю зайнятий
-        let reserve = [];
-        
-        // busy - напів зайнятий
-        let busy = [];
-        
-        // статуси 
-        // blocked - зайнятий 
-        // rest - зайнятий
-        // partly_busy - напів зайнятий
-        // free - вільний
-        // unknows - вільний
+    })
+        .then((data) => {
+            return data.json();
+        })
+        .then((body) => {
 
-        $.each(body.days, function(index, value) {
-            if (value.status == 'blocked' || value.status == 'rest') {
-                reserve.push(find_month(value.day));
-            } else 
-            if (value.status == 'partly_busy') {
-                busy.push(find_month(value.day));
-            }
-        });
-       
-        datepicker.destroy();
-        create_client_calender(weekenddDays, reserve, busy, months_items);
+            let datepicker = $('#datapicker_user').datepicker().data('datepicker');
+            let months_items = ['january', 'feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            let weekenddDays = [0, 6];
+            // reserve - повністю зайнятий
+            let reserve = [];
 
-        
+            // busy - напів зайнятий
+            let busy = [];
+
+            // статуси 
+            // blocked - зайнятий 
+            // rest - зайнятий
+            // partly_busy - напів зайнятий
+            // free - вільний
+            // unknows - вільний
+
+            $.each(body.days, function (index, value) {
+                if (value.status == 'blocked' || value.status == 'rest') {
+                    reserve.push(find_month(value.day));
+                } else
+                    if (value.status == 'partly_busy') {
+                        busy.push(find_month(value.day));
+                    }
+            });
+
+            datepicker.destroy();
+            create_client_calender(weekenddDays, reserve, busy, months_items);
+
+
             $('.advocate_select_date').css('opacity', '1');
             $('.load_message__block').text('');
 
@@ -1269,8 +1270,8 @@ function fetch_get_data_user_calender(content) {
                 $('.load_message__block').css('opacity', '0');
                 $('.load_message__block').css('z-index', '-1');
             }
-        
-      }); 
+
+        });
 }
 
 function find_month(value) {
@@ -1303,40 +1304,40 @@ function find_month(value) {
         current_month = 'November';
     } else if (dates[1] == '12') {
         current_month = 'December';
-    }     
+    }
     current_date = `${current_day}-${current_month}-${current_year}`;
-    return current_date;               
+    return current_date;
 }
 
-$('.docs_title_btn').on('click', function() {
+$('.docs_title_btn').on('click', function () {
     let wrap = $(this).parents('.docs__wrap');
     $(wrap).toggleClass('docs__wrap_active');
 });
 
 if ($('.advocate_user_input__block').length >= 1) {
-        // var datepicker = $('#datapicker_user').datepicker().data('datepicker');
-        // datepicker.destroy();
-        // var weekenddDays = [0, 6];
-        // var reserve = ["20-August-2020", "21-August-2020"];
-        // var busy = ["25-August-2020", "27-August-2020"];
-        // var months_items = ['january','feburary','March','April','May','June','July','August','September','October','November','December'];
-        // create_client_calender(weekenddDays, reserve, busy, months_items);
+    // var datepicker = $('#datapicker_user').datepicker().data('datepicker');
+    // datepicker.destroy();
+    // var weekenddDays = [0, 6];
+    // var reserve = ["20-August-2020", "21-August-2020"];
+    // var busy = ["25-August-2020", "27-August-2020"];
+    // var months_items = ['january','feburary','March','April','May','June','July','August','September','October','November','December'];
+    // create_client_calender(weekenddDays, reserve, busy, months_items);
 
 
-        let date_js = new Date();
-        let date_month = date_js.getMonth() + 1;
-        let date_year = date_js.getFullYear();
-        let date_client = $('.advocat_info_id').attr('data-advocat');
-        let date_advocat = date_client;
-        
-        let advocat_days_json = {
-            year: date_year,
-            month: date_month,
-            advocat: date_advocat,
-            client: date_client,
-        }
-        fetch_get_data_user_calender(advocat_days_json);
-       
+    let date_js = new Date();
+    let date_month = date_js.getMonth() + 1;
+    let date_year = date_js.getFullYear();
+    let date_client = $('.advocat_info_id').attr('data-advocat');
+    let date_advocat = date_client;
+
+    let advocat_days_json = {
+        year: date_year,
+        month: date_month,
+        advocat: date_advocat,
+        client: date_client,
+    }
+    fetch_get_data_user_calender(advocat_days_json);
+
 }
 
 function create_load_item() {
@@ -1372,8 +1373,8 @@ function create_clockwork_client(content) {
 function return_current_date(date) {
     let current_month = date.getMonth() + 1;
     let date_year = date.getFullYear();
-    let date_month = ((current_month<10)?'0':'')+current_month;
-    let date_day = ((date.getDate()<10)?'0':'')+date.getDate();
+    let date_month = ((current_month < 10) ? '0' : '') + current_month;
+    let date_day = ((date.getDate() < 10) ? '0' : '') + date.getDate();
     let result = `${date_year}-${date_month}-${date_day}`;
     return result;
 }
@@ -1381,17 +1382,17 @@ function update_datepicker(disabledDays, reserved_days, busy_days, months) {
     var datepicker = $('#datapicker_user').datepicker().data('datepicker');
     // datepicker.update({
     $('#datapicker_user').datepicker({
-        onRenderCell: function(date, cellType) {
+        onRenderCell: function (date, cellType) {
             var currentDate = date.getDate();
             var myDate = return_current_date(date);
-           
-            if (reserved_days.indexOf(myDate) != -1){
+
+            if (reserved_days.indexOf(myDate) != -1) {
                 return {
                     classes: 'disable_day',
                     disabled: true
                 }
             }
-            if (busy_days.indexOf(myDate) != -1){
+            if (busy_days.indexOf(myDate) != -1) {
                 return {
                     classes: 'busy_day',
                     disabled: false,
@@ -1400,10 +1401,10 @@ function update_datepicker(disabledDays, reserved_days, busy_days, months) {
             }
         },
     })
-    
-        $('.load_calender').removeClass('load_calender_active');
+
+    $('.load_calender').removeClass('load_calender_active');
 }
-    
+
 
 function create_client_calender(disabledDays, reserved_days, busy_days, months) {
     var myDatepicker = $('#datapicker_user').datepicker({
@@ -1411,16 +1412,16 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
         multipleDates: false,
         showOtherMonths: false,
         minDate: new Date(),
-        onRenderCell: function(date, cellType) {
+        onRenderCell: function (date, cellType) {
             var currentDate = date.getDate();
-            var myDate = ((date.getDate()<10)?'0':'')+date.getDate()+'-'+months[date.getMonth()]+'-'+date.getFullYear();
-            
-             if (reserved_days.indexOf(myDate)>-1) {
-               return {
-                classes: 'disable_day',
-                disabled: true
-               }
-             } else if (busy_days.indexOf(myDate)>-1) {
+            var myDate = ((date.getDate() < 10) ? '0' : '') + date.getDate() + '-' + months[date.getMonth()] + '-' + date.getFullYear();
+
+            if (reserved_days.indexOf(myDate) > -1) {
+                return {
+                    classes: 'disable_day',
+                    disabled: true
+                }
+            } else if (busy_days.indexOf(myDate) > -1) {
                 return {
                     classes: 'busy_day',
                     disabled: false,
@@ -1430,18 +1431,18 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             //    else if (cellType == 'day') {
             //         var day = date.getDay(),
             //         isDisabled = disabledDays.indexOf(day) != -1;
-    
+
             //     return {
             //         disabled: isDisabled
             //     }
             // } 
             else {
-               return {
-                disabled: false
-              }
+                return {
+                    disabled: false
+                }
             }
-          },
-        onSelect: function(formattedDate, date, inst) {
+        },
+        onSelect: function (formattedDate, date, inst) {
             let str_text = inst.selectedDates[0] + ' ';
             let current_day = str_text.slice(0, 3);
             let current_data;
@@ -1463,7 +1464,7 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
             $('.all_price_consultation').text(0);
             $('.advocate_select_date').find('.step_select').addClass('step_select_active');
             $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
-    
+
 
 
             if ($('.reserve_clock__block').length >= 1) {
@@ -1472,70 +1473,70 @@ function create_client_calender(disabledDays, reserved_days, busy_days, months) 
                 $('.first_advocate_user_clock').attr('data-clock', '0');
                 $('.second_advocate_user_clock').text('0');
                 $('.second_advocate_user_clock').attr('data-clock', '0');
-            }  
+            }
             create_clockwork_items();
-                     
+
         },
-        onChangeMonth: function(date_month, date_year) {
+        onChangeMonth: function (date_month, date_year) {
             $('.load_calender').addClass('load_calender_active');
 
-                let date_client = $('.client_info_id').attr('data-client');
-                let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
-                let info = return_info_users();
-                
-                let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${info.result_advocate}&client=${info.result_client}`;
-                fetch(url, {
-                  method: "GET",
-                })
+            let date_client = $('.client_info_id').attr('data-client');
+            let date_advocat = $('.advoc_step_select').find('.step_active_content').attr('data-id');
+            let info = return_info_users();
+
+            let url = `/api/get_days_info/?year=${date_year}&month=${date_month + 1}&advocat=${info.result_advocate}&client=${info.result_client}`;
+            fetch(url, {
+                method: "GET",
+            })
                 .then((data) => {
-                  return data.json();
+                    return data.json();
                 })
                 .then((body) => {
-                  let datepicker = $('#datapicker_user').datepicker().data('datepicker');
-                  let months_items = ['january','feburary','March','April','May','June','July','August','September', 'October', 'November','December'];
-                  let weekenddDays = [0, 6];
-                  // reserve - повністю зайнятий
-                  let reserve = [];
-                  
-                  
-                  // busy - напів зайнятий
-                  let busy = [];
-                  
-                  
-                  // статуси 
-                  // blocked - зайнятий 
-                  // rest - зайнятий
-                  // partly_busy - напів зайнятий
-                  // free - вільний
-                  // unknows - вільний
-          
-                  $.each(body.days, function(index, value) {
-                      if (value.status == 'blocked' || value.status == 'rest') {
-                          reserve.push(value.day);
-                          
-                      } else 
-                      if (value.status == 'partly_busy') {
-                          busy.push(value.day);
-                      }
-                  });
-    
-                  update_datepicker(weekenddDays, reserve, busy, months_items);
+                    let datepicker = $('#datapicker_user').datepicker().data('datepicker');
+                    let months_items = ['january', 'feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    let weekenddDays = [0, 6];
+                    // reserve - повністю зайнятий
+                    let reserve = [];
+
+
+                    // busy - напів зайнятий
+                    let busy = [];
+
+
+                    // статуси 
+                    // blocked - зайнятий 
+                    // rest - зайнятий
+                    // partly_busy - напів зайнятий
+                    // free - вільний
+                    // unknows - вільний
+
+                    $.each(body.days, function (index, value) {
+                        if (value.status == 'blocked' || value.status == 'rest') {
+                            reserve.push(value.day);
+
+                        } else
+                            if (value.status == 'partly_busy') {
+                                busy.push(value.day);
+                            }
+                    });
+
+                    update_datepicker(weekenddDays, reserve, busy, months_items);
                 });
         },
-     });
+    });
 
-     setTimeout(() => {
+    setTimeout(() => {
         $('.datepicker')[0].appendChild(create_load_item());
     }, 1000);
 }
 
 
-$(document).mouseup(function (e){ // событие клика по веб-документу
-    
+$(document).mouseup(function (e) { // событие клика по веб-документу
+
     var div = $(".advocate_step_hidden_content"); // тут указываем ID элемента
     if (!div.is(e.target) // если клик был не по нашему блоку
         && div.has(e.target).length === 0) { // и не по его дочерним элементам
-            
+
         $('.advocate_step_hidden_content').removeClass('step_hidden_content_active') // скрываем его
     }
 });
@@ -1544,7 +1545,7 @@ function return_info_users() {
     let client;
     let advocate;
     let current_date;
-    
+
     if ($('.reserve_hidden_content').length >= 1) {
         current_date = $('.datapicker_user').val();
         client = $('.advocat_info_id').attr('data-advocat');
@@ -1565,35 +1566,35 @@ function create_clockwork_items() {
     let info = return_info_users();
     fetch(`/api/get_hours_info/?date=${info.result_current_date}&advocat=${info.result_advocate}&client=${info.result_client}`, {
         method: "GET",
-      })
-      .then((data) => {
-        return data.json();
-      })
-      .then((body) => {
-          if ($('.step_3').length >= 1) {
-            show_step([3]);
-          }
-          $('.step_date__wrap').children().remove();
+    })
+        .then((data) => {
+            return data.json();
+        })
+        .then((body) => {
+            if ($('.step_3').length >= 1) {
+                show_step([3]);
+            }
+            $('.step_date__wrap').children().remove();
 
-          $.each(body.working_hours, function(index, value) {
-              let delete_space = value.hour.replace(/\s+/g, '');
-              let words = delete_space.split(':');
-              let date = new Date(0, 0, 0, words[0], words[1], 0);
-              let current_clock_json = {
-                 hours: date.getHours() * 60 + date.getMinutes(),
-                 is_free: value.is_free,
-                 is_index: index,
-              }
-            //   if (current_clock_json.hours <= 360) {
-            //     //   в цей час потрібно спати, а не працювати
-            //   } else {
+            $.each(body.working_hours, function (index, value) {
+                let delete_space = value.hour.replace(/\s+/g, '');
+                let words = delete_space.split(':');
+                let date = new Date(0, 0, 0, words[0], words[1], 0);
+                let current_clock_json = {
+                    hours: date.getHours() * 60 + date.getMinutes(),
+                    is_free: value.is_free,
+                    is_index: index,
+                }
+                //   if (current_clock_json.hours <= 360) {
+                //     //   в цей час потрібно спати, а не працювати
+                //   } else {
                 $('.step_date__wrap')[0].appendChild(create_clockwork_client(current_clock_json));
-            //   }
-                
-          });
-      });   
-    }
- 
+                //   }
+
+            });
+        });
+}
+
 function replasor_text() {
     let client_date = $('.advocate_user_date').text();
     let delete_space = client_date.replace(/\s+/g, '');
@@ -1602,20 +1603,20 @@ function replasor_text() {
     return current_date;
 }
 
-$('.data_step_select_btn').on('click', function() {
+$('.data_step_select_btn').on('click', function () {
     if ($(this).hasClass('visible')) {
         $('#datapicker_user').hide();
     } else {
         $('#datapicker_user').show();
     }
-    
+
 
     $(this).toggleClass('visible');
 })
 
 
 // додавання файлів адвокатом для клієнта в його консультацію
-$('.consultation_advocate_doc_btn').on('change', function() {
+$('.consultation_advocate_doc_btn').on('change', function () {
     let file_create = $('#consultation_advocate_doc_btn')[0];
     let Formdata = new FormData();
     let files = file_create.files;
@@ -1624,7 +1625,7 @@ $('.consultation_advocate_doc_btn').on('change', function() {
     Formdata.append(`author`, info.result_client);
     Formdata.append(`consultation`, id_sonsultation);
 
-    $.each(files, function(i, file){
+    $.each(files, function (i, file) {
         Formdata.append(`file`, file);
         let json_file = {
             file_name: file.name,
@@ -1636,22 +1637,22 @@ $('.consultation_advocate_doc_btn').on('change', function() {
             method: 'POST',
             body: Formdata,
         })
-        .then(data => {
-            return data.json();
-        })
-        .then(data => {
-         
-        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+
+            })
     });
 
-   
+
 });
 
 let create_simple_files = (content) => {
     let doc_profile = document.createElement('a');
-        doc_profile.classList.add('doc-profile');
-        doc_profile.setAttribute(`href`, content.file_href);
-        doc_profile.setAttribute(`target`, '_blank');
+    doc_profile.classList.add('doc-profile');
+    doc_profile.setAttribute(`href`, content.file_href);
+    doc_profile.setAttribute(`target`, '_blank');
 
 
     // let doc_img = document.createElement('img');
@@ -1668,14 +1669,14 @@ let create_simple_files = (content) => {
 }
 
 // додавання файлів адвокатом
-$('.advocate_doc_add_btn').on('change', function() {
+$('.advocate_doc_add_btn').on('change', function () {
     let file_create = $('#advocate_doc_add_btn')[0];
     let Formdata = new FormData();
     let files = file_create.files;
     let info = return_info_users();
     Formdata.append(`user`, info.result_client);
 
-    $.each(files, function(i, file){
+    $.each(files, function (i, file) {
         Formdata.append(`file[${i}]`, file);
         $('.doc-block')[0].appendChild(create_advocate_files(file));
     });
@@ -1684,12 +1685,12 @@ $('.advocate_doc_add_btn').on('change', function() {
         method: 'POST',
         body: Formdata,
     })
-    .then(data => {
-        return data.json();
-    })
-    .then(data => {
-     
-    })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+
+        })
 });
 
 
@@ -1697,13 +1698,13 @@ $('.advocate_doc_add_btn').on('change', function() {
 
 let create_advocate_files = (content) => {
     let doc_profile = document.createElement('div');
-        doc_profile.classList.add('doc-profile');
+    doc_profile.classList.add('doc-profile');
 
-        let doc_top = document.createElement('div');
-        doc_top.classList.add('doc-top');
+    let doc_top = document.createElement('div');
+    doc_top.classList.add('doc-top');
 
-        let doc_bot = document.createElement('div');
-        doc_bot.classList.add('doc-bot');
+    let doc_bot = document.createElement('div');
+    doc_bot.classList.add('doc-bot');
 
     let doc_img_wrap = document.createElement('div');
     doc_img_wrap.classList.add('doc-img-wrap');
@@ -1742,34 +1743,34 @@ let create_advocate_files = (content) => {
     doc_img_wrap.appendChild(doc_name);
     doc_top.appendChild(doc__title);
 
-    
-        return doc_profile;
+
+    return doc_profile;
 }
 
 
 
-$('.pseudo_btn').click(function(e) {
-	e.preventDefault();
-  var nb_attachments = $('form input').length;
-  var $input = $('<input type="file" name=attachment-' + nb_attachments + '>');
-  $input.on('change', function(evt) {
-    var f = evt.target.files[0];
-    let value_object = {
-        input: $(this),
-        name: f.name
-    }
-    $('.advocate_download__block')[0].appendChild(create_client_files(value_object));
-  });
-  $input.hide();
-  $input.trigger('click');
+$('.pseudo_btn').click(function (e) {
+    e.preventDefault();
+    var nb_attachments = $('form input').length;
+    var $input = $('<input type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" name=attachment-' + nb_attachments + '>');
+    $input.on('change', function (evt) {
+        var f = evt.target.files[0];
+        let value_object = {
+            input: $(this),
+            name: f.name
+        }
+        $('.advocate_download__block')[0].appendChild(create_client_files(value_object));
+    });
+    $input.hide();
+    $input.trigger('click');
 });
 
 
 
 
 // додавання файлів клієнтом
-$('.input_user_file').on('change', function() {
-    
+$('.input_user_file').on('change', function () {
+
     // let fileData = this.files;
     // 
 
@@ -1789,7 +1790,7 @@ $('.input_user_file').on('change', function() {
     //     return data.json();
     // })
     // .then(data => {
-     
+
     // })
 
     // let file_create = $('#input_user_file')[0];
@@ -1808,14 +1809,14 @@ $('.input_user_file').on('change', function() {
 
 
 let create_client_files = (content) => {
-    
+
     let advocate_download_prof = document.createElement('div');
-        advocate_download_prof.classList.add('advocate_download_prof', 'new_advocate_download_prof');
+    advocate_download_prof.classList.add('advocate_download_prof', 'new_advocate_download_prof');
 
     let advocate_download_name = document.createElement('div');
     advocate_download_name.classList.add('advocate_download_name', 'main_title', 'main_title_4', 'color_gold');
     advocate_download_name.textContent = content.name;
-    
+
 
     let svg_span = document.createElement('span');
     svg_span.classList.add('advocate_download_close');
@@ -1832,40 +1833,40 @@ let create_client_files = (content) => {
     advocate_download_prof.appendChild(advocate_download_name);
     advocate_download_prof.appendChild(svg_span);
 
-    
-        return advocate_download_prof;
+
+    return advocate_download_prof;
 }
 
-$('.set-wrap').on('click', function() {
+$('.set-wrap').on('click', function () {
     $.fancybox.open({
         src: '#modal-change_settings',
         touch: false
-    }); 
+    });
 });
 
-$('.step_change_btn').on('click', function() {
+$('.step_change_btn').on('click', function () {
     let wrap = $(this).parents('.step_select');
     $(wrap).find('.step_hidden_content').toggleClass('step_hidden_content_active');
     $(wrap).toggleClass('step_select_open');
     let current_practise = $('.advocate_practise_content__block').find('.advocate_download_prof');
     let all_practise = $('.step_hidden_content').find('.step_select_radio');
-        $.each(all_practise, function(index, all_value) {
-            $.each(current_practise, function(index, current_value) {
-                if ($(all_value).attr('data-id') == $(current_value).find('.advocate_download_name').attr('data-id')) {
-                    $(all_value).addClass('step_select_text_active');
-                }
-            });
+    $.each(all_practise, function (index, all_value) {
+        $.each(current_practise, function (index, current_value) {
+            if ($(all_value).attr('data-id') == $(current_value).find('.advocate_download_name').attr('data-id')) {
+                $(all_value).addClass('step_select_text_active');
+            }
         });
+    });
 });
 
-$(".main_doc_link").on("click", function(){
-    
+$(".main_doc_link").on("click", function () {
+
     let wrap = $(this).parents('.tab-auto-content-prof');
     $(wrap).find(".main_doc_link").removeClass("main_doc_link_active");
-     $(this).addClass("main_doc_link_active");
+    $(this).addClass("main_doc_link_active");
 
     $(wrap).find(".main_doc_content").removeClass("main_doc_content_active");
-    $("#profile_"+$(this)[0].dataset.tab).addClass("main_doc_content_active");
+    $("#profile_" + $(this)[0].dataset.tab).addClass("main_doc_content_active");
 
 });
 
@@ -1879,11 +1880,11 @@ function delete_file() {
     $(wrap).css('left', '-100%');
 
     let current_practise = $('.step_hidden_content').find('.step_select_radio');
-        $.each(current_practise, function(index, value) {
-            if ($(value).attr('data-id') == id) {
-                $(value).removeClass('step_select_text_active');
-            }
-        });
+    $.each(current_practise, function (index, value) {
+        if ($(value).attr('data-id') == id) {
+            $(value).removeClass('step_select_text_active');
+        }
+    });
 
 
     setTimeout(() => {
@@ -1894,37 +1895,50 @@ function delete_file() {
 
 }
 
-
-
-$('.submit_wrapper').on('click', function() {
-    check_user_valid();
+$('.custom_label').on('click', function () {
+    let wrapper = $(this).parents('.custom_checkbox__block').parents('#modal-form_documents');
+    $(wrapper).toggleClass('active');
 })
-$('.submit_user_order').on('click', function() {
-    $('.load_spin').addClass('load_spin_active');
-    let all_order_vars = create_obgect_order();
-    append_form_data(all_order_vars);
-    fetch_order(all_order_vars);
-    
+$('.custom_pdf_document').on('click', function () {
+    $.fancybox.open({
+        src: '#modal-form_pdf',
+        touch: false
+    });
 });
 
-function create_obgect_order() {
+$('.submit_wrapper').on('click', function () {
+    check_user_valid();
+})
+$('.submit_user_order').on('click', function () {
 
-    let object = {
-        Formdata: new FormData(),
-        client: $('.client_info_id').attr('data-client'),
-        practise: $('.pract_step_select').find('.step_active_content').attr('data-id'),
-        advocate: $('.advoc_step_select').find('.step_active_content').attr('data-id'),
-        date: $('.advocate_user_date').attr('data-date'),
-        clock_first: $('.clock_manager_first').attr('data-result').replace('.', ':'),
-        clock_last: $('.clock_manager_second').attr('data-result').replace('.', ':'),
-        url: $('.user_order_of_advocate').attr('action'),
-        csrftoken: $('.hidden_wrap_inp').find('input').val(),
-        file_array: $('.new_advocate_download_prof').find('input')
-    }
-    return object;
-}
+    $.fancybox.close();
+    $.fancybox.open({
+        src: '#modal-form_documents',
+        touch: false
+    });
+    // $('.load_spin').addClass('load_spin_active');
+    // let all_order_vars = create_obgect_order();
+    // append_form_data(all_order_vars);
+    // fetch_order(all_order_vars);
+});
+
+// function create_obgect_order() {
+//     let object = {
+//         Formdata: new FormData(),
+//         client: $('.client_info_id').attr('data-client'),
+//         practise: $('.pract_step_select').find('.step_active_content').attr('data-id'),
+//         advocate: $('.advoc_step_select').find('.step_active_content').attr('data-id'),
+//         date: $('.advocate_user_date').attr('data-date'),
+//         clock_first: $('.clock_manager_first').attr('data-result').replace('.', ':'),
+//         clock_last: $('.clock_manager_second').attr('data-result').replace('.', ':'),
+//         url: $('.user_order_of_advocate').attr('action'),
+//         csrftoken: $('.hidden_wrap_inp').find('input').val(),
+//         file_array: $('.new_advocate_download_prof').find('input')
+//     }
+//     return object;
+// }
 function append_form_data(all_order_vars) {
-    jQuery.each(all_order_vars.file_array, function(i, file) {
+    jQuery.each(all_order_vars.file_array, function (i, file) {
         let fileData = file.files[0];
         all_order_vars.Formdata.append(`document[${i}]`, fileData);
     });
@@ -1936,38 +1950,38 @@ function append_form_data(all_order_vars) {
     all_order_vars.Formdata.append(`start`, all_order_vars.clock_first);
     all_order_vars.Formdata.append(`end`, all_order_vars.clock_last);
     all_order_vars.Formdata.append(`csrftoken`, all_order_vars.csrftoken);
-    
+
     if (all_order_vars.comment != undefined) {
-        all_order_vars.Formdata.append(`comment`, all_order_vars.comment); 
+        all_order_vars.Formdata.append(`comment`, all_order_vars.comment);
     }
-        
+
 }
 function fetch_order(content) {
     fetch(content.url, {
         method: 'POST',
         body: content.Formdata,
     })
-    .then(data => {
-        return data.json();
-    })
-    .then(data => {
-        
-        if ($('.reserve_hidden_content').length >= 1) {
-            create_all_calender(true);
-        } else {
-            $('.load_spin').removeClass('load_spin_active');
-            let redirect = $('.submit_user_order').attr('data-redirect');
-            window.location = redirect;
-        }
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
 
-        generete_modal_text(data.messages[0].text);
-    })
+            if ($('.reserve_hidden_content').length >= 1) {
+                create_all_calender(true);
+            } else {
+                $('.load_spin').removeClass('load_spin_active');
+                let redirect = $('.submit_user_order').attr('data-redirect');
+                window.location = redirect;
+            }
+
+            generete_modal_text(data.messages[0].text);
+        })
 }
 function check_user_valid() {
     let all_check_items = $('.step_select');
     let all_count = $('.step_select').length;
     let counter = 0;
-    $.each(all_check_items, function(index, value) {
+    $.each(all_check_items, function (index, value) {
         if ($(value).hasClass('step_select_active')) {
             counter++;
         } else {
@@ -1976,7 +1990,7 @@ function check_user_valid() {
             return false;
         }
         if (counter == all_count) {
-            
+
             $('.sumbit_content_error').text('');
             $('.submit_wrapper').removeClass('submit_wrapper_error');
         } else {
@@ -1997,15 +2011,15 @@ function add_clockwork() {
         $('.step_date_prof').removeClass('second_mark');
         $('.step_date_prof').removeClass('step_date_prof_is_hover');
         $(this).addClass('first_mark');
-        
+
     } else if ($('.step_date_prof_active').length == 2) {
         let all_clockwork = $('.step_date_prof');
         $(this).addClass('second_mark');
         let first_index = Number($('.first_mark').attr('data-index'));
         let second_index = Number($('.second_mark').attr('data-index'));
         let current_index = Number($(this).attr('data-index'));
-            
-        $.each(all_clockwork, function(index, value) {
+
+        $.each(all_clockwork, function (index, value) {
             if (index > first_index && index < second_index || index < first_index && index > second_index) {
                 $(value).addClass('step_date_prof_active');
                 if ($(value).hasClass('step_date_prof_passive')) {
@@ -2016,30 +2030,30 @@ function add_clockwork() {
                 }
             }
         });
-        
-       
-          // перевірка чи юзер клікнув на середню активну годину
-          if (first_index < second_index && prepare_second_click != undefined) {
-                if (current_index == first_index + 1) {
-                    $('.step_date_prof').removeClass('first_mark');
-                    $('.step_date_prof').removeClass('second_mark');
-                    $('.step_date_prof').removeClass('step_date_prof_active');
-                    $('.step_date_prof').removeClass('step_date_prof_is_hover');
-                    $(this).addClass('step_date_prof_active');
-                    $(this).addClass('first_mark');
-                } 
-            } else if (first_index > second_index && prepare_second_click != undefined) {
-                if (current_index == first_index - 1) {
-                    $('.step_date_prof').removeClass('first_mark');
-                    $('.step_date_prof').removeClass('second_mark');
-                    $('.step_date_prof').removeClass('step_date_prof_active');
-                    $('.step_date_prof').removeClass('step_date_prof_is_hover');
-                    $(this).addClass('step_date_prof_active');
-                    $(this).addClass('first_mark');
-                }  
-            } 
 
-            
+
+        // перевірка чи юзер клікнув на середню активну годину
+        if (first_index < second_index && prepare_second_click != undefined) {
+            if (current_index == first_index + 1) {
+                $('.step_date_prof').removeClass('first_mark');
+                $('.step_date_prof').removeClass('second_mark');
+                $('.step_date_prof').removeClass('step_date_prof_active');
+                $('.step_date_prof').removeClass('step_date_prof_is_hover');
+                $(this).addClass('step_date_prof_active');
+                $(this).addClass('first_mark');
+            }
+        } else if (first_index > second_index && prepare_second_click != undefined) {
+            if (current_index == first_index - 1) {
+                $('.step_date_prof').removeClass('first_mark');
+                $('.step_date_prof').removeClass('second_mark');
+                $('.step_date_prof').removeClass('step_date_prof_active');
+                $('.step_date_prof').removeClass('step_date_prof_is_hover');
+                $(this).addClass('step_date_prof_active');
+                $(this).addClass('first_mark');
+            }
+        }
+
+
 
     } else if ($('.step_date_prof_active').length == 0 || $('.step_date_prof_active').length >= 3) {
         $('.step_date_prof').removeClass('first_mark');
@@ -2048,15 +2062,15 @@ function add_clockwork() {
         $('.step_date_prof').removeClass('step_date_prof_is_hover');
         $(this).addClass('step_date_prof_active');
         $(this).addClass('first_mark');
-        
-    } 
+
+    }
 
 
     let attr = Number($(this).parents('.step_date__wrap').attr('data-transition'));
     let current_clock = Number($(this).parents('.step_date__block').find('.step_date__wrap').find('.step_date_prof_active').length);
     $('.step_access').text(transform_clock(current_clock * attr));
 
-    
+
     if ($('.step_date_prof_active').length == 0) {
         cancel_clock();
     } else if ($('.step_date_prof_active').length >= 1) {
@@ -2066,17 +2080,17 @@ function add_clockwork() {
 
 
 function accept_clock() {
-      // якщо все ок проводить обрахунки
-      if ($('.reserve_hidden_content').length >= 1) {
+    // якщо все ок проводить обрахунки
+    if ($('.reserve_hidden_content').length >= 1) {
         let result_clock = find_order_clock();
         $('.first_advocate_user_clock').text(result_clock.first);
         $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
         $('.second_advocate_user_clock').text(result_clock.second);
         $('.second_advocate_user_clock').attr('data-clock', result_clock.second);
-        
+
     } else {
         let current_clock = transform_minute(Number($('.step_access').text()));
-        
+
         // if (current_clock == 0) {
         //     $('.step_access').css('border', '1px solid red');
         //     $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
@@ -2084,25 +2098,25 @@ function accept_clock() {
         //     $('.all_price_consultation').text(0);
         //     hide_step([4]);
         // } else {
-            let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
-            let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
-            let current_sum = current_cost / duration;
-            let sum = current_sum * current_clock;
-    
-            $('.advocate_select_time').find('.step_select').addClass('step_select_active');
-            $('.current_clock_num').text(transform_clock(current_clock));
-            $('.all_price_consultation').attr('data-price', sum);
-            
-            let result_clock = find_order_clock();
-            
-            $('.clock_manager_first').text(`з ${result_clock.first}`);
-            $('.clock_manager_first').attr(`data-result`, result_clock.first);
-            $('.clock_manager_second').text(`по ${result_clock.second}`);
-            $('.clock_manager_second').attr(`data-result`, result_clock.second);
-            $('.all_price_consultation').text(sum);
-            // counter_num('.all_price_consultation', 1000, sum);
-            check_user_valid();
-            show_step([4]);
+        let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
+        let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
+        let current_sum = current_cost / duration;
+        let sum = current_sum * current_clock;
+
+        $('.advocate_select_time').find('.step_select').addClass('step_select_active');
+        $('.current_clock_num').text(transform_clock(current_clock));
+        $('.all_price_consultation').attr('data-price', sum);
+
+        let result_clock = find_order_clock();
+
+        $('.clock_manager_first').text(`з ${result_clock.first}`);
+        $('.clock_manager_first').attr(`data-result`, result_clock.first);
+        $('.clock_manager_second').text(`по ${result_clock.second}`);
+        $('.clock_manager_second').attr(`data-result`, result_clock.second);
+        $('.all_price_consultation').text(sum);
+        // counter_num('.all_price_consultation', 1000, sum);
+        check_user_valid();
+        show_step([4]);
         // }
     }
 }
@@ -2110,17 +2124,17 @@ function cancel_clock() {
     if ($('.reserve_hidden_content').length >= 1) {
         $('.first_advocate_user_clock').text('');
         $('.second_advocate_user_clock').text('');
-        
+
     } else {
-            $('.step_access').css('border', '1px solid #D2A351');
-            $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
-            $('.current_clock_num').text('0');
-            $('.clock_manager_first').text(``);
-            $('.clock_manager_second').text(``);
-            $('.all_price_consultation').text(0);
-            check_user_valid();
-            hide_step([4]);
-    } 
+        $('.step_access').css('border', '1px solid #D2A351');
+        $('.advocate_select_time').find('.step_select').removeClass('step_select_active');
+        $('.current_clock_num').text('0');
+        $('.clock_manager_first').text(``);
+        $('.clock_manager_second').text(``);
+        $('.all_price_consultation').text(0);
+        check_user_valid();
+        hide_step([4]);
+    }
 }
 
 
@@ -2129,22 +2143,22 @@ function hover_clock() {
         let all_clockwork = $('.step_date_prof');
         let mark_index = Number($('.first_mark').attr('data-index'));
         let this_index = Number($(this).attr('data-index'));
-        
-        $.each(all_clockwork, function(index, value) {
-            
+
+        $.each(all_clockwork, function (index, value) {
+
             if (index < this_index && index > mark_index || index > this_index && index < mark_index) {
                 $(value).addClass('step_date_prof_is_hover');
             } else {
                 $(value).removeClass('step_date_prof_is_hover');
             }
         });
-        
+
     }
 }
 
-$('.save_reserve_date_btn').on('click', function() {
+$('.save_reserve_date_btn').on('click', function () {
     let date_value = $('.datapicker_user').val();
-    
+
     let first_clock = $('.first_advocate_user_clock').attr('data-clock');
     let second_clock = $('.second_advocate_user_clock').attr('data-clock');
 
@@ -2155,40 +2169,40 @@ $('.save_reserve_date_btn').on('click', function() {
     } else {
         $('.error_reserve').text('');
 
-       
-       
+
+
 
         fetch(`/api/faculties/`, {
             method: "GET",
-          })
-          .then((data) => {
-            return data.json();
-          })
-          .then((body) => {
-            let object = {
-                Formdata: new FormData(),
-                client: $('.advocat_info_id').attr('data-advocat'),
-                practise: body[0].id,
-                advocate: $('.advocat_info_id').attr('data-advocat'),
-                date: $('.datapicker_user').val(),
-                clock_first: $('.first_advocate_user_clock').attr('data-clock').replace('.', ':'),
-                clock_last: $('.second_advocate_user_clock').attr('data-clock').replace('.', ':'),
-                url: '/api/consultations/',
-                csrftoken: $('.hidden_wrap_inp').find('input').val(),
-                comment: $('.advocate_user_comment__block').find('textarea').val()
-                
-            }
-              append_form_data(object);
-              fetch_order(object);
-              create_clockwork_items();
-          })
+        })
+            .then((data) => {
+                return data.json();
+            })
+            .then((body) => {
+                let object = {
+                    Formdata: new FormData(),
+                    client: $('.advocat_info_id').attr('data-advocat'),
+                    practise: body[0].id,
+                    advocate: $('.advocat_info_id').attr('data-advocat'),
+                    date: $('.datapicker_user').val(),
+                    clock_first: $('.first_advocate_user_clock').attr('data-clock').replace('.', ':'),
+                    clock_last: $('.second_advocate_user_clock').attr('data-clock').replace('.', ':'),
+                    url: '/api/consultations/',
+                    csrftoken: $('.hidden_wrap_inp').find('input').val(),
+                    comment: $('.advocate_user_comment__block').find('textarea').val()
+
+                }
+                append_form_data(object);
+                fetch_order(object);
+                create_clockwork_items();
+            })
 
         function append_form_data(all_order_vars) {
-            jQuery.each(all_order_vars.file_array, function(i, file) {
+            jQuery.each(all_order_vars.file_array, function (i, file) {
                 let fileData = file.files[0];
                 all_order_vars.Formdata.append(`document[${i}]`, fileData);
             });
-        
+
             all_order_vars.Formdata.append(`client`, all_order_vars.client);
             all_order_vars.Formdata.append(`faculty`, all_order_vars.practise);
             all_order_vars.Formdata.append(`advocat`, all_order_vars.advocate);
@@ -2202,11 +2216,11 @@ $('.save_reserve_date_btn').on('click', function() {
         }
     }
 })
-$('.step_access_btn').on('click', function() {
+$('.step_access_btn').on('click', function () {
     // if ($(this).hasClass('step_advocate_btn')) {
-        
+
     //         let result_clock = find_order_clock();
-            
+
     //         $('.first_advocate_user_clock').text(result_clock.first);
     //         $('.first_advocate_user_clock').attr('data-clock', result_clock.first);
     //         $('.second_advocate_user_clock').text(result_clock.second);
@@ -2223,19 +2237,19 @@ $('.step_access_btn').on('click', function() {
     //         hide_step([4]);
     //     } else {
     //         $('.step_access').css('border', '1px solid #D2A351');
-    
+
     //         let current_cost = Number($('.all_price_consultation').attr('data-advocate-cost'));
     //         let duration = Number($('.all_price_consultation').attr('data-advocate_duration_cost'));
-    
+
     //         let current_sum = current_cost / duration;
     //         let sum = current_sum * current_clock;
-    
+
     //         $('.advocate_select_time').find('.step_select').addClass('step_select_active');
     //         $('.current_clock_num').text(transform_clock(current_clock));
     //         $('.all_price_consultation').attr('data-price', sum);
-            
+
     //         let result_clock = find_order_clock();
-            
+
     //         $('.clock_manager_first').text(`з ${result_clock.first}`);
     //         $('.clock_manager_first').attr(`data-result`, result_clock.first);
     //         $('.clock_manager_second').text(`по ${result_clock.second}`);
@@ -2270,9 +2284,9 @@ function find_order_clock() {
     }
     result.first = first_clock;
     result.second = second_clock;
-    
-    return result;  
-    
+
+    return result;
+
 }
 
 
@@ -2281,15 +2295,15 @@ function find_order_clock() {
 // number - до якої кількості прокручувати
 function counter_num(className, duration_animation, number) {
     $({ Counter: 0 }).animate({
-      Counter: number
+        Counter: number
     }, {
-      duration: duration_animation,
-      easing: 'swing',
-      step: function() {
-        $(className).text(Math.ceil(this.Counter) + " грн");
-      }
+        duration: duration_animation,
+        easing: 'swing',
+        step: function () {
+            $(className).text(Math.ceil(this.Counter) + " грн");
+        }
     });
-  }
+}
 
 
 
@@ -2300,70 +2314,70 @@ if ($('.step_date__block').length == 1) {
 
     // When the container is scrolled
     container.addEventListener('scroll', () => {
-    // If we are dragging the knob, do nothing
-    if (dragging) return
-    
-    // Otherwise, set the knob position based on the scroll position
-    knob.style.top = container.scrollTop / (container.scrollHeight - container.offsetHeight) * 100 + '%'
+        // If we are dragging the knob, do nothing
+        if (dragging) return
+
+        // Otherwise, set the knob position based on the scroll position
+        knob.style.top = container.scrollTop / (container.scrollHeight - container.offsetHeight) * 100 + '%'
     })
 
     var dragging = false
     knob.addEventListener('mousedown', (event) => {
-    dragging = {
-        x: event.clientX,
-        y: event.clientY
-    }
+        dragging = {
+            x: event.clientX,
+            y: event.clientY
+        }
     })
     window.addEventListener('mousemove', (event) => {
 
-    if (dragging) {
-        // When dragging
-        event.preventDefault()
-        var diff = {
-        x: event.clientX - dragging.x,
-        y: event.clientY - dragging.y
+        if (dragging) {
+            // When dragging
+            event.preventDefault()
+            var diff = {
+                x: event.clientX - dragging.x,
+                y: event.clientY - dragging.y
+            }
+
+            // Clamp the position of the knob to be a maximum of 
+            // the knobs container, and a minimum of 0
+            var newTop = Math.max(0, Math.min(knob.offsetTop + diff.y, bar.offsetHeight))
+            knob.style.top = newTop + 'px'
+
+            // Base the scroll offset on the knobs position
+            // in relation to the knobs container
+            var scrollOffset = newTop / bar.offsetHeight * (container.scrollHeight - container.offsetHeight)
+            container.scrollTop = scrollOffset
+
+            dragging = {
+                x: event.clientX,
+                y: event.clientY
+            }
         }
-        
-        // Clamp the position of the knob to be a maximum of 
-        // the knobs container, and a minimum of 0
-        var newTop = Math.max(0, Math.min(knob.offsetTop + diff.y, bar.offsetHeight))
-        knob.style.top = newTop + 'px'
-        
-        // Base the scroll offset on the knobs position
-        // in relation to the knobs container
-        var scrollOffset = newTop / bar.offsetHeight * (container.scrollHeight - container.offsetHeight)
-        container.scrollTop = scrollOffset
-        
-        dragging = {
-        x: event.clientX,
-        y: event.clientY
-        }
-    }
     })
     window.addEventListener('mouseup', () => {
-    dragging = false
+        dragging = false
     })
 }
 
 
 
-$('.advocate_user_clock').on('click', function() {
+$('.advocate_user_clock').on('click', function () {
     let wrap = $(this).parents('.advocate_user_clock__block');
     $(wrap).find('.advocate_step_hidden_content').toggleClass('step_hidden_content_active');
 });
 
-$('.reserve_btn').on('click', function() {
+$('.reserve_btn').on('click', function () {
     $('.reserve_hidden_content').toggleClass('reserve_hidden_content_active');
 });
 
 
-$('.step_select_radio').on('click', function() {
+$('.step_select_radio').on('click', function () {
     let id_practise = $(this).attr('data-id');
     let name_practise = $(this).attr('data-title');
 
     if ($(this).hasClass('step_select_text_active')) {
         let current_practise = $('.advocate_practise__block').find('.advocate_download_prof');
-        $.each(current_practise, function(index, value) {
+        $.each(current_practise, function (index, value) {
             if ($(value).find(".advocate_download_name").attr('data-id') == id_practise) {
                 $(value).remove();
                 get_fetch_for_active_practise();
@@ -2379,7 +2393,7 @@ $('.step_select_radio').on('click', function() {
         create_practise(practise_json);
         get_fetch_for_active_practise();
     }
-   
+
 });
 
 
@@ -2396,7 +2410,7 @@ let create_practise = (content) => {
     <svg class="advocate_download_close" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
     </div>
       
-    `;       
+    `;
     let old_html = $(".advocate_practise_content__block")[0].innerHTML;
     $(".advocate_practise_content__block")[0].innerHTML = old_html + product_item;
 
@@ -2426,7 +2440,7 @@ function transform_minute(date) {
 
     let hours = Math.trunc(current_clock) * 60;
     let minute = (current_clock - Math.trunc(current_clock)) * 100;
-    
+
     current_clock = Math.round(hours + minute);
 
     return current_clock;

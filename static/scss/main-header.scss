@@ -63,12 +63,13 @@
 #modal-form_user {
 	width: 400px;
 	padding: 35px !important;
+	padding-bottom: 20px !important;
 	.inp-vak-wrap {
 		min-height: 75px;
 	}
 
 	.btn-read {
-		margin-top: 15px;
+		margin-top: 25px;
 	}
 }
 .fancybox-slide {
@@ -736,6 +737,32 @@
 	padding: 13px;
 	padding-left: 35px;
 	cursor: pointer;
+}
+#modal_form_false {
+	.form_true_img {
+		margin-top: 35px !important;
+	}
+	.footer_sub {
+		font-weight: bold !important;
+	}
+}
+.stantard_btn {
+	position: relative;
+	display: block;
+	width: 245px;
+	font-family: 'Montserrat', sans-serif;
+	border-radius: 40px;
+	color: #fff;
+	text-align: center;
+	padding: 13px;
+	padding-left: 50px;
+	cursor: pointer;
+	.comun-icon {
+		width: 47px;
+	}
+	&_gold {
+		border: 2px solid #D2A351;
+	}
 }
 .comun-icon {
 	position: absolute;
@@ -1424,8 +1451,8 @@
 	justify-content: space-between;
 	margin: 0 auto;
 	flex-direction: column;
-	width: 90%;
-	margin-top: 20px;
+	width: 100%;
+	margin-top: 30px;
 
 	input {
 		width: 100%;

@@ -17,6 +17,25 @@
 	  line-height: 1;
 	  padding-top: 17px;
 }
+.registery {
+	&__block {
+		display: flex;
+		align-items: center;
+		margin-top: 20px;
+	}
+	&_text {
+		color: #6C6C6C;
+    	font-weight: 400;
+	}
+	&_btn {
+		padding-bottom: 3px;
+		color: #D2A351;
+		cursor: pointer;
+		margin-left: 30px;
+		font-weight: 700;
+		border-bottom: 1px solid #D2A351;
+	}
+}
 .footer-block {
 	display: flex;
 	justify-content: space-between;
@@ -84,6 +103,15 @@
 		flex-direction: column-reverse;
 	}
 	
+}
+@media (max-width: 500px) {
+	.registery__block {
+		flex-direction: column;
+	}
+	.registery_btn {
+		margin-left: 0;
+		margin-top: 6px;
+	}
 }
 @media (max-width: 464px) {
 	.footer-block {

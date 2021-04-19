@@ -1,21 +1,22 @@
 <div id="profile_3" class="main_doc_content main_doc_content_active">
   {% if unordered_consultation %}
-   <div class="consult_borg">
-      У вас є неоплачена консультація. 
-      <a href="{% url 'payment' %}" style="color:#054C23;">Перейдіть</a> на сторінку оплати, щоб оплатити її, 
-      або 
-      <a class="delete_user_first_consultation" data-href="/api/consultations/{{unordered_consultation.id}}/" data-method="DELETE" style="color:red;">видаліть</a> 
-      її. 
-   </div>
+  <div class="consult_borg">
+    У вас є неоплачена консультація.
+    <a href="{% url 'payment' %}" style="color:#054C23;">Перейдіть</a> на сторінку оплати, щоб оплатити її,
+    або
+    <a class="delete_user_first_consultation" data-href="/api/consultations/{{unordered_consultation.id}}/"
+      data-method="DELETE" style="color:red;">видаліть</a>
+    її.
+  </div>
   {% else %}
   <form action="/api/consultations/" class="new_form user_order_of_advocate">
     <!-- Крок 1 -->
     <div class="step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 1.
-      </span> 
-        Для початку роботи Вам необхідно вибрати галузь 
-        юреспруденції та адвоката, котрий надаватиме Вам консультацію.
+      </span>
+      Для початку роботи Вам необхідно вибрати галузь
+      юреспруденції та адвоката, котрий надаватиме Вам консультацію.
     </div>
     <!-- Вибір галузі -->
     <div class="step_select__block">
@@ -25,16 +26,17 @@
         </div>
         <div class="step_change_btn step_select_btn">
           <div class="step_select_img">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 8819 8819"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 8819 8819" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Layer_x0020_1">
-              <metadata id="CorelCorpID_0Corel-Layer"/>
+                <metadata id="CorelCorpID_0Corel-Layer" />
                 <g id="_2353930230192">
-                <rect class="step_svg" x="882" y="882" width="3079" height="3146"/>
-                <rect class="step_svg" x="4859" y="882" width="3079" height="3146"/>
-                <rect class="step_svg" x="4859" y="4791" width="3079" height="3146"/>
-                <rect class="step_svg" x="882" y="4791" width="3079" height="3146"/>
+                  <rect class="step_svg" x="882" y="882" width="3079" height="3146" />
+                  <rect class="step_svg" x="4859" y="882" width="3079" height="3146" />
+                  <rect class="step_svg" x="4859" y="4791" width="3079" height="3146" />
+                  <rect class="step_svg" x="882" y="4791" width="3079" height="3146" />
                 </g>
               </g>
             </svg>
@@ -43,12 +45,14 @@
             Галузь
           </div>
           <div class="step_select_arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 2117 2117"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 2117 2117" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Layer_x0020_1">
-                <metadata id="CorelCorpID_0Corel-Layer"/>
-                <path class="arrow_svg" d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <path class="arrow_svg"
+                  d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z" />
               </g>
             </svg>
           </div>
@@ -66,15 +70,17 @@
         </div>
         <div class="step_change_btn step_select_btn step_select_btn_2">
           <div class="step_select_img">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 8819 8819"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-              
-                <g id="Layer_x0020_1">
-                <metadata id="CorelCorpID_0Corel-Layer"/>
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 8819 8819" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
                 <g id="_2354017389488">
-                  <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661"/>
-                  <path class="step_svg" d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z"/>
+                  <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661" />
+                  <path class="step_svg"
+                    d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z" />
                 </g>
               </g>
             </svg>
@@ -83,18 +89,20 @@
             Адвокат
           </div>
           <div class="step_select_arrow step_select_arrow_2">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 2117 2117"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 2117 2117" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Layer_x0020_1">
-                <metadata id="CorelCorpID_0Corel-Layer"/>
-                <path class="arrow_svg" d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <path class="arrow_svg"
+                  d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z" />
               </g>
             </svg>
           </div>
         </div>
         <div class="step_active_content standart_title standart_title_4 color_gold">
-          
+
         </div>
         <div class="hidden_message"></div>
         <div class="client_select_step_hidden_content step_hidden_content">
@@ -110,13 +118,13 @@
     <div class="step_2 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 2.
-      </span> 
+      </span>
       Виберіть зручну для Вас дату та годину проведення консультації виходячи
       із графіку планувань адвоката. Мінімальний час консультації - одна година.
       <br>
       <br>
-      Після завершення бронювання з Вами зв’яжуть для уточненян формату провдення 
-      консультації:  Skype, Viber, Google.meet, Zoom, Мобільний дзвінок.
+      Після завершення бронювання з Вами зв’яжуть для уточненян формату провдення
+      консультації: Skype, Viber, Google.meet, Zoom, Мобільний дзвінок.
     </div>
     <!-- Вибір адвоката -->
     <div class="step_2 advocate_select_profile__block">
@@ -140,7 +148,7 @@
           <div class="user_advocate_type_work advocate_type_work standart_title standart_title_4 color_black">
             Оберіть галузь
           </div>
-          
+
         </div>
         <div class="advocate_user_item__block">
           <div class="advocate_user_img">
@@ -175,19 +183,19 @@
             <img src="/static/img/profile/5.svg" alt="">
           </div>
           <div class="advocate_user_title standart_title standart_title_4 color_black">
-              Виберіть годину 
-              <span class="clock_manager" data-clock=''>
-                    <!-- з -->
-                <span class="clock_manager_first">
-                  <!-- 09.00 -->
-                </span>
-                    <!-- по  -->
-                <span class="clock_manager_second">
-                  <!-- 11.00 -->
-                </span>
-                <!-- . -->
+            Виберіть годину
+            <span class="clock_manager" data-clock=''>
+              <!-- з -->
+              <span class="clock_manager_first">
+                <!-- 09.00 -->
               </span>
-              <span>консультація -  <span class="current_clock_num">0</span> год.</span>
+              <!-- по  -->
+              <span class="clock_manager_second">
+                <!-- 11.00 -->
+              </span>
+              <!-- . -->
+            </span>
+            <span>консультація - <span class="current_clock_num">0</span> год.</span>
           </div>
           <!-- <div class="advocate_user_settings">
             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="29px" height="29px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
@@ -214,8 +222,7 @@
             <img src="/static/img/profile/7.svg" alt="">
           </div>
           <div class="advocate_user_title main_title main_title_4 color_gold">
-            Виберіть тип консультації
-            <!-- Skype -->
+            тип консультації: Google meet
           </div>
         </div>
         <div class="advocate_user_item__block">
@@ -227,15 +234,16 @@
               Вартість консультації:
             </span>
             <span class="span_sum__block">
-              <span class="odometer all_price_consultation color_gold" data-advocate_duration_cost='30' data-advocate-cost='500' data-price='0'>
+              <span class="odometer all_price_consultation color_gold" data-advocate_duration_cost='30'
+                data-advocate-cost='500' data-price='0'>
                 0
               </span>
-              <span class="color_gold"> 
+              <span class="color_gold">
                 грн
               </span>
             </span>
           </div>
-          
+
         </div>
       </div>
       <div class="advocate_select_date">
@@ -245,15 +253,17 @@
           </div>
           <div class="data_step_select_btn step_select_btn step_select_btn_2 visible">
             <div class="step_select_img">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 8819 8819"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-                
-                  <g id="Layer_x0020_1">
-                  <metadata id="CorelCorpID_0Corel-Layer"/>
+              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm"
+                version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 8819 8819" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <g id="Layer_x0020_1">
+                  <metadata id="CorelCorpID_0Corel-Layer" />
                   <g id="_2354017389488">
-                    <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661"/>
-                    <path class="step_svg" d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z"/>
+                    <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661" />
+                    <path class="step_svg"
+                      d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z" />
                   </g>
                 </g>
               </svg>
@@ -262,12 +272,14 @@
               Дата
             </div>
             <div class="step_select_arrow step_select_arrow_2">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 2117 2117"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm"
+                version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 2117 2117" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Layer_x0020_1">
-                  <metadata id="CorelCorpID_0Corel-Layer"/>
-                  <path class="arrow_svg" d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+                  <metadata id="CorelCorpID_0Corel-Layer" />
+                  <path class="arrow_svg"
+                    d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z" />
                 </g>
               </svg>
             </div>
@@ -287,15 +299,17 @@
           </div>
           <div class="step_change_btn step_select_btn step_select_btn_2">
             <div class="step_select_img">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 8819 8819"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-                
-                  <g id="Layer_x0020_1">
-                  <metadata id="CorelCorpID_0Corel-Layer"/>
+              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="88.1944mm" height="88.1944mm"
+                version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 8819 8819" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <g id="Layer_x0020_1">
+                  <metadata id="CorelCorpID_0Corel-Layer" />
                   <g id="_2354017389488">
-                    <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661"/>
-                    <path class="step_svg" d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z"/>
+                    <ellipse class="step_svg" cx="4500" cy="2543" rx="1764" ry="1661" />
+                    <path class="step_svg"
+                      d="M4410 4614c-1946,0 -3528,1491 -3528,3323l7056 0c0,-1841 -1583,-3323 -3528,-3323z" />
                   </g>
                 </g>
               </svg>
@@ -304,12 +318,14 @@
               Час
             </div>
             <div class="step_select_arrow step_select_arrow_2">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 2117 2117"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.1666mm" height="21.1666mm"
+                version="1.1"
+                style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 2117 2117" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Layer_x0020_1">
-                  <metadata id="CorelCorpID_0Corel-Layer"/>
-                  <path class="arrow_svg" d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z"/>
+                  <metadata id="CorelCorpID_0Corel-Layer" />
+                  <path class="arrow_svg"
+                    d="M1621 659c62,-54 156,-47 210,15 54,63 47,157 -15,211l-656 568 -2 3 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 2 -1 0 -2 2 -1 1 -2 1 -1 1 -2 1 -1 1 -3 1 0 0 -3 2 0 0 -3 2 0 0 -3 1 -1 1 -3 1 0 0 -3 2 0 0 -3 1 -1 0 -3 1 0 0 -3 2 0 0 -4 1 0 0 -3 1 0 0 -4 1 0 0 -3 1 -4 1 0 0 -3 0 0 0 -4 1 -3 0 0 1 -4 0 0 0 -3 0 -4 1 -3 0 -4 0 -4 0 -3 0 -4 0 -3 0 -4 -1 -3 0 -1 0 -3 0 0 -1 -4 0 -3 -1 0 0 -4 0 0 0 -3 -1 -4 -1 0 0 -3 -1 0 0 -4 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 0 -3 -1 0 0 -3 -2 -1 0 -3 -1 0 -1 -3 -1 0 0 -3 -2 0 0 -3 -2 -1 0 -2 -1 -1 -1 -2 -1 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -1 -1 -2 -1 -1 -1 -2 -2 -1 0 -2 -2 -3 -3 -655 -568c-63,-54 -69,-148 -16,-211 54,-62 148,-69 211,-15l562 489 563 -489z" />
                 </g>
               </svg>
             </div>
@@ -319,7 +335,7 @@
               <div class="step_date_scroll__wrap custom-scrollbar">
                 <!-- data-transition='30' тут має виводитись яка тривалість консультації -->
                 <div data-transition='30' class="step_date__wrap custom-scrollbar__inner">
-                  
+
                 </div>
 
                 <div class="custom-scrollbar__bar">
@@ -357,14 +373,14 @@
         </div>
       </div>
     </div>
-  
+
 
 
     <!-- Крок 3 -->
     <div class="step_4 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 3.
-      </span> 
+      </span>
       Для завершення бронювання внесіть опалту:
     </div>
     <!-- Оплата -->
@@ -395,8 +411,9 @@
     <div class="step_4 step_title standart_title standart_title_4 color_black">
       <span class="step_text color_gold">
         Крок 4.
-      </span> 
-      Якщо для Вашої консультації є певні необхідні документи чи файли можете їх прикріпити для більш детального розгляду та ознайомлення адвокату
+      </span>
+      Якщо для Вашої консультації є певні необхідні документи чи файли можете їх прикріпити для більш детального
+      розгляду та ознайомлення адвокату
     </div>
     <!-- Загрузка файлів -->
     <div class="step_4 advocate_download__block">
@@ -428,9 +445,6 @@
     <div class="sumbit_content_error standart_title standart_title_4 color_green">
     </div>
     <!--  -->
-  
-
-
   </form>
   {% endif %}
 </div>

@@ -1,35 +1,33 @@
 <form method="POST" action="{% url 'form' %}" class="formA" id="modal-form" style="display:none;">
     {% csrf_token %}
     <div class="modal-block">
-    <div class="green-logo">
-        <img src="/static/img/green-logo.png" alt="">
-    </div>
-    <div class="input-wrap">
-       <div class="inp_fix_wrap">
-           <div class="wrap-mail">
-           <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
-           </div>
-           <input name="name" title="Не правильное имя или фамилия" type="text" placeholder="Прізвище та ім'я">
-       </div>
-    </div>
-    <div class="input-wrap">
-        <div class="inp_fix_wrap">
-            <div class="wrap-mail">
-            <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
-            </div>
-            <input name="phone" id="phone" type="text" placeholder="+38 (0__) _ _ _ - _ _ - _ _">
+        <div class="green-logo">
+            <img src="/static/img/green-logo.png" alt="">
         </div>
-       
-    </div>
-    <div class="input-wrap">
-        <div class="inp_fix_wrap">
-            <div class="wrap-mail wrap-mail-3">
-            <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
+        <div class="input-wrap">
+            <div class="inp_fix_wrap">
+                <div class="wrap-mail">
+                    <img class="form_icon" src="/static/img/form-icon-1.png" alt="">
+                </div>
+                <input name="name" title="Не правильное имя или фамилия" type="text" placeholder="Прізвище та ім'я">
             </div>
-            <input name="email" type="email" placeholder="Email">
         </div>
-       
-    </div>
-    <input value="Надіслати" type="submit" class="btn-read hvr-fade">
+        <div class="input-wrap">
+            <div class="inp_fix_wrap">
+                <div class="wrap-mail">
+                    <img class="form_icon" src="/static/img/form-icon-2.png" alt="">
+                </div>
+                <input name="phone" id="phone" type="tel" placeholder="+38 (0__) _ _ _ - _ _ - _ _">
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div class="inp_fix_wrap">
+                <div class="wrap-mail wrap-mail-3">
+                    <img class="form_icon" src="/static/img/form-icon-3.png" alt="">
+                </div>
+                <input name="email" type="email" placeholder="Email">
+            </div>
+        </div>
+        <input value="Надіслати" type="submit" class="btn-read hvr-fade">
     </div>
 </form>

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block head_static%}
 {% include 'includes/head_static.html' %}
-<link  href="/static/css/datepicker.css" rel="stylesheet">
-<link  href="/static/css/new_profile.css" rel="stylesheet">
+<link href="/static/css/datepicker.css" rel="stylesheet">
+<link href="/static/css/new_profile.css" rel="stylesheet">
 {% endblock head_static%}
 {% block content%}
 {% include "booking/includes/modals.html" %}
@@ -45,11 +45,170 @@
       {% include "booking/components/client_personal.html" %}
       {% include "booking/components/client_documents.html" %}
     </div>
-      </div>
-    </div>
+  </div>
+  </div>
   </div>
   {% include 'booking/includes/consult_btn.html' %}
 </header>
+
+<form method="POST" action="/test/" class="formA form_documents" id="modal-form_documents" style="display:none;">
+  {% csrf_token %}
+  <div class="modal-block">
+    <div class="green-logo">
+      <img src="/static/img/green-logo.png" alt="">
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/1.svg" alt="">
+        </div>
+        <input name="name" type="text" placeholder="Прізвище та ім'я">
+      </div>
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/2.svg" alt="">
+        </div>
+        <input name="rnkopp" type="text" placeholder="РНКОПП Клієнта">
+      </div>
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/3.svg" alt="">
+        </div>
+        <input name="register_place" type="text" placeholder="Місце проживання (реєстрації) клієнта">
+      </div>
+      <div class="hint_form standart_title standart_title_4 color_black">
+        Поштовий індекс, область, населений пункт, вулиця, будинок, корпус, квартира
+      </div>
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/4.svg" alt="">
+        </div>
+        <input name="pasport" type="text" placeholder="Паспортні дані клієнта">
+      </div>
+      <div class="hint_form standart_title standart_title_4 color_black">
+        Серія і номер, ким та коли виданий
+      </div>
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/5.svg" alt="">
+        </div>
+        <input name="phone" id="phone_2" type="tel" placeholder="Контактний номер засобу зв'язку">
+      </div>
+    </div>
+    <div class="input-wrap">
+      <div class="inp_fix_wrap">
+        <div class="wrap-mail">
+          <img class="form_icon" src="/static/img/profile/form/6.svg" alt="">
+        </div>
+        <input name="email" type="email" placeholder="Електронна пошта клієнта">
+      </div>
+    </div>
+
+    <div class="custom_checkbox__block">
+      <div class="custom_checkbox custom_label">
+      </div>
+      <div class="custom_checkbox_text__block">
+        <div class="custom_label custom_checkbox_text standart_title standart_title_4 color_gold">
+          Я ознайомлений(на) із договором публічної оферти та даю згоду на обробку моїх персональних даних
+        </div>
+        <div class="custom_checkbox_pdf_text standart_title standart_title_4 color_gold">
+          (якщо ви хочете переглянути шаблон договору клікніть <span class="custom_pdf_document">по силці</span>)
+        </div>
+      </div>
+    </div>
+
+    <input value="Продовжити" type="submit" class="btn-read hvr-fade">
+  </div>
+</form>
+
+
+<form method="POST" action="/test/" class="formA" id="modal-form_pdf" style="display:none;">
+  {% csrf_token %}
+  <div class="modal-block">
+    <div class="green-logo">
+      <img src="/static/img/green-logo.png" alt="">
+    </div>
+    <div class="custom_pdf__block">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex porro libero excepturi odio praesentium, maiores
+      labore similique, sed nam voluptates veniam, assumenda ducimus velit tempore adipisci. Assumenda a, inventore
+      atque facilis voluptas in corporis beatae sint aut corrupti neque asperiores recusandae veritatis laborum illo,
+      quasi nam vitae natus tempora. Voluptatum quod assumenda, officiis incidunt accusantium dignissimos facilis
+      suscipit ipsam earum illum quibusdam dolorum dolores quis natus sunt nulla ratione laboriosam eaque in asperiores
+      at! Modi sequi reprehenderit officiis inventore fugiat esse corrupti, dolores impedit quod maiores porro! Maxime
+      iste saepe sint blanditiis? Impedit qui omnis, quibusdam modi perspiciatis a libero obcaecati incidunt totam
+      ratione, laborum culpa exercitationem doloribus saepe odit dolorem. Sunt quisquam nesciunt assumenda maiores ipsam
+      eum enim! Distinctio, doloremque velit deserunt sint ipsa modi sit fuga culpa dolorem et eaque mollitia neque
+      quaerat explicabo ullam! Ullam, officiis repellendus. Cupiditate vitae, voluptas distinctio quisquam velit porro
+      repellendus quidem fugiat enim voluptatem aspernatur eius iste. Mollitia perspiciatis possimus iusto eius
+      voluptatibus tempora dolor incidunt veniam, facere totam aspernatur consequuntur nemo! Sint veritatis enim, nulla
+      officiis illum ad at nam perspiciatis ex illo omnis ea, sit sapiente. Nulla dolorum tempore sunt, perferendis iure
+      quae nihil quod, voluptates perspiciatis voluptatem id deserunt libero consectetur repellat assumenda totam non
+      eius voluptatum. Fuga asperiores neque at nemo porro necessitatibus magni dolores, sint id labore autem ullam iure
+      quibusdam rerum provident hic inventore nulla deserunt quasi non aliquid beatae quisquam. Blanditiis iusto atque
+      quo id quod! Quod natus deleniti, alias blanditiis dicta mollitia atque voluptatibus. Eligendi officia ratione
+      dolore rerum dicta similique veniam at, itaque illo saepe nesciunt? Laborum alias dignissimos minus magni facere,
+      obcaecati rem maiores nisi eius! Fugiat tenetur inventore doloribus cupiditate facere, illum earum nihil laborum,
+      tempora ab modi ducimus tempore itaque voluptas, vero dolore voluptates? Illo sequi velit aliquid delectus ab
+      optio ipsum, blanditiis nemo aliquam, excepturi debitis ut iure sapiente, eveniet iste natus odit ipsam corporis
+      labore. Tempora itaque numquam possimus ipsam doloribus. Provident saepe magni qui illum, expedita velit
+      aspernatur minus. Ullam doloribus nam nisi eius ipsa nesciunt numquam ipsum facilis blanditiis aut asperiores, ad
+      iure, ea impedit nihil beatae inventore reprehenderit aliquid vitae praesentium natus quidem voluptas placeat.
+      Alias reprehenderit ducimus ut molestias provident ipsam assumenda blanditiis ea placeat magnam sit, quis beatae
+      dolores a nam omnis suscipit commodi obcaecati pariatur! Autem corrupti impedit obcaecati facilis, nobis in odit
+      assumenda inventore, molestias ratione illum nemo. Perferendis et ullam dignissimos sequi fugiat incidunt. In
+      quisquam laboriosam, neque eaque adipisci minus expedita, saepe hic similique odit quidem repellendus, vel cum
+      veritatis officiis fugiat atque esse soluta nihil totam sapiente? Consequatur nobis eius dolorem ipsum suscipit
+      culpa possimus. Sapiente, obcaecati nisi? Ab sequi repellat necessitatibus provident quidem cumque assumenda quae
+      perferendis minus reiciendis neque, a autem atque iusto mollitia aut saepe tempore maiores at earum molestias!
+      Alias expedita asperiores nesciunt esse nam animi labore quos illo error, doloremque laborum! Laudantium cumque
+      quo suscipit? Quaerat amet odio, praesentium laborum nostrum molestias rem voluptates tempora assumenda
+      perspiciatis voluptas, magnam dignissimos est, a aut voluptate dolor. Dicta tempora reprehenderit blanditiis atque
+      consectetur, qui suscipit perspiciatis est laudantium placeat odit ducimus maiores recusandae minus! Quod odit
+      eligendi, nisi nesciunt, qui quo iusto architecto ullam hic consequatur quia distinctio nostrum pariatur
+      consequuntur dolor laboriosam sit ducimus inventore aliquam alias! Reiciendis, ipsam est reprehenderit neque
+      voluptate ipsum placeat quo beatae fuga maiores necessitatibus? In dolores culpa quis, ea assumenda excepturi illo
+      iusto quod exercitationem, vero praesentium odio magnam cupiditate, consequuntur reprehenderit quo velit nam
+      possimus? Eos unde aliquam accusamus nostrum ut distinctio voluptates similique neque ad architecto ipsa
+      recusandae, voluptate quis quos aut vel. Deserunt a optio numquam asperiores consectetur magni vero expedita
+      cupiditate voluptates dolorem laborum est rerum et minima minus odit corrupti, sint excepturi! Odio, incidunt.
+      Nobis praesentium iste delectus. Quisquam perspiciatis molestiae qui placeat dolore accusamus laudantium labore
+      dicta deserunt beatae officiis dolorem itaque provident excepturi tenetur eligendi exercitationem facilis,
+      explicabo adipisci nisi ullam unde? Quos quidem culpa a, dolor quo dolorum hic voluptas quisquam ullam? Harum cum
+      ullam porro temporibus, quaerat tempore vitae voluptas fuga odit beatae reiciendis, minima voluptatibus molestiae.
+      Repudiandae consectetur molestiae neque, excepturi ad tenetur delectus dolore facilis quaerat nam unde
+      voluptatibus cupiditate asperiores vel culpa nisi itaque illum sint omnis vero. Hic laboriosam harum eos eveniet!
+      Saepe nobis veniam sunt iure libero nihil magnam modi reiciendis ipsum obcaecati incidunt, illum earum at
+      cupiditate accusamus! Quisquam officia, voluptatibus ex magnam nisi facilis unde ipsa illo iure saepe temporibus
+      debitis sequi corrupti tempore veritatis eius voluptatem natus! Omnis harum voluptates, esse doloremque nisi cum
+      earum ipsam optio enim quod id, suscipit voluptatem sapiente praesentium, voluptatibus autem hic a quis velit.
+      Quis ad, debitis alias omnis, maxime cum molestiae provident rerum iusto possimus officiis, tempora incidunt a
+      quos! Ratione quaerat nostrum, aperiam quasi nihil minima laboriosam harum obcaecati hic voluptate repellat.
+      Numquam eum, autem impedit voluptatem unde blanditiis. Vel, adipisci porro numquam impedit eum optio, expedita
+      culpa, possimus dignissimos at doloribus ex. Et impedit ea ut optio, eligendi nemo vero exercitationem recusandae,
+      iste nostrum reprehenderit blanditiis facere? Optio voluptas itaque dignissimos doloremque omnis assumenda beatae
+      architecto ipsum corporis dolorem sed alias deserunt, odit vel! Delectus et unde doloremque modi dicta iusto,
+      minima magni dolorem nemo deleniti ex repellendus minus consequatur nihil officiis tenetur iure facilis ipsa,
+      mollitia, ullam eius fugit! Omnis ducimus qui cumque nihil facere laboriosam eligendi, fuga porro voluptatum
+      veritatis maiores amet doloremque culpa obcaecati, dolorum perferendis eaque possimus ab ea quasi. Enim sunt
+      excepturi dignissimos praesentium voluptate. Doloribus, natus dolor? Aliquid a corporis cupiditate adipisci
+      ducimus numquam dicta fugit, maiores ipsa doloribus ad porro dolore voluptatem harum quia amet iure ipsum
+      exercitationem omnis quaerat nemo laborum eum. Atque nisi optio labore sint laborum, voluptatum veniam tempore
+      autem, non dolorum iste necessitatibus pariatur voluptatem iure. Distinctio explicabo nulla possimus dignissimos
+      laboriosam, quia amet repudiandae assumenda velit. Itaque, consequatur laboriosam exercitationem optio vitae
+      repellat molestias dolorum velit qui officia debitis corporis. Inventore velit illo amet voluptas necessitatibus
+      suscipit eveniet sint accusantium nulla! Ratione possimus nam excepturi provident facere eveniet repellat
+      explicabo?
+    </div>
+  </div>
+</form>
 {% endblock content%}
 {% block footer_static%}
 {% include 'includes/footer_static.html' %}

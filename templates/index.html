@@ -5,45 +5,46 @@
 {% block header_class%}main-header{% endblock header_class%}
 
 {% block content %}
-  <div id="shad-1" class="shadow-text">
-    Галицька <br>
-    правнича <br>
-    група <br>
+<div id="shad-1" class="shadow-text">
+  Галицька <br>
+  правнича <br>
+  група <br>
+</div>
+
+
+<div class="info-icon-block-container">
+  <img data-src="/static/img/header-ico-1.png" alt="">
+  <img data-src="/static/img/header-ico-2.png" alt="">
+  <img data-src="/static/img/header-ico-3.png" alt="">
+</div>
+
+{% include 'includes/form.html' %}
+
+<a class="link-fanc" onclick="gtag('event', 'send', { 'event_category': 'contact_us', 'event_action': 'click', });"
+  data-src="#modal-form">
+  <div class="btn-communicate hvr-bounce-to-right">
+    <img class="comun-icon" data-src="/static/img/communicate-icon.png" alt="">
+    Консультація
   </div>
+</a>
 
+<div class="scene-wrap m-headfer-img">
+  <div id="scene">
 
-  <div class="info-icon-block-container">
-    <img data-src="/static/img/header-ico-1.png" alt="">
-    <img data-src="/static/img/header-ico-2.png" alt="">
-    <img data-src="/static/img/header-ico-3.png" alt="">
-  </div>
+    <!-- ===== -->
 
-  {% include 'includes/form.html' %}
-
-  <a class="link-fanc" onclick="gtag('event', 'send', { 'event_category': 'contact_us', 'event_action': 'click', });" data-src="#modal-form">
-    <div class="btn-communicate hvr-bounce-to-right">
-      <img class="comun-icon" data-src="/static/img/communicate-icon.png" alt="">
-      Консультація
-    </div>
-  </a>
-
-  <div class="scene-wrap m-headfer-img">
-    <div id="scene">
-
-      <!-- ===== -->
-
-      <!-- ======= -->
-      <img class="parallax-layer parallax-logo" data-depth="0.20" src="/static/img/Банер.png" alt="" />
-      <!-- <img class="parallax-layer parallax-layer-4" data-depth="0.20" src="/static/img/par-4-old.png" alt="" />
+    <!-- ======= -->
+    <img class="parallax-layer parallax-logo" data-depth="0.20" src="/static/img/Банер.png" alt="" />
+    <!-- <img class="parallax-layer parallax-layer-4" data-depth="0.20" src="/static/img/par-4-old.png" alt="" />
       <img class="parallax-layer" data-depth="0.20" src="/static/img/par-2-old.png" alt="" />
       <img class="parallax-layer parallax-logo parallax-logo" data-depth="0.20" src="/static/img/par-1-old.png" alt="" />
       <img class="parallax-layer layer_fix" data-depth="0.40" src="/static/img/par-3-old.png" alt="" /> -->
-    </div>
   </div>
+</div>
 
-  {% include 'includes/posts_slider.html' %}
+{% include 'includes/posts_slider.html' %}
 
-  <!-- <div class="header_link__index link__index">
+<!-- <div class="header_link__index link__index">
     <a href="#scene">
       <div class="elips elips_active">
 
@@ -79,771 +80,958 @@
 
 
 {% block extra_content %}
-  <section id="about_us" class="about_us">
-    <div class="container">
-      <div id="main__title-1" class="main__title">
-        ПРО НАС
+<section id="about_us" class="about_us">
+  <div class="container">
+    <div id="main__title-1" class="main__title">
+      ПРО НАС
+    </div>
+    <div class="about-block">
+      <div class="about-left">
+        <img data-src="/static/img/about-us/about-img.png" alt="">
       </div>
-      <div class="about-block">
-        <div class="about-left">
-          <img data-src="/static/img/about-us/about-img.png" alt="">
-        </div>
-        <div class="about-right">
-          <div class="about-profile">
-            <img data-src="/static/img/about-us/about-icon-1.png" alt="">
-            <div class="punct-text">
-              Наша Команда вітає Вас на сайті адвокатського об'єднання
-              «Галицька правнича група».
-            </div>
-          </div>
-          <div class="about-profile">
-            <img data-src="/static/img/about-us/about-icon-2.png" alt="">
-            <div class="punct-text">
-              Ми - команда досвідчених юристів, котрі завжди рухаються вперед у ногу з часом. Наш «колективний розум»
-              працює виключно на позитивний результат усі 24 години на добу. Ми працьовиті та завзяті, ті, хто завжди
-              впевнений у своїх діях. Однак, основною нашою рисою є те, що ми вміємо приймати правильні рішення, щоб
-              досягти для Вас бажаного результату.
-            </div>
-          </div>
-          <div class="about-profile">
-            <img data-src="/static/img/about-us/about-icon-3.png" alt="">
-            <div class="punct-text">
-              {% comment %} Україна - одна з найбільших у світі країн-виробників сільськогосподарської продукції. Аграрний бізнес займає
-              левову частку у формуванні валового національного продукту в економіці України. {% endcomment %}
-              «Кожен з нас, вже більше 15 років надає правничу допомогу аграрному бізнесу у Західній Україні та відгукується на кожне звернення – будь-то власник, керівник або простий працівник у цій сфері. Наша команда багато знає про юридичний супровід аграрного бізнесу та його основну складову – ЗЕМЛЮ.».
-            </div>
+      <div class="about-right">
+        <div class="about-profile">
+          <img data-src="/static/img/about-us/about-icon-1.png" alt="">
+          <div class="punct-text">
+            Наша Команда вітає Вас на сайті адвокатського об'єднання
+            «Галицька правнича група».
           </div>
         </div>
+        <div class="about-profile">
+          <img data-src="/static/img/about-us/about-icon-2.png" alt="">
+          <div class="punct-text">
+            Ми - команда досвідчених юристів, котрі завжди рухаються вперед у ногу з часом. Наш «колективний розум»
+            працює виключно на позитивний результат усі 24 години на добу. Ми працьовиті та завзяті, ті, хто завжди
+            впевнений у своїх діях. Однак, основною нашою рисою є те, що ми вміємо приймати правильні рішення, щоб
+            досягти для Вас бажаного результату.
+          </div>
+        </div>
+        <div class="about-profile">
+          <img data-src="/static/img/about-us/about-icon-3.png" alt="">
+          <div class="punct-text">
+            {% comment %} Україна - одна з найбільших у світі країн-виробників сільськогосподарської продукції. Аграрний
+            бізнес займає
+            левову частку у формуванні валового національного продукту в економіці України. {% endcomment %}
+            «Кожен з нас, вже більше 15 років надає правничу допомогу аграрному бізнесу у Західній Україні та
+            відгукується на кожне звернення – будь-то власник, керівник або простий працівник у цій сфері. Наша команда
+            багато знає про юридичний супровід аграрного бізнесу та його основну складову – ЗЕМЛЮ.».
+          </div>
+        </div>
       </div>
-      <div class="btn-wrap">
-        <a href="{% url 'about' %}">
+    </div>
+    <div class="btn-wrap">
+      <a href="{% url 'about' %}">
+        <div class="btn-read hvr-fade">
+          Більше
+        </div>
+      </a>
+    </div>
+    <!-- <div class="link__index">
+       <a href="#scene">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-1">
+          <div class="elips elips_active">
+
+          </div>
+        </a>
+        <a href="#main__title-work">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-client">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-team">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-practise">
+          <div class="elips">
+
+          </div>
+        </a>
+      </div> -->
+  </div>
+  <!-- /.container -->
+</section>
+
+<section id="work" class="work">
+  <div class="container">
+    <div id="main__title-work" class="main__title">
+      ЯК МИ ПРАЦЮЄМО?
+    </div>
+    <div class="work-block">
+      <div data-wow-delay="0.1s" class="work-profile wow slideInLeft">
+        <div class="flex-box"></div>
+        <div class="work-text">
+          <div class="green-name">
+            Звернення клієнта до нас
+            <div class="line"></div>
+          </div>
+
+          <div class="sub-work">
+            Дзвінок по телефону, е-mail, сайт, сторінка Facebооk
+          </div>
+        </div>
+
+        <img data-src="/static/img/work/work-icon-1.png" alt="">
+
+      </div>
+      <div class="work-wrap-right">
+        <div class="flex-box"></div>
+        <div class="work-profile work-prof-right wow slideInRight" data-wow-delay="0.2s">
+          <div class="flex-box"></div>
+          <div class="work-text">
+            <div class="green-name">
+              Зустріч з адвокатом чи юристом
+              <div class="line"></div>
+            </div>
+
+            <div class="sub-work">
+              Зустріч з адвокатом, юристом в офісі адвокатського об'єднання
+              або іншому зручному місці для клієнта (можливий виїзд
+              адвоката за адресою місця проживання особи або адресою
+              розташування виконавчого органу юрособи)
+            </div>
+          </div>
+
+          <img data-src="/static/img/work/work-icon-2.png" alt="">
+
+        </div>
+      </div>
+      <div data-wow-delay="0.1s" class="work-profile work-profile-fix wow slideInLeft">
+        <div class="flex-box"></div>
+        <div class="work-text">
+          <div class="green-name">
+            Укладення договору
+            <div class="line"></div>
+          </div>
+
+          <div class="sub-work">
+            Укладення з клієнтом договору про
+            надання правової допомоги
+          </div>
+        </div>
+
+        <img data-src="/static/img/work/work-icon-3.png" alt="">
+
+      </div>
+      <div class="work-wrap-right">
+        <div class="flex-box"></div>
+        <div data-wow-delay="0.2s" class="work-profile work-prof-right wow slideInRight">
+          <div class="flex-box"></div>
+          <div class="work-text">
+            <div class="green-name">
+              Домовленість оплати послуг
+              <div class="line"></div>
+            </div>
+
+            <div class="sub-work">
+              Досягнення домовленості про часткову передоплату
+            </div>
+          </div>
+
+          <img data-src="/static/img/work/work-icon-4.png" alt="">
+
+        </div>
+      </div>
+      <div data-wow-delay="0.1s" class="work-profile wow slideInLeft">
+        <div class="flex-box"></div>
+        <div class="work-text">
+          <div class="green-name">
+            Вирішення питання
+            <div class="line"></div>
+          </div>
+
+          <div class="sub-work">
+            Надання правничої допомоги
+          </div>
+        </div>
+
+        <img data-src="/static/img/work/work-icon-5.png" alt="">
+
+      </div>
+      <div class="work-wrap-right">
+        <div class="flex-box"></div>
+        <div data-wow-delay="0.2s" class="work-profile work-prof-right wow slideInRight">
+          <div class="flex-box"></div>
+          <div class="work-text">
+            <div class="green-name">
+              Остаточна оплата за послугу
+              <div class="line"></div>
+            </div>
+
+            <div class="sub-work">
+              Проводиться остаточна оплата за надану
+              послугу згідно визначеної суми
+            </div>
+          </div>
+
+          <img data-src="/static/img/work/work-icon-6.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <!-- <div class="link__index">
+       <a href="#scene">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-1">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-work">
+          <div class="elips elips_active">
+
+          </div>
+        </a>
+        <a href="#main__title-client">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-team">
+          <div class="elips">
+
+          </div>
+        </a>
+        <a href="#main__title-practise">
+          <div class="elips">
+
+          </div>
+        </a>
+      </div> -->
+
+  </div>
+  <!-- /.container -->
+</section>
+
+<section id="practise" class="practise">
+  <div class="container">
+    <div id="main__title-practise" class="main__title">
+      НАШІ ПРАКТИКИ
+    </div>
+    <div class="main_subtitle_client">
+      Для кожної задачі в нашій команді знайдеться профільний юрист, який спеціалізується в даній області.
+    </div>
+    <div class="practise-block">
+
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 300 300" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2
+                  }
+
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="150" cy="150" r="143" />
+                <path class="fil1"
+                  d="M197 176c0,0 0,-1 0,-1l-14 -29c2,-1 4,-3 4,-6 0,-2 -1,-3 -3,-3 -1,0 -3,1 -3,3 0,1 -1,2 -2,2 -2,0 -3,-1 -3,-2 0,-2 -1,-3 -2,-3l-16 -4c-1,-3 -3,-5 -5,-6l0 -5 4 -4c1,-1 1,-2 1,-3l-6 -11c-1,-2 -3,-2 -4,0l-6 11c0,1 0,2 1,3l4 4 0 5c-1,0 -3,2 -4,3l-16 -3c-2,-1 -3,0 -3,2 0,1 -1,3 -3,3 -1,0 -3,-2 -3,-3 0,-1 -1,-3 -2,-3 -2,0 -3,2 -3,3 0,3 2,6 4,7l-14 29c0,0 0,2 0,2 5,6 11,9 18,9 7,0 14,-3 18,-9 1,0 1,-2 0,-2l-14 -29c1,-1 3,-2 3,-4l14 3c0,3 3,6 5,7l0 42 -5 0c-1,0 -1,0 -2,1l-8 8c0,1 -1,2 0,3 0,1 1,1 2,1l32 0c1,0 2,0 2,-1 1,-1 0,-2 0,-3l-8 -8c-1,-1 -1,-1 -2,-1l-5 0 0 -42c1,-1 3,-2 4,-4l14 4c1,2 2,4 4,4l-14 29c-1,1 -1,2 0,3 4,6 11,9 18,9 7,0 13,-3 18,-9 0,-1 0,-2 0,-2 0,0 0,0 0,0 0,0 0,0 0,0zm-76 -5c-3,0 -6,-1 -9,-3l18 0c-3,2 -6,3 -9,3zm12 -8l-23 0 11 -23 12 23zm17 -52l2 4 -2 2 -2 -2 2 -4zm7 78l2 3 -18 0 2 -3 14 0zm-7 -52c-2,0 -3,-1 -3,-3 0,-1 1,-2 3,-2 1,0 3,1 3,2 0,2 -2,3 -3,3zm29 45c-3,0 -7,-1 -9,-3l18 0c-3,2 -6,3 -9,3zm-12 -8l12 -23 11 23 -23 0z" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="green-practise">
+          Судова практика
+        </div>
+        <div class="sub-practise">
+          <!-- Важливим напрямком
+            діяльності Адвокатського
+            об'єднання «Галицька ... -->
+        </div>
+        <a href="{% url 'practice' pk=1 %}">
           <div class="btn-read hvr-fade">
             Більше
           </div>
         </a>
       </div>
-      <!-- <div class="link__index">
-       <a href="#scene">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-1">
-          <div class="elips elips_active">
-
-          </div>
-        </a>
-        <a href="#main__title-work">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-client">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-team">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-practise">
-          <div class="elips">
-
-          </div>
-        </a>
-      </div> -->
-    </div>
-    <!-- /.container -->
-  </section>
-
-  <section id="work" class="work">
-    <div class="container">
-      <div id="main__title-work" class="main__title">
-        ЯК МИ ПРАЦЮЄМО?
-      </div>
-      <div class="work-block">
-        <div data-wow-delay="0.1s" class="work-profile wow slideInLeft">
-          <div class="flex-box"></div>
-          <div class="work-text">
-            <div class="green-name">
-              Звернення клієнта до нас
-              <div class="line"></div>
-            </div>
-
-            <div class="sub-work">
-              Дзвінок по телефону, е-mail, сайт, сторінка Facebооk
-            </div>
-          </div>
-
-          <img data-src="/static/img/work/work-icon-1.png" alt="">
-
-        </div>
-        <div class="work-wrap-right">
-          <div class="flex-box"></div>
-          <div class="work-profile work-prof-right wow slideInRight" data-wow-delay="0.2s">
-            <div class="flex-box"></div>
-            <div class="work-text">
-              <div class="green-name">
-                Зустріч з адвокатом чи юристом
-                <div class="line"></div>
-              </div>
-
-              <div class="sub-work">
-                Зустріч з адвокатом, юристом в офісі адвокатського об'єднання
-                або іншому зручному місці для клієнта (можливий виїзд
-                адвоката за адресою місця проживання особи або адресою
-                розташування виконавчого органу юрособи)
-              </div>
-            </div>
-
-            <img data-src="/static/img/work/work-icon-2.png" alt="">
-
-          </div>
-        </div>
-        <div data-wow-delay="0.1s" class="work-profile work-profile-fix wow slideInLeft">
-          <div class="flex-box"></div>
-          <div class="work-text">
-            <div class="green-name">
-              Укладення договору
-              <div class="line"></div>
-            </div>
-
-            <div class="sub-work">
-              Укладення з клієнтом договору про
-              надання правової допомоги
-            </div>
-          </div>
-
-          <img data-src="/static/img/work/work-icon-3.png" alt="">
-
-        </div>
-        <div class="work-wrap-right">
-          <div class="flex-box"></div>
-          <div data-wow-delay="0.2s" class="work-profile work-prof-right wow slideInRight">
-            <div class="flex-box"></div>
-            <div class="work-text">
-              <div class="green-name">
-                Домовленість оплати послуг
-                <div class="line"></div>
-              </div>
-
-              <div class="sub-work">
-                Досягнення домовленості про часткову передоплату
-              </div>
-            </div>
-
-            <img data-src="/static/img/work/work-icon-4.png" alt="">
-
-          </div>
-        </div>
-        <div data-wow-delay="0.1s" class="work-profile wow slideInLeft">
-          <div class="flex-box"></div>
-          <div class="work-text">
-            <div class="green-name">
-              Вирішення питання
-              <div class="line"></div>
-            </div>
-
-            <div class="sub-work">
-              Надання правничої допомоги
-            </div>
-          </div>
-
-          <img data-src="/static/img/work/work-icon-5.png" alt="">
-
-        </div>
-        <div class="work-wrap-right">
-          <div class="flex-box"></div>
-          <div data-wow-delay="0.2s" class="work-profile work-prof-right wow slideInRight">
-            <div class="flex-box"></div>
-            <div class="work-text">
-              <div class="green-name">
-                Остаточна оплата за послугу
-                <div class="line"></div>
-              </div>
-
-              <div class="sub-work">
-                Проводиться остаточна оплата за надану
-                послугу згідно визначеної суми
-              </div>
-            </div>
-
-            <img data-src="/static/img/work/work-icon-6.png" alt="">
-
-          </div>
-        </div>
-      </div>
-      <!-- <div class="link__index">
-       <a href="#scene">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-1">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-work">
-          <div class="elips elips_active">
-
-          </div>
-        </a>
-        <a href="#main__title-client">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-team">
-          <div class="elips">
-
-          </div>
-        </a>
-        <a href="#main__title-practise">
-          <div class="elips">
-
-          </div>
-        </a>
-      </div> -->
-
-    </div>
-    <!-- /.container -->
-  </section>
-
-  <section id="practise" class="practise">
-    <div class="container">
-      <div id="main__title-practise" class="main__title">
-        НАШІ ПРАКТИКИ
-      </div>
-      <div class="main_subtitle_client">
-       Для кожної задачі в нашій команді знайдеться профільний юрист, який спеціалізується в даній області.
-    </div>
-      <div class="practise-block">
-
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 300 300"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
+      <div class="pract-prof pract-prof-center">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 500 500" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs>
-              <style type="text/css">
-                <![CDATA[
-                .str0 {stroke:#D2A351;stroke-width:2}
-                .fil0 {fill:none}
-                .fil1 {fill:#D2A351}
-                ]]>
-              </style>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.33333
+                  }
+
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351
+                  }
+                  ]]>
+                </style>
               </defs>
               <g id="Layer_x0020_1">
-              <metadata id="CorelCorpID_0Corel-Layer"/>
-              <circle class="circle-delete fil0 str0" cx="150" cy="150" r="143"/>
-              <path class="fil1" d="M197 176c0,0 0,-1 0,-1l-14 -29c2,-1 4,-3 4,-6 0,-2 -1,-3 -3,-3 -1,0 -3,1 -3,3 0,1 -1,2 -2,2 -2,0 -3,-1 -3,-2 0,-2 -1,-3 -2,-3l-16 -4c-1,-3 -3,-5 -5,-6l0 -5 4 -4c1,-1 1,-2 1,-3l-6 -11c-1,-2 -3,-2 -4,0l-6 11c0,1 0,2 1,3l4 4 0 5c-1,0 -3,2 -4,3l-16 -3c-2,-1 -3,0 -3,2 0,1 -1,3 -3,3 -1,0 -3,-2 -3,-3 0,-1 -1,-3 -2,-3 -2,0 -3,2 -3,3 0,3 2,6 4,7l-14 29c0,0 0,2 0,2 5,6 11,9 18,9 7,0 14,-3 18,-9 1,0 1,-2 0,-2l-14 -29c1,-1 3,-2 3,-4l14 3c0,3 3,6 5,7l0 42 -5 0c-1,0 -1,0 -2,1l-8 8c0,1 -1,2 0,3 0,1 1,1 2,1l32 0c1,0 2,0 2,-1 1,-1 0,-2 0,-3l-8 -8c-1,-1 -1,-1 -2,-1l-5 0 0 -42c1,-1 3,-2 4,-4l14 4c1,2 2,4 4,4l-14 29c-1,1 -1,2 0,3 4,6 11,9 18,9 7,0 13,-3 18,-9 0,-1 0,-2 0,-2 0,0 0,0 0,0 0,0 0,0 0,0zm-76 -5c-3,0 -6,-1 -9,-3l18 0c-3,2 -6,3 -9,3zm12 -8l-23 0 11 -23 12 23zm17 -52l2 4 -2 2 -2 -2 2 -4zm7 78l2 3 -18 0 2 -3 14 0zm-7 -52c-2,0 -3,-1 -3,-3 0,-1 1,-2 3,-2 1,0 3,1 3,2 0,2 -2,3 -3,3zm29 45c-3,0 -7,-1 -9,-3l18 0c-3,2 -6,3 -9,3zm-12 -8l12 -23 11 23 -23 0z"/>
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="250" cy="250" r="238" />
+                <g id="_2059424680192">
+                  <path class="fil1"
+                    d="M212 219c0,-1 1,-2 1,-2 2,-1 3,-2 4,-4 0,-1 1,-2 1,-4 0,-2 -1,-3 -1,-4 -1,-2 -2,-3 -4,-4 0,0 -1,-1 -1,-2 0,0 0,-1 0,-2 0,-1 1,-1 1,-2 1,0 2,0 2,0 2,0 4,-1 5,-1 2,-1 3,-2 4,-4 1,-1 2,-2 2,-4 0,-1 0,-3 -1,-4 0,-1 0,-2 0,-2 0,-1 1,-2 1,-2 1,0 2,-1 3,-1 0,0 1,1 2,1 1,1 3,2 4,2 2,0 4,0 5,-1 2,0 3,-1 4,-2 1,-1 2,-2 3,-4 0,-1 0,-1 1,-2 1,0 1,0 2,0 1,0 1,0 2,0 1,1 1,1 1,2 1,2 2,3 3,4 1,1 2,2 4,2 1,1 3,1 5,1 1,0 3,-1 4,-2 1,0 2,-1 2,-1 1,0 2,1 3,1 0,0 1,1 1,2 0,0 0,1 0,2 -1,1 -1,3 -1,4 0,2 1,3 2,4 1,2 2,3 3,4 2,0 4,1 5,1l1 0c0,0 1,0 2,0 0,1 1,1 1,2 0,1 0,2 0,2 0,1 -1,2 -1,2 -2,1 -3,2 -4,4 0,1 -1,2 -1,4 0,2 1,3 1,4 1,2 2,3 4,4 0,0 1,1 1,2 0,0 0,1 0,2 0,1 -1,1 -1,2 -1,0 -2,0 -2,0 -2,0 -4,1 -5,1 -2,1 -3,2 -4,4 -1,1 -2,2 -2,4 0,1 0,3 1,4 0,1 0,2 0,2 0,1 -1,2 -1,2 -1,0 -2,1 -3,1 0,0 -1,-1 -2,-1 -1,-1 -3,-2 -4,-2 -2,0 -4,0 -5,1 -2,0 -3,1 -4,2 -1,1 -2,2 -3,4 0,1 0,1 -1,2 -1,0 -1,0 -2,0 -1,0 -1,0 -2,0 -1,-1 -1,-1 -1,-2 -1,-2 -2,-3 -3,-4 -1,-1 -2,-2 -4,-2 -1,-1 -3,-1 -5,-1 -1,0 -3,1 -4,2 -1,0 -2,1 -2,1 -1,0 -2,-1 -3,-1 0,0 -1,-1 -1,-2 0,0 0,-1 0,-2 1,-1 1,-3 1,-4 0,-2 -1,-3 -2,-4 -1,-2 -2,-3 -4,-4 -1,0 -3,-1 -5,-1 0,0 -1,0 -2,0 0,-1 -1,-1 -1,-2 0,-1 0,-2 0,-2zm50 2c-3,3 -7,5 -12,5 -5,0 -9,-2 -12,-5 -3,-3 -5,-7 -5,-12 0,-5 2,-9 5,-12 3,-3 7,-5 12,-5 5,0 9,2 12,5 3,3 5,7 5,12 0,5 -2,9 -5,12zm-4 -20c-2,-2 -5,-3 -8,-3 -3,0 -6,1 -8,3 -2,2 -3,5 -3,8 0,3 1,6 3,8 2,2 5,3 8,3 3,0 6,-1 8,-3 2,-2 3,-5 3,-8 0,-3 -1,-6 -3,-8zm-32 -2c-1,0 -3,1 -4,1 1,1 1,2 2,3 0,2 1,4 1,6 0,2 -1,4 -1,5 -1,2 -1,3 -2,4 1,0 3,1 4,1 1,1 3,3 4,5 1,1 2,3 2,4 0,1 1,3 1,4l1 -1c1,0 2,0 3,0 1,0 2,0 3,0 1,0 2,1 2,1 2,1 4,1 5,3 1,0 2,1 3,2 1,-1 2,-2 3,-2 1,-2 3,-2 5,-3 1,-1 3,-1 5,-1 2,0 3,0 4,1 0,-1 1,-3 1,-4 0,-1 1,-3 2,-4 1,-2 3,-4 4,-5 2,0 3,-1 4,-1 -1,-1 -1,-2 -2,-4 0,-1 -1,-3 -1,-5 0,-2 1,-4 1,-6 1,-1 1,-2 2,-3 -1,0 -2,-1 -4,-1 -1,-1 -3,-3 -4,-5 -1,-1 -2,-3 -2,-4 0,-1 -1,-3 -1,-4 -1,1 -2,1 -4,1 -2,0 -4,0 -5,-1 -2,-1 -4,-2 -5,-3 -1,0 -2,-1 -3,-2 -1,1 -2,2 -3,2 -1,1 -3,2 -5,3 -1,1 -3,1 -5,1 -2,0 -3,0 -4,-1 0,1 -1,3 -1,4 0,1 -1,3 -2,4 -1,2 -3,4 -4,5z" />
+                  <path class="fil1"
+                    d="M174 241c30,1 69,13 95,26 17,-6 38,-11 57,-12 2,0 3,2 3,4 0,2 -1,4 -3,4 -16,0 -37,5 -52,10 -36,10 -70,28 -97,55 -1,1 -2,1 -3,1 -1,0 -2,0 -2,-1 -2,-1 -2,-3 0,-5 7,-7 15,-14 24,-20 -8,-3 -15,-5 -23,-7 -2,0 -3,-2 -2,-4 0,-2 2,-4 4,-3 10,2 19,5 28,8 4,-2 7,-4 11,-6 -13,-5 -27,-9 -40,-12 -2,0 -4,-2 -3,-4 0,-2 2,-3 4,-3 16,3 32,8 47,14 4,-2 9,-5 13,-7 -20,-7 -40,-13 -61,-16 -2,0 -4,-2 -3,-4 0,-2 2,-3 4,-3 23,3 47,10 69,19 5,-2 10,-3 14,-5 -24,-11 -58,-21 -84,-22 -2,0 -3,-2 -3,-4 0,-2 1,-3 3,-3zm155 65c0,1 0,2 0,3 -1,1 -2,1 -2,1 -10,3 -18,5 -27,8 -9,4 -17,7 -25,11l-1 0 0 0c-1,0 -2,0 -2,0 -1,-1 -1,-1 -2,-2 0,0 0,-1 0,-2 1,-1 1,-2 2,-2 8,-4 17,-8 26,-11 9,-3 18,-6 27,-8 1,-1 2,0 3,0 0,0 1,1 1,2zm-92 23c-1,0 -1,0 -1,0 -1,0 -1,0 -2,0 0,0 -1,-1 -1,-1 -1,-1 -1,-2 -1,-3 1,-1 1,-2 2,-2 14,-10 29,-17 43,-22 18,-7 35,-12 48,-14 1,0 2,0 3,0 0,1 1,2 1,2l0 1c0,1 0,1 0,2 -1,1 -2,2 -3,2 -13,2 -29,6 -47,13 -13,6 -27,13 -41,22 -1,0 -1,0 -1,0zm21 -40c26,-11 51,-16 67,-18 1,0 2,0 3,0 1,1 1,2 1,3l0 0c0,1 0,2 -1,2 0,1 -1,2 -2,2 -15,2 -39,7 -66,18 -18,7 -37,18 -55,32 0,1 0,1 -1,1 0,0 0,0 -1,0 0,0 -1,0 -1,0 -1,0 -1,-1 -1,-1l-1 0c0,-1 0,-2 0,-3 0,-1 0,-1 1,-2l0 0c18,-15 38,-26 57,-34z" />
+                </g>
               </g>
             </svg>
-            </div>
           </div>
-          <div class="green-practise">
-            Судова практика
-          </div>
-          <div class="sub-practise">
-            <!-- Важливим напрямком
-            діяльності Адвокатського
-            об'єднання «Галицька ... -->
-          </div>
-          <a href="{% url 'practice' pk=1 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
-        </div>
-        <div class="pract-prof pract-prof-center">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 500 500"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.33333}
-      .fil0 {fill:none}
-      .fil1 {fill:#D2A351}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="250" cy="250" r="238"/>
-    <g id="_2059424680192">
-    <path class="fil1" d="M212 219c0,-1 1,-2 1,-2 2,-1 3,-2 4,-4 0,-1 1,-2 1,-4 0,-2 -1,-3 -1,-4 -1,-2 -2,-3 -4,-4 0,0 -1,-1 -1,-2 0,0 0,-1 0,-2 0,-1 1,-1 1,-2 1,0 2,0 2,0 2,0 4,-1 5,-1 2,-1 3,-2 4,-4 1,-1 2,-2 2,-4 0,-1 0,-3 -1,-4 0,-1 0,-2 0,-2 0,-1 1,-2 1,-2 1,0 2,-1 3,-1 0,0 1,1 2,1 1,1 3,2 4,2 2,0 4,0 5,-1 2,0 3,-1 4,-2 1,-1 2,-2 3,-4 0,-1 0,-1 1,-2 1,0 1,0 2,0 1,0 1,0 2,0 1,1 1,1 1,2 1,2 2,3 3,4 1,1 2,2 4,2 1,1 3,1 5,1 1,0 3,-1 4,-2 1,0 2,-1 2,-1 1,0 2,1 3,1 0,0 1,1 1,2 0,0 0,1 0,2 -1,1 -1,3 -1,4 0,2 1,3 2,4 1,2 2,3 3,4 2,0 4,1 5,1l1 0c0,0 1,0 2,0 0,1 1,1 1,2 0,1 0,2 0,2 0,1 -1,2 -1,2 -2,1 -3,2 -4,4 0,1 -1,2 -1,4 0,2 1,3 1,4 1,2 2,3 4,4 0,0 1,1 1,2 0,0 0,1 0,2 0,1 -1,1 -1,2 -1,0 -2,0 -2,0 -2,0 -4,1 -5,1 -2,1 -3,2 -4,4 -1,1 -2,2 -2,4 0,1 0,3 1,4 0,1 0,2 0,2 0,1 -1,2 -1,2 -1,0 -2,1 -3,1 0,0 -1,-1 -2,-1 -1,-1 -3,-2 -4,-2 -2,0 -4,0 -5,1 -2,0 -3,1 -4,2 -1,1 -2,2 -3,4 0,1 0,1 -1,2 -1,0 -1,0 -2,0 -1,0 -1,0 -2,0 -1,-1 -1,-1 -1,-2 -1,-2 -2,-3 -3,-4 -1,-1 -2,-2 -4,-2 -1,-1 -3,-1 -5,-1 -1,0 -3,1 -4,2 -1,0 -2,1 -2,1 -1,0 -2,-1 -3,-1 0,0 -1,-1 -1,-2 0,0 0,-1 0,-2 1,-1 1,-3 1,-4 0,-2 -1,-3 -2,-4 -1,-2 -2,-3 -4,-4 -1,0 -3,-1 -5,-1 0,0 -1,0 -2,0 0,-1 -1,-1 -1,-2 0,-1 0,-2 0,-2zm50 2c-3,3 -7,5 -12,5 -5,0 -9,-2 -12,-5 -3,-3 -5,-7 -5,-12 0,-5 2,-9 5,-12 3,-3 7,-5 12,-5 5,0 9,2 12,5 3,3 5,7 5,12 0,5 -2,9 -5,12zm-4 -20c-2,-2 -5,-3 -8,-3 -3,0 -6,1 -8,3 -2,2 -3,5 -3,8 0,3 1,6 3,8 2,2 5,3 8,3 3,0 6,-1 8,-3 2,-2 3,-5 3,-8 0,-3 -1,-6 -3,-8zm-32 -2c-1,0 -3,1 -4,1 1,1 1,2 2,3 0,2 1,4 1,6 0,2 -1,4 -1,5 -1,2 -1,3 -2,4 1,0 3,1 4,1 1,1 3,3 4,5 1,1 2,3 2,4 0,1 1,3 1,4l1 -1c1,0 2,0 3,0 1,0 2,0 3,0 1,0 2,1 2,1 2,1 4,1 5,3 1,0 2,1 3,2 1,-1 2,-2 3,-2 1,-2 3,-2 5,-3 1,-1 3,-1 5,-1 2,0 3,0 4,1 0,-1 1,-3 1,-4 0,-1 1,-3 2,-4 1,-2 3,-4 4,-5 2,0 3,-1 4,-1 -1,-1 -1,-2 -2,-4 0,-1 -1,-3 -1,-5 0,-2 1,-4 1,-6 1,-1 1,-2 2,-3 -1,0 -2,-1 -4,-1 -1,-1 -3,-3 -4,-5 -1,-1 -2,-3 -2,-4 0,-1 -1,-3 -1,-4 -1,1 -2,1 -4,1 -2,0 -4,0 -5,-1 -2,-1 -4,-2 -5,-3 -1,0 -2,-1 -3,-2 -1,1 -2,2 -3,2 -1,1 -3,2 -5,3 -1,1 -3,1 -5,1 -2,0 -3,0 -4,-1 0,1 -1,3 -1,4 0,1 -1,3 -2,4 -1,2 -3,4 -4,5z"/>
-    <path class="fil1" d="M174 241c30,1 69,13 95,26 17,-6 38,-11 57,-12 2,0 3,2 3,4 0,2 -1,4 -3,4 -16,0 -37,5 -52,10 -36,10 -70,28 -97,55 -1,1 -2,1 -3,1 -1,0 -2,0 -2,-1 -2,-1 -2,-3 0,-5 7,-7 15,-14 24,-20 -8,-3 -15,-5 -23,-7 -2,0 -3,-2 -2,-4 0,-2 2,-4 4,-3 10,2 19,5 28,8 4,-2 7,-4 11,-6 -13,-5 -27,-9 -40,-12 -2,0 -4,-2 -3,-4 0,-2 2,-3 4,-3 16,3 32,8 47,14 4,-2 9,-5 13,-7 -20,-7 -40,-13 -61,-16 -2,0 -4,-2 -3,-4 0,-2 2,-3 4,-3 23,3 47,10 69,19 5,-2 10,-3 14,-5 -24,-11 -58,-21 -84,-22 -2,0 -3,-2 -3,-4 0,-2 1,-3 3,-3zm155 65c0,1 0,2 0,3 -1,1 -2,1 -2,1 -10,3 -18,5 -27,8 -9,4 -17,7 -25,11l-1 0 0 0c-1,0 -2,0 -2,0 -1,-1 -1,-1 -2,-2 0,0 0,-1 0,-2 1,-1 1,-2 2,-2 8,-4 17,-8 26,-11 9,-3 18,-6 27,-8 1,-1 2,0 3,0 0,0 1,1 1,2zm-92 23c-1,0 -1,0 -1,0 -1,0 -1,0 -2,0 0,0 -1,-1 -1,-1 -1,-1 -1,-2 -1,-3 1,-1 1,-2 2,-2 14,-10 29,-17 43,-22 18,-7 35,-12 48,-14 1,0 2,0 3,0 0,1 1,2 1,2l0 1c0,1 0,1 0,2 -1,1 -2,2 -3,2 -13,2 -29,6 -47,13 -13,6 -27,13 -41,22 -1,0 -1,0 -1,0zm21 -40c26,-11 51,-16 67,-18 1,0 2,0 3,0 1,1 1,2 1,3l0 0c0,1 0,2 -1,2 0,1 -1,2 -2,2 -15,2 -39,7 -66,18 -18,7 -37,18 -55,32 0,1 0,1 -1,1 0,0 0,0 -1,0 0,0 -1,0 -1,0 -1,0 -1,-1 -1,-1l-1 0c0,-1 0,-2 0,-3 0,-1 0,-1 1,-2l0 0c18,-15 38,-26 57,-34z"/>
-    </g>
-  </g>
-  </svg>
-            </div>
 
-          </div>
-          <div class="green-practise">
-            Практика земельних
-            правовідносин
-          </div>
-          <div class="sub-practise">
-            <!-- Якщо у Вас є певні перешкоди
+        </div>
+        <div class="green-practise">
+          Практика земельних
+          правовідносин
+        </div>
+        <div class="sub-practise">
+          <!-- Якщо у Вас є певні перешкоди
             на шляху щоб набути... -->
-          </div>
-          <a href="{% url 'practice' pk=2 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <g id="_2057853895488">
-    <path class="fil1" d="M262 159l-41 -5 0 -9c0,-1 -1,-2 -2,-2l-59 0c-2,-4 -5,-6 -9,-6 -4,0 -8,2 -10,6l-2 0c-2,0 -2,1 -2,2l0 116c0,2 0,3 2,3l80 0c1,0 2,-1 2,-3l0 -3 27 4c0,0 0,0 0,0 1,0 2,-1 2,-2l13 -99c1,-1 0,-2 -1,-2zm-3 4l0 0 -1 9 -11 10 -26 -4 0 -20 38 5zm-108 -22l0 0c1,0 3,1 4,2l-9 0c1,-1 3,-2 5,-2zm66 118l0 0 -76 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -2,4 -4,4 -2,0 -3,-2 -3,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 0,-2 0,-2 1,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -2,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 4,8 8,8 5,0 8,-4 8,-8l0 -20c0,0 0,0 0,0l56 0 0 112zm29 -2l0 0 -25 -3 0 -72 27 4c0,0 0,0 0,0 0,0 1,0 1,-1l8 -6 -11 78z"/>
-    <polygon class="fil1" points="202,156 213,156 213,160 202,160 "/>
-    <polygon class="fil1" points="194,164 213,164 213,168 194,168 "/>
-    <polygon class="fil1" points="145,183 213,183 213,187 145,187 "/>
-    <polygon class="fil1" points="145,192 213,192 213,196 145,196 "/>
-    <polygon class="fil1" points="145,200 213,200 213,204 145,204 "/>
-    <polygon class="fil1" points="145,209 175,209 175,213 145,213 "/>
-    <polygon class="fil1" points="183,237 211,237 211,241 183,241 "/>
-    <path class="fil1" d="M189 231c-1,-2 -2,-3 -2,-4 0,-1 0,-2 0,-3 1,0 1,0 2,0 0,0 1,1 1,1 0,1 0,2 0,3 0,0 0,1 0,1 0,1 1,2 1,3 1,1 2,2 3,2 0,0 1,0 1,-1 1,0 2,-1 2,-2 1,-1 1,-2 1,-2 0,-1 1,-2 1,-3 0,0 0,1 0,1 0,1 0,1 0,2 1,2 2,3 4,4l0 0c1,-1 2,-1 3,-1l4 -3 -3 -3 -3 2 0 0c-1,0 -1,0 -1,0 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 0,-3 -2,-4 -5,-4 -1,1 -2,1 -2,2 -1,1 -1,2 -2,3 0,0 0,-1 0,-2 0,-2 -2,-4 -4,-4 -2,-1 -5,0 -6,2 -1,2 -2,4 -1,6 0,2 1,4 2,5l4 -2z"/>
-    </g>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=2 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <g id="_2057853895488">
+                  <path class="fil1"
+                    d="M262 159l-41 -5 0 -9c0,-1 -1,-2 -2,-2l-59 0c-2,-4 -5,-6 -9,-6 -4,0 -8,2 -10,6l-2 0c-2,0 -2,1 -2,2l0 116c0,2 0,3 2,3l80 0c1,0 2,-1 2,-3l0 -3 27 4c0,0 0,0 0,0 1,0 2,-1 2,-2l13 -99c1,-1 0,-2 -1,-2zm-3 4l0 0 -1 9 -11 10 -26 -4 0 -20 38 5zm-108 -22l0 0c1,0 3,1 4,2l-9 0c1,-1 3,-2 5,-2zm66 118l0 0 -76 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -2,4 -4,4 -2,0 -3,-2 -3,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 0,-2 0,-2 1,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -2,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 4,8 8,8 5,0 8,-4 8,-8l0 -20c0,0 0,0 0,0l56 0 0 112zm29 -2l0 0 -25 -3 0 -72 27 4c0,0 0,0 0,0 0,0 1,0 1,-1l8 -6 -11 78z" />
+                  <polygon class="fil1" points="202,156 213,156 213,160 202,160 " />
+                  <polygon class="fil1" points="194,164 213,164 213,168 194,168 " />
+                  <polygon class="fil1" points="145,183 213,183 213,187 145,187 " />
+                  <polygon class="fil1" points="145,192 213,192 213,196 145,196 " />
+                  <polygon class="fil1" points="145,200 213,200 213,204 145,204 " />
+                  <polygon class="fil1" points="145,209 175,209 175,213 145,213 " />
+                  <polygon class="fil1" points="183,237 211,237 211,241 183,241 " />
+                  <path class="fil1"
+                    d="M189 231c-1,-2 -2,-3 -2,-4 0,-1 0,-2 0,-3 1,0 1,0 2,0 0,0 1,1 1,1 0,1 0,2 0,3 0,0 0,1 0,1 0,1 1,2 1,3 1,1 2,2 3,2 0,0 1,0 1,-1 1,0 2,-1 2,-2 1,-1 1,-2 1,-2 0,-1 1,-2 1,-3 0,0 0,1 0,1 0,1 0,1 0,2 1,2 2,3 4,4l0 0c1,-1 2,-1 3,-1l4 -3 -3 -3 -3 2 0 0c-1,0 -1,0 -1,0 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 0,-3 -2,-4 -5,-4 -1,1 -2,1 -2,2 -1,1 -1,2 -2,3 0,0 0,-1 0,-2 0,-2 -2,-4 -4,-4 -2,-1 -5,0 -6,2 -1,2 -2,4 -1,6 0,2 1,4 2,5l4 -2z" />
+                </g>
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Договірна та претензійна
-            практика
-          </div>
-          <div class="sub-practise">
-            <!-- Прибуткова підприємницька та
+
+        </div>
+        <div class="green-practise">
+          Договірна та претензійна
+          практика
+        </div>
+        <div class="sub-practise">
+          <!-- Прибуткова підприємницька та
             господарська діяльність... -->
-          </div>
-          <a href="{% url 'practice' pk=3 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190"/>
-    <g id="_2058151486032">
-    <path class="fil1" d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z"/>
-    <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 "/>
-    <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 "/>
-    <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 "/>
-    <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 "/>
-    <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 "/>
-    <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 "/>
-    <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 "/>
-    <path class="fil1" d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <path class="fil1" d="M236 178c0,-1 1,-1 1,-2 0,0 0,-1 0,-2l0 -1 23 0c1,0 1,0 2,-1 1,0 1,-1 1,-2 0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-25 0 -1 -1c0,0 0,-1 -1,-1 0,0 0,-1 -1,-1l0 0 0 -1c0,-2 -1,-3 -1,-5 -1,-2 -1,-4 -2,-5l-1 -2 32 0c1,0 1,0 2,-1 1,-1 1,-2 1,-3 0,0 0,-1 -1,-2 -1,-1 -1,-1 -2,-1l-40 0 0 0c-2,-1 -4,-2 -7,-3 -2,0 -5,0 -7,0 -3,0 -5,0 -8,0 -2,1 -4,2 -6,3l0 0 -48 0 0 -4c0,-1 0,-2 -1,-2 -1,-1 -2,-1 -2,-1l-1 0c-1,0 -1,0 -2,1 -1,0 -1,1 -1,2l0 113c0,0 0,1 1,2 1,1 1,1 2,1l1 0c0,0 1,0 2,-1 1,-1 1,-2 1,-2l0 -12 12 0 0 7c0,1 0,2 1,3 1,0 1,1 2,1l12 0 0 8c0,1 0,2 0,2 1,1 2,2 3,2l64 0c1,0 2,-1 2,-2 1,0 1,-1 1,-2l0 -8 11 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -7 4 0c1,0 1,0 2,-1 1,-1 1,-2 1,-2 0,-1 0,-2 -1,-3 -1,-1 -1,-1 -2,-1l-4 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-1 -2 12 0c1,0 1,0 2,-1 1,0 1,-1 1,-2 0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1 -7,0 -18,-1 -24,0l-1 -1c-2,0 -4,-1 -5,-2 -3,-1 -5,-1 -6,-2l-1 0 0 0c-2,0 -3,-2 -3,-4 0,-1 0,-3 0,-3l0 0 0 -1 0 0c1,-1 1,-1 1,-1 1,-1 1,-1 1,-2l1 0 37 0c1,0 1,0 2,-1 1,-1 1,-2 1,-2 0,-1 0,-2 -1,-3 -1,-1 -1,-1 -2,-1l-36 0 5 -2c2,-1 3,-2 5,-4 1,-1 2,-3 2,-5zm-11 -13l0 1c0,1 0,2 1,3 1,0 1,1 2,1l0 0c1,0 1,0 1,1 0,0 1,0 1,0 0,1 0,2 0,3 0,0 0,1 0,2 -1,1 -1,2 -2,3 0,1 -1,2 -2,2l0 0 0 0c-1,-1 -2,-1 -3,0 0,0 -1,1 -1,2 -2,4 -4,8 -7,12 -3,2 -6,4 -9,4 -4,0 -7,-2 -9,-4 -3,-4 -6,-8 -7,-12 0,-1 -1,-2 -1,-2 -1,0 -2,-1 -2,-1 -1,0 -1,0 -1,1l0 0 0 0c-1,0 -2,-1 -3,-2 0,-1 -1,-2 -1,-3 0,-1 0,-2 0,-2 0,-1 0,-2 0,-3 0,0 0,0 0,0 1,-1 1,-1 1,-1l1 0c0,0 1,-1 2,-1 0,-1 1,-2 1,-3l0 -1c0,-6 2,-10 5,-13 4,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,13l0 0zm-6 49c-1,2 -3,4 -5,6 -3,1 -6,2 -8,2 -3,0 -6,-1 -8,-2 -2,-2 -4,-4 -5,-6l0 -1 0 0c2,-1 2,-2 3,-3 1,-2 2,-3 2,-4l0 -2 1 1c1,0 2,1 4,1 1,0 2,0 3,0 1,0 2,0 3,0 1,0 2,-1 3,-1l1 -1 1 2c0,1 1,2 1,4 1,1 2,2 3,3l1 0 0 1zm-43 -2l-32 0 0 -16 45 0 0 0c1,1 1,1 1,2 1,0 1,0 1,1l1 0 0 1 0 0c0,0 0,3 -1,5 0,1 -1,2 -2,2l-1 0 0 0c-1,1 -3,1 -6,2 -2,1 -4,2 -6,2l0 1 0 0zm-1 -38c0,1 0,2 0,2 0,1 0,1 0,2 1,2 2,4 3,5 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -21c-1,1 -2,3 -2,5 -1,2 -1,3 -1,5l0 1 -1 0c0,0 0,1 -1,1 0,0 0,1 -1,1l0 1 -33 0 0 -16 40 0 -1 2zm-38 65l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 39l-56 0 0 -16 57 0 0 16 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-3 0,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,1 0,2 0,3l0 7 -8 0 0 -12c0,-3 2,-6 6,-9 4,-4 11,-7 16,-8l1 -1 0 1c2,4 5,7 8,9 4,3 8,4 12,4 4,0 8,-1 12,-4 3,-2 6,-5 7,-9l1 -1 1 1c5,1 11,4 16,8 3,3 6,6 6,9l0 12 -1 0z"/>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=3 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190" />
+                <g id="_2058151486032">
+                  <path class="fil1"
+                    d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z" />
+                  <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 " />
+                  <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 " />
+                  <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 " />
+                  <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 " />
+                  <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 " />
+                  <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 " />
+                  <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 " />
+                  <path class="fil1"
+                    d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <path class="fil1"
+                  d="M236 178c0,-1 1,-1 1,-2 0,0 0,-1 0,-2l0 -1 23 0c1,0 1,0 2,-1 1,0 1,-1 1,-2 0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-25 0 -1 -1c0,0 0,-1 -1,-1 0,0 0,-1 -1,-1l0 0 0 -1c0,-2 -1,-3 -1,-5 -1,-2 -1,-4 -2,-5l-1 -2 32 0c1,0 1,0 2,-1 1,-1 1,-2 1,-3 0,0 0,-1 -1,-2 -1,-1 -1,-1 -2,-1l-40 0 0 0c-2,-1 -4,-2 -7,-3 -2,0 -5,0 -7,0 -3,0 -5,0 -8,0 -2,1 -4,2 -6,3l0 0 -48 0 0 -4c0,-1 0,-2 -1,-2 -1,-1 -2,-1 -2,-1l-1 0c-1,0 -1,0 -2,1 -1,0 -1,1 -1,2l0 113c0,0 0,1 1,2 1,1 1,1 2,1l1 0c0,0 1,0 2,-1 1,-1 1,-2 1,-2l0 -12 12 0 0 7c0,1 0,2 1,3 1,0 1,1 2,1l12 0 0 8c0,1 0,2 0,2 1,1 2,2 3,2l64 0c1,0 2,-1 2,-2 1,0 1,-1 1,-2l0 -8 11 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -7 4 0c1,0 1,0 2,-1 1,-1 1,-2 1,-2 0,-1 0,-2 -1,-3 -1,-1 -1,-1 -2,-1l-4 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-1 -2 12 0c1,0 1,0 2,-1 1,0 1,-1 1,-2 0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1 -7,0 -18,-1 -24,0l-1 -1c-2,0 -4,-1 -5,-2 -3,-1 -5,-1 -6,-2l-1 0 0 0c-2,0 -3,-2 -3,-4 0,-1 0,-3 0,-3l0 0 0 -1 0 0c1,-1 1,-1 1,-1 1,-1 1,-1 1,-2l1 0 37 0c1,0 1,0 2,-1 1,-1 1,-2 1,-2 0,-1 0,-2 -1,-3 -1,-1 -1,-1 -2,-1l-36 0 5 -2c2,-1 3,-2 5,-4 1,-1 2,-3 2,-5zm-11 -13l0 1c0,1 0,2 1,3 1,0 1,1 2,1l0 0c1,0 1,0 1,1 0,0 1,0 1,0 0,1 0,2 0,3 0,0 0,1 0,2 -1,1 -1,2 -2,3 0,1 -1,2 -2,2l0 0 0 0c-1,-1 -2,-1 -3,0 0,0 -1,1 -1,2 -2,4 -4,8 -7,12 -3,2 -6,4 -9,4 -4,0 -7,-2 -9,-4 -3,-4 -6,-8 -7,-12 0,-1 -1,-2 -1,-2 -1,0 -2,-1 -2,-1 -1,0 -1,0 -1,1l0 0 0 0c-1,0 -2,-1 -3,-2 0,-1 -1,-2 -1,-3 0,-1 0,-2 0,-2 0,-1 0,-2 0,-3 0,0 0,0 0,0 1,-1 1,-1 1,-1l1 0c0,0 1,-1 2,-1 0,-1 1,-2 1,-3l0 -1c0,-6 2,-10 5,-13 4,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,13l0 0zm-6 49c-1,2 -3,4 -5,6 -3,1 -6,2 -8,2 -3,0 -6,-1 -8,-2 -2,-2 -4,-4 -5,-6l0 -1 0 0c2,-1 2,-2 3,-3 1,-2 2,-3 2,-4l0 -2 1 1c1,0 2,1 4,1 1,0 2,0 3,0 1,0 2,0 3,0 1,0 2,-1 3,-1l1 -1 1 2c0,1 1,2 1,4 1,1 2,2 3,3l1 0 0 1zm-43 -2l-32 0 0 -16 45 0 0 0c1,1 1,1 1,2 1,0 1,0 1,1l1 0 0 1 0 0c0,0 0,3 -1,5 0,1 -1,2 -2,2l-1 0 0 0c-1,1 -3,1 -6,2 -2,1 -4,2 -6,2l0 1 0 0zm-1 -38c0,1 0,2 0,2 0,1 0,1 0,2 1,2 2,4 3,5 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -21c-1,1 -2,3 -2,5 -1,2 -1,3 -1,5l0 1 -1 0c0,0 0,1 -1,1 0,0 0,1 -1,1l0 1 -33 0 0 -16 40 0 -1 2zm-38 65l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 39l-56 0 0 -16 57 0 0 16 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-3 0,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,1 0,2 0,3l0 7 -8 0 0 -12c0,-3 2,-6 6,-9 4,-4 11,-7 16,-8l1 -1 0 1c2,4 5,7 8,9 4,3 8,4 12,4 4,0 8,-1 12,-4 3,-2 6,-5 7,-9l1 -1 1 1c5,1 11,4 16,8 3,3 6,6 6,9l0 12 -1 0z" />
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Практика кримінально-
-            правового захисту
-          </div>
-          <div class="sub-practise">
-            <!-- Якщо у Вас, Ваших рідних
+
+        </div>
+        <div class="green-practise">
+          Практика кримінально-
+          правового захисту
+        </div>
+        <div class="sub-practise">
+          <!-- Якщо у Вас, Ваших рідних
             або знайомих виникли ... -->
-          </div>
-          <a href="{% url 'practice' pk=4 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof pract-prof-center">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil2 {fill:#D2A351}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190"/>
-    <g id="_2058151488048">
-    <path class="fil1" d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z"/>
-    <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 "/>
-    <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 "/>
-    <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 "/>
-    <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 "/>
-    <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 "/>
-    <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 "/>
-    <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 "/>
-    <path class="fil1" d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190"/>
-    <path class="fil1" d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z"/>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <path class="fil2" d="M200 137c-7,0 -13,2 -18,6 -5,4 -8,9 -9,16l0 1 -33 0c-1,0 -2,0 -2,1 -1,0 -1,1 -1,2l0 49c0,1 0,1 1,2 0,1 1,1 2,1l3 0 0 45c0,1 1,2 1,2 1,1 2,2 3,2l106 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -45 3 0c1,0 2,0 2,-1 1,-1 2,-1 2,-2l0 -49c0,-1 -1,-2 -2,-2 0,-1 -1,-1 -2,-1l-33 0 0 -1c-1,-7 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -42 12 0 0 6c0,0 1,1 1,2 1,1 2,1 3,1l18 0c1,0 2,0 3,-1 0,-1 1,-2 1,-2l0 -6 22 0 0 6c0,0 1,1 1,2 1,1 2,1 3,1l18 0c1,0 2,0 3,-1 0,-1 1,-2 1,-2l0 -6 12 0 0 42 -49 0zm0 -49l-11 0 0 -5c0,-1 -1,-2 -1,-3 -1,0 -2,-1 -3,-1l-18 0c-1,0 -2,1 -3,1 0,1 -1,2 -1,3l0 5 -19 0 0 -41 112 0 0 41 -19 0 0 -5c0,-1 -1,-2 -1,-3 -1,0 -2,-1 -3,-1l-18 0c-1,0 -2,1 -3,1 0,1 -1,2 -1,3l0 5 -11 0zm0 -48l-20 0 0 -2c1,-4 4,-8 8,-11 3,-2 7,-4 12,-4 5,0 9,2 12,4 4,3 7,7 8,11l0 2 -20 0zm20 46l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z"/>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=4 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof pract-prof-center">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil2 {
+                    fill: #D2A351
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190" />
+                <g id="_2058151488048">
+                  <path class="fil1"
+                    d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z" />
+                  <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 " />
+                  <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 " />
+                  <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 " />
+                  <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 " />
+                  <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 " />
+                  <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 " />
+                  <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 " />
+                  <path class="fil1"
+                    d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190" />
+                <path class="fil1"
+                  d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z" />
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <path class="fil2"
+                  d="M200 137c-7,0 -13,2 -18,6 -5,4 -8,9 -9,16l0 1 -33 0c-1,0 -2,0 -2,1 -1,0 -1,1 -1,2l0 49c0,1 0,1 1,2 0,1 1,1 2,1l3 0 0 45c0,1 1,2 1,2 1,1 2,2 3,2l106 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -45 3 0c1,0 2,0 2,-1 1,-1 2,-1 2,-2l0 -49c0,-1 -1,-2 -2,-2 0,-1 -1,-1 -2,-1l-33 0 0 -1c-1,-7 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -42 12 0 0 6c0,0 1,1 1,2 1,1 2,1 3,1l18 0c1,0 2,0 3,-1 0,-1 1,-2 1,-2l0 -6 22 0 0 6c0,0 1,1 1,2 1,1 2,1 3,1l18 0c1,0 2,0 3,-1 0,-1 1,-2 1,-2l0 -6 12 0 0 42 -49 0zm0 -49l-11 0 0 -5c0,-1 -1,-2 -1,-3 -1,0 -2,-1 -3,-1l-18 0c-1,0 -2,1 -3,1 0,1 -1,2 -1,3l0 5 -19 0 0 -41 112 0 0 41 -19 0 0 -5c0,-1 -1,-2 -1,-3 -1,0 -2,-1 -3,-1l-18 0c-1,0 -2,1 -3,1 0,1 -1,2 -1,3l0 5 -11 0zm0 -48l-20 0 0 -2c1,-4 4,-8 8,-11 3,-2 7,-4 12,-4 5,0 9,2 12,4 4,3 7,7 8,11l0 2 -20 0zm20 46l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z" />
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Консалтинг з
-            юридичних питань
-          </div>
-          <div class="sub-practise">
-            <!-- це Ваше спілкування з
+
+        </div>
+        <div class="green-practise">
+          Консалтинг з
+          юридичних питань
+        </div>
+        <div class="sub-practise">
+          <!-- це Ваше спілкування з
             досвідченим ... -->
-          </div>
-          <a href="{% url 'practice' pk=5 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil1 {fill:#D2A351}
-      .fil2 {fill:#FEFEFE;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <g id="_2226275610192">
-    <path class="fil1" d="M225 188c-1,0 -2,0 -3,0 -1,0 -2,0 -3,0l-2 1 0 -35c0,-5 -4,-9 -10,-12 -8,-4 -19,-5 -30,-5 -11,0 -22,1 -30,5 -6,3 -10,7 -10,12l0 71c0,6 4,10 10,13 8,3 19,5 30,5 2,0 4,0 6,0 3,0 5,-1 7,-1l1 0 0 1c4,6 9,11 15,15 5,3 12,6 19,6 11,0 20,-5 27,-12 7,-6 12,-16 12,-26 0,-11 -5,-20 -12,-27 -7,-7 -16,-11 -27,-11zm-48 -46c9,0 17,1 23,3 7,3 11,6 11,9 0,3 -4,7 -11,9 -6,2 -14,3 -23,3 -9,0 -17,-1 -23,-3 -7,-2 -12,-6 -12,-9 0,-3 5,-6 12,-9 6,-2 14,-3 23,-3zm-33 23c4,2 9,4 14,5 6,1 12,2 19,2 6,0 13,-1 18,-2 6,-1 11,-3 14,-5l2 -1 0 8c0,3 -4,6 -11,9 -6,2 -14,3 -23,3 -9,0 -17,-1 -23,-3 -7,-3 -12,-6 -12,-9l0 -8 2 1zm0 18c4,2 9,4 14,5 6,1 12,2 19,2 6,0 13,-1 18,-2 6,-1 11,-3 14,-5l2 -1 0 8 0 1c-3,1 -5,2 -7,3 -2,2 -4,3 -6,5l0 0 0 0c-3,1 -7,2 -10,2 -4,1 -7,1 -11,1 -9,0 -17,-1 -23,-3 -7,-3 -12,-6 -12,-9l0 -8 2 1zm0 18c4,2 9,4 14,5 6,1 12,2 19,2 2,0 4,-1 6,-1 3,0 5,0 7,0l3 -1 -2 2c0,2 -1,3 -2,5 0,2 -1,3 -1,5l0 1 -1 0c-2,0 -3,0 -5,1 -2,0 -3,0 -5,0 -9,0 -17,-2 -23,-4 -7,-2 -12,-5 -12,-8l0 -9 2 2zm33 37c-9,0 -17,-2 -23,-4 -7,-2 -12,-6 -12,-8l0 -9 2 1c4,3 9,4 14,6 6,1 12,1 19,1 3,0 6,0 9,0l1 0 0 1c0,2 0,3 1,5 0,1 0,3 0,4l1 2 -4 0c-2,0 -5,1 -8,1zm48 20c-9,0 -17,-4 -23,-10 -5,-5 -9,-13 -9,-22 0,-9 4,-17 9,-23 6,-6 14,-10 23,-10 9,0 17,4 23,10 6,6 10,14 10,23 0,9 -4,17 -10,22 -6,6 -14,10 -23,10z"/>
-    <path class="fil1" d="M238 216c0,-1 0,-1 -1,-2 -1,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -2,0 -3,1l-18 19c-1,0 -1,1 -1,2 0,1 0,2 1,2 0,1 1,1 2,1 1,0 2,0 2,-1l19 -18c1,-1 1,-2 1,-3z"/>
-    <path class="fil2" d="M237 216c0,0 0,0 0,-1 0,0 0,0 -1,0 0,-1 0,-1 0,-1 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 0,0 -1,0 -1,1l-19 18c0,1 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,0 0,1 1,0 1,0 1,0 0,0 1,0 1,0 0,0 1,0 1,0 0,0 0,0 1,0l18 -19c1,0 1,-1 1,-1 0,0 0,0 0,-1zm2 -1c0,0 0,1 0,1 0,1 0,1 0,2 0,0 -1,1 -1,1l-19 19c0,0 -1,1 -1,1 -1,0 -1,0 -2,0 -1,0 -1,0 -2,0 0,0 -1,-1 -1,-1 0,0 -1,-1 -1,-1 0,-1 0,-1 0,-2 0,-1 0,-1 0,-2 0,0 1,-1 1,-1l19 -19c0,0 1,0 1,-1 1,0 1,0 2,0 0,0 1,0 1,0 1,1 1,1 2,1 0,1 0,1 1,2z"/>
-    <circle class="fil1" cx="217" cy="217" r="5"/>
-    <path class="fil2" d="M221 217c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -1,2 -1,3 0,1 0,2 1,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-1 3,-2 5,-2 1,0 3,1 4,2z"/>
-    <circle class="fil1" cx="234" cy="234" r="5"/>
-    <path class="fil2" d="M238 234c0,-1 0,-2 -1,-3 -1,0 -2,-1 -3,-1 -1,0 -2,1 -3,1 -1,1 -1,2 -1,3 0,1 0,2 1,3 1,1 2,1 3,1 1,0 2,0 3,-1 1,-1 1,-2 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,3 -2,5 -1,1 -2,1 -4,1 -2,0 -3,0 -4,-1 -1,-2 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z"/>
-    </g>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=5 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351
+                  }
+
+                  .fil2 {
+                    fill: #FEFEFE;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <g id="_2226275610192">
+                  <path class="fil1"
+                    d="M225 188c-1,0 -2,0 -3,0 -1,0 -2,0 -3,0l-2 1 0 -35c0,-5 -4,-9 -10,-12 -8,-4 -19,-5 -30,-5 -11,0 -22,1 -30,5 -6,3 -10,7 -10,12l0 71c0,6 4,10 10,13 8,3 19,5 30,5 2,0 4,0 6,0 3,0 5,-1 7,-1l1 0 0 1c4,6 9,11 15,15 5,3 12,6 19,6 11,0 20,-5 27,-12 7,-6 12,-16 12,-26 0,-11 -5,-20 -12,-27 -7,-7 -16,-11 -27,-11zm-48 -46c9,0 17,1 23,3 7,3 11,6 11,9 0,3 -4,7 -11,9 -6,2 -14,3 -23,3 -9,0 -17,-1 -23,-3 -7,-2 -12,-6 -12,-9 0,-3 5,-6 12,-9 6,-2 14,-3 23,-3zm-33 23c4,2 9,4 14,5 6,1 12,2 19,2 6,0 13,-1 18,-2 6,-1 11,-3 14,-5l2 -1 0 8c0,3 -4,6 -11,9 -6,2 -14,3 -23,3 -9,0 -17,-1 -23,-3 -7,-3 -12,-6 -12,-9l0 -8 2 1zm0 18c4,2 9,4 14,5 6,1 12,2 19,2 6,0 13,-1 18,-2 6,-1 11,-3 14,-5l2 -1 0 8 0 1c-3,1 -5,2 -7,3 -2,2 -4,3 -6,5l0 0 0 0c-3,1 -7,2 -10,2 -4,1 -7,1 -11,1 -9,0 -17,-1 -23,-3 -7,-3 -12,-6 -12,-9l0 -8 2 1zm0 18c4,2 9,4 14,5 6,1 12,2 19,2 2,0 4,-1 6,-1 3,0 5,0 7,0l3 -1 -2 2c0,2 -1,3 -2,5 0,2 -1,3 -1,5l0 1 -1 0c-2,0 -3,0 -5,1 -2,0 -3,0 -5,0 -9,0 -17,-2 -23,-4 -7,-2 -12,-5 -12,-8l0 -9 2 2zm33 37c-9,0 -17,-2 -23,-4 -7,-2 -12,-6 -12,-8l0 -9 2 1c4,3 9,4 14,6 6,1 12,1 19,1 3,0 6,0 9,0l1 0 0 1c0,2 0,3 1,5 0,1 0,3 0,4l1 2 -4 0c-2,0 -5,1 -8,1zm48 20c-9,0 -17,-4 -23,-10 -5,-5 -9,-13 -9,-22 0,-9 4,-17 9,-23 6,-6 14,-10 23,-10 9,0 17,4 23,10 6,6 10,14 10,23 0,9 -4,17 -10,22 -6,6 -14,10 -23,10z" />
+                  <path class="fil1"
+                    d="M238 216c0,-1 0,-1 -1,-2 -1,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -2,0 -3,1l-18 19c-1,0 -1,1 -1,2 0,1 0,2 1,2 0,1 1,1 2,1 1,0 2,0 2,-1l19 -18c1,-1 1,-2 1,-3z" />
+                  <path class="fil2"
+                    d="M237 216c0,0 0,0 0,-1 0,0 0,0 -1,0 0,-1 0,-1 0,-1 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 0,0 -1,0 -1,1l-19 18c0,1 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,0 0,1 1,0 1,0 1,0 0,0 1,0 1,0 0,0 1,0 1,0 0,0 0,0 1,0l18 -19c1,0 1,-1 1,-1 0,0 0,0 0,-1zm2 -1c0,0 0,1 0,1 0,1 0,1 0,2 0,0 -1,1 -1,1l-19 19c0,0 -1,1 -1,1 -1,0 -1,0 -2,0 -1,0 -1,0 -2,0 0,0 -1,-1 -1,-1 0,0 -1,-1 -1,-1 0,-1 0,-1 0,-2 0,-1 0,-1 0,-2 0,0 1,-1 1,-1l19 -19c0,0 1,0 1,-1 1,0 1,0 2,0 0,0 1,0 1,0 1,1 1,1 2,1 0,1 0,1 1,2z" />
+                  <circle class="fil1" cx="217" cy="217" r="5" />
+                  <path class="fil2"
+                    d="M221 217c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -1,2 -1,3 0,1 0,2 1,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-1 3,-2 5,-2 1,0 3,1 4,2z" />
+                  <circle class="fil1" cx="234" cy="234" r="5" />
+                  <path class="fil2"
+                    d="M238 234c0,-1 0,-2 -1,-3 -1,0 -2,-1 -3,-1 -1,0 -2,1 -3,1 -1,1 -1,2 -1,3 0,1 0,2 1,3 1,1 2,1 3,1 1,0 2,0 3,-1 1,-1 1,-2 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,3 -2,5 -1,1 -2,1 -4,1 -2,0 -3,0 -4,-1 -1,-2 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z" />
+                </g>
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Купівля-продаж
-            підприємств
-          </div>
-          <div class="sub-practise">
-            <!-- Угоди купівлі-продажу існуючого
+
+        </div>
+        <div class="green-practise">
+          Купівля-продаж
+          підприємств
+        </div>
+        <div class="sub-practise">
+          <!-- Угоди купівлі-продажу існуючого
             бізнесу користуються ... -->
-          </div>
-          <a href="{% url 'practice' pk=6 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 142 142"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width: 1}
-      .fil0 {fill:none}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete_fix circle-delete fil0 str0" cx="71" cy="71" r="67"/>
-    <g id="_2816624458896">
-    <path class="fil1" d="M55 62c4,0 7,-3 7,-7 0,-4 -3,-7 -7,-7 -4,0 -7,3 -7,7 0,4 3,7 7,7zm3 -2l0 0c-2,1 -4,1 -6,0l0 -2c0,-1 1,-1 2,-1 0,0 0,0 0,0 0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 0,0 0,-1 0,0 0,-1 1,-1 1,0 2,0 2,1 0,1 0,1 -1,1 0,1 0,1 0,2 1,0 1,0 1,0 1,0 1,0 1,1l0 2zm-3 -10l0 0c3,0 5,2 5,5 0,1 0,2 0,3 0,-1 -1,-2 -2,-3 0,0 0,-1 0,-1 0,-2 -2,-3 -3,-2 -2,0 -3,1 -3,2 0,1 0,1 0,1 0,1 0,1 0,1 -1,1 -1,1 -1,2 -2,-3 -1,-6 1,-7 1,-1 2,-1 3,-1z"/>
-    <path class="fil1" d="M87 48c-4,0 -7,3 -7,7 0,4 3,7 7,7 4,0 7,-3 7,-7 0,-4 -3,-7 -7,-7zm3 12l0 0c-2,1 -4,1 -6,0l0 -2c0,-1 0,-1 1,-1 0,0 0,0 0,0 1,0 1,-1 1,-1 0,0 0,0 0,-1 -1,0 -1,0 -1,-1 0,0 1,-1 2,-1 0,0 1,0 1,1 0,1 0,1 0,1 0,1 0,1 0,2 0,0 0,0 0,0 1,0 2,0 2,1l0 2zm1 -2l0 0c0,-1 0,-2 -1,-3 0,0 0,-1 0,-1 -1,-2 -2,-3 -4,-2 -1,0 -2,1 -2,2 0,1 0,1 0,1 0,1 -1,1 -1,1 0,1 -1,1 -1,2 -1,-3 0,-6 2,-7 3,-2 6,-1 7,1 1,2 1,4 0,6z"/>
-    <path class="fil1" d="M71 69c0,0 -1,0 -1,0l-1 0c0,1 0,2 1,2l0 1 2 0 0 -1c1,0 1,-1 1,-2 0,-2 -1,-2 -2,-2 -1,-1 -1,-1 -1,-1 0,-1 1,-1 1,-1 0,0 1,0 1,1l1 0c0,-1 0,-2 -1,-2l0 -1 -2 0 0 1c-1,0 -1,1 -1,2 0,1 1,2 2,2 1,0 1,0 1,1 0,0 -1,0 -1,0z"/>
-    <polygon class="fil1" points="70,56 72,56 72,58 70,58 "/>
-    <polygon class="fil1" points="80,66 82,66 82,68 80,68 "/>
-    <polygon class="fil1" points="60,66 62,66 62,68 60,68 "/>
-    <polygon class="fil1" points="62,60 64,59 65,60 64,61 "/>
-    <polygon class="fil1" points="77,60 78,59 80,60 78,61 "/>
-    <path class="fil1" d="M94 93l0 -17c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-9 0 0 -4c0,0 -1,-1 -1,-1 0,0 0,0 0,0l-5 0c2,-4 0,-8 -4,-10 -4,-1 -8,0 -10,4 -1,2 -1,4 0,6l-5 0c0,0 -1,1 -1,1 0,0 0,0 0,0l0 4 -8 0c0,0 -1,0 -1,1 0,0 0,0 0,0l0 17c0,0 1,1 1,1 0,0 0,0 0,0l43 0c0,0 1,-1 1,-1 0,0 0,0 0,0zm-36 -1l0 0 -7 0 0 -16 7 0 0 16zm13 -31l0 0c3,0 6,3 6,6 0,4 -3,6 -6,6 -3,0 -6,-2 -6,-6 0,-3 3,-6 6,-6zm2 31l0 0 -4 0 0 -5c0,-1 1,-2 2,-2 1,0 2,1 2,2l0 5zm9 0l0 0 -8 0 0 -5c0,-2 -1,-3 -3,-3 -2,0 -3,1 -3,3l0 5 -8 0 0 -20 5 0c2,3 7,4 10,1 1,0 2,-1 2,-1l5 0 0 20zm10 0l0 0 -8 0 0 -16 8 0 0 16z"/>
-    <path class="fil1" d="M66 76l-3 0c-1,0 -1,1 -1,1 0,0 0,0 0,0l0 3c0,0 0,1 1,1 0,0 0,0 0,0l3 0c0,0 0,-1 0,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -1 2 0 0 1z"/>
-    <path class="fil1" d="M53 91l3 0c0,0 1,-1 1,-1 0,0 0,0 0,0l0 -11c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-3 0c0,0 -1,0 -1,1 0,0 0,0 0,0l0 11c0,0 1,1 1,1 0,0 0,0 0,0zm1 -12l0 0 1 0 0 10 -1 0 0 -10z"/>
-    <path class="fil1" d="M87 91l3 0c0,0 1,-1 1,-1 0,0 0,0 0,0l0 -11c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-3 0c-1,0 -1,0 -1,1 0,0 0,0 0,0l0 11c0,0 0,1 1,1 0,0 0,0 0,0zm1 -12l0 0 1 0 0 10 -1 0 0 -10z"/>
-    <path class="fil1" d="M73 76l-4 0c0,0 0,1 0,1 0,0 0,0 0,0l0 3c0,0 0,1 0,1 0,0 0,0 0,0l4 0c0,0 0,-1 0,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -1 2 0 0 1z"/>
-    <path class="fil1" d="M79 84l-3 0c0,0 0,0 0,1 0,0 0,0 0,0l0 3c0,0 0,0 0,0 0,0 0,0 0,0l3 0c1,0 1,0 1,0 0,0 0,0 0,0l0 -3c0,-1 0,-1 -1,-1 0,0 0,0 0,0zm0 3l0 0 -2 0 0 -2 2 0 0 2z"/>
-    <path class="fil1" d="M66 84l-3 0c-1,0 -1,0 -1,1 0,0 0,0 0,0l0 3c0,0 0,0 1,0 0,0 0,0 0,0l3 0c0,0 0,0 0,0 0,0 0,0 0,0l0 -3c0,-1 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -2 2 0 0 2z"/>
-    <path class="fil1" d="M76 77l0 3c0,0 0,1 0,1 0,0 0,0 0,0l3 0c1,0 1,-1 1,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 -1,-1 0,0 0,0 0,0l-3 0c0,0 0,1 0,1 0,0 0,0 0,0zm1 1l0 0 2 0 0 1 -2 0 0 -1z"/>
-    </g>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=6 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 142 142" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 1
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete_fix circle-delete fil0 str0" cx="71" cy="71" r="67" />
+                <g id="_2816624458896">
+                  <path class="fil1"
+                    d="M55 62c4,0 7,-3 7,-7 0,-4 -3,-7 -7,-7 -4,0 -7,3 -7,7 0,4 3,7 7,7zm3 -2l0 0c-2,1 -4,1 -6,0l0 -2c0,-1 1,-1 2,-1 0,0 0,0 0,0 0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 0,0 0,-1 0,0 0,-1 1,-1 1,0 2,0 2,1 0,1 0,1 -1,1 0,1 0,1 0,2 1,0 1,0 1,0 1,0 1,0 1,1l0 2zm-3 -10l0 0c3,0 5,2 5,5 0,1 0,2 0,3 0,-1 -1,-2 -2,-3 0,0 0,-1 0,-1 0,-2 -2,-3 -3,-2 -2,0 -3,1 -3,2 0,1 0,1 0,1 0,1 0,1 0,1 -1,1 -1,1 -1,2 -2,-3 -1,-6 1,-7 1,-1 2,-1 3,-1z" />
+                  <path class="fil1"
+                    d="M87 48c-4,0 -7,3 -7,7 0,4 3,7 7,7 4,0 7,-3 7,-7 0,-4 -3,-7 -7,-7zm3 12l0 0c-2,1 -4,1 -6,0l0 -2c0,-1 0,-1 1,-1 0,0 0,0 0,0 1,0 1,-1 1,-1 0,0 0,0 0,-1 -1,0 -1,0 -1,-1 0,0 1,-1 2,-1 0,0 1,0 1,1 0,1 0,1 0,1 0,1 0,1 0,2 0,0 0,0 0,0 1,0 2,0 2,1l0 2zm1 -2l0 0c0,-1 0,-2 -1,-3 0,0 0,-1 0,-1 -1,-2 -2,-3 -4,-2 -1,0 -2,1 -2,2 0,1 0,1 0,1 0,1 -1,1 -1,1 0,1 -1,1 -1,2 -1,-3 0,-6 2,-7 3,-2 6,-1 7,1 1,2 1,4 0,6z" />
+                  <path class="fil1"
+                    d="M71 69c0,0 -1,0 -1,0l-1 0c0,1 0,2 1,2l0 1 2 0 0 -1c1,0 1,-1 1,-2 0,-2 -1,-2 -2,-2 -1,-1 -1,-1 -1,-1 0,-1 1,-1 1,-1 0,0 1,0 1,1l1 0c0,-1 0,-2 -1,-2l0 -1 -2 0 0 1c-1,0 -1,1 -1,2 0,1 1,2 2,2 1,0 1,0 1,1 0,0 -1,0 -1,0z" />
+                  <polygon class="fil1" points="70,56 72,56 72,58 70,58 " />
+                  <polygon class="fil1" points="80,66 82,66 82,68 80,68 " />
+                  <polygon class="fil1" points="60,66 62,66 62,68 60,68 " />
+                  <polygon class="fil1" points="62,60 64,59 65,60 64,61 " />
+                  <polygon class="fil1" points="77,60 78,59 80,60 78,61 " />
+                  <path class="fil1"
+                    d="M94 93l0 -17c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-9 0 0 -4c0,0 -1,-1 -1,-1 0,0 0,0 0,0l-5 0c2,-4 0,-8 -4,-10 -4,-1 -8,0 -10,4 -1,2 -1,4 0,6l-5 0c0,0 -1,1 -1,1 0,0 0,0 0,0l0 4 -8 0c0,0 -1,0 -1,1 0,0 0,0 0,0l0 17c0,0 1,1 1,1 0,0 0,0 0,0l43 0c0,0 1,-1 1,-1 0,0 0,0 0,0zm-36 -1l0 0 -7 0 0 -16 7 0 0 16zm13 -31l0 0c3,0 6,3 6,6 0,4 -3,6 -6,6 -3,0 -6,-2 -6,-6 0,-3 3,-6 6,-6zm2 31l0 0 -4 0 0 -5c0,-1 1,-2 2,-2 1,0 2,1 2,2l0 5zm9 0l0 0 -8 0 0 -5c0,-2 -1,-3 -3,-3 -2,0 -3,1 -3,3l0 5 -8 0 0 -20 5 0c2,3 7,4 10,1 1,0 2,-1 2,-1l5 0 0 20zm10 0l0 0 -8 0 0 -16 8 0 0 16z" />
+                  <path class="fil1"
+                    d="M66 76l-3 0c-1,0 -1,1 -1,1 0,0 0,0 0,0l0 3c0,0 0,1 1,1 0,0 0,0 0,0l3 0c0,0 0,-1 0,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -1 2 0 0 1z" />
+                  <path class="fil1"
+                    d="M53 91l3 0c0,0 1,-1 1,-1 0,0 0,0 0,0l0 -11c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-3 0c0,0 -1,0 -1,1 0,0 0,0 0,0l0 11c0,0 1,1 1,1 0,0 0,0 0,0zm1 -12l0 0 1 0 0 10 -1 0 0 -10z" />
+                  <path class="fil1"
+                    d="M87 91l3 0c0,0 1,-1 1,-1 0,0 0,0 0,0l0 -11c0,-1 -1,-1 -1,-1 0,0 0,0 0,0l-3 0c-1,0 -1,0 -1,1 0,0 0,0 0,0l0 11c0,0 0,1 1,1 0,0 0,0 0,0zm1 -12l0 0 1 0 0 10 -1 0 0 -10z" />
+                  <path class="fil1"
+                    d="M73 76l-4 0c0,0 0,1 0,1 0,0 0,0 0,0l0 3c0,0 0,1 0,1 0,0 0,0 0,0l4 0c0,0 0,-1 0,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -1 2 0 0 1z" />
+                  <path class="fil1"
+                    d="M79 84l-3 0c0,0 0,0 0,1 0,0 0,0 0,0l0 3c0,0 0,0 0,0 0,0 0,0 0,0l3 0c1,0 1,0 1,0 0,0 0,0 0,0l0 -3c0,-1 0,-1 -1,-1 0,0 0,0 0,0zm0 3l0 0 -2 0 0 -2 2 0 0 2z" />
+                  <path class="fil1"
+                    d="M66 84l-3 0c-1,0 -1,0 -1,1 0,0 0,0 0,0l0 3c0,0 0,0 1,0 0,0 0,0 0,0l3 0c0,0 0,0 0,0 0,0 0,0 0,0l0 -3c0,-1 0,-1 0,-1 0,0 0,0 0,0zm-1 3l0 0 -2 0 0 -2 2 0 0 2z" />
+                  <path class="fil1"
+                    d="M76 77l0 3c0,0 0,1 0,1 0,0 0,0 0,0l3 0c1,0 1,-1 1,-1 0,0 0,0 0,0l0 -3c0,0 0,-1 -1,-1 0,0 0,0 0,0l-3 0c0,0 0,1 0,1 0,0 0,0 0,0zm1 1l0 0 2 0 0 1 -2 0 0 -1z" />
+                </g>
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Державна реєстрація
-          </div>
-          <div class="sub-practise">
-            <!-- Ми допоможемо Вам не лише
+
+        </div>
+        <div class="green-practise">
+          Державна реєстрація
+        </div>
+        <div class="sub-practise">
+          <!-- Ми допоможемо Вам не лише
             стати суб'єктом господарської
             діяльності та ... -->
-          </div>
-          <a href="{% url 'practice' pk=7 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof pract-prof-center">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil2 {fill:#D2A351}
-      .fil3 {fill:#FEFEFE;fill-rule:nonzero}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190"/>
-    <g id="_2058151500272">
-    <path class="fil1" d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z"/>
-    <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 "/>
-    <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 "/>
-    <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 "/>
-    <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 "/>
-    <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 "/>
-    <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 "/>
-    <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 "/>
-    <path class="fil1" d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190"/>
-    <path class="fil1" d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z"/>
-    <circle class="circle-delete fil0 str0" cx="201" cy="9071" r="190"/>
-    <path class="fil2" d="M201 9007c-7,0 -13,2 -18,6 -5,4 -8,10 -9,16l0 1 -33 0c-1,0 -2,1 -2,1 -1,1 -2,2 -2,3l0 48c0,1 1,2 2,3 0,0 1,1 2,1l3 0 0 45c0,1 1,1 1,2 1,1 2,1 3,1l106 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2l0 -45 3 0c1,0 2,-1 2,-1 1,-1 1,-2 1,-3l0 -48c0,-1 0,-2 -1,-3 0,0 -1,-1 -2,-1l-33 0 0 -1c-1,-6 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -41 12 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 22 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 12 0 0 41 -49 0zm0 -48l-11 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -19 0 0 -42 112 0 0 42 -19 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -11 0zm0 -49l-20 0 0 -1c1,-5 4,-8 8,-11 3,-3 7,-4 12,-4 5,0 9,1 12,4 4,3 7,6 8,11l0 1 -20 0zm20 47l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z"/>
-    <circle class="fil0 str0" cx="1730" cy="8817" r="190"/>
-    <g id="_2058151492784">
-    <path class="fil2" d="M1756 8804c-1,0 -2,0 -3,0 -2,1 -3,1 -4,1l-1 0 0 -34c0,-6 -5,-10 -11,-13 -8,-3 -19,-5 -30,-5 -10,0 -21,2 -29,5 -7,3 -11,8 -11,13l0 71c0,5 4,9 11,12 7,4 18,6 29,6 2,0 5,0 7,-1 2,0 4,0 7,0l0 0 1 0c3,7 8,12 14,16 6,3 13,5 20,5 10,0 20,-4 27,-11 7,-7 11,-16 11,-27 0,-10 -4,-20 -11,-27 -7,-7 -17,-11 -27,-11zm-49 -45c9,0 17,1 23,3 8,2 12,6 12,9 0,3 -4,6 -12,9 -6,1 -14,3 -23,3 -9,0 -17,-2 -22,-3 -8,-3 -12,-6 -12,-9 0,-3 4,-7 12,-9 5,-2 13,-3 22,-3zm-32 22c3,3 8,4 14,6 5,1 12,2 18,2 7,0 13,-1 19,-2 5,-2 10,-3 14,-6l2 -1 0 9c0,2 -4,6 -12,8 -6,2 -14,4 -23,4 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-8l0 -9 2 1zm0 18c3,3 8,4 14,6 5,1 12,1 18,1 7,0 13,0 19,-1 5,-2 10,-3 14,-6l2 -1 0 9 -1 0c-2,1 -5,2 -7,4 -2,1 -4,3 -5,5l0 0 -1 0c-3,1 -6,1 -10,2 -3,0 -7,1 -11,1 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-9l0 -8 2 1zm0 18c3,2 8,4 14,5 5,2 12,2 18,2 2,0 5,0 7,0 2,0 4,-1 7,-1l2 0 -1 2c-1,1 -2,3 -2,5 -1,1 -1,3 -2,5l0 0 -1 1c-1,0 -3,0 -4,0 -2,0 -4,0 -6,0 -9,0 -17,-1 -22,-3 -8,-2 -12,-6 -12,-9l0 -8 2 1zm32 37c-9,0 -17,-1 -22,-3 -8,-3 -12,-6 -12,-9l0 -8 2 1c3,2 8,4 14,5 5,1 12,2 18,2 3,0 6,0 9,-1l2 0 0 2c0,1 0,3 0,4 0,2 1,3 1,5l0 1 -3 1c-3,0 -6,0 -9,0zm49 20c-9,0 -17,-3 -23,-9 -6,-6 -10,-14 -10,-23 0,-9 4,-17 10,-23 6,-5 14,-9 23,-9 9,0 17,4 23,9 6,6 9,14 9,23 0,9 -3,17 -9,23 -6,6 -14,9 -23,9z"/>
-    <path class="fil2" d="M1768 8833c0,-1 0,-2 -1,-2 0,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -1,0 -2,1l-19 18c-1,1 -1,2 -1,3 0,0 0,1 1,2 1,0 2,1 2,1 1,0 2,-1 3,-1l19 -19c0,-1 0,-1 0,-2z"/>
-    <path class="fil3" d="M1767 8833c0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0l-19 19c0,0 -1,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,0 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 0,0 1,-1 1,-1l19 -19c0,0 0,0 0,0 0,-1 0,-1 0,-1zm2 -2c0,1 0,1 0,2 0,0 0,1 0,1 0,1 0,1 -1,2l-19 19c0,0 0,0 -1,1 0,0 -1,0 -2,0 0,0 -1,0 -1,0 -1,-1 -1,-1 -2,-1 0,-1 0,-1 -1,-2 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 1,-1 1,-1 1,-1l19 -19c1,-1 1,-1 2,-1 0,0 1,0 1,0 1,0 1,0 2,0 0,0 1,0 1,1 1,0 1,1 1,1z"/>
-    <circle class="circle-delete fil2" cx="1747" cy="8833" r="5"/>
-    <path class="fil3" d="M1751 8833c0,-1 0,-2 -1,-2 -1,-1 -2,-2 -3,-2 -1,0 -2,1 -3,2 -1,0 -1,1 -1,2 0,2 0,3 1,3 1,1 2,2 3,2 1,0 2,-1 3,-2 1,0 1,-1 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,4 -2,5 -1,1 -2,2 -4,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z"/>
-    <circle class="circle-delete fil2" cx="1765" cy="8851" r="5"/>
-    <path class="fil3" d="M1769 8851c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -2,2 -2,3 0,1 1,2 2,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-2 3,-2 5,-2 1,0 3,0 4,2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="-1328" cy="10748" r="190"/>
-    <g id="_2058151488080">
-    <path class="fil1" d="M-1373 10722c11,0 19,-8 19,-19 0,-10 -8,-19 -19,-19 -10,0 -19,9 -19,19 0,11 9,19 19,19zm9 -6l0 0c-6,3 -12,3 -17,0l0 -5c0,-2 1,-3 3,-3 0,0 0,0 0,0 2,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 1,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 4,1 4,3l0 5zm-9 -27l0 0c8,0 15,6 15,14 0,3 -1,6 -2,8 0,-3 -2,-6 -5,-7 1,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 3,-2 5,-2 8,-2z"/>
-    <path class="fil1" d="M-1284 10684c-11,0 -19,9 -19,19 0,11 8,19 19,19 10,0 19,-8 19,-19 0,-10 -9,-19 -19,-19zm8 32l0 0c-5,3 -11,3 -16,0l0 -5c-1,-2 1,-3 3,-3 0,0 0,0 0,0 1,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 0,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 3,1 3,3l0 5zm5 -5l0 0c0,-3 -2,-6 -5,-7 0,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 7,-5 16,-2 21,5 3,4 3,10 0,15z"/>
-    <path class="fil1" d="M-1328 10744c-2,0 -3,-1 -3,-2l-4 0c0,2 2,5 4,5l0 3 5 0 0 -3c2,0 4,-3 4,-5 0,-5 -4,-6 -6,-7 -2,0 -3,-1 -3,-2 0,-1 1,-2 3,-2 1,0 2,1 2,2l4 0c0,-3 -2,-5 -4,-6l0 -2 -5 0 0 2c-2,1 -4,3 -4,6 0,5 4,6 6,6 2,1 3,1 3,3 0,1 -1,2 -2,2z"/>
-    <polygon class="fil1" points="-1331,10706 -1326,10706 -1326,10712 -1331,10712 "/>
-    <polygon class="fil1" points="-1303,10735 -1297,10735 -1297,10739 -1303,10739 "/>
-    <polygon class="fil1" points="-1360,10735 -1354,10735 -1354,10739 -1360,10739 "/>
-    <polygon class="fil1" points="-1352,10716 -1349,10713 -1345,10718 -1348,10721 "/>
-    <polygon class="fil1" points="-1312,10718 -1308,10713 -1305,10716 -1309,10721 "/>
-    <path class="fil1" d="M-1265 10809l0 -48c0,-2 -1,-3 -2,-3 0,0 0,0 0,0l-25 0 0 -10c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-14 0c5,-11 0,-23 -11,-28 -11,-5 -23,0 -28,11 -2,5 -2,11 0,17l-14 0c-2,0 -2,1 -2,2 0,0 0,0 0,0l0 10 -24 0c-1,0 -2,1 -2,3 0,0 0,0 0,0l0 48c0,1 1,2 2,2 0,0 0,0 0,0l121 0c1,0 2,-1 2,-2 0,0 0,0 0,0zm-99 -2l0 0 -22 0 0 -44 22 0 0 44zm36 -87l0 0c9,0 16,8 16,17 0,10 -7,17 -16,17 -10,0 -17,-7 -17,-17 0,-9 7,-17 17,-17zm4 87l0 0 -9 0 0 -15c0,-2 2,-4 5,-4 2,0 4,2 4,4l0 15zm27 0l0 0 -23 0 0 -15c0,-4 -4,-8 -8,-8 -5,0 -9,4 -9,8l0 15 -23 0 0 -57 15 0c7,9 20,11 29,4 2,-1 3,-2 4,-4l15 0 0 57zm28 0l0 0 -23 0 0 -44 23 0 0 44z"/>
-    <path class="fil1" d="M-1343 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1379 10803l8 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z"/>
-    <path class="fil1" d="M-1284 10803l8 0c2,0 3,-1 3,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z"/>
-    <path class="fil1" d="M-1324 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1305 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1343 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1316 10765l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0zm4 2l0 0 5 0 0 4 -5 0 0 -4z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <path class="fil1" d="M154 179c-1,0 -1,0 -1,0 -1,-1 -2,-1 -2,-1 -1,-1 -2,-1 -2,-2l0 0c0,-1 -1,-1 -1,-2 0,-1 0,-2 0,-2 0,-1 0,-1 0,-1 0,-1 0,-1 -1,-1 0,0 0,-1 0,-1 0,0 0,0 0,-1 -1,0 -1,-1 -1,-2 -1,0 -1,-1 -1,-2l0 0c0,-1 0,-2 1,-2 0,-1 0,-2 1,-2 0,-1 0,-1 0,-1 0,0 0,-1 0,-1 1,0 1,0 1,-1 0,0 0,0 0,-1 0,0 0,-1 0,-2 0,-1 1,-1 1,-2l0 0c0,-1 1,-1 2,-1 0,-1 1,-1 2,-2 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,-1 1,-1 0,0 0,0 1,-1 0,0 1,-1 1,-1 1,-1 1,-1 2,-1l0 0c1,-1 2,-1 2,-1 1,0 2,1 3,1 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 2,-1 2,-1 1,0 2,0 3,1l0 0c0,0 1,0 2,1 0,0 1,1 1,1 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 1,1 2,1 2,2 1,0 1,0 2,1l0 0c0,1 1,1 1,2 0,1 0,2 0,2 0,1 0,1 0,1 0,1 0,1 0,1 1,0 1,1 1,1 0,0 0,0 0,1 1,0 1,1 1,2 1,0 1,1 1,2l0 0c0,1 0,2 -1,2 0,1 0,2 -1,2 0,1 0,1 0,1 0,0 0,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,1 0,0 0,1 0,2 0,1 -1,1 -1,2l0 0c-1,1 -1,1 -2,2 0,0 -1,0 -2,1 0,0 0,0 -1,0 0,0 0,0 0,0 -1,1 -1,1 -1,1 0,0 -1,0 -1,1 0,0 -1,1 -1,1 -1,1 -2,1 -2,1l0 0c-1,0 -1,1 -1,1 0,0 -1,0 -1,0 -1,0 -1,0 -1,-1 -1,0 -1,0 -2,0 0,0 0,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0 -1,0 -1,0 -1,0 -1,0 -2,1 -3,1 0,0 -1,0 -2,-1l0 0c-1,0 -1,0 -2,-1 0,0 -1,-1 -1,-1 -1,-1 -1,-1 -1,-1 0,0 0,0 -1,-1 0,0 0,0 0,0zm92 -36l1 0 0 1 -1 0 0 -1 0 0zm7 2l9 7c1,0 1,1 1,2 1,1 0,3 0,4l-40 57c-1,0 -1,1 -1,1 -1,1 -1,1 -2,1 0,0 0,0 0,0l0 0 -28 33c-1,0 -2,1 -3,1 -1,0 -2,0 -3,-1l0 0 -5 1c0,0 0,0 -1,0 0,0 0,0 -1,-1l-1 -1 0 1c0,2 0,4 -1,5 -2,1 -3,2 -5,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5l0 -21c0,0 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1 0,0 0,1 0,1l0 21c0,0 -1,1 -1,1 -1,1 -1,1 -2,1 0,0 -1,0 -1,-1 -1,0 -1,-1 -1,-1l0 -21c0,-2 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 5,2 1,1 1,2 1,4l0 21c0,1 1,1 1,2 0,0 1,0 1,0 1,0 1,0 1,0 1,-1 1,-1 1,-2l0 -6c0,0 0,-1 0,-1 0,0 0,0 1,-1l0 0c0,0 1,0 1,0 1,0 1,0 2,0l4 4 3 0c0,0 0,0 0,-1 0,0 0,0 0,0l21 -38c0,0 0,-1 0,-1 0,-1 0,-2 1,-2l40 -58c0,-1 1,-1 3,-1 1,-1 2,0 3,0l0 0zm-44 66l-20 35 26 -31 -6 -4zm36 -47c1,1 3,2 5,3l-5 -3zm-34 42l8 6 31 -44 -8 -6 -31 44zm41 -43c-1,0 -3,-2 -4,-3l4 3zm-8 -5l9 6 6 -9 -9 -6 -6 9zm-25 100c1,-1 1,-2 1,-3l0 -31c1,-1 2,-2 2,-3l0 0c1,0 1,0 2,0 0,0 0,-1 1,-1l0 0 0 35c0,2 -1,4 -3,6 -1,2 -4,2 -6,3l-71 0c-2,-1 -4,-1 -6,-3 -2,-2 -2,-4 -2,-6l0 -110c0,-2 0,-4 2,-6 2,-2 4,-2 6,-2l71 0c2,0 5,0 6,2 2,2 3,4 3,6l0 24c-2,2 -3,5 -5,7l0 -31c0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-71 0c-1,0 -2,0 -3,1 -1,1 -1,2 -1,3l0 110c0,1 0,2 1,3 1,1 2,1 3,1l71 0c1,0 2,0 3,-1zm-68 -55l51 0 0 0c-1,1 -1,1 -1,2 0,0 0,1 0,1l0 0c0,1 0,1 -1,2l-49 0c-1,0 -2,-1 -2,-1 0,0 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1zm0 -11l58 0c-1,2 -2,3 -3,5l-55 0c-1,0 -2,0 -2,-1 0,0 -1,-1 -1,-1 0,-1 1,-2 1,-2 0,0 1,-1 2,-1zm-2 26c0,-1 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1l46 0 -3 4 -43 0c-1,0 -2,0 -2,0zm25 -46c-3,2 -5,4 -9,4 -3,0 -6,-2 -8,-4 -2,-2 -3,-5 -3,-8 0,-3 1,-6 3,-8 2,-2 5,-4 8,-4 4,0 6,2 9,4 2,2 3,5 3,8 0,3 -1,6 -3,8zm-4 -13c-1,-1 -3,-2 -5,-2 -2,0 -3,1 -5,2 -1,1 -2,3 -2,5 0,2 1,4 2,5 2,1 3,2 5,2 2,0 4,-1 5,-2 2,-1 2,-3 2,-5 0,-2 0,-4 -2,-5zm-19 2c0,0 0,1 -1,1l0 0c0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1l0 0c1,0 1,1 1,1 0,1 1,1 1,1l0 0c0,1 0,1 0,2 0,0 0,1 0,1l0 0c0,1 0,1 0,1 0,1 0,1 1,1 0,1 0,1 0,1 1,0 1,0 2,0l0 0c0,1 0,1 1,1 0,0 1,0 1,1l0 0c0,0 1,0 1,1 0,0 1,0 1,1l0 0c0,0 0,0 1,0 0,1 0,1 1,1 0,0 0,0 1,0 0,0 0,0 1,0l0 0c0,0 1,0 1,0 0,0 1,-1 1,-1l0 0c1,0 1,1 2,1 0,0 1,0 1,0l0 0c1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,-1 0,0 1,0 1,0l0 0c0,-1 1,-1 1,-1 0,-1 1,-1 1,-1l0 0c0,-1 1,-1 1,-1 0,0 1,0 1,-1l0 0c1,0 1,0 1,0 1,0 1,0 1,-1 0,0 0,0 1,-1 0,0 0,0 0,-1l0 0c0,0 0,-1 0,-1 0,-1 0,-1 0,-2l0 0c0,0 0,0 1,-1 0,0 0,-1 0,-1l0 0c1,0 1,-1 1,-1 0,0 0,-1 0,-1 0,0 0,-1 0,-1 0,0 0,-1 -1,-1l0 0c0,0 0,-1 0,-1 -1,-1 -1,-1 -1,-1l0 0c0,-1 0,-1 0,-2 0,0 0,-1 0,-1l0 0c0,-1 0,-1 0,-1 -1,-1 -1,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 0,0 -1,0l0 0c0,-1 -1,-1 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 -1,0 -1,0 0,-1 0,-1 -1,-1 0,0 0,0 -1,0 0,0 0,0 -1,0l0 0c0,0 -1,0 -1,0 -1,1 -1,1 -2,1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,0l0 0c-1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,1 -1,0 -1,0 -1,0l0 0c0,1 -1,1 -1,1 0,1 -1,1 -1,1l0 0c0,1 -1,1 -1,1 -1,0 -1,0 -1,1l0 0c-1,0 -1,0 -2,0 0,0 0,0 0,1 -1,0 -1,0 -1,1 0,0 0,0 0,1l0 0c0,0 0,1 0,1 0,1 0,1 0,2l0 0c0,0 -1,0 -1,1z"/>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=7 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof pract-prof-center">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil2 {
+                    fill: #D2A351
+                  }
+
+                  .fil3 {
+                    fill: #FEFEFE;
+                    fill-rule: nonzero
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190" />
+                <g id="_2058151500272">
+                  <path class="fil1"
+                    d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z" />
+                  <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 " />
+                  <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 " />
+                  <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 " />
+                  <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 " />
+                  <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 " />
+                  <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 " />
+                  <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 " />
+                  <path class="fil1"
+                    d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190" />
+                <path class="fil1"
+                  d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z" />
+                <circle class="circle-delete fil0 str0" cx="201" cy="9071" r="190" />
+                <path class="fil2"
+                  d="M201 9007c-7,0 -13,2 -18,6 -5,4 -8,10 -9,16l0 1 -33 0c-1,0 -2,1 -2,1 -1,1 -2,2 -2,3l0 48c0,1 1,2 2,3 0,0 1,1 2,1l3 0 0 45c0,1 1,1 1,2 1,1 2,1 3,1l106 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2l0 -45 3 0c1,0 2,-1 2,-1 1,-1 1,-2 1,-3l0 -48c0,-1 0,-2 -1,-3 0,0 -1,-1 -2,-1l-33 0 0 -1c-1,-6 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -41 12 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 22 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 12 0 0 41 -49 0zm0 -48l-11 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -19 0 0 -42 112 0 0 42 -19 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -11 0zm0 -49l-20 0 0 -1c1,-5 4,-8 8,-11 3,-3 7,-4 12,-4 5,0 9,1 12,4 4,3 7,6 8,11l0 1 -20 0zm20 47l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z" />
+                <circle class="fil0 str0" cx="1730" cy="8817" r="190" />
+                <g id="_2058151492784">
+                  <path class="fil2"
+                    d="M1756 8804c-1,0 -2,0 -3,0 -2,1 -3,1 -4,1l-1 0 0 -34c0,-6 -5,-10 -11,-13 -8,-3 -19,-5 -30,-5 -10,0 -21,2 -29,5 -7,3 -11,8 -11,13l0 71c0,5 4,9 11,12 7,4 18,6 29,6 2,0 5,0 7,-1 2,0 4,0 7,0l0 0 1 0c3,7 8,12 14,16 6,3 13,5 20,5 10,0 20,-4 27,-11 7,-7 11,-16 11,-27 0,-10 -4,-20 -11,-27 -7,-7 -17,-11 -27,-11zm-49 -45c9,0 17,1 23,3 8,2 12,6 12,9 0,3 -4,6 -12,9 -6,1 -14,3 -23,3 -9,0 -17,-2 -22,-3 -8,-3 -12,-6 -12,-9 0,-3 4,-7 12,-9 5,-2 13,-3 22,-3zm-32 22c3,3 8,4 14,6 5,1 12,2 18,2 7,0 13,-1 19,-2 5,-2 10,-3 14,-6l2 -1 0 9c0,2 -4,6 -12,8 -6,2 -14,4 -23,4 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-8l0 -9 2 1zm0 18c3,3 8,4 14,6 5,1 12,1 18,1 7,0 13,0 19,-1 5,-2 10,-3 14,-6l2 -1 0 9 -1 0c-2,1 -5,2 -7,4 -2,1 -4,3 -5,5l0 0 -1 0c-3,1 -6,1 -10,2 -3,0 -7,1 -11,1 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-9l0 -8 2 1zm0 18c3,2 8,4 14,5 5,2 12,2 18,2 2,0 5,0 7,0 2,0 4,-1 7,-1l2 0 -1 2c-1,1 -2,3 -2,5 -1,1 -1,3 -2,5l0 0 -1 1c-1,0 -3,0 -4,0 -2,0 -4,0 -6,0 -9,0 -17,-1 -22,-3 -8,-2 -12,-6 -12,-9l0 -8 2 1zm32 37c-9,0 -17,-1 -22,-3 -8,-3 -12,-6 -12,-9l0 -8 2 1c3,2 8,4 14,5 5,1 12,2 18,2 3,0 6,0 9,-1l2 0 0 2c0,1 0,3 0,4 0,2 1,3 1,5l0 1 -3 1c-3,0 -6,0 -9,0zm49 20c-9,0 -17,-3 -23,-9 -6,-6 -10,-14 -10,-23 0,-9 4,-17 10,-23 6,-5 14,-9 23,-9 9,0 17,4 23,9 6,6 9,14 9,23 0,9 -3,17 -9,23 -6,6 -14,9 -23,9z" />
+                  <path class="fil2"
+                    d="M1768 8833c0,-1 0,-2 -1,-2 0,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -1,0 -2,1l-19 18c-1,1 -1,2 -1,3 0,0 0,1 1,2 1,0 2,1 2,1 1,0 2,-1 3,-1l19 -19c0,-1 0,-1 0,-2z" />
+                  <path class="fil3"
+                    d="M1767 8833c0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0l-19 19c0,0 -1,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,0 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 0,0 1,-1 1,-1l19 -19c0,0 0,0 0,0 0,-1 0,-1 0,-1zm2 -2c0,1 0,1 0,2 0,0 0,1 0,1 0,1 0,1 -1,2l-19 19c0,0 0,0 -1,1 0,0 -1,0 -2,0 0,0 -1,0 -1,0 -1,-1 -1,-1 -2,-1 0,-1 0,-1 -1,-2 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 1,-1 1,-1 1,-1l19 -19c1,-1 1,-1 2,-1 0,0 1,0 1,0 1,0 1,0 2,0 0,0 1,0 1,1 1,0 1,1 1,1z" />
+                  <circle class="circle-delete fil2" cx="1747" cy="8833" r="5" />
+                  <path class="fil3"
+                    d="M1751 8833c0,-1 0,-2 -1,-2 -1,-1 -2,-2 -3,-2 -1,0 -2,1 -3,2 -1,0 -1,1 -1,2 0,2 0,3 1,3 1,1 2,2 3,2 1,0 2,-1 3,-2 1,0 1,-1 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,4 -2,5 -1,1 -2,2 -4,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z" />
+                  <circle class="circle-delete fil2" cx="1765" cy="8851" r="5" />
+                  <path class="fil3"
+                    d="M1769 8851c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -2,2 -2,3 0,1 1,2 2,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-2 3,-2 5,-2 1,0 3,0 4,2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="-1328" cy="10748" r="190" />
+                <g id="_2058151488080">
+                  <path class="fil1"
+                    d="M-1373 10722c11,0 19,-8 19,-19 0,-10 -8,-19 -19,-19 -10,0 -19,9 -19,19 0,11 9,19 19,19zm9 -6l0 0c-6,3 -12,3 -17,0l0 -5c0,-2 1,-3 3,-3 0,0 0,0 0,0 2,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 1,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 4,1 4,3l0 5zm-9 -27l0 0c8,0 15,6 15,14 0,3 -1,6 -2,8 0,-3 -2,-6 -5,-7 1,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 3,-2 5,-2 8,-2z" />
+                  <path class="fil1"
+                    d="M-1284 10684c-11,0 -19,9 -19,19 0,11 8,19 19,19 10,0 19,-8 19,-19 0,-10 -9,-19 -19,-19zm8 32l0 0c-5,3 -11,3 -16,0l0 -5c-1,-2 1,-3 3,-3 0,0 0,0 0,0 1,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 0,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 3,1 3,3l0 5zm5 -5l0 0c0,-3 -2,-6 -5,-7 0,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 7,-5 16,-2 21,5 3,4 3,10 0,15z" />
+                  <path class="fil1"
+                    d="M-1328 10744c-2,0 -3,-1 -3,-2l-4 0c0,2 2,5 4,5l0 3 5 0 0 -3c2,0 4,-3 4,-5 0,-5 -4,-6 -6,-7 -2,0 -3,-1 -3,-2 0,-1 1,-2 3,-2 1,0 2,1 2,2l4 0c0,-3 -2,-5 -4,-6l0 -2 -5 0 0 2c-2,1 -4,3 -4,6 0,5 4,6 6,6 2,1 3,1 3,3 0,1 -1,2 -2,2z" />
+                  <polygon class="fil1" points="-1331,10706 -1326,10706 -1326,10712 -1331,10712 " />
+                  <polygon class="fil1" points="-1303,10735 -1297,10735 -1297,10739 -1303,10739 " />
+                  <polygon class="fil1" points="-1360,10735 -1354,10735 -1354,10739 -1360,10739 " />
+                  <polygon class="fil1" points="-1352,10716 -1349,10713 -1345,10718 -1348,10721 " />
+                  <polygon class="fil1" points="-1312,10718 -1308,10713 -1305,10716 -1309,10721 " />
+                  <path class="fil1"
+                    d="M-1265 10809l0 -48c0,-2 -1,-3 -2,-3 0,0 0,0 0,0l-25 0 0 -10c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-14 0c5,-11 0,-23 -11,-28 -11,-5 -23,0 -28,11 -2,5 -2,11 0,17l-14 0c-2,0 -2,1 -2,2 0,0 0,0 0,0l0 10 -24 0c-1,0 -2,1 -2,3 0,0 0,0 0,0l0 48c0,1 1,2 2,2 0,0 0,0 0,0l121 0c1,0 2,-1 2,-2 0,0 0,0 0,0zm-99 -2l0 0 -22 0 0 -44 22 0 0 44zm36 -87l0 0c9,0 16,8 16,17 0,10 -7,17 -16,17 -10,0 -17,-7 -17,-17 0,-9 7,-17 17,-17zm4 87l0 0 -9 0 0 -15c0,-2 2,-4 5,-4 2,0 4,2 4,4l0 15zm27 0l0 0 -23 0 0 -15c0,-4 -4,-8 -8,-8 -5,0 -9,4 -9,8l0 15 -23 0 0 -57 15 0c7,9 20,11 29,4 2,-1 3,-2 4,-4l15 0 0 57zm28 0l0 0 -23 0 0 -44 23 0 0 44z" />
+                  <path class="fil1"
+                    d="M-1343 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1379 10803l8 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z" />
+                  <path class="fil1"
+                    d="M-1284 10803l8 0c2,0 3,-1 3,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z" />
+                  <path class="fil1"
+                    d="M-1324 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1305 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1343 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1316 10765l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0zm4 2l0 0 5 0 0 4 -5 0 0 -4z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <path class="fil1"
+                  d="M154 179c-1,0 -1,0 -1,0 -1,-1 -2,-1 -2,-1 -1,-1 -2,-1 -2,-2l0 0c0,-1 -1,-1 -1,-2 0,-1 0,-2 0,-2 0,-1 0,-1 0,-1 0,-1 0,-1 -1,-1 0,0 0,-1 0,-1 0,0 0,0 0,-1 -1,0 -1,-1 -1,-2 -1,0 -1,-1 -1,-2l0 0c0,-1 0,-2 1,-2 0,-1 0,-2 1,-2 0,-1 0,-1 0,-1 0,0 0,-1 0,-1 1,0 1,0 1,-1 0,0 0,0 0,-1 0,0 0,-1 0,-2 0,-1 1,-1 1,-2l0 0c0,-1 1,-1 2,-1 0,-1 1,-1 2,-2 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,-1 1,-1 0,0 0,0 1,-1 0,0 1,-1 1,-1 1,-1 1,-1 2,-1l0 0c1,-1 2,-1 2,-1 1,0 2,1 3,1 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 2,-1 2,-1 1,0 2,0 3,1l0 0c0,0 1,0 2,1 0,0 1,1 1,1 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 1,1 2,1 2,2 1,0 1,0 2,1l0 0c0,1 1,1 1,2 0,1 0,2 0,2 0,1 0,1 0,1 0,1 0,1 0,1 1,0 1,1 1,1 0,0 0,0 0,1 1,0 1,1 1,2 1,0 1,1 1,2l0 0c0,1 0,2 -1,2 0,1 0,2 -1,2 0,1 0,1 0,1 0,0 0,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,1 0,0 0,1 0,2 0,1 -1,1 -1,2l0 0c-1,1 -1,1 -2,2 0,0 -1,0 -2,1 0,0 0,0 -1,0 0,0 0,0 0,0 -1,1 -1,1 -1,1 0,0 -1,0 -1,1 0,0 -1,1 -1,1 -1,1 -2,1 -2,1l0 0c-1,0 -1,1 -1,1 0,0 -1,0 -1,0 -1,0 -1,0 -1,-1 -1,0 -1,0 -2,0 0,0 0,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0 -1,0 -1,0 -1,0 -1,0 -2,1 -3,1 0,0 -1,0 -2,-1l0 0c-1,0 -1,0 -2,-1 0,0 -1,-1 -1,-1 -1,-1 -1,-1 -1,-1 0,0 0,0 -1,-1 0,0 0,0 0,0zm92 -36l1 0 0 1 -1 0 0 -1 0 0zm7 2l9 7c1,0 1,1 1,2 1,1 0,3 0,4l-40 57c-1,0 -1,1 -1,1 -1,1 -1,1 -2,1 0,0 0,0 0,0l0 0 -28 33c-1,0 -2,1 -3,1 -1,0 -2,0 -3,-1l0 0 -5 1c0,0 0,0 -1,0 0,0 0,0 -1,-1l-1 -1 0 1c0,2 0,4 -1,5 -2,1 -3,2 -5,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5l0 -21c0,0 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1 0,0 0,1 0,1l0 21c0,0 -1,1 -1,1 -1,1 -1,1 -2,1 0,0 -1,0 -1,-1 -1,0 -1,-1 -1,-1l0 -21c0,-2 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 5,2 1,1 1,2 1,4l0 21c0,1 1,1 1,2 0,0 1,0 1,0 1,0 1,0 1,0 1,-1 1,-1 1,-2l0 -6c0,0 0,-1 0,-1 0,0 0,0 1,-1l0 0c0,0 1,0 1,0 1,0 1,0 2,0l4 4 3 0c0,0 0,0 0,-1 0,0 0,0 0,0l21 -38c0,0 0,-1 0,-1 0,-1 0,-2 1,-2l40 -58c0,-1 1,-1 3,-1 1,-1 2,0 3,0l0 0zm-44 66l-20 35 26 -31 -6 -4zm36 -47c1,1 3,2 5,3l-5 -3zm-34 42l8 6 31 -44 -8 -6 -31 44zm41 -43c-1,0 -3,-2 -4,-3l4 3zm-8 -5l9 6 6 -9 -9 -6 -6 9zm-25 100c1,-1 1,-2 1,-3l0 -31c1,-1 2,-2 2,-3l0 0c1,0 1,0 2,0 0,0 0,-1 1,-1l0 0 0 35c0,2 -1,4 -3,6 -1,2 -4,2 -6,3l-71 0c-2,-1 -4,-1 -6,-3 -2,-2 -2,-4 -2,-6l0 -110c0,-2 0,-4 2,-6 2,-2 4,-2 6,-2l71 0c2,0 5,0 6,2 2,2 3,4 3,6l0 24c-2,2 -3,5 -5,7l0 -31c0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-71 0c-1,0 -2,0 -3,1 -1,1 -1,2 -1,3l0 110c0,1 0,2 1,3 1,1 2,1 3,1l71 0c1,0 2,0 3,-1zm-68 -55l51 0 0 0c-1,1 -1,1 -1,2 0,0 0,1 0,1l0 0c0,1 0,1 -1,2l-49 0c-1,0 -2,-1 -2,-1 0,0 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1zm0 -11l58 0c-1,2 -2,3 -3,5l-55 0c-1,0 -2,0 -2,-1 0,0 -1,-1 -1,-1 0,-1 1,-2 1,-2 0,0 1,-1 2,-1zm-2 26c0,-1 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1l46 0 -3 4 -43 0c-1,0 -2,0 -2,0zm25 -46c-3,2 -5,4 -9,4 -3,0 -6,-2 -8,-4 -2,-2 -3,-5 -3,-8 0,-3 1,-6 3,-8 2,-2 5,-4 8,-4 4,0 6,2 9,4 2,2 3,5 3,8 0,3 -1,6 -3,8zm-4 -13c-1,-1 -3,-2 -5,-2 -2,0 -3,1 -5,2 -1,1 -2,3 -2,5 0,2 1,4 2,5 2,1 3,2 5,2 2,0 4,-1 5,-2 2,-1 2,-3 2,-5 0,-2 0,-4 -2,-5zm-19 2c0,0 0,1 -1,1l0 0c0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 0,1l0 0c1,0 1,1 1,1 0,1 1,1 1,1l0 0c0,1 0,1 0,2 0,0 0,1 0,1l0 0c0,1 0,1 0,1 0,1 0,1 1,1 0,1 0,1 0,1 1,0 1,0 2,0l0 0c0,1 0,1 1,1 0,0 1,0 1,1l0 0c0,0 1,0 1,1 0,0 1,0 1,1l0 0c0,0 0,0 1,0 0,1 0,1 1,1 0,0 0,0 1,0 0,0 0,0 1,0l0 0c0,0 1,0 1,0 0,0 1,-1 1,-1l0 0c1,0 1,1 2,1 0,0 1,0 1,0l0 0c1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,-1 0,0 1,0 1,0l0 0c0,-1 1,-1 1,-1 0,-1 1,-1 1,-1l0 0c0,-1 1,-1 1,-1 0,0 1,0 1,-1l0 0c1,0 1,0 1,0 1,0 1,0 1,-1 0,0 0,0 1,-1 0,0 0,0 0,-1l0 0c0,0 0,-1 0,-1 0,-1 0,-1 0,-2l0 0c0,0 0,0 1,-1 0,0 0,-1 0,-1l0 0c1,0 1,-1 1,-1 0,0 0,-1 0,-1 0,0 0,-1 0,-1 0,0 0,-1 -1,-1l0 0c0,0 0,-1 0,-1 -1,-1 -1,-1 -1,-1l0 0c0,-1 0,-1 0,-2 0,0 0,-1 0,-1l0 0c0,-1 0,-1 0,-1 -1,-1 -1,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 0,0 -1,0l0 0c0,-1 -1,-1 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 -1,0 -1,0 0,-1 0,-1 -1,-1 0,0 0,0 -1,0 0,0 0,0 -1,0l0 0c0,0 -1,0 -1,0 -1,1 -1,1 -2,1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,0l0 0c-1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,1 -1,0 -1,0 -1,0l0 0c0,1 -1,1 -1,1 0,1 -1,1 -1,1l0 0c0,1 -1,1 -1,1 -1,0 -1,0 -1,1l0 0c-1,0 -1,0 -2,0 0,0 0,0 0,1 -1,0 -1,0 -1,1 0,0 0,0 0,1l0 0c0,0 0,1 0,1 0,1 0,1 0,2l0 0c0,0 -1,0 -1,1z" />
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Практика із надання
-            бухгалтерських послуг
-          </div>
-          <div class="sub-practise">
-            <!-- Пропонуємо послуги з
+
+        </div>
+        <div class="green-practise">
+          Практика із надання
+          бухгалтерських послуг
+        </div>
+        <div class="sub-practise">
+          <!-- Пропонуємо послуги з
             бухгалтерського обслуговування ... -->
-          </div>
-          <a href="{% url 'practice' pk=8 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-        <div class="pract-prof">
-          <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
-          <div class="pract-icon">
-            <div class="svg-pract">
-              <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-  viewBox="0 0 400 400"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <style type="text/css">
-    <![CDATA[
-      .str0 {stroke:#D2A351;stroke-width:2.66667}
-      .fil0 {fill:none}
-      .fil2 {fill:#D2A351}
-      .fil3 {fill:#FEFEFE;fill-rule:nonzero}
-      .fil1 {fill:#D2A351;fill-rule:nonzero}
-    ]]>
-    </style>
-  </defs>
-  <g id="Layer_x0020_1">
-    <metadata id="CorelCorpID_0Corel-Layer"/>
-    <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190"/>
-    <g id="_2058151449296">
-    <path class="fil1" d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z"/>
-    <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 "/>
-    <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 "/>
-    <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 "/>
-    <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 "/>
-    <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 "/>
-    <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 "/>
-    <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 "/>
-    <path class="fil1" d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190"/>
-    <path class="fil1" d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z"/>
-    <circle class="circle-delete fil0 str0" cx="201" cy="9071" r="190"/>
-    <path class="fil2" d="M201 9007c-7,0 -13,2 -18,6 -5,4 -8,10 -9,16l0 1 -33 0c-1,0 -2,1 -2,1 -1,1 -2,2 -2,3l0 48c0,1 1,2 2,3 0,0 1,1 2,1l3 0 0 45c0,1 1,1 1,2 1,1 2,1 3,1l106 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2l0 -45 3 0c1,0 2,-1 2,-1 1,-1 1,-2 1,-3l0 -48c0,-1 0,-2 -1,-3 0,0 -1,-1 -2,-1l-33 0 0 -1c-1,-6 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -41 12 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 22 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 12 0 0 41 -49 0zm0 -48l-11 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -19 0 0 -42 112 0 0 42 -19 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -11 0zm0 -49l-20 0 0 -1c1,-5 4,-8 8,-11 3,-3 7,-4 12,-4 5,0 9,1 12,4 4,3 7,6 8,11l0 1 -20 0zm20 47l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z"/>
-    <circle class="circle-delete fil0 str0" cx="1730" cy="8817" r="190"/>
-    <g id="_2058151447408">
-    <path class="fil2" d="M1756 8804c-1,0 -2,0 -3,0 -2,1 -3,1 -4,1l-1 0 0 -34c0,-6 -5,-10 -11,-13 -8,-3 -19,-5 -30,-5 -10,0 -21,2 -29,5 -7,3 -11,8 -11,13l0 71c0,5 4,9 11,12 7,4 18,6 29,6 2,0 5,0 7,-1 2,0 4,0 7,0l0 0 1 0c3,7 8,12 14,16 6,3 13,5 20,5 10,0 20,-4 27,-11 7,-7 11,-16 11,-27 0,-10 -4,-20 -11,-27 -7,-7 -17,-11 -27,-11zm-49 -45c9,0 17,1 23,3 8,2 12,6 12,9 0,3 -4,6 -12,9 -6,1 -14,3 -23,3 -9,0 -17,-2 -22,-3 -8,-3 -12,-6 -12,-9 0,-3 4,-7 12,-9 5,-2 13,-3 22,-3zm-32 22c3,3 8,4 14,6 5,1 12,2 18,2 7,0 13,-1 19,-2 5,-2 10,-3 14,-6l2 -1 0 9c0,2 -4,6 -12,8 -6,2 -14,4 -23,4 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-8l0 -9 2 1zm0 18c3,3 8,4 14,6 5,1 12,1 18,1 7,0 13,0 19,-1 5,-2 10,-3 14,-6l2 -1 0 9 -1 0c-2,1 -5,2 -7,4 -2,1 -4,3 -5,5l0 0 -1 0c-3,1 -6,1 -10,2 -3,0 -7,1 -11,1 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-9l0 -8 2 1zm0 18c3,2 8,4 14,5 5,2 12,2 18,2 2,0 5,0 7,0 2,0 4,-1 7,-1l2 0 -1 2c-1,1 -2,3 -2,5 -1,1 -1,3 -2,5l0 0 -1 1c-1,0 -3,0 -4,0 -2,0 -4,0 -6,0 -9,0 -17,-1 -22,-3 -8,-2 -12,-6 -12,-9l0 -8 2 1zm32 37c-9,0 -17,-1 -22,-3 -8,-3 -12,-6 -12,-9l0 -8 2 1c3,2 8,4 14,5 5,1 12,2 18,2 3,0 6,0 9,-1l2 0 0 2c0,1 0,3 0,4 0,2 1,3 1,5l0 1 -3 1c-3,0 -6,0 -9,0zm49 20c-9,0 -17,-3 -23,-9 -6,-6 -10,-14 -10,-23 0,-9 4,-17 10,-23 6,-5 14,-9 23,-9 9,0 17,4 23,9 6,6 9,14 9,23 0,9 -3,17 -9,23 -6,6 -14,9 -23,9z"/>
-    <path class="fil2" d="M1768 8833c0,-1 0,-2 -1,-2 0,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -1,0 -2,1l-19 18c-1,1 -1,2 -1,3 0,0 0,1 1,2 1,0 2,1 2,1 1,0 2,-1 3,-1l19 -19c0,-1 0,-1 0,-2z"/>
-    <path class="fil3" d="M1767 8833c0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0l-19 19c0,0 -1,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,0 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 0,0 1,-1 1,-1l19 -19c0,0 0,0 0,0 0,-1 0,-1 0,-1zm2 -2c0,1 0,1 0,2 0,0 0,1 0,1 0,1 0,1 -1,2l-19 19c0,0 0,0 -1,1 0,0 -1,0 -2,0 0,0 -1,0 -1,0 -1,-1 -1,-1 -2,-1 0,-1 0,-1 -1,-2 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 1,-1 1,-1 1,-1l19 -19c1,-1 1,-1 2,-1 0,0 1,0 1,0 1,0 1,0 2,0 0,0 1,0 1,1 1,0 1,1 1,1z"/>
-    <circle class="circle-delete fil2" cx="1747" cy="8833" r="5"/>
-    <path class="fil3" d="M1751 8833c0,-1 0,-2 -1,-2 -1,-1 -2,-2 -3,-2 -1,0 -2,1 -3,2 -1,0 -1,1 -1,2 0,2 0,3 1,3 1,1 2,2 3,2 1,0 2,-1 3,-2 1,0 1,-1 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,4 -2,5 -1,1 -2,2 -4,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z"/>
-    <circle class="circle-delete fil2" cx="1765" cy="8851" r="5"/>
-    <path class="fil3" d="M1769 8851c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -2,2 -2,3 0,1 1,2 2,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-2 3,-2 5,-2 1,0 3,0 4,2z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="-1328" cy="10748" r="190"/>
-    <g id="_2058151501776">
-    <path class="fil1" d="M-1373 10722c11,0 19,-8 19,-19 0,-10 -8,-19 -19,-19 -10,0 -19,9 -19,19 0,11 9,19 19,19zm9 -6l0 0c-6,3 -12,3 -17,0l0 -5c0,-2 1,-3 3,-3 0,0 0,0 0,0 2,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 1,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 4,1 4,3l0 5zm-9 -27l0 0c8,0 15,6 15,14 0,3 -1,6 -2,8 0,-3 -2,-6 -5,-7 1,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 3,-2 5,-2 8,-2z"/>
-    <path class="fil1" d="M-1284 10684c-11,0 -19,9 -19,19 0,11 8,19 19,19 10,0 19,-8 19,-19 0,-10 -9,-19 -19,-19zm8 32l0 0c-5,3 -11,3 -16,0l0 -5c-1,-2 1,-3 3,-3 0,0 0,0 0,0 1,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 0,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 3,1 3,3l0 5zm5 -5l0 0c0,-3 -2,-6 -5,-7 0,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 7,-5 16,-2 21,5 3,4 3,10 0,15z"/>
-    <path class="fil1" d="M-1328 10744c-2,0 -3,-1 -3,-2l-4 0c0,2 2,5 4,5l0 3 5 0 0 -3c2,0 4,-3 4,-5 0,-5 -4,-6 -6,-7 -2,0 -3,-1 -3,-2 0,-1 1,-2 3,-2 1,0 2,1 2,2l4 0c0,-3 -2,-5 -4,-6l0 -2 -5 0 0 2c-2,1 -4,3 -4,6 0,5 4,6 6,6 2,1 3,1 3,3 0,1 -1,2 -2,2z"/>
-    <polygon class="fil1" points="-1331,10706 -1326,10706 -1326,10712 -1331,10712 "/>
-    <polygon class="fil1" points="-1303,10735 -1297,10735 -1297,10739 -1303,10739 "/>
-    <polygon class="fil1" points="-1360,10735 -1354,10735 -1354,10739 -1360,10739 "/>
-    <polygon class="fil1" points="-1352,10716 -1349,10713 -1345,10718 -1348,10721 "/>
-    <polygon class="fil1" points="-1312,10718 -1308,10713 -1305,10716 -1309,10721 "/>
-    <path class="fil1" d="M-1265 10809l0 -48c0,-2 -1,-3 -2,-3 0,0 0,0 0,0l-25 0 0 -10c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-14 0c5,-11 0,-23 -11,-28 -11,-5 -23,0 -28,11 -2,5 -2,11 0,17l-14 0c-2,0 -2,1 -2,2 0,0 0,0 0,0l0 10 -24 0c-1,0 -2,1 -2,3 0,0 0,0 0,0l0 48c0,1 1,2 2,2 0,0 0,0 0,0l121 0c1,0 2,-1 2,-2 0,0 0,0 0,0zm-99 -2l0 0 -22 0 0 -44 22 0 0 44zm36 -87l0 0c9,0 16,8 16,17 0,10 -7,17 -16,17 -10,0 -17,-7 -17,-17 0,-9 7,-17 17,-17zm4 87l0 0 -9 0 0 -15c0,-2 2,-4 5,-4 2,0 4,2 4,4l0 15zm27 0l0 0 -23 0 0 -15c0,-4 -4,-8 -8,-8 -5,0 -9,4 -9,8l0 15 -23 0 0 -57 15 0c7,9 20,11 29,4 2,-1 3,-2 4,-4l15 0 0 57zm28 0l0 0 -23 0 0 -44 23 0 0 44z"/>
-    <path class="fil1" d="M-1343 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1379 10803l8 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z"/>
-    <path class="fil1" d="M-1284 10803l8 0c2,0 3,-1 3,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z"/>
-    <path class="fil1" d="M-1324 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1305 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1343 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z"/>
-    <path class="fil1" d="M-1316 10765l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0zm4 2l0 0 5 0 0 4 -5 0 0 -4z"/>
-    </g>
-    <circle class="circle-delete fil0 str0" cx="201" cy="11002" r="190"/>
-    <path class="fil1" d="M173 10981c-1,0 -1,0 -1,-1 -1,0 -2,0 -2,-1 -1,0 -1,-1 -2,-1l0 0c0,-1 -1,-2 -1,-2 0,-1 0,-2 0,-2 0,-1 0,-1 0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-1 -1,-1 0,0 0,-1 0,-1 -1,0 -1,-1 -1,-2 -1,-1 -1,-1 -1,-2l0 0c0,-1 0,-2 1,-2 0,-1 0,-2 1,-2 0,-1 0,-1 0,-1 0,0 0,-1 1,-1 0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 0,-1 0,-2 0,-1 1,-1 1,-2l0 0c1,-1 1,-1 2,-2 0,0 1,0 2,-1 0,0 0,0 1,0 0,0 0,0 0,0 1,-1 1,-1 1,-1 0,0 0,0 1,-1 0,0 1,-1 1,-1 1,-1 2,-1 2,-1l0 0c1,-1 2,-1 2,-1 1,0 2,0 3,1 0,0 0,0 1,0 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,0 1,0 1,-1 2,-1 3,-1 0,0 1,0 2,1l0 0c1,0 1,0 2,1 0,0 1,1 1,1 1,1 1,1 1,1 0,0 0,0 1,1 0,0 0,0 0,0 1,0 1,0 1,0 1,1 2,1 2,1 1,1 1,1 2,2l0 0c0,1 1,1 1,2 0,1 0,2 0,2 0,1 0,1 0,1 0,0 0,1 0,1 1,0 1,1 1,1 0,0 0,0 0,1 1,0 1,1 1,2 1,0 1,1 1,2l0 0c0,1 0,1 -1,2 0,1 0,2 -1,2 0,0 0,1 0,1 0,0 0,0 -1,1 0,0 0,0 0,1 0,0 0,0 0,1 0,0 0,1 0,2 0,0 -1,1 -1,2l0 0c-1,0 -1,1 -2,1 0,1 -1,1 -2,1 0,1 0,1 -1,1 0,0 0,0 0,0 -1,0 -1,1 -1,1 0,0 0,0 -1,0 0,1 -1,2 -1,2 -1,1 -1,1 -2,1l0 0c-1,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 -1,0 -1,0 -1,0 -1,0 -2,0 0,0 0,0 -1,0 0,0 0,0 0,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -2,0 -3,0 0,0 -1,0 -2,0l0 0c0,0 -1,0 -2,-1 0,0 -1,-1 -1,-2 -1,0 -1,0 -1,0 0,0 0,-1 -1,-1 0,0 0,0 0,0zm92 -36l1 0 0 1 -1 0 0 -1 0 0zm7 2l9 6c1,1 1,2 2,3 0,1 -1,3 -1,4l-40 57c0,0 -1,1 -1,1 -1,0 -1,1 -2,1 0,0 0,0 0,0l0 0 -28 32c0,1 -1,2 -3,2 -1,0 -2,0 -3,-1l0 0 -5 1c0,0 0,0 -1,0 0,0 0,-1 -1,-1l-1 -1 0 1c0,2 0,4 -1,5 -2,1 -3,1 -5,1 -2,0 -3,0 -4,-1 -1,-1 -2,-3 -2,-5l0 -21c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1 0,0 0,0 0,1l0 20c0,1 -1,2 -1,2 0,0 -1,1 -2,1 0,0 -1,-1 -1,-1 -1,0 -1,-1 -1,-2l0 -20c0,-2 1,-3 2,-5 1,-1 3,-1 4,-1 2,0 3,0 5,1 1,2 1,3 1,5l0 21c0,1 1,1 1,1 0,1 1,1 1,1 1,0 1,0 1,-1 1,0 1,0 1,-1l0 -6c0,-1 0,-1 0,-1 0,0 0,-1 1,-1l0 0c0,0 1,0 1,0 1,0 1,0 2,0l4 4 3 0c0,0 0,-1 0,-1 0,0 0,0 0,-1l21 -37c0,0 0,-1 0,-2 0,0 1,-1 1,-1l40 -58c0,-1 2,-1 3,-1 1,-1 2,0 3,0l0 0zm-44 66l-20 35 26 -31 -6 -4zm36 -47c2,1 3,2 5,3l-5 -3zm-34 42l8 6 31 -44 -8 -6 -31 44zm41 -43c-1,-1 -3,-2 -4,-3l4 3zm-8 -5l9 6 6 -9 -9 -6 -6 9zm-25 100c1,-1 1,-2 1,-3l0 -31c1,-1 2,-2 3,-3l0 0c0,0 0,0 1,0 0,-1 0,-1 1,-1l0 0 0 35c0,2 -1,4 -3,6 -1,1 -3,2 -6,2l-71 0c-2,0 -4,-1 -6,-2 -1,-2 -2,-4 -2,-6l0 -110c0,-2 1,-5 2,-6 2,-2 4,-3 6,-3l71 0c3,0 5,1 6,3 2,1 3,4 3,6l0 24c-2,2 -3,4 -5,7l0 -31c0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-71 0c-1,0 -2,0 -3,1 0,1 -1,2 -1,3l0 110c0,1 1,2 1,3 1,0 2,1 3,1l71 0c1,0 2,-1 3,-1zm-68 -55l51 0 0 0c-1,1 -1,1 -1,2 0,0 0,1 0,1l0 0c0,1 0,1 -1,2l-49 0c-1,0 -2,-1 -2,-1 0,-1 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1zm0 -11l58 0c-1,2 -2,3 -3,5l-55 0c-1,0 -2,0 -2,-1 0,0 -1,-1 -1,-1 0,-1 1,-2 1,-2 0,0 1,-1 2,-1zm-2 26c0,-1 -1,-1 -1,-2 0,-1 1,-1 1,-2 0,0 1,0 2,0l46 0 -3 4 -43 0c-1,0 -2,0 -2,0zm25 -46c-2,2 -5,3 -8,3 -4,0 -7,-1 -9,-3 -2,-2 -3,-5 -3,-8 0,-3 1,-6 3,-8 2,-2 5,-4 9,-4 3,0 6,2 8,4 2,2 3,5 3,8 0,3 -1,6 -3,8zm-3 -13c-2,-1 -4,-2 -5,-2 -2,0 -4,1 -5,2 -2,1 -3,3 -3,5 0,2 1,4 3,5 1,1 3,2 5,2 1,0 3,-1 5,-2 1,-1 2,-3 2,-5 0,-2 -1,-4 -2,-5zm-20 2c0,0 0,0 0,1l0 0c-1,0 -1,0 -1,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 1,1l0 0c0,0 0,1 0,1 0,1 1,1 1,1l0 0c0,1 0,1 0,2 0,0 0,1 0,1l0 0c0,0 0,1 0,1 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 1,0l0 0c0,0 0,1 1,1 0,0 1,0 1,1l0 0c0,0 1,0 1,0 0,1 1,1 1,1l0 0c0,1 0,1 1,1 0,1 0,1 1,1 0,0 0,0 1,0 0,0 0,0 1,0l0 0c0,0 1,0 1,-1 1,0 1,0 2,0l0 0c0,0 0,0 1,0 0,1 1,1 1,1l0 0c1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,-1 1,0 1,0 1,-1l0 0c0,0 1,0 1,-1 0,0 1,0 1,0l0 0c0,-1 1,-1 1,-1 1,0 1,-1 1,-1l0 0c1,0 1,0 1,0 1,0 1,-1 1,-1 0,0 1,0 1,-1 0,0 0,-1 0,-1l0 0c0,0 0,-1 0,-1 0,-1 0,-1 0,-2l0 0c0,0 1,0 1,-1 0,0 0,-1 0,-1l0 0c1,0 1,-1 1,-1 0,0 0,-1 0,-1 0,0 0,-1 0,-1 0,-1 0,-1 -1,-1l0 0c0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-2l0 0c0,0 0,0 0,-1 0,0 0,-1 0,-1l0 0c0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 0,0 -1,-1l0 0c0,0 0,0 -1,0 0,0 -1,-1 -1,-1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 0,0 -1,-1 0,0 0,0 -1,0 0,0 0,0 -1,0 0,0 0,0 -1,0l0 0c0,0 -1,0 -1,0 -1,0 -1,0 -1,0l0 0c-1,0 -1,0 -2,0 0,0 -1,0 -1,0l0 0c-1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,1 -1,1 -1,1l0 0c0,1 -1,1 -1,1 0,1 -1,1 -1,1l0 0c0,0 -1,1 -1,1 -1,0 -1,0 -1,0l0 0c-1,1 -1,1 -1,1 -1,0 -1,0 -1,1 0,0 -1,0 -1,1 0,0 0,0 0,1l0 0c0,0 0,1 0,1 0,1 0,1 0,1l0 0c0,1 -1,1 -1,2z"/>
-    <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190"/>
-    <g id="_2058151497424">
-    <path class="fil2" d="M261 258l-122 0c-1,0 -2,1 -2,3 0,1 1,3 2,3l122 0c1,0 3,-2 3,-3 0,-2 -2,-3 -3,-3z"/>
-    <path class="fil2" d="M150 253l16 0c1,0 2,-2 2,-3l0 -22c0,-1 -1,-2 -2,-2l-16 0c-2,0 -3,1 -3,2l0 22c0,1 1,3 3,3zm2 -22l11 0 0 16 -11 0 0 -16z"/>
-    <path class="fil2" d="M176 209c-1,0 -2,2 -2,3l0 38c0,1 1,3 2,3l16 0c2,0 3,-2 3,-3l0 -38c0,-1 -1,-3 -3,-3l-16 0zm13 38l-10 0 0 -32 10 0 0 32z"/>
-    <path class="fil2" d="M203 193c-2,0 -3,1 -3,3l0 54c0,1 1,3 3,3l16 0c1,0 2,-2 2,-3l0 -54c0,-2 -1,-3 -2,-3l-16 0zm13 54l-11 0 0 -48 11 0 0 48z"/>
-    <path class="fil2" d="M226 169l0 81c0,1 2,3 3,3l16 0c1,0 3,-2 3,-3l0 -81c0,-2 -2,-3 -3,-3l-16 0c-1,0 -3,1 -3,3zm6 3l10 0 0 75 -10 0 0 -75z"/>
-    <path class="fil2" d="M150 215c0,0 0,0 1,0 21,-10 41,-23 58,-40 8,-9 16,-19 23,-29 0,2 1,5 1,7 0,1 1,2 3,2 0,0 0,0 0,0 2,0 3,-2 2,-3 -1,-5 -2,-9 -3,-13 0,-2 -1,-3 -3,-2 -4,1 -8,2 -12,2 -2,1 -3,2 -3,4 1,1 2,2 3,2 0,0 0,0 0,0 3,-1 5,-1 7,-2 -6,10 -14,20 -22,28 -16,17 -35,30 -56,39 -2,0 -2,2 -2,3 1,1 2,2 3,2z"/>
-    </g>
-  </g>
-  </svg>
-            </div>
+        <a href="{% url 'practice' pk=8 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
+      </div>
+      <div class="pract-prof">
+        <!-- <img class="pract-icon" data-src="/static/img/practise/pract-1.png" alt=""> -->
+        <div class="pract-icon">
+          <div class="svg-pract">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="142px" height="142px" version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 400 400" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
+                  .str0 {
+                    stroke: #D2A351;
+                    stroke-width: 2.66667
+                  }
 
+                  .fil0 {
+                    fill: none
+                  }
+
+                  .fil2 {
+                    fill: #D2A351
+                  }
+
+                  .fil3 {
+                    fill: #FEFEFE;
+                    fill-rule: nonzero
+                  }
+
+                  .fil1 {
+                    fill: #D2A351;
+                    fill-rule: nonzero
+                  }
+                  ]]>
+                </style>
+              </defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer" />
+                <circle class="circle-delete fil0 str0" cx="1730" cy="6889" r="190" />
+                <g id="_2058151449296">
+                  <path class="fil1"
+                    d="M1792 6848l-40 -5 0 -9c0,-1 -1,-2 -2,-2l-60 0c-1,-4 -5,-6 -9,-6 -4,0 -8,2 -9,6l-3 0c-1,0 -2,1 -2,2l0 116c0,2 1,3 2,3l81 0c1,0 2,-1 2,-3l0 -3 26 4c0,0 0,0 0,0 2,0 2,-1 3,-2l13 -99c0,-1 -1,-2 -2,-2zm-3 4l0 0 -1 9 -10 10 -26 -4 0 -20 37 5zm-108 -22l0 0c2,0 3,1 4,2l-8 0c1,-1 2,-2 4,-2zm67 118l0 0 -77 0 0 -112 16 0c0,0 0,0 0,0l0 20c0,2 -1,4 -3,4 -2,0 -4,-2 -4,-4l0 -2c0,0 0,0 0,0l0 -9c0,-1 1,-2 1,-2 0,0 1,1 1,2l0 9 4 0 0 -9c0,-3 -2,-6 -5,-6 -3,0 -5,3 -5,6l0 5c0,0 0,0 0,0l0 6c0,4 3,8 8,8 4,0 7,-4 7,-8l0 -20c0,0 0,0 0,0l57 0 0 112zm29 -2l0 0 -25 -3 0 -72 26 4c0,0 0,0 0,0 1,0 1,0 2,-1l7 -6 -10 78z" />
+                  <polygon class="fil1" points="1733,6845 1743,6845 1743,6849 1733,6849 " />
+                  <polygon class="fil1" points="1724,6853 1743,6853 1743,6857 1724,6857 " />
+                  <polygon class="fil1" points="1675,6872 1743,6872 1743,6876 1675,6876 " />
+                  <polygon class="fil1" points="1675,6881 1743,6881 1743,6885 1675,6885 " />
+                  <polygon class="fil1" points="1675,6889 1743,6889 1743,6893 1675,6893 " />
+                  <polygon class="fil1" points="1675,6898 1705,6898 1705,6902 1675,6902 " />
+                  <polygon class="fil1" points="1714,6926 1741,6926 1741,6930 1714,6930 " />
+                  <path class="fil1"
+                    d="M1719 6920c-1,-1 -1,-3 -2,-4 0,-1 0,-2 1,-3 0,0 1,0 1,0 1,0 1,1 1,1 1,1 1,2 1,3 0,0 0,1 0,1 0,1 0,2 1,3 0,1 1,2 3,2 0,0 0,0 0,-1 2,0 3,-1 3,-2 0,-1 0,-2 1,-2 0,-1 0,-2 0,-3 0,0 1,1 1,1 0,1 0,1 0,2 0,2 2,3 4,4l0 0c1,-1 2,-1 2,-1l4 -3 -2 -3 -4 2 0 0c0,0 0,0 0,0 0,0 0,-1 0,-1 0,-1 0,-2 -1,-2 0,-2 -2,-4 -4,-4 -1,1 -2,1 -3,2 0,1 -1,2 -1,3 0,0 0,-1 0,-2 -1,-2 -2,-4 -4,-4 -3,-1 -5,0 -7,2 -1,2 -1,4 -1,6 1,2 2,4 3,5l3 -2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="-1328" cy="8817" r="190" />
+                <path class="fil1"
+                  d="M-1298 8794c0,0 0,-1 1,-1 0,-1 0,-1 0,-2l0 -1 22 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l-24 0 -1 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1l0 -1 0 0c0,-2 -1,-4 -1,-6 -1,-2 -1,-3 -2,-5l-1 -1 31 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-39 0 0 -1c-2,-1 -5,-1 -7,-2 -2,-1 -5,-1 -7,-1 -3,0 -5,0 -8,1 -2,1 -4,1 -6,2l0 1 -48 0 0 -4c0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1l0 0c-1,0 -2,0 -2,1 -1,1 -1,2 -1,3l0 112c0,1 0,2 1,3 0,0 1,1 2,1l0 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3l0 -11 12 0 0 7c0,1 0,2 1,2 0,1 1,1 2,1l11 0 0 9c0,1 1,1 1,2 1,1 2,1 3,1l64 0c1,0 1,0 2,-1 1,-1 1,-1 1,-2l0 -9 11 0c1,0 2,0 3,-1 0,0 1,-1 1,-2l0 -7 3 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-3 0 0 -1c0,-3 -1,-5 -2,-7 -1,-2 -3,-4 -5,-6l-2 -2 12 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2 0,-1 -1,-2 -1,-3 -1,-1 -2,-1 -3,-1 -6,0 -17,-1 -24,0l0 0c-2,-1 -4,-2 -6,-2 -2,-1 -5,-2 -5,-2l-1 0 0 0c-2,-1 -3,-2 -3,-4 0,-2 0,-3 0,-3l0 -1 0 0 0 -1c1,0 1,0 1,-1 0,0 1,-1 1,-1l0 0 37 0c1,0 2,-1 3,-1 0,-1 1,-2 1,-3 0,-1 -1,-2 -1,-2 -1,-1 -2,-1 -3,-1l-35 0 5 -2c2,-1 3,-2 4,-4 2,-2 3,-4 3,-6zm-11 -13l0 2c0,1 0,2 1,2 0,1 1,1 2,1l0 0c0,1 1,1 1,1 0,0 0,1 1,1 0,1 0,1 0,2 0,1 0,2 0,2 -1,2 -1,3 -2,3 -1,2 -2,2 -2,2l0 0 0 0c-1,0 -2,0 -3,0 0,1 -1,1 -1,2 -2,4 -4,9 -7,12 -3,3 -6,5 -9,5 -4,0 -7,-2 -9,-5 -3,-3 -6,-8 -7,-12 -1,0 -1,-1 -2,-1 0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,0l0 0 0 0c-1,0 -2,0 -3,-2 0,0 -1,-1 -1,-3 0,0 -1,-1 0,-2 0,-1 0,-1 0,-2 0,0 0,-1 0,-1 1,0 1,0 1,-1l0 0c1,0 2,0 3,-1 0,0 0,-1 0,-2l0 -2c0,-5 2,-9 6,-12 3,-3 9,-5 14,-5 5,0 10,2 14,5 3,3 5,7 5,12l0 0zm-6 50c-1,2 -3,4 -6,5 -2,2 -5,3 -7,3 -3,0 -6,-1 -8,-3 -2,-1 -4,-3 -5,-5l-1 -1 1 -1c1,0 2,-1 3,-3 1,-1 2,-2 2,-4l0 -1 1 0c1,1 2,1 3,1 1,0 3,1 4,1 1,0 2,-1 3,-1 1,0 2,0 3,-1l1 0 1 1c0,2 0,3 1,4 1,2 2,3 3,3l1 1 0 1zm-43 -3l-32 0 0 -15 45 0 0 0c1,0 1,1 1,1 1,1 1,1 1,1l1 1 -1 0 1 1c0,0 0,2 -1,4 0,2 -1,2 -2,3l-1 0 0 0c-1,0 -3,1 -6,2 -2,0 -4,1 -6,2l0 0 0 0zm-1 -37c0,1 0,1 0,2 0,0 0,1 0,1 1,2 2,4 3,6 1,2 3,3 5,4l5 2 -44 0 0 -16 31 0 0 1zm8 -22c-1,2 -2,3 -2,5 -1,2 -1,4 -1,6l0 0 -1 1c0,0 -1,0 -1,1 0,0 -1,0 -1,1l0 0 -33 0 0 -15 40 0 -1 1zm-38 66l19 0 -2 2c-2,2 -3,4 -4,6 -1,2 -2,4 -2,7l0 1 -12 0 0 -16 1 0zm88 38l-56 0 0 -15 57 0 0 15 -1 0zm15 -12l-7 0 0 -7c0,-1 0,-2 -1,-2 -1,-1 -1,-1 -2,-1l-64 0c-1,0 -2,0 -3,1 0,0 -1,1 -1,2l0 7 -7 0 0 -11c0,-4 2,-7 6,-10 4,-3 11,-6 16,-8l1 0 0 1c2,4 4,7 8,9 3,2 8,4 12,4 4,0 8,-2 12,-4 3,-2 6,-5 7,-9l0 -1 1 0c6,2 12,5 17,8 3,3 6,6 6,10l0 11 -1 0z" />
+                <circle class="circle-delete fil0 str0" cx="201" cy="9071" r="190" />
+                <path class="fil2"
+                  d="M201 9007c-7,0 -13,2 -18,6 -5,4 -8,10 -9,16l0 1 -33 0c-1,0 -2,1 -2,1 -1,1 -2,2 -2,3l0 48c0,1 1,2 2,3 0,0 1,1 2,1l3 0 0 45c0,1 1,1 1,2 1,1 2,1 3,1l106 0c1,0 2,0 3,-1 0,-1 1,-1 1,-2l0 -45 3 0c1,0 2,-1 2,-1 1,-1 1,-2 1,-3l0 -48c0,-1 0,-2 -1,-3 0,0 -1,-1 -2,-1l-33 0 0 -1c-1,-6 -4,-12 -9,-16 -5,-4 -11,-6 -18,-6zm0 120l-49 0 0 -41 12 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 22 0 0 5c0,1 1,2 1,2 1,1 2,2 3,2l18 0c1,0 2,-1 3,-2 0,0 1,-1 1,-2l0 -5 12 0 0 41 -49 0zm0 -48l-11 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -19 0 0 -42 112 0 0 42 -19 0 0 -6c0,-1 -1,-1 -1,-2 -1,-1 -2,-1 -3,-1l-18 0c-1,0 -2,0 -3,1 0,1 -1,1 -1,2l0 6 -11 0zm0 -49l-20 0 0 -1c1,-5 4,-8 8,-11 3,-3 7,-4 12,-4 5,0 9,1 12,4 4,3 7,6 8,11l0 1 -20 0zm20 47l10 0 0 11 -11 0 0 -11 1 0zm-48 0l9 0 0 11 -11 0 0 -11 2 0z" />
+                <circle class="circle-delete fil0 str0" cx="1730" cy="8817" r="190" />
+                <g id="_2058151447408">
+                  <path class="fil2"
+                    d="M1756 8804c-1,0 -2,0 -3,0 -2,1 -3,1 -4,1l-1 0 0 -34c0,-6 -5,-10 -11,-13 -8,-3 -19,-5 -30,-5 -10,0 -21,2 -29,5 -7,3 -11,8 -11,13l0 71c0,5 4,9 11,12 7,4 18,6 29,6 2,0 5,0 7,-1 2,0 4,0 7,0l0 0 1 0c3,7 8,12 14,16 6,3 13,5 20,5 10,0 20,-4 27,-11 7,-7 11,-16 11,-27 0,-10 -4,-20 -11,-27 -7,-7 -17,-11 -27,-11zm-49 -45c9,0 17,1 23,3 8,2 12,6 12,9 0,3 -4,6 -12,9 -6,1 -14,3 -23,3 -9,0 -17,-2 -22,-3 -8,-3 -12,-6 -12,-9 0,-3 4,-7 12,-9 5,-2 13,-3 22,-3zm-32 22c3,3 8,4 14,6 5,1 12,2 18,2 7,0 13,-1 19,-2 5,-2 10,-3 14,-6l2 -1 0 9c0,2 -4,6 -12,8 -6,2 -14,4 -23,4 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-8l0 -9 2 1zm0 18c3,3 8,4 14,6 5,1 12,1 18,1 7,0 13,0 19,-1 5,-2 10,-3 14,-6l2 -1 0 9 -1 0c-2,1 -5,2 -7,4 -2,1 -4,3 -5,5l0 0 -1 0c-3,1 -6,1 -10,2 -3,0 -7,1 -11,1 -9,0 -17,-2 -22,-4 -8,-2 -12,-6 -12,-9l0 -8 2 1zm0 18c3,2 8,4 14,5 5,2 12,2 18,2 2,0 5,0 7,0 2,0 4,-1 7,-1l2 0 -1 2c-1,1 -2,3 -2,5 -1,1 -1,3 -2,5l0 0 -1 1c-1,0 -3,0 -4,0 -2,0 -4,0 -6,0 -9,0 -17,-1 -22,-3 -8,-2 -12,-6 -12,-9l0 -8 2 1zm32 37c-9,0 -17,-1 -22,-3 -8,-3 -12,-6 -12,-9l0 -8 2 1c3,2 8,4 14,5 5,1 12,2 18,2 3,0 6,0 9,-1l2 0 0 2c0,1 0,3 0,4 0,2 1,3 1,5l0 1 -3 1c-3,0 -6,0 -9,0zm49 20c-9,0 -17,-3 -23,-9 -6,-6 -10,-14 -10,-23 0,-9 4,-17 10,-23 6,-5 14,-9 23,-9 9,0 17,4 23,9 6,6 9,14 9,23 0,9 -3,17 -9,23 -6,6 -14,9 -23,9z" />
+                  <path class="fil2"
+                    d="M1768 8833c0,-1 0,-2 -1,-2 0,-1 -1,-1 -2,-1 0,0 0,0 0,0 -1,0 -1,0 -2,1l-19 18c-1,1 -1,2 -1,3 0,0 0,1 1,2 1,0 2,1 2,1 1,0 2,-1 3,-1l19 -19c0,-1 0,-1 0,-2z" />
+                  <path class="fil3"
+                    d="M1767 8833c0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 0,0 -1,0 0,0 0,0 0,0l-19 19c0,0 -1,1 -1,1 0,0 0,0 0,1 0,0 0,0 0,0 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 0,0 1,0 1,0 1,0 0,0 1,-1 1,-1l19 -19c0,0 0,0 0,0 0,-1 0,-1 0,-1zm2 -2c0,1 0,1 0,2 0,0 0,1 0,1 0,1 0,1 -1,2l-19 19c0,0 0,0 -1,1 0,0 -1,0 -2,0 0,0 -1,0 -1,0 -1,-1 -1,-1 -2,-1 0,-1 0,-1 -1,-2 0,0 0,-1 0,-1 0,-1 0,-2 0,-2 1,-1 1,-1 1,-1l19 -19c1,-1 1,-1 2,-1 0,0 1,0 1,0 1,0 1,0 2,0 0,0 1,0 1,1 1,0 1,1 1,1z" />
+                  <circle class="circle-delete fil2" cx="1747" cy="8833" r="5" />
+                  <path class="fil3"
+                    d="M1751 8833c0,-1 0,-2 -1,-2 -1,-1 -2,-2 -3,-2 -1,0 -2,1 -3,2 -1,0 -1,1 -1,2 0,2 0,3 1,3 1,1 2,2 3,2 1,0 2,-1 3,-2 1,0 1,-1 1,-3zm0 -4c1,1 2,3 2,4 0,2 -1,4 -2,5 -1,1 -2,2 -4,2 -2,0 -3,-1 -4,-2 -1,-1 -2,-3 -2,-5 0,-1 1,-3 2,-4 1,-1 2,-2 4,-2 2,0 3,1 4,2z" />
+                  <circle class="circle-delete fil2" cx="1765" cy="8851" r="5" />
+                  <path class="fil3"
+                    d="M1769 8851c0,-1 -1,-2 -2,-3 0,-1 -1,-1 -2,-1 -2,0 -3,0 -3,1 -1,1 -2,2 -2,3 0,1 1,2 2,3 0,0 1,1 3,1 1,0 2,-1 2,-1 1,-1 2,-2 2,-3zm0 -4c1,1 2,2 2,4 0,2 -1,3 -2,4 -1,1 -3,2 -4,2 -2,0 -4,-1 -5,-2 -1,-1 -2,-2 -2,-4 0,-2 1,-3 2,-4 1,-2 3,-2 5,-2 1,0 3,0 4,2z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="-1328" cy="10748" r="190" />
+                <g id="_2058151501776">
+                  <path class="fil1"
+                    d="M-1373 10722c11,0 19,-8 19,-19 0,-10 -8,-19 -19,-19 -10,0 -19,9 -19,19 0,11 9,19 19,19zm9 -6l0 0c-6,3 -12,3 -17,0l0 -5c0,-2 1,-3 3,-3 0,0 0,0 0,0 2,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 1,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 4,1 4,3l0 5zm-9 -27l0 0c8,0 15,6 15,14 0,3 -1,6 -2,8 0,-3 -2,-6 -5,-7 1,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 3,-2 5,-2 8,-2z" />
+                  <path class="fil1"
+                    d="M-1284 10684c-11,0 -19,9 -19,19 0,11 8,19 19,19 10,0 19,-8 19,-19 0,-10 -9,-19 -19,-19zm8 32l0 0c-5,3 -11,3 -16,0l0 -5c-1,-2 1,-3 3,-3 0,0 0,0 0,0 1,0 2,-1 2,-2 0,-1 0,-1 0,-2 -1,-1 -1,-2 -1,-3 0,-2 2,-4 4,-4 2,0 4,1 4,3 0,2 0,3 -1,4 -1,1 -1,2 0,3 1,0 1,1 2,1 2,0 3,1 3,3l0 5zm5 -5l0 0c0,-3 -2,-6 -5,-7 0,-1 1,-3 0,-4 -1,-5 -5,-8 -10,-7 -4,1 -6,4 -6,8 0,1 0,2 0,3 -1,1 -2,1 -2,2 -2,1 -3,3 -3,5 -4,-7 -2,-16 5,-20 7,-5 16,-2 21,5 3,4 3,10 0,15z" />
+                  <path class="fil1"
+                    d="M-1328 10744c-2,0 -3,-1 -3,-2l-4 0c0,2 2,5 4,5l0 3 5 0 0 -3c2,0 4,-3 4,-5 0,-5 -4,-6 -6,-7 -2,0 -3,-1 -3,-2 0,-1 1,-2 3,-2 1,0 2,1 2,2l4 0c0,-3 -2,-5 -4,-6l0 -2 -5 0 0 2c-2,1 -4,3 -4,6 0,5 4,6 6,6 2,1 3,1 3,3 0,1 -1,2 -2,2z" />
+                  <polygon class="fil1" points="-1331,10706 -1326,10706 -1326,10712 -1331,10712 " />
+                  <polygon class="fil1" points="-1303,10735 -1297,10735 -1297,10739 -1303,10739 " />
+                  <polygon class="fil1" points="-1360,10735 -1354,10735 -1354,10739 -1360,10739 " />
+                  <polygon class="fil1" points="-1352,10716 -1349,10713 -1345,10718 -1348,10721 " />
+                  <polygon class="fil1" points="-1312,10718 -1308,10713 -1305,10716 -1309,10721 " />
+                  <path class="fil1"
+                    d="M-1265 10809l0 -48c0,-2 -1,-3 -2,-3 0,0 0,0 0,0l-25 0 0 -10c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-14 0c5,-11 0,-23 -11,-28 -11,-5 -23,0 -28,11 -2,5 -2,11 0,17l-14 0c-2,0 -2,1 -2,2 0,0 0,0 0,0l0 10 -24 0c-1,0 -2,1 -2,3 0,0 0,0 0,0l0 48c0,1 1,2 2,2 0,0 0,0 0,0l121 0c1,0 2,-1 2,-2 0,0 0,0 0,0zm-99 -2l0 0 -22 0 0 -44 22 0 0 44zm36 -87l0 0c9,0 16,8 16,17 0,10 -7,17 -16,17 -10,0 -17,-7 -17,-17 0,-9 7,-17 17,-17zm4 87l0 0 -9 0 0 -15c0,-2 2,-4 5,-4 2,0 4,2 4,4l0 15zm27 0l0 0 -23 0 0 -15c0,-4 -4,-8 -8,-8 -5,0 -9,4 -9,8l0 15 -23 0 0 -57 15 0c7,9 20,11 29,4 2,-1 3,-2 4,-4l15 0 0 57zm28 0l0 0 -23 0 0 -44 23 0 0 44z" />
+                  <path class="fil1"
+                    d="M-1343 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1379 10803l8 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z" />
+                  <path class="fil1"
+                    d="M-1284 10803l8 0c2,0 3,-1 3,-2 0,0 0,0 0,0l0 -32c0,-1 -1,-2 -3,-2 0,0 0,0 0,0l-8 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 32c0,1 1,2 2,2 0,0 0,0 0,0zm2 -32l0 0 4 0 0 28 -4 0 0 -28z" />
+                  <path class="fil1"
+                    d="M-1324 10763l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1305 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1343 10784l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0l0 8c0,2 1,3 2,3 0,0 0,0 0,0l9 0c1,0 2,-1 2,-3 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0zm-2 8l0 0 -5 0 0 -4 5 0 0 4z" />
+                  <path class="fil1"
+                    d="M-1316 10765l0 8c0,1 1,2 2,2 0,0 0,0 0,0l9 0c1,0 2,-1 2,-2 0,0 0,0 0,0l0 -8c0,-1 -1,-2 -2,-2 0,0 0,0 0,0l-9 0c-1,0 -2,1 -2,2 0,0 0,0 0,0zm4 2l0 0 5 0 0 4 -5 0 0 -4z" />
+                </g>
+                <circle class="circle-delete fil0 str0" cx="201" cy="11002" r="190" />
+                <path class="fil1"
+                  d="M173 10981c-1,0 -1,0 -1,-1 -1,0 -2,0 -2,-1 -1,0 -1,-1 -2,-1l0 0c0,-1 -1,-2 -1,-2 0,-1 0,-2 0,-2 0,-1 0,-1 0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-1 -1,-1 0,0 0,-1 0,-1 -1,0 -1,-1 -1,-2 -1,-1 -1,-1 -1,-2l0 0c0,-1 0,-2 1,-2 0,-1 0,-2 1,-2 0,-1 0,-1 0,-1 0,0 0,-1 1,-1 0,0 0,-1 0,-1 0,0 0,0 0,-1 0,0 0,-1 0,-2 0,-1 1,-1 1,-2l0 0c1,-1 1,-1 2,-2 0,0 1,0 2,-1 0,0 0,0 1,0 0,0 0,0 0,0 1,-1 1,-1 1,-1 0,0 0,0 1,-1 0,0 1,-1 1,-1 1,-1 2,-1 2,-1l0 0c1,-1 2,-1 2,-1 1,0 2,0 3,1 0,0 0,0 1,0 0,0 0,0 1,0 0,0 0,0 0,0 1,0 1,0 1,0 1,-1 2,-1 3,-1 0,0 1,0 2,1l0 0c1,0 1,0 2,1 0,0 1,1 1,1 1,1 1,1 1,1 0,0 0,0 1,1 0,0 0,0 0,0 1,0 1,0 1,0 1,1 2,1 2,1 1,1 1,1 2,2l0 0c0,1 1,1 1,2 0,1 0,2 0,2 0,1 0,1 0,1 0,0 0,1 0,1 1,0 1,1 1,1 0,0 0,0 0,1 1,0 1,1 1,2 1,0 1,1 1,2l0 0c0,1 0,1 -1,2 0,1 0,2 -1,2 0,0 0,1 0,1 0,0 0,0 -1,1 0,0 0,0 0,1 0,0 0,0 0,1 0,0 0,1 0,2 0,0 -1,1 -1,2l0 0c-1,0 -1,1 -2,1 0,1 -1,1 -2,1 0,1 0,1 -1,1 0,0 0,0 0,0 -1,0 -1,1 -1,1 0,0 0,0 -1,0 0,1 -1,2 -1,2 -1,1 -1,1 -2,1l0 0c-1,0 -1,0 -1,0 0,0 -1,0 -1,0 0,0 -1,0 -1,0 -1,0 -1,0 -2,0 0,0 0,0 -1,0 0,0 0,0 0,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -2,0 -3,0 0,0 -1,0 -2,0l0 0c0,0 -1,0 -2,-1 0,0 -1,-1 -1,-2 -1,0 -1,0 -1,0 0,0 0,-1 -1,-1 0,0 0,0 0,0zm92 -36l1 0 0 1 -1 0 0 -1 0 0zm7 2l9 6c1,1 1,2 2,3 0,1 -1,3 -1,4l-40 57c0,0 -1,1 -1,1 -1,0 -1,1 -2,1 0,0 0,0 0,0l0 0 -28 32c0,1 -1,2 -3,2 -1,0 -2,0 -3,-1l0 0 -5 1c0,0 0,0 -1,0 0,0 0,-1 -1,-1l-1 -1 0 1c0,2 0,4 -1,5 -2,1 -3,1 -5,1 -2,0 -3,0 -4,-1 -1,-1 -2,-3 -2,-5l0 -21c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1 0,0 0,0 0,1l0 20c0,1 -1,2 -1,2 0,0 -1,1 -2,1 0,0 -1,-1 -1,-1 -1,0 -1,-1 -1,-2l0 -20c0,-2 1,-3 2,-5 1,-1 3,-1 4,-1 2,0 3,0 5,1 1,2 1,3 1,5l0 21c0,1 1,1 1,1 0,1 1,1 1,1 1,0 1,0 1,-1 1,0 1,0 1,-1l0 -6c0,-1 0,-1 0,-1 0,0 0,-1 1,-1l0 0c0,0 1,0 1,0 1,0 1,0 2,0l4 4 3 0c0,0 0,-1 0,-1 0,0 0,0 0,-1l21 -37c0,0 0,-1 0,-2 0,0 1,-1 1,-1l40 -58c0,-1 2,-1 3,-1 1,-1 2,0 3,0l0 0zm-44 66l-20 35 26 -31 -6 -4zm36 -47c2,1 3,2 5,3l-5 -3zm-34 42l8 6 31 -44 -8 -6 -31 44zm41 -43c-1,-1 -3,-2 -4,-3l4 3zm-8 -5l9 6 6 -9 -9 -6 -6 9zm-25 100c1,-1 1,-2 1,-3l0 -31c1,-1 2,-2 3,-3l0 0c0,0 0,0 1,0 0,-1 0,-1 1,-1l0 0 0 35c0,2 -1,4 -3,6 -1,1 -3,2 -6,2l-71 0c-2,0 -4,-1 -6,-2 -1,-2 -2,-4 -2,-6l0 -110c0,-2 1,-5 2,-6 2,-2 4,-3 6,-3l71 0c3,0 5,1 6,3 2,1 3,4 3,6l0 24c-2,2 -3,4 -5,7l0 -31c0,-1 0,-2 -1,-3 -1,-1 -2,-1 -3,-1l-71 0c-1,0 -2,0 -3,1 0,1 -1,2 -1,3l0 110c0,1 1,2 1,3 1,0 2,1 3,1l71 0c1,0 2,-1 3,-1zm-68 -55l51 0 0 0c-1,1 -1,1 -1,2 0,0 0,1 0,1l0 0c0,1 0,1 -1,2l-49 0c-1,0 -2,-1 -2,-1 0,-1 -1,-1 -1,-2 0,0 1,-1 1,-1 0,-1 1,-1 2,-1zm0 -11l58 0c-1,2 -2,3 -3,5l-55 0c-1,0 -2,0 -2,-1 0,0 -1,-1 -1,-1 0,-1 1,-2 1,-2 0,0 1,-1 2,-1zm-2 26c0,-1 -1,-1 -1,-2 0,-1 1,-1 1,-2 0,0 1,0 2,0l46 0 -3 4 -43 0c-1,0 -2,0 -2,0zm25 -46c-2,2 -5,3 -8,3 -4,0 -7,-1 -9,-3 -2,-2 -3,-5 -3,-8 0,-3 1,-6 3,-8 2,-2 5,-4 9,-4 3,0 6,2 8,4 2,2 3,5 3,8 0,3 -1,6 -3,8zm-3 -13c-2,-1 -4,-2 -5,-2 -2,0 -4,1 -5,2 -2,1 -3,3 -3,5 0,2 1,4 3,5 1,1 3,2 5,2 1,0 3,-1 5,-2 1,-1 2,-3 2,-5 0,-2 -1,-4 -2,-5zm-20 2c0,0 0,0 0,1l0 0c-1,0 -1,0 -1,1 0,0 0,1 0,1 0,0 0,1 0,1 0,0 0,1 1,1l0 0c0,0 0,1 0,1 0,1 1,1 1,1l0 0c0,1 0,1 0,2 0,0 0,1 0,1l0 0c0,0 0,1 0,1 0,1 1,1 1,1 0,0 0,1 1,1 0,0 0,0 1,0l0 0c0,0 0,1 1,1 0,0 1,0 1,1l0 0c0,0 1,0 1,0 0,1 1,1 1,1l0 0c0,1 0,1 1,1 0,1 0,1 1,1 0,0 0,0 1,0 0,0 0,0 1,0l0 0c0,0 1,0 1,-1 1,0 1,0 2,0l0 0c0,0 0,0 1,0 0,1 1,1 1,1l0 0c1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,0 1,-1 1,0 1,0 1,-1l0 0c0,0 1,0 1,-1 0,0 1,0 1,0l0 0c0,-1 1,-1 1,-1 1,0 1,-1 1,-1l0 0c1,0 1,0 1,0 1,0 1,-1 1,-1 0,0 1,0 1,-1 0,0 0,-1 0,-1l0 0c0,0 0,-1 0,-1 0,-1 0,-1 0,-2l0 0c0,0 1,0 1,-1 0,0 0,-1 0,-1l0 0c1,0 1,-1 1,-1 0,0 0,-1 0,-1 0,0 0,-1 0,-1 0,-1 0,-1 -1,-1l0 0c0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-2l0 0c0,0 0,0 0,-1 0,0 0,-1 0,-1l0 0c0,-1 0,-1 0,-1 0,-1 -1,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 0,0 -1,-1l0 0c0,0 0,0 -1,0 0,0 -1,-1 -1,-1l0 0c0,0 -1,0 -1,-1 0,0 -1,0 -1,-1l0 0c0,0 0,0 -1,-1 0,0 0,0 -1,0 0,0 0,0 -1,0 0,0 0,0 -1,0l0 0c0,0 -1,0 -1,0 -1,0 -1,0 -1,0l0 0c-1,0 -1,0 -2,0 0,0 -1,0 -1,0l0 0c-1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,0 -1,1 -1,1 -1,1l0 0c0,1 -1,1 -1,1 0,1 -1,1 -1,1l0 0c0,0 -1,1 -1,1 -1,0 -1,0 -1,0l0 0c-1,1 -1,1 -1,1 -1,0 -1,0 -1,1 0,0 -1,0 -1,1 0,0 0,0 0,1l0 0c0,0 0,1 0,1 0,1 0,1 0,1l0 0c0,1 -1,1 -1,2z" />
+                <circle class="circle-delete fil0 str0" cx="200" cy="200" r="190" />
+                <g id="_2058151497424">
+                  <path class="fil2"
+                    d="M261 258l-122 0c-1,0 -2,1 -2,3 0,1 1,3 2,3l122 0c1,0 3,-2 3,-3 0,-2 -2,-3 -3,-3z" />
+                  <path class="fil2"
+                    d="M150 253l16 0c1,0 2,-2 2,-3l0 -22c0,-1 -1,-2 -2,-2l-16 0c-2,0 -3,1 -3,2l0 22c0,1 1,3 3,3zm2 -22l11 0 0 16 -11 0 0 -16z" />
+                  <path class="fil2"
+                    d="M176 209c-1,0 -2,2 -2,3l0 38c0,1 1,3 2,3l16 0c2,0 3,-2 3,-3l0 -38c0,-1 -1,-3 -3,-3l-16 0zm13 38l-10 0 0 -32 10 0 0 32z" />
+                  <path class="fil2"
+                    d="M203 193c-2,0 -3,1 -3,3l0 54c0,1 1,3 3,3l16 0c1,0 2,-2 2,-3l0 -54c0,-2 -1,-3 -2,-3l-16 0zm13 54l-11 0 0 -48 11 0 0 48z" />
+                  <path class="fil2"
+                    d="M226 169l0 81c0,1 2,3 3,3l16 0c1,0 3,-2 3,-3l0 -81c0,-2 -2,-3 -3,-3l-16 0c-1,0 -3,1 -3,3zm6 3l10 0 0 75 -10 0 0 -75z" />
+                  <path class="fil2"
+                    d="M150 215c0,0 0,0 1,0 21,-10 41,-23 58,-40 8,-9 16,-19 23,-29 0,2 1,5 1,7 0,1 1,2 3,2 0,0 0,0 0,0 2,0 3,-2 2,-3 -1,-5 -2,-9 -3,-13 0,-2 -1,-3 -3,-2 -4,1 -8,2 -12,2 -2,1 -3,2 -3,4 1,1 2,2 3,2 0,0 0,0 0,0 3,-1 5,-1 7,-2 -6,10 -14,20 -22,28 -16,17 -35,30 -56,39 -2,0 -2,2 -2,3 1,1 2,2 3,2z" />
+                </g>
+              </g>
+            </svg>
           </div>
-          <div class="green-practise">
-            Податкова практика
-          </div>
-          <div class="sub-practise">
-            <!-- Податки та оподаткування -
+
+        </div>
+        <div class="green-practise">
+          Податкова практика
+        </div>
+        <div class="sub-practise">
+          <!-- Податки та оподаткування -
             це поняття, які нерозривно
             пов'язані ... -->
-          </div>
-          <a href="{% url 'practice' pk=9 %}">
-            <div class="btn-read hvr-fade">
-              Більше
-            </div>
-          </a>
         </div>
-
+        <a href="{% url 'practice' pk=9 %}">
+          <div class="btn-read hvr-fade">
+            Більше
+          </div>
+        </a>
       </div>
-      <!-- <div class="link__index">
+
+    </div>
+    <!-- <div class="link__index">
        <a href="#scene">
           <div class="elips">
 
@@ -875,53 +1063,58 @@
           </div>
         </a>
       </div> -->
+  </div>
+</section>
+
+<section id="team" class="team">
+  <div class="container">
+    <div id="main__title-team" class="main__title">
+      КОМАНДА
     </div>
-  </section>
 
-  <section id="team" class="team">
-    <div class="container">
-      <div id="main__title-team" class="main__title">
-        КОМАНДА
+    <div class="team-wrap">
+      <img data-src="/static/img/team/team-img.png" alt="">
+      <div class="team-name-block">
+        <a href="{% url 'member' slug='slobodyan' %}">
+          <div class="team-name-prof">
+            Валентин Слободян
+          </div>
+        </a>
+        <a href="{% url 'member' slug='smihura' %}">
+          <div class="team-name-prof team-name-smihura">
+            Василь Сміхура
+          </div>
+        </a>
+        <a href="{% url 'member' slug='kulinich' %}">
+          <div class="team-name-prof">
+            Тетяна Кулініч
+          </div>
+        </a>
+        <a href="{% url 'member' slug='markiv' %}">
+          <div class="team-name-prof">
+            Назар Марків
+          </div>
+        </a>
+        <a href="{% url 'member' slug='borovec' %}">
+          <div class="team-name-prof">
+            Микола Боровець
+          </div>
+        </a>
+        <a href="{% url 'member' slug='frei' %}">
+          <div class="team-name-prof">
+            Андріан Фрей
+          </div>
+        </a>
       </div>
+    </div>
 
-      <div class="team-wrap">
-        <img data-src="/static/img/team/team-img.png" alt="">
-        <div class="team-name-block">
-          <a href="{% url 'member' slug='slobodyan' %}">
-            <div class="team-name-prof">
-              Валентин Слободян
-            </div>
-          </a>
-          <a href="{% url 'member' slug='smihura' %}">
-            <div class="team-name-prof team-name-smihura">
-              Василь Сміхура 
-            </div>
-          </a>
-          <a href="{% url 'member' slug='kulinich' %}">
-            <div class="team-name-prof">
-              Тетяна Кулініч
-            </div>
-          </a>
-          <a href="{% url 'member' slug='markiv' %}">
-            <div class="team-name-prof">
-              Назар Марків 
-            </div>
-          </a>
-          <a href="{% url 'member' slug='borovec' %}">
-            <div class="team-name-prof">
-              Микола Боровець 
-            </div>
-          </a>
-          <a href="{% url 'member' slug='frei' %}">
-            <div class="team-name-prof">
-              Андріан Фрей
-            </div>
-          </a>
-        </div>
+    <a class="online_consultation_btn">
+      <div class="team_section_btn stantard_btn stantard_btn_gold hvr-bounce-to-right">
+        <img class="comun-icon" data-src="/static/img/communicate-icon.png" alt="">
+        Онлайн консультація
       </div>
-
-     
-      <!-- <div class="link__index">
+    </a>
+    <!-- <div class="link__index">
        <a href="#scene">
           <div class="elips">
 
@@ -953,11 +1146,10 @@
           </div>
         </a>
       </div> -->
-    </div>
-    <!-- /.container -->
-  </section>
-  {% include 'components/clients.html' %}
+  </div>
+  <!-- /.container -->
+</section>
+{% include 'components/clients.html' %}
 
-  
+
 {% endblock extra_content %}
-
